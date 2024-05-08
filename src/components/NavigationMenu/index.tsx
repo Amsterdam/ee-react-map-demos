@@ -24,6 +24,7 @@ const NavigationMenu = (): JSX.Element => (
     </div>
     <div>
       <Heading level={4}>React + React-Leaflet</Heading>
+      <RRAmsLink to="/react-leaflet/">Amsterdam Base Layer</RRAmsLink>
     </div>
   </nav>
 );
