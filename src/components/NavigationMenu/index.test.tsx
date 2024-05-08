@@ -15,8 +15,8 @@ describe('NavigationMenu', () => {
     expect(container.firstChild).toBeDefined();
   });
 
-  it('contains two elements', () => {
+  it('contains one elements', () => {
     const { container } = render(<NavigationMenu />);
-    expect(container.querySelectorAll('a')).toHaveLength(2);
+    expect(container.querySelectorAll('a')).toHaveLength(1);
   });
 });
