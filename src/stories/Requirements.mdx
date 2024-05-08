@@ -1,0 +1,19 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Global requirements" />
+
+# Global Requirements
+
+For a [Leaflet](https://leafletjs.com/) / [React-leaflet](https://react-leaflet.js.org/) based map to function, the following two elements are required:
+
+1. The [Leaflet](https://leafletjs.com/) / [React-leaflet](https://react-leaflet.js.org/) library
+
+    `import L from 'leaflet'` or `import { MapContainer } from 'react-leaflet'`
+<br />
+2. The Leaflet CSS
+
+    `import 'leaflet/dist/leaflet.css';`
+<br />
+3. The map container (parent DOM element where the Leaflet map will be rendered into) has a defined height. For example:
+
+    `.map-container { height: 180px; }`
