@@ -1,0 +1,4 @@
+{
+  "./**/*.{ts,tsx,json}": "npm run lint:scripts",
+  "./**/*.{css,scss}": "npm run lint:styles"
+}

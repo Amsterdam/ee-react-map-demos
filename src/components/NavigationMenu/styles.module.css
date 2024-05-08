@@ -1,0 +1,12 @@
+.container {
+  align-items: center;
+  background: #fff;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 72px;
+  z-index: 1000;
+}

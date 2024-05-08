@@ -1,0 +1,14 @@
+body {
+  font-family: var(--ams-text-font-family);
+  margin: 0;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.ams-header__menu-button {
+  cursor: pointer;
+
+  &:hover {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path fill='%23102E62' fill-rule='evenodd' d='M0 3.238h32V7.81H0V3.238zm0 10.476h32v4.572H0v-4.572zM0 24.19h32v4.572H0V24.19z'/></svg>");
+    color: var(--ams-color-dark-blue);
+  }
+}
