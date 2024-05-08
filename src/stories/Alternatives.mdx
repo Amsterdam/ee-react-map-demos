@@ -1,0 +1,80 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Alternative solutions" />
+
+# Alternative solutions
+
+[Leaflet](https://leafletjs.com) is the preferred map engine by Gemeente Amsterdam. However over the last several years, there has been coniderable advancements with map engines using WebGL. It's always wise to stay aware of the latest developments and advancements depending on what you want to deliver and how long the application should live for.
+
+## Map engines
+
+- [ESRI ArcGIS](https://www.esri.com/en-us/arcgis/about-arcgis/overview)
+    - **Pro:** Provides a seamless end-to-end solution from data-entry to configuring map applications/pages.
+    - **Pro:** Professional and shareable maps. For example, [NYC OpenData](https://data.cityofnewyork.us/Housing-Development/arcGIS/pq44-rrf3) and [Gemeente Eindhoven](https://eindhoven.maps.arcgis.com/home/index.html).
+    - **Pro:** More tools for non-developers
+    - **Con:** Expensive
+    - **Con:** Learning curve
+    - **Con:** Overwhelming with the number of features
+
+- [Google Maps](https://google.com/maps)
+    - **Pro:** Familiar UI, delivers fast and smooth UX
+    - **Pro:** Lots of data and frequently refreshed
+    - **Con:** Pricing is a bit complicated
+    - **Con:** Google/USA = legally complicated
+
+- [Leaflet](https://leafletjs.com/)
+    - **Pro:** Open-source and free to use
+    - **Pro:** Flexible and compatible with multiple providers
+    - **Pro:** Lightweight and minimal code for simple maps
+    - **Pro:** (Excluding google maps) In the last decade the most popular maps packge [(npmtrends)](https://npmtrends.com/@tomtom-international/web-sdk-maps-vs-leaflet-vs-mapbox-gl-vs-maplibre-gl-vs-openlayers)
+    - **Con:** Setup with Node.js/Typescript is a bit legacy
+    - **Con:** Customizing map styles requires expertise
+
+- [Mapbox](https://mapbox.com/)
+    - **Pro:** WebGL, fast and nice
+    - **Pro:** Easily customizable (albeit a bit overwhelming)
+    - **Pro:** (Excluding google maps) In the last five years has become the most popular maps packge [(npmtrends)](https://npmtrends.com/@tomtom-international/web-sdk-maps-vs-leaflet-vs-mapbox-gl-vs-maplibre-gl-vs-openlayers)
+    - **Con:** Hosted externally
+    - **Con:** Pricing is not straightforward
+    - **Con:** Can get quickly overcomplicated
+
+- [MapLibre](https://maplibre.org/)
+    - **Pro:** Derived from OpenLayers; uses WebGL, fast and nice
+    - **Pro:** Open-source and free to use
+    - **Pro:** Flexible and compatible with multiple providers
+    - **Con:** Possible steeper learning curve for developers
+    - **Con:** (Excluding google maps) Is the third most popular map library [(npmtrends)](https://npmtrends.com/@tomtom-international/web-sdk-maps-vs-leaflet-vs-mapbox-gl-vs-maplibre-gl-vs-openlayers) but with less than half the number of users to Mapbox/Leaflet
+
+- [OpenLayers](https://openlayers.org/)
+    - **Pro:** Open-source and free to use
+    - **Pro:** Flexible and compatible with multiple providers
+    - **Pro:** Large number of [examples](https://openlayers.org/en/latest/examples/)
+    - **Con:** Possible steeper learning curve for developers
+    - **Con:** Not very popular in relation to Leaflet, Mapbox and MapLibre ([(npmtrends)](https://npmtrends.com/@tomtom-international/web-sdk-maps-vs-leaflet-vs-mapbox-gl-vs-maplibre-gl-vs-openlayers))
+
+- [TomTom Maps](https://www.tomtom.com/products/maps/)
+    - **Pro:** High quality map data
+    - **Pro:** Fast and smooth UX
+    - **Pro:** More tools for non-developers
+    - **Con:** Doesn't plot houseboats?
+    - **Con:** Closed source, steeper learning curve
+    - **Con:** Not very popular in relation to Leaflet, Mapbox and MapLibre ([(npmtrends)](https://npmtrends.com/@tomtom-international/web-sdk-maps-vs-leaflet-vs-mapbox-gl-vs-maplibre-gl-vs-openlayers))
+
+## Map tile layers
+
+- [Amsterdam Base Layer](../?path=/docs/alternatives--docs)
+
+- [NL Maps](https://nlmaps.nl/)
+    - **Pro:** Powered and supported by [Kadaster](https://kadaster.nl/)
+    - **Pro:** Nice UI with several themes
+    - **Con:** Setup with Node.js/Typescript is a bit legacy
+    - **Con:** Houseboats are not plotted
+    - **Con:** Dependency on external company if changes are ever needed
+
+- [OpenStreetMap](https://www.openstreetmap.org/)
+    - **Pro:** Open-source and built on a collaborative community
+    - **Pro:** Large community of contributors
+    - **Con:** Default styling is ugly
+    - **Con:** Dependency on open source contributions if changes are ever needed
+
+Leaflet provide more examples of other tile layer providers [here](https://leaflet-extras.github.io/leaflet-providers/preview/).
