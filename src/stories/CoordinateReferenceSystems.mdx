@@ -1,0 +1,43 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Coordinate Reference Systems (CRS)" />
+
+# Coordinate Reference Systems
+
+A Coordinate Reference System (CRS) is a framework for specifying locations on the Earth's surface. Each CRS defines a method of representing geographic coordinates (for example, latitude and longitude) and projecting them onto a flat surface (for example, a PNG image file).
+
+When working with web map libraries, understanding CRS is crucial for correctly positioning and displaying data.
+
+Leaflet by default supports [Web mercator (EPSG:3857 / WGS84 / Pseudo-Mercator)](https://epsg.io/3857), which is also compatible with [Google Maps](https://google.com/maps), [Mapbox](https://mapbox.com) and [Open Street Maps](https://openstreetmap.org).
+
+Nine times out of ten (if not more), you will be using WGS84 (latitude-longitude coordinate pairs) when developing with maps. Google Maps and Leaflet both use latitude-longitude, which formed the standards for most map libraries. However, GeoJSON (and other protocols and tools) use the reverse order. For more info on the differences, and another reason why to never trust developers, [read more](https://macwright.com/lonlat/).
+
+**Pro tip:** *If you can't find your data on the map or the map is rendering around the east coast of Africa/Somalia, then you have your coordinates in the wrong order.*
+
+**Pro tip:** *When using the DSO API you can [append a header `Accept-Crs` to set the return type for geometry data](https://api.data.amsterdam.nl/v1/docs/generic/rest/projections.html).*
+
+### World Geodetic System 1984 (WGS84)
+
+```json
+{
+    "type": "Point",
+    "coordinates": [ 4.89089948838428, 52.37316397601927 ]
+}
+```
+*WGS84 Coordinates for the Koninklijk Paleis Amsterdam*
+
+The World Geodetic System 1984 (WGS84) is a globally defined datum developed and maintained by the United States National Geospatial-Intelligence Agency (NGA). It is consistent with the International Terrestrial Reference Frame (ITRF) at the 1cm level. WGS84 allows us to relate a 3-dimensional position to a consistent coordinate, in the format latitude (Φ), longitude (λ), ellipsoidal height (H), and time (t).
+
+### Rijksdriehoek coordinates (RD)
+
+```json
+{
+    "type": "Point",
+    "coordinates": [ 121202, 487370 ]
+}
+```
+*RD Coordinates for the Koninklijk Paleis Amsterdam*
+
+The Rijksdriehoek coordinate system is a Dutch geographic coordinate system. It was developed by the Dutch government's national mapping agency, [Kadaster](https://www.kadaster.nl/). This is often used as the default coordinate system with Gemeente data.
+
+[Read more (in Dutch)](https://www.kadaster.nl/zakelijk/registraties/basisregistraties/rijksdriehoeksmeting/rijksdriehoeksstelsel)
