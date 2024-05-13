@@ -1,16 +1,16 @@
 import type { RouteObject } from 'react-router-dom';
 import App from '@/containers/App';
-import Home from '@/pages/Home';
-import Contact from '@/pages/Contact';
+import BaseLayer from '@/pages/BaseLayer';
+import RLBaseLayer from '@/pages/ReactLeaflet/BaseLayer';
 
 const children: RouteObject[] = [
   {
     path: '/',
-    element: <Home />,
+    element: <BaseLayer />,
   },
   {
-    path: 'contact',
-    element: <Contact />,
+    path: 'react-leaflet',
+    element: <RLBaseLayer />,
   },
 ];
 
