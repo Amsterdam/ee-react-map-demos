@@ -4,7 +4,7 @@ name: Build and Publish Storybook to GitHub Pages
 on:
   # Event for the workflow to run on
   push:
-    branches: [features/storybook]
+    branches: [feature/storybook]
     # branches: [main]
 
 permissions:
