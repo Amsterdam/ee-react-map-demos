@@ -10,6 +10,6 @@ const App: FunctionComponent = () => (
       <Outlet />
     </div>
   </>
-)
+);
 
 export default App;
