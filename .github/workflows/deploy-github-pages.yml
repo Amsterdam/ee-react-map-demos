@@ -2,8 +2,7 @@ name: Build and Publish Storybook to GitHub Pages
 
 on:
   push:
-    branches: [feature/storybook-gh-config]
-    # branches: [main]
+    branches: [main]
 
 permissions:
   contents: read
