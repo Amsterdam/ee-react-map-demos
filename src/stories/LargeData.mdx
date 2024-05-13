@@ -1,0 +1,42 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Handling large volumes of data" />
+
+# Handling large volumes of data
+
+Maps commonly run into performance issues when handling with large volumes of data. This is less often an issue when using WebGL/Canvas maps, however, dropping large volumes of data on the frontend should always be avoided as it can lead to varying issues of performance and with some devices (particularly legacy) completely broken applications.
+
+Marker clustering is supposedly good until around [50.000 markers](https://github.com/Leaflet/Leaflet.markercluster?tab=readme-ov-file#handling-lots-of-markers).
+
+
+
+In short:
+
+(Backend) A micro API to deliver geodata with ‘geo-’queries
++
+
+(Frontend) a maps application that only requests data for the currently rendered maps area (based on bounding box * 0,5 and zoom levels).
+The large data problem is primarily a backend problem that cannot be solved solely on the frontend side; therefore, we need to restrict and limit geodata sent to the frontend. This requires validating the frontend’s map state and defining rules for each dataset, for example:
+
+Dataset has a high number of records (for example, 1 million+ records)
+Dataset has high volume data in a small locality (is data specific to a buurt, GGWgebied, stadsdeel, wijk etc.)
+Possible next steps for data catalogus
+
+TODO define variables + rough estimate of calculations?
+
+Restafval containers - https://data.amsterdam.nl/data/geozoek/?center=52.3712991%2C4.8678266&lagen=afvlc-wlorst&legenda=true
+https://api.data.amsterdam.nl/v1/afvalwijzer/afvalwijzer/?afvalwijzerFractieNaam=Rest&_count=true  X-Total-Count: 566429
+
+TODO local geography – if all points are on de dam – cluster = true
+
+Therefore,
+
+Data should only be displayed when the zoom level is high, otherwise:
+The user will be overloaded with data.
+There is too much data to ever present efficiently.
+You risk rendering too many map points, leading to undesireable performance.
+Combining and utilizing common parameters from the frontend helps minimize the amount of data for a specific area. We can utilize features such as zoom levels and the map's current bounding box to avoid loading unnecessary out-of-view data or too much data.
+
+Based on these techniques, we successfully built a performant map that renders a dataset with 176.618 records.
+
+The codebase for this POC: frontend  and backend .
