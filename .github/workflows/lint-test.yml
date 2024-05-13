@@ -2,11 +2,8 @@ name: Lint and test
 
 on:
   push:
-    branches: [feature/storybook]
-    # branches: [main, develop]
-  pull_request:
-    branches: [feature/storybook]
-    # branches: [main, develop]
+    branches-ignore: [main, feature/storybook]
+    # branches-ignore: [main]
 
 jobs:
   setup:
@@ -29,3 +26,6 @@ jobs:
         run: npm run lint:styles
       - name: Test application
         run: npm run test
+
+# lint-test should run on every push + PR
+# deploy-github-pages should only run on push to main (feature/storybook for this example)
