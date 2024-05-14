@@ -4,39 +4,28 @@ import { Meta } from "@storybook/blocks";
 
 # Handling large volumes of data
 
-Maps commonly run into performance issues when handling with large volumes of data. This is less often an issue when using WebGL/Canvas maps, however, dropping large volumes of data on the frontend should always be avoided as it can lead to varying issues of performance and with some devices (particularly legacy) completely broken applications.
+Maps commonly run into performance issues when handling with large volumes of data. Traditionally this is because with map libraries and JavaScript, each marker requires a corresponding DOM element.
 
-Marker clustering is supposedly good until around [50.000 markers](https://github.com/Leaflet/Leaflet.markercluster?tab=readme-ov-file#handling-lots-of-markers).
+This is less so an issue when using WebGL maps, as they make use of the HTML canvas element. However, dropping large volumes of data on the frontend should always be avoided as it can lead to varying issues of performance and with some (particularly legacy) devices buggy applications.
 
+## Clustering
 
+Clustering is the most common and often simplest solution for large datasets.
 
-In short:
+- [supercluster](https://github.com/mapbox/supercluster)
+- [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster)
 
-(Backend) A micro API to deliver geodata with ‘geo-’queries
-+
+## A full end-to-end solution
 
-(Frontend) a maps application that only requests data for the currently rendered maps area (based on bounding box * 0,5 and zoom levels).
-The large data problem is primarily a backend problem that cannot be solved solely on the frontend side; therefore, we need to restrict and limit geodata sent to the frontend. This requires validating the frontend’s map state and defining rules for each dataset, for example:
+The large data problem is primarily a backend problem that cannot be solved solely on the frontend side; therefore, we need to restrict and limit geo-data sent to the frontend. This requires validating the frontend’s map state and defining rules for each dataset, for example:
 
-Dataset has a high number of records (for example, 1 million+ records)
-Dataset has high volume data in a small locality (is data specific to a buurt, GGWgebied, stadsdeel, wijk etc.)
-Possible next steps for data catalogus
+- Dataset has a high number of records (for example, 1 million+ records)
+- Dataset has high volume data in a small locality (data is specific to a buurt, stadsdeel, wijk etc.)
 
-TODO define variables + rough estimate of calculations?
+Therefore, data should only be displayed when the zoom level is high, otherwise:
 
-Restafval containers - https://data.amsterdam.nl/data/geozoek/?center=52.3712991%2C4.8678266&lagen=afvlc-wlorst&legenda=true
-https://api.data.amsterdam.nl/v1/afvalwijzer/afvalwijzer/?afvalwijzerFractieNaam=Rest&_count=true  X-Total-Count: 566429
+1. The user will be overloaded with data.
+2. There is too much data to ever present efficiently.
+3. Rendering too many map points can lead to undesireable performance.
 
-TODO local geography – if all points are on de dam – cluster = true
-
-Therefore,
-
-Data should only be displayed when the zoom level is high, otherwise:
-The user will be overloaded with data.
-There is too much data to ever present efficiently.
-You risk rendering too many map points, leading to undesireable performance.
 Combining and utilizing common parameters from the frontend helps minimize the amount of data for a specific area. We can utilize features such as zoom levels and the map's current bounding box to avoid loading unnecessary out-of-view data or too much data.
-
-Based on these techniques, we successfully built a performant map that renders a dataset with 176.618 records.
-
-The codebase for this POC: frontend  and backend .
