@@ -3,9 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "start": "vite --host",
-    "build": "tsc --project tsconfig.prod.json && vite build",
-    "preview": "vite preview",
+    "start": "storybook dev -p 6006",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest --coverage",
@@ -73,8 +71,6 @@
     "@amsterdam/design-system-tokens": "^0.8.0",
     "leaflet": "^1.9.4",
     "proj4": "^2.11.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.0"
+    "react": "^18.3.1"
   }
 }
