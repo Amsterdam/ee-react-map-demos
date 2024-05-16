@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -7,14 +7,20 @@ import styles from './styles.module.css';
 
 const BaseLayer: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<L.Map | null>(null);
+
+  // Use state instead of a ref for storing the Leaflet map object otherwise you may run into DOM issues when React StrictMode is enabled
+  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+
+  // This could be a useState but as we don't expect this to fire more than once, use ref as it is mutable and won't trigger any further re-render
+  const createdMapInstance = useRef(false);
 
   useEffect(() => {
-    if (containerRef.current === null) {
+    // Ensure that the target DOM element exists and that the map doesn't already exist (to prevent duplicate renders in StrictMode)
+    if (containerRef.current === null || createdMapInstance.current !== false) {
       return;
     }
 
-    mapRef.current = new L.Map(containerRef.current, {
+    const map = new L.Map(containerRef.current, {
       center: L.latLng([52.370216, 4.895168]),
       zoom: 12,
       layers: [
@@ -25,11 +31,11 @@ const BaseLayer: FunctionComponent = () => {
         }),
       ],
       zoomControl: false,
-
-      // Copied from Amsterdam-react-maps
       maxZoom: 16,
       minZoom: 3,
+      // Ensure proper handling for Rijksdriehoekcoördinaten
       crs: getCrsRd(),
+      // Prevent the user browsing too far outside Amsterdam otherwise the map will render blank greyspace. Amsterdam tile layer only supports Amsterdam and the immediate surrounding areas
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],
@@ -37,11 +43,15 @@ const BaseLayer: FunctionComponent = () => {
     });
 
     // Remove Leaflet link from the map
-    mapRef.current.attributionControl.setPrefix(false);
+    map.attributionControl.setPrefix(false);
 
-    // eslint-disable-next-line consistent-return
+    // Set the map as created and store the object to state
+    createdMapInstance.current = true;
+    setMapInstance(map);
+
+    // On component unmount, destroy the map and all related events
     return () => {
-      if (mapRef.current) mapRef.current.remove();
+      if (mapInstance) mapInstance.remove();
     };
   }, []);
 
