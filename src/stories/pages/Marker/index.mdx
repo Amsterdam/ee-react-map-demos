@@ -38,6 +38,14 @@ This creates a marker at the coordinates (52.370216, 4.895168), which is added t
 
 A Leaflet marker element consists of [events](https://leafletjs.com/reference.html#marker-move), [methods](https://leafletjs.com/reference.html#marker-l-marker) and [options](https://leafletjs.com/reference.html#marker-icon).
 
+### Large numbers of markers can lead to degraded performance
+
+A standard Leaflet marker is a HTML image element. Therefore, if there are 100 markers, then there are 100 HTML image elements - each one with its own events, listeners and side-effects - another element to add the DOM tree. Modern browsers and devices are quite efficient so negative performance often won't be noticed until you are handling tens of thousands of markers.
+
+The real solution to this is to ideally never render so many markers simultaneously. However, with some APIs that isn't always an easy option. This is where clustering ideally should be implemented or the `preferCanvas` option is set to `true` when creating your Leaflet map.
+
+The `preferCanvas` instructs Leaflet to use the HTML Canvas element, which performs a lot quicker than the traditional HTML DOM tree. [See docs](https://leafletjs.com/reference.html#map-prefercanvas).
+
 ## Usage Scenarios
 
 - **Location Pins**: Highlighting specific locations such as restaurants, shops, landmarks, etc.
