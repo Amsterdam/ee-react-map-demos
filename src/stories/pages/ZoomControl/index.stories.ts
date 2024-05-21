@@ -8,13 +8,6 @@ import '@amsterdam/design-system-css/dist/index.css';
 const meta = {
   title: 'React/ZoomControl',
   component: ZoomControl,
-  parameters: {
-    // layout: 'fullscreen',
-    // options: {
-    //   panelPosition: 'bottom',
-    //   bottomPanelHeight: 0,
-    // },
-  },
 } satisfies Meta<typeof ZoomControl>;
 
 export default meta;

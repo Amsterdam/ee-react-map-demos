@@ -23,11 +23,11 @@ const ZoomControl = () => {
       <div className={styles.container}>
         <Button variant="secondary">
           <VisuallyHidden>Zoom in</VisuallyHidden>
-          <Icon svg={EnlargeIcon} />
+          <Icon svg={EnlargeIcon} size="level-5" />
         </Button>
         <Button variant="secondary">
           <VisuallyHidden>Zoom out</VisuallyHidden>
-          <Icon svg={MinimiseIcon} />
+          <Icon svg={MinimiseIcon} size="level-5" />
         </Button>
       </div>
     </>
