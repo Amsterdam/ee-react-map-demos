@@ -6,7 +6,6 @@ import '@amsterdam/design-system-css/dist/index.css';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import { viewports } from './viewports';
 
-// Set language to Dutch for Canvas and Stories
 export const decorators = [
   withThemeByClassName({
     themes: {
