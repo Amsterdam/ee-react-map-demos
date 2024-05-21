@@ -7,6 +7,7 @@ import {
 import styles from './styles.module.css';
 
 const ZoomControl = () => {
+  // TODO pass ref to this component
   // const handleZoomInClick = () => {
   //   if (mapRef.current) {
   //     mapRef.current?.setZoom(mapRef.current.getZoom() + 1);
