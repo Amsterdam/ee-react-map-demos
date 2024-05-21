@@ -9,9 +9,18 @@ import { Story } from '@storybook/blocks';
 const meta = {
   title: 'React/ZoomControl',
   component: ZoomControl,
+  args: {
+    zoom: 12,
+    minZoom: 3,
+    maxZoom: 16,
+  },
 } satisfies Meta<typeof ZoomControl>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Buttons: Story = {};
+export const Buttons: Story = {
+  args: {
+    zoom: 14,
+  },
+};
