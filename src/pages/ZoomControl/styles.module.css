@@ -1,5 +1,16 @@
 .container {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.buttons {
+  bottom: var(--ams-space-inside-xs, 10px);
   display: inline-flex;
   flex-direction: column;
   gap: var(--ams-space-inside-xs, 10px);
+  position: absolute;
+  right: var(--ams-space-inside-xs, 10px);
+  /* TODO Temporary fix, need to hook into control layer */
+  z-index: 999;
 }
