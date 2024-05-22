@@ -10,7 +10,7 @@ export type PaneProps = {
 
 const Pane = ({ children, label, closable }: PaneProps) => {
   return (
-    <aside className={styles.pane}>
+    <aside className={styles.container}>
       <header>
         <Heading level={2} size="level-4">
           {label}

@@ -1,0 +1,18 @@
+.container {
+  background-color: #fff;
+  height: 100%;
+  left: 0;
+  max-inline-size: 468px;
+  min-inline-size: 320px;
+  padding-block: var(--ams-space-inside-md, 16px);
+  padding-inline: var(--ams-space-inside-md, 16px);
+  position: sticky;
+  top: 0;
+  width: 100%;
+
+  > header {
+    display: flex;
+    justify-content: space-between;
+    padding-block-end: var(--ams-space-inside-sm, 8px);
+  }
+}

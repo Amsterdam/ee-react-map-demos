@@ -2,7 +2,6 @@ import {
   Accordion,
   Checkbox,
   Column,
-  Heading,
   SearchField,
 } from '@amsterdam/design-system-react';
 
@@ -10,9 +9,6 @@ const Legend = () => {
   return (
     <form action="#">
       <Column gap="small">
-        <Heading level={2} size="level-4">
-          Legenda
-        </Heading>
         <SearchField>
           <SearchField.Input placeholder="Zoek op kaartlaag..." />
           <SearchField.Button />
