@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ZoomControl from '.';
+import ZoomControl from './ZoomControl';
 
 describe('ZoomControl', () => {
   it('renders the component', () => {

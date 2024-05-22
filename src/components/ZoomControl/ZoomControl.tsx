@@ -1,17 +1,16 @@
 import { Button, Icon, VisuallyHidden } from '@amsterdam/design-system-react';
-import L from 'leaflet';
+import { FunctionComponent } from 'react';
 import {
   EnlargeIcon,
   MinimiseIcon,
 } from '@amsterdam/design-system-react-icons';
 
 import styles from './styles.module.css';
+import { useMapInstance } from '../Map/MapContext';
 
-export type ZoomControlProps = {
-  mapInstance?: L.Map | null;
-};
+const ZoomControl: FunctionComponent = () => {
+  const mapInstance = useMapInstance();
 
-const ZoomControl = ({ mapInstance }: ZoomControlProps) => {
   const handleZoomInClick = () => {
     if (mapInstance) {
       mapInstance?.setZoom(mapInstance.getZoom() + 1);
@@ -24,7 +23,7 @@ const ZoomControl = ({ mapInstance }: ZoomControlProps) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.buttons}>
       <Button variant="secondary" onClick={handleZoomInClick}>
         <VisuallyHidden>Zoom in</VisuallyHidden>
         <Icon svg={EnlargeIcon} size="level-5" />

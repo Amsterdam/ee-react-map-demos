@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ZoomControl from '@/components/ZoomControl';
+import ZoomControl from '../../../components/ZoomControl/ZoomControl';
 
 import '@amsterdam/design-system-tokens/dist/index.css';
 import '@amsterdam/design-system-assets/font/index.css';

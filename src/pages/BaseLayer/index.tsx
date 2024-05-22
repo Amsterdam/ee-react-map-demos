@@ -50,8 +50,8 @@ const BaseLayer: FunctionComponent = ({
     // Remove Leaflet link from the map
     map.attributionControl.setPrefix(false);
 
-    // Set the map as created and store the object to state
-    createdMapInstance.current = true;
+    // // Set the map as created and store the object to state
+    // createdMapInstance.current = true;
     setMapInstance(map);
 
     // On component unmount, destroy the map and all related events

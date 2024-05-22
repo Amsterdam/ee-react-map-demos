@@ -1,5 +1,10 @@
-.container {
+.buttons {
+  bottom: var(--ams-space-inside-lg, 24px);
   display: inline-flex;
   flex-direction: column;
   gap: var(--ams-space-inside-xs, 8px);
+  position: absolute;
+  right: var(--ams-space-inside-lg, 24px);
+  /* TODO Temporary fix, need to hook into control layer */
+  z-index: 999;
 }
