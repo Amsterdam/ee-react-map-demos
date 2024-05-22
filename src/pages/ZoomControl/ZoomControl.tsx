@@ -1,5 +1,5 @@
 import { Button, Icon, VisuallyHidden } from '@amsterdam/design-system-react';
-import { FunctionComponent, useRef } from 'react';
+import { FunctionComponent } from 'react';
 import {
   EnlargeIcon,
   MinimiseIcon,
@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 import { useMapInstance } from '../Fullscreen/MapContext';
 
 const ZoomControl: FunctionComponent = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const mapInstance = useMapInstance();
 
   const handleZoomInClick = () => {
@@ -24,20 +23,16 @@ const ZoomControl: FunctionComponent = () => {
   };
 
   return (
-    <>
-      <div className={styles.container} ref={containerRef}>
-        <div className={styles.buttons}>
-          <Button variant="secondary" onClick={handleZoomInClick}>
-            <VisuallyHidden>Zoom in</VisuallyHidden>
-            <Icon svg={EnlargeIcon} size="level-5" />
-          </Button>
-          <Button variant="secondary" onClick={handleZoomOutClick}>
-            <VisuallyHidden>Zoom out</VisuallyHidden>
-            <Icon svg={MinimiseIcon} size="level-5" />
-          </Button>
-        </div>
-      </div>
-    </>
+    <div className={styles.buttons}>
+      <Button variant="secondary" onClick={handleZoomInClick}>
+        <VisuallyHidden>Zoom in</VisuallyHidden>
+        <Icon svg={EnlargeIcon} size="level-5" />
+      </Button>
+      <Button variant="secondary" onClick={handleZoomOutClick}>
+        <VisuallyHidden>Zoom out</VisuallyHidden>
+        <Icon svg={MinimiseIcon} size="level-5" />
+      </Button>
+    </div>
   );
 };
 
