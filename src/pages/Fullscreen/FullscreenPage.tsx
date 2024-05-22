@@ -5,7 +5,7 @@ import {
   SkipLink,
 } from '@amsterdam/design-system-react';
 import { Dispatch, ReactElement, SetStateAction, createContext } from 'react';
-import ZoomControl from '../ZoomControl';
+import ZoomControl from '../ZoomControl/ZoomControl';
 import Map from './Map';
 
 export type FullscreenPageProps = {

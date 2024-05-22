@@ -1,16 +1,8 @@
-import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 
 export const MAP_OPTIONS = {
   center: [52.370216, 4.895168] as [number, number],
   zoom: 12,
-  layers: [
-    L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
-      attribution: '',
-      subdomains: ['t1', 't2', 't3', 't4'],
-      tms: true,
-    }),
-  ],
   zoomControl: false,
   maxZoom: 16,
   minZoom: 3,
