@@ -16,7 +16,6 @@ export default function Map({ mapOptions = MAP_OPTIONS, children }: MapProps) {
   const createdMapInstance = useRef(false);
 
   useEffect(() => {
-    console.log(mapRef.current, mapInstance);
     if (mapRef.current === null || createdMapInstance.current !== false) {
       return;
     }
