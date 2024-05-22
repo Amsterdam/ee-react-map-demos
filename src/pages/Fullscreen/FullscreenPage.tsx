@@ -4,14 +4,9 @@ import {
   Screen,
   SkipLink,
 } from '@amsterdam/design-system-react';
-import {
-  Dispatch,
-  ReactElement,
-  SetStateAction,
-  createContext,
-  useState,
-} from 'react';
+import { Dispatch, ReactElement, SetStateAction, createContext } from 'react';
 import ZoomControl from '../ZoomControl';
+import Map from './Map';
 
 export type FullscreenPageProps = {
   header?: ReactElement;
@@ -27,8 +22,6 @@ interface MapContextType {
 export const MapContext = createContext<MapContextType | null>(null);
 
 export const FullscreenPage = ({ header, footer }: FullscreenPageProps) => {
-  const [map, setMap] = useState('test');
-
   return (
     <>
       <SkipLink href="#main">Direct naar inhoud</SkipLink>
@@ -37,10 +30,9 @@ export const FullscreenPage = ({ header, footer }: FullscreenPageProps) => {
 
         <Overlap>
           <AspectRatio ratio="wide">
-            <MapContext.Provider value={{ map, setMap }}>
-              {/* <BaseLayer /> */}
+            <Map mapOptions={{ scrollWheelZoom: false }}>
               <ZoomControl />
-            </MapContext.Provider>
+            </Map>
           </AspectRatio>
         </Overlap>
 
