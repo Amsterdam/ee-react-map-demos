@@ -5,7 +5,8 @@ import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import { toGeoJSON } from '@/utils/toGeoJSON';
-import { BoomApiResponse } from './types';
+import { Boom } from './types';
+import data from './data.json';
 
 const GeoJSONLayer: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,46 +52,16 @@ const GeoJSONLayer: FunctionComponent = () => {
       return;
     }
 
-    async function fetchData() {
-      if (mapInstance === null) {
-        return;
-      }
-
-      try {
-        const data: BoomApiResponse = await (
-          await fetch(
-            'https://api.data.amsterdam.nl/v1/bomen/stamgegevens/?_pageSize=1000',
-            {
-              headers: {
-                'Accept-Crs': 'EPSG:4326',
-              },
-            }
-          )
-        ).json();
-
-        // The toGeoJSON function needs a propery named geometry.
-        // This propery should reference a geojson Geometry.
-        const renamed = data._embedded.stamgegevens.map(
-          ({ geometrie, ...t }) => ({ ...t, geometry: geometrie })
-        );
-
-        L.geoJson(toGeoJSON(renamed), {
-          pointToLayer: (_, latlng) => {
-            return L.circleMarker(latlng, {
-              fillColor: '#247514',
-              fill: true,
-              color: '#247514',
-              radius: 3,
-            });
-          },
-        }).addTo(mapInstance);
-      } catch (e) {
-        console.error('Error fetching data from API');
-        console.error(e);
-      }
-    }
-
-    fetchData();
+    L.geoJson(toGeoJSON(data as Boom[]), {
+      pointToLayer: (_, latlng) => {
+        return L.circleMarker(latlng, {
+          fillColor: '#247514',
+          fill: true,
+          color: '#247514',
+          radius: 3,
+        });
+      },
+    }).addTo(mapInstance);
   }, [mapInstance]);
 
   return <div className={styles.container} ref={containerRef} />;

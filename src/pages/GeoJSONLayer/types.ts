@@ -1,21 +1,9 @@
 import type { Point } from 'geojson';
 
-export type BaseApiResponse<T, PropertyName extends string> = {
-  _embedded: {
-    [P in PropertyName]: T[];
-  };
-  page: {
-    number: number;
-    size: number;
-    totalElements?: number;
-    totalPages?: number;
-  };
-};
-
 export type Boom = {
   id: number;
   gbdBuurtId: string;
-  geometrie: Point;
+  geometry: Point;
   typeBeheerderPlus: string | null;
   boomhoogteklasseActueel: string | null;
   typeEigenaarPlus: string | null;
@@ -28,5 +16,3 @@ export type Boom = {
   soortnaamKort: string | null;
   soortnaamTop: string | null;
 };
-
-export type BoomApiResponse = BaseApiResponse<Boom, 'stamgegevens'>;
