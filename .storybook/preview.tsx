@@ -20,6 +20,20 @@ export const parameters = {
   backgrounds: {
     disable: true,
   },
+  options: {
+    storySort: {
+      order: [
+        'Introduction',
+        'Alternative*',
+        'Coordinate*',
+        'Global',
+        'React',
+        'React-Leaflet',
+        'Components',
+        'Patterns',
+      ],
+    },
+  },
   viewport: {
     viewports,
   },
