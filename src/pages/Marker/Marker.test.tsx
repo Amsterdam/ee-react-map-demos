@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
-import Marker from './';
+import Marker from './Marker';
 
 describe('Marker', () => {
   it('renders the component', () => {

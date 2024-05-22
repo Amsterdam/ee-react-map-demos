@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Marker from '@/pages/Marker';
+import Marker from '@/pages/Marker/Marker';
 
 const meta = {
   title: 'React/Marker',
