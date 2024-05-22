@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import WFSLayer from '.';
+import WFSLayer from './WFSLayer';
 import useGeoJSONLayer from './useGeoJSONLayer';
 import useLeafletMap from './useLeafletMap';
 

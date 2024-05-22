@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WFSLayer from '@/pages/WFSLayer';
+import WFSLayer from '@/pages/WFSLayer/WFSLayer';
 
 const meta = {
   title: 'React/WFSLayer',
