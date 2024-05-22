@@ -4,18 +4,36 @@
  */
 
 import { Meta, StoryObj } from '@storybook/react';
-import { FullscreenPage } from './FullscreenPage';
+import {
+  FullscreenPage,
+  FullscreenPageFooter,
+  FullscreenPageHeader,
+} from '../../../pages/Fullscreen';
 
 const meta = {
-  title: 'Docs/Patterns/Fullscreen',
+  title: 'Patterns/Fullscreen',
   component: FullscreenPage,
   parameters: {
     layout: 'fullscreen',
+  },
+  args: {
+    header: <FullscreenPageHeader />,
+    footer: <FullscreenPageFooter />,
+  },
+  argTypes: {
+    header: { control: { disable: true } },
+    footer: { control: { disable: true } },
   },
 } satisfies Meta<typeof FullscreenPage>;
 
 export default meta;
 
 export const Default: StoryObj = {
-  render: () => <FullscreenPage />,
+  parameters: {
+    docs: {
+      source: {
+        disable: true,
+      },
+    },
+  },
 };

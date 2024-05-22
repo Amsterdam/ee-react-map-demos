@@ -42,6 +42,8 @@ const ZoomControl: FunctionComponent = () => {
         }),
       ],
       zoomControl: false,
+      /** Disable scroll wheel zoom when the (custom) zoom control is used */
+      scrollWheelZoom: false,
       maxZoom: 16,
       minZoom: 3,
       crs: getCrsRd(),
