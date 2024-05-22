@@ -4,30 +4,25 @@ import {
   Screen,
   SkipLink,
 } from '@amsterdam/design-system-react';
-import {
-  Dispatch,
-  ReactElement,
-  SetStateAction,
-  createContext,
-  useState,
-} from 'react';
-import ZoomControl from '../ZoomControl';
+import { ReactElement } from 'react';
+// import BaseLayer from '../BaseLayer';
+import ZoomControlLayer from '../ZoomControlLayer';
 
 export type FullscreenPageProps = {
   header?: ReactElement;
   footer?: ReactElement;
 };
 
-interface MapContextType {
-  map: string;
-  setMap: Dispatch<SetStateAction<string>>;
-}
+// interface MapContextType {
+//   map: string;
+//   setMap: Dispatch<SetStateAction<string>>;
+// }
 
 // Create the context with the correct type and a default value
-export const MapContext = createContext<MapContextType | null>(null);
+// export const MapContext = createContext<MapContextType | null>(null);
 
 export const FullscreenPage = ({ header, footer }: FullscreenPageProps) => {
-  const [map, setMap] = useState('test');
+  // const [map, setMap] = useState('test');
 
   return (
     <>
@@ -37,10 +32,10 @@ export const FullscreenPage = ({ header, footer }: FullscreenPageProps) => {
 
         <Overlap>
           <AspectRatio ratio="wide">
-            <MapContext.Provider value={{ map, setMap }}>
-              {/* <BaseLayer /> */}
-              <ZoomControl />
-            </MapContext.Provider>
+            {/* <MapContext.Provider value={{ map, setMap }}> */}
+            {/* <BaseLayer /> */}
+            <ZoomControlLayer />
+            {/* </MapContext.Provider> */}
           </AspectRatio>
         </Overlap>
 

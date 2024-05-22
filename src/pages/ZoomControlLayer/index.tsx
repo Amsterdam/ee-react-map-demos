@@ -1,29 +1,14 @@
-import { Button, Icon, VisuallyHidden } from '@amsterdam/design-system-react';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
-import {
-  EnlargeIcon,
-  MinimiseIcon,
-} from '@amsterdam/design-system-react-icons';
 
 import styles from './styles.module.css';
+import ZoomControl from '../../components/ZoomControl';
 
-const ZoomControl: FunctionComponent = () => {
+const ZoomControlLayer: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);
-
-  const handleZoomInClick = () => {
-    if (mapInstance) {
-      mapInstance?.setZoom(mapInstance.getZoom() + 1);
-    }
-  };
-  const handleZoomOutClick = () => {
-    if (mapInstance) {
-      mapInstance?.setZoom(mapInstance.getZoom() - 1);
-    }
-  };
 
   // Set the Leaflet map and Amsterdam base layer
   useEffect(() => {
@@ -67,18 +52,11 @@ const ZoomControl: FunctionComponent = () => {
     <>
       <div className={styles.container} ref={containerRef}>
         <div className={styles.buttons}>
-          <Button variant="secondary" onClick={handleZoomInClick}>
-            <VisuallyHidden>Zoom in</VisuallyHidden>
-            <Icon svg={EnlargeIcon} size="level-5" />
-          </Button>
-          <Button variant="secondary" onClick={handleZoomOutClick}>
-            <VisuallyHidden>Zoom out</VisuallyHidden>
-            <Icon svg={MinimiseIcon} size="level-5" />
-          </Button>
+          <ZoomControl mapInstance={mapInstance} />
         </div>
       </div>
     </>
   );
 };
 
-export default ZoomControl;
+export default ZoomControlLayer;
