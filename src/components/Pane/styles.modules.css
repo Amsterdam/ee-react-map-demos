@@ -1,0 +1,9 @@
+.pane {
+  height: 100%;
+  left: 0;
+  max-inline-size: 468px;
+  min-inline-size: 320px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
