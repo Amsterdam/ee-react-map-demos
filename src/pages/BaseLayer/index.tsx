@@ -5,12 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
-const BaseLayer: FunctionComponent = ({
-  center,
-  zoom,
-  minZoom,
-  maxZoom,
-}: L.MapOptions) => {
+const BaseLayer: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Use state instead of a ref for storing the Leaflet map object otherwise you may run into DOM issues when React StrictMode is enabled
@@ -26,8 +21,8 @@ const BaseLayer: FunctionComponent = ({
     }
 
     const map = new L.Map(containerRef.current, {
-      center: center ?? L.latLng([52.370216, 4.895168]),
-      zoom: zoom ?? 12,
+      center: L.latLng([52.370216, 4.895168]),
+      zoom: 12,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
           attribution: '',
@@ -36,8 +31,8 @@ const BaseLayer: FunctionComponent = ({
         }),
       ],
       zoomControl: false,
-      maxZoom: maxZoom ?? 16,
-      minZoom: minZoom ?? 3,
+      maxZoom: 16,
+      minZoom: 3,
       // Ensure proper handling for Rijksdriehoekcoördinaten
       crs: getCrsRd(),
       // Prevent the user browsing too far outside Amsterdam otherwise the map will render blank greyspace. Amsterdam tile layer only supports Amsterdam and the immediate surrounding areas
@@ -50,8 +45,8 @@ const BaseLayer: FunctionComponent = ({
     // Remove Leaflet link from the map
     map.attributionControl.setPrefix(false);
 
-    // // Set the map as created and store the object to state
-    // createdMapInstance.current = true;
+    // Set the map as created and store the object to state
+    createdMapInstance.current = true;
     setMapInstance(map);
 
     // On component unmount, destroy the map and all related events

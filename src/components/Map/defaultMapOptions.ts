@@ -1,6 +1,6 @@
 import getCrsRd from '@/utils/getCrsRd';
 
-export const MAP_OPTIONS = {
+export const DEFAULT_MAP_OPTIONS = {
   center: [52.370216, 4.895168] as [number, number],
   zoom: 12,
   zoomControl: false,
