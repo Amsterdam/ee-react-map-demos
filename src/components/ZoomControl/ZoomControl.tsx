@@ -6,7 +6,7 @@ import {
 } from '@amsterdam/design-system-react-icons';
 
 import styles from './styles.module.css';
-import { useMapInstance } from '../Map/MapContext';
+import { useMapInstance } from '@/components/Map/MapContext';
 
 const ZoomControl: FunctionComponent = () => {
   const mapInstance = useMapInstance();

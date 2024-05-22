@@ -9,6 +9,7 @@ import {
   FullscreenPageFooter,
   FullscreenPageHeader,
 } from '../../../pages/Fullscreen';
+import FullscreenPageMap from '../../../pages/Fullscreen/FullscreenPageMap';
 
 const meta = {
   title: 'Patterns/Fullscreen',
@@ -18,22 +19,16 @@ const meta = {
   },
   args: {
     header: <FullscreenPageHeader />,
+    map: <FullscreenPageMap scrollWheelZoom={false} />,
     footer: <FullscreenPageFooter />,
   },
   argTypes: {
     header: { control: { disable: true } },
+    map: { control: { disable: true } },
     footer: { control: { disable: true } },
   },
 } satisfies Meta<typeof FullscreenPage>;
 
 export default meta;
 
-export const Default: StoryObj = {
-  parameters: {
-    docs: {
-      source: {
-        disable: true,
-      },
-    },
-  },
-};
+export const Default: StoryObj = {};
