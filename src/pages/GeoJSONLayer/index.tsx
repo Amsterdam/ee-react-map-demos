@@ -3,8 +3,8 @@ import type { FunctionComponent } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
-import styles from './styles.module.css';
 import { toGeoJSON } from '@/utils/toGeoJSON';
+import styles from './styles.module.css';
 import { Boom } from './types';
 import data from './data.json';
 
@@ -21,13 +21,6 @@ const GeoJSONLayer: FunctionComponent = () => {
     const map = new L.Map(containerRef.current, {
       center: [52.370216, 4.895168],
       zoom: 8,
-      layers: [
-        L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
-          attribution: '',
-          subdomains: ['t1', 't2', 't3', 't4'],
-          tms: true,
-        }),
-      ],
       zoomControl: true,
       maxZoom: 16,
       minZoom: 3,
@@ -38,6 +31,12 @@ const GeoJSONLayer: FunctionComponent = () => {
       ],
       attributionControl: false,
     });
+
+    L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
+      attribution: '',
+      subdomains: ['t1', 't2', 't3', 't4'],
+      tms: true,
+    }).addTo(map);
 
     createdMapInstance.current = true;
     setMapInstance(map);
@@ -52,16 +51,34 @@ const GeoJSONLayer: FunctionComponent = () => {
       return;
     }
 
-    L.geoJson(toGeoJSON(data as Boom[]), {
-      pointToLayer: (_, latlng) => {
+    const layer = L.geoJson(toGeoJSON(data as Boom[]), {
+      pointToLayer: (feature, latlng) => {
+        if (process.env.NODE_ENV === 'test') {
+          // Testing library cant find path elements so we render a div instead.
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'c-marker',
+              iconSize: [12, 12],
+              html: `<span data-testid="marker"><span data-testid="${feature.properties?.id}">Marker: ${feature.properties?.id}</span></span>`,
+            }),
+          });
+        }
+
         return L.circleMarker(latlng, {
           fillColor: '#247514',
           fill: true,
           color: '#247514',
           radius: 3,
+          className: 'c-marker',
         });
       },
-    }).addTo(mapInstance);
+    });
+
+    layer.addTo(mapInstance);
+
+    return () => {
+      layer.removeFrom(mapInstance);
+    };
   }, [mapInstance]);
 
   return <div className={styles.container} ref={containerRef} />;
