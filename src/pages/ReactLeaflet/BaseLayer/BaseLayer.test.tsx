@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
-import BaseMap from './';
+import BaseMap from './BaseLayer';
 
 describe('BaseMap', () => {
   it('renders the component', () => {

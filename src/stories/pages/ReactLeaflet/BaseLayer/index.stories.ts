@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseLayer from '@/pages/ReactLeaflet/BaseLayer';
+import BaseLayer from '@/pages/ReactLeaflet/BaseLayer/BaseLayer';
 
 const meta = {
   title: 'React-Leaflet/BaseLayer',
