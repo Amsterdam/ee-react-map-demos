@@ -8,7 +8,7 @@ module.exports = defineConfig({
   plugins: [react(), svgr()],
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: 'happy-dom',
     setupFiles: ['./test/vitest-setup.ts'],
   },
   resolve: {
