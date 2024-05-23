@@ -8,8 +8,7 @@ import customMarker from './icons/customMarker';
 const Marker: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [markerInstance, setMarkerInstance] = useState<L.Marker | null>(null);
+  const [, setMarkerInstance] = useState<L.Marker | null>(null);
   const createdMapInstance = useRef(false);
 
   // Set the Leaflet map and Amsterdam base layer
