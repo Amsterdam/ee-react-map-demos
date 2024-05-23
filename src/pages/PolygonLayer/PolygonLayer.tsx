@@ -4,14 +4,14 @@ import L, { LatLngTuple } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
-import data from './single.json';
+import data from './data.json';
 
-const polygonStyles = {
+export const polygonStyles = {
   fillOpacity: 0.2,
   color: '#0000ff',
 };
 
-const polygonHoverStyles = {
+export const polygonHoverStyles = {
   ...polygonStyles,
   fillOpacity: 0.5,
   color: '#ff0000',
@@ -31,8 +31,8 @@ const PolygonLayer: FunctionComponent = () => {
     }
 
     const map = new L.Map(containerRef.current, {
-      center: L.latLng([52.370216, 4.895168]),
-      zoom: 12,
+      center: [52.356423, 4.867811],
+      zoom: 10,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
           attribution: '',
@@ -65,7 +65,10 @@ const PolygonLayer: FunctionComponent = () => {
     if (mapInstance) {
       // TypeScript will often throw errors with Leaflet coordinate sets if you don't explicitly cast the type
       polygonRef.current = L.polygon(
-        data.geometry.coordinates as LatLngTuple[][][]
+        data.geometry.coordinates as LatLngTuple[][][],
+        {
+          className: 'c-layer',
+        }
       )
         .addTo(mapInstance)
         .on('mouseover', () => {
