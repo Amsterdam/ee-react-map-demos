@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import PolygonLayer, {
-  polygonStyles,
-  polygonHoverStyles,
-} from './PolygonLayer';
+import PolygonLayer from './PolygonLayer';
+import { polygonStyles, polygonHoverStyles } from './layerStyles';
 
 describe('PolygonLayer', () => {
   it('renders the component', () => {

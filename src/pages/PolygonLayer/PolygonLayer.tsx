@@ -5,17 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import data from './data.json';
-
-export const polygonStyles = {
-  fillOpacity: 0.2,
-  color: '#0000ff',
-};
-
-export const polygonHoverStyles = {
-  ...polygonStyles,
-  fillOpacity: 0.5,
-  color: '#ff0000',
-};
+import { polygonHoverStyles, polygonStyles } from './layerStyles';
 
 const PolygonLayer: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
