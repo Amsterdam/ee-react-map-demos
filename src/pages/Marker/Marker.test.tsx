@@ -10,9 +10,7 @@ describe('Marker', () => {
 
   it('renders a leaflet marker icon', () => {
     const { container } = render(<Marker />);
-    const icon = container.querySelector(
-      '.leaflet-marker-icon.leaflet-interactive'
-    );
+    const icon = container.querySelector('.c-marker');
 
     expect(icon).toBeInTheDocument();
     expect((icon as HTMLImageElement)?.alt).toEqual('Marker');
