@@ -50,7 +50,7 @@ const Marker: FunctionComponent = () => {
   // Create the marker and add it to the map
   useEffect(() => {
     if (mapInstance) {
-      const marker = L.marker(L.latLng([52.370216, 4.895168]), {
+      const marker = L.marker([52.370216, 4.895168], {
         // There are many more options to choose from @see https://leafletjs.com/reference.html#marker
         icon: customMarker,
       })
