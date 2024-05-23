@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L from 'leaflet';
+import L, { circleMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
@@ -52,26 +52,14 @@ const GeoJSONLayer: FunctionComponent = () => {
     }
 
     const layer = L.geoJson(toGeoJSON(data as Boom[]), {
-      pointToLayer: (feature, latlng) => {
-        if (process.env.NODE_ENV === 'test') {
-          // Testing library cant find path elements so we render a div instead.
-          return L.marker(latlng, {
-            icon: L.divIcon({
-              className: 'c-marker',
-              iconSize: [12, 12],
-              html: `<span data-testid="marker"><span data-testid="${feature.properties?.id}">Marker: ${feature.properties?.id}</span></span>`,
-            }),
-          });
-        }
-
-        return L.circleMarker(latlng, {
+      pointToLayer: (_feature, latlng) =>
+        circleMarker(latlng, {
           fillColor: '#247514',
           fill: true,
           color: '#247514',
           radius: 3,
           className: 'c-marker',
-        });
-      },
+        }),
     });
 
     layer.addTo(mapInstance);
