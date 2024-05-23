@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import WFSLayer from '@/pages/WFSLayer/WFSLayer';
+import WFSLayer from '@/pages/ReactLeaflet/WFSLayer/WFSLayer';
 
 const meta = {
-  title: 'React/WFSLayer',
+  title: 'React-Leaflet/WFSLayer',
   component: WFSLayer,
   parameters: {
     layout: 'fullscreen',
