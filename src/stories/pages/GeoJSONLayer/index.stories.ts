@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseLayer from '@/pages/ReactLeaflet/BaseLayer/BaseLayer';
+import GeoJSONLayer from '@/pages/GeoJSONLayer/GeoJSONLayer';
 
 const meta = {
-  title: 'React-Leaflet/BaseLayer',
-  component: BaseLayer,
+  title: 'React/GeoJSONLayer',
+  component: GeoJSONLayer,
   parameters: {
     layout: 'fullscreen',
     options: {
@@ -11,7 +11,7 @@ const meta = {
       bottomPanelHeight: 0,
     },
   },
-} satisfies Meta<typeof BaseLayer>;
+} satisfies Meta<typeof GeoJSONLayer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

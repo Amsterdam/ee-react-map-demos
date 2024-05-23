@@ -1,15 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
-import BaseMap from './';
+import BaseLayer from './BaseLayer';
 
-describe('BaseMap', () => {
+describe('BaseLayer', () => {
   it('renders the component', () => {
-    const { container } = render(<BaseMap />);
+    const { container } = render(<BaseLayer />);
     expect(container.firstChild).toBeDefined();
   });
 
   it('uses the amsterdam base tile', () => {
-    const { container } = render(<BaseMap />);
+    const { container } = render(<BaseLayer />);
 
     // Only test on the less dynamic part of the URL
     const imgSrc = (
