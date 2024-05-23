@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseLayer from '@/pages/BaseLayer';
+import BaseLayer from '@/pages/BaseLayer/BaseLayer';
 
 const meta = {
   title: 'React/BaseLayer',
