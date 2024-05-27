@@ -1,0 +1,43 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as MVTLayerStories from './index.stories';
+import MVTLayer from '@/pages/MVTLayer/MVTLayer?raw';
+import styles from '@/pages/MVTLayer/styles.module.css?raw';
+
+<Meta of={MVTLayerStories} />
+
+# Amsterdam MVTLayer
+
+## Requirements
+
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+
+## Description
+
+....
+
+The primary code in regards to creating a Leaflet WMS layer, is lines 50-68:
+
+```js
+...
+```
+
+## Usage Scenarios
+
+...
+
+## Usage
+
+The following files are required:
+
+### React Components
+
+#### 1. MVTLayer.tsx
+
+<Source code={MVTLayer} />
+
+### CSS Styling
+
+#### 1. styles.module.css
+
+<Source code={styles} />
