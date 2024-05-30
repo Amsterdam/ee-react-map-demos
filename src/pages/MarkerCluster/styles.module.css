@@ -7,7 +7,7 @@
   display: flex !important;
   align-items: center;
   justify-content: center;
-  background: #ff0000;
+  background-color: rgba(255, 0, 0, 0.5);
   border-radius: 100px;
   cursor: pointer;
   padding: 2px;
@@ -29,13 +29,25 @@
 }
 
 .markerClusterSmall {
-  background: blue;
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+.markerClusterSmall:hover {
+  background: rgba(0, 0, 255);
 }
 
 .markerClusterMedium {
+  background: rgba(0, 128, 0, 0.5);
+}
+
+.markerClusterMedium:hover {
   background: green;
 }
 
 .markerClusterLarge {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.markerClusterLarge:hover {
   background: #ff0000;
 }

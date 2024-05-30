@@ -1,3 +1,5 @@
+// TODO spiderify?
+// TODO test in non storybook
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import L, {
@@ -7,57 +9,24 @@ import L, {
   LatLng,
 } from 'leaflet';
 import Supercluster from 'supercluster';
+import type { BBox, GeoJsonObject } from 'geojson';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
 import { Record } from './types';
 import data from './data.json';
-import { BBox, Feature, GeoJsonObject, Point } from 'geojson';
+import createClusterIcon from './utils/createClusterIcon';
 
-// We need to import these otherwise the browser will request these images with the wrong path resulting in 404s
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
-
-const iconDefault = L.icon({
-  iconRetinaUrl,
-  iconUrl,
-  shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41],
-});
-
-L.Marker.prototype.options.icon = iconDefault;
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const createClusterIcon = (feature: Feature<Point, any>, latlng: L.LatLng) => {
-  if (!feature.properties.cluster) return L.marker(latlng);
-
-  const count = feature.properties.point_count;
-  const sizeClassName =
-    count < 10
-      ? styles.markerClusterSmall
-      : count < 100
-        ? styles.markerClusterMedium
-        : styles.markerClusterLarge;
-  const icon = L.divIcon({
-    html: `<div><span>${feature.properties.point_count_abbreviated}</span></div>`,
-    className: `${styles.markerCluster} ${sizeClassName}`,
-    iconSize: L.point(40, 40),
-  });
-
-  return L.marker(latlng, {
-    icon: icon,
-  });
+const CLUSTER_STYLES = {
+  default: styles.markerCluster,
+  small: styles.markerClusterSmall,
+  medium: styles.markerClusterMedium,
+  large: styles.markerClusterLarge,
 };
 
 const MarkerCluster: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
-  const [, setClusterInstance] = useState<L.Marker | null>(null);
   const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(
     null
   );
@@ -94,13 +63,11 @@ const MarkerCluster: FunctionComponent = () => {
 
   const onClick = useCallback(
     (event: LeafletMouseEvent) => {
-      console.log('click', event);
-      const clusterId = event.propagatedFrom.feature.properties.cluster
-        ? event.propagatedFrom.feature.properties.cluster_id
-        : undefined;
-      const markerId = !event.propagatedFrom.feature.properties.cluster
-        ? event.propagatedFrom.feature.properties.id
-        : undefined;
+      const { feature } = event.propagatedFrom;
+      const { cluster, cluster_id, id } = feature.properties;
+
+      const clusterId = cluster ? cluster_id : undefined;
+      const markerId = !cluster ? id : undefined;
 
       onMarkerClick(event.propagatedFrom.getLatLng(), clusterId, markerId);
     },
@@ -109,14 +76,12 @@ const MarkerCluster: FunctionComponent = () => {
 
   const onKeyup = useCallback(
     (event: LeafletKeyboardEvent) => {
-      console.log('key', event);
       if (event.originalEvent.key === 'Enter') {
-        const clusterId = event.propagatedFrom.feature.properties.cluster
-          ? event.propagatedFrom.feature.properties.cluster_id
-          : undefined;
-        const markerId = !event.propagatedFrom.feature.properties.cluster
-          ? event.propagatedFrom.feature.properties.id
-          : undefined;
+        const { feature } = event.propagatedFrom;
+        const { cluster, cluster_id, id } = feature.properties;
+
+        const clusterId = cluster ? cluster_id : undefined;
+        const markerId = !cluster ? id : undefined;
 
         onMarkerClick(event.propagatedFrom.getLatLng(), clusterId, markerId);
       }
@@ -154,7 +119,7 @@ const MarkerCluster: FunctionComponent = () => {
 
     // Empty Layer Group that will receive the clusters data on the fly.
     const markers = L.geoJSON(null, {
-      pointToLayer: createClusterIcon,
+      pointToLayer: (...args) => createClusterIcon(...args, CLUSTER_STYLES),
     }).addTo(map);
 
     createdMapInstance.current = true;
@@ -168,13 +133,19 @@ const MarkerCluster: FunctionComponent = () => {
 
     return () => {
       if (mapInstance) mapInstance.remove();
+
+      if (markersInstance) {
+        markersInstance.off();
+        markersInstance.remove();
+      }
     };
   }, []);
 
   useEffect(() => {
     if (mapInstance) {
-      // Clear any already rendered cluster/marker HTML
+      // Clear any already rendered clusters/markers
       markersInstance?.clearLayers();
+      markersInstance?.off();
 
       // Parse any API data to GeoJSON
       const parsedGeoJson = toGeoJSON(data as Record[]);
@@ -206,16 +177,6 @@ const MarkerCluster: FunctionComponent = () => {
         markersInstance?.on('keyup', onKeyup);
       }
     }
-
-    // Cleanup listeners on component unmount
-    // TODO why is this firing on click
-    // return () => {
-    //   if (markersInstance) {
-    //     markersInstance.off('click', onClick);
-    //     markersInstance.off('keyup', onKeyup);
-    //     markersInstance.remove();
-    //   }
-    // };
   }, [mapInstance, zoom, center]);
 
   return <div className={styles.container} ref={containerRef} />;
