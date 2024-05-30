@@ -1,14 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, { LatLngTuple, LeafletMouseEvent } from 'leaflet';
+import L, {
+  LatLngTuple,
+  LeafletKeyboardEvent,
+  LeafletMouseEvent,
+  LatLng,
+} from 'leaflet';
 import Supercluster from 'supercluster';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
 import { Record } from './types';
 import data from './data.json';
-import { BBox, Feature, Point } from 'geojson';
-// import './marker-cluster.css';
+import { BBox, Feature, GeoJsonObject, Point } from 'geojson';
 
 // We need to import these otherwise the browser will request these images with the wrong path resulting in 404s
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
@@ -63,36 +67,58 @@ const MarkerCluster: FunctionComponent = () => {
   const [zoom, setZoom] = useState(7);
 
   const clusterIndex = new Supercluster({
-    log: true,
+    // Enable this for console.logs with the timing to build each cluster
+    log: false,
     radius: 40,
     extent: 3000,
     nodeSize: 64,
     maxZoom: 13,
   });
 
-  const onClick = useCallback(
-    (event: LeafletMouseEvent) => {
-      console.log('onClick', { event });
-
-      if (event.propagatedFrom.feature.properties.cluster_id) {
+  const onMarkerClick = useCallback(
+    (latlng: LatLng, clusterId: number, markerId = undefined) => {
+      if (clusterId) {
         mapInstance?.setZoomAround(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          event.latlng || (event as any)._latlng,
-          clusterIndex.getClusterExpansionZoom(event.propagatedFrom.feature.id)
+          latlng,
+          clusterIndex.getClusterExpansionZoom(clusterId)
           //event.propagatedFrom.feature.properties.expansion_zoom ?? mapInstance.getZoom() + 1
         );
+      } else if (markerId) {
+        // TODO add alert/console.log on marker click as example
+        alert('marker click');
       }
-      // onMarkerClick && onMarkerClick(event);
+    },
+    [mapInstance]
+  );
+
+  const onClick = useCallback(
+    (event: LeafletMouseEvent) => {
+      console.log('click', event);
+      const clusterId = event.propagatedFrom.feature.properties.cluster
+        ? event.propagatedFrom.feature.properties.cluster_id
+        : undefined;
+      const markerId = !event.propagatedFrom.feature.properties.cluster
+        ? event.propagatedFrom.feature.properties.id
+        : undefined;
+
+      onMarkerClick(event.propagatedFrom.getLatLng(), clusterId, markerId);
     },
     [mapInstance]
   );
 
   const onKeyup = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (event: any) => {
+    (event: LeafletKeyboardEvent) => {
+      console.log('key', event);
       if (event.originalEvent.key === 'Enter') {
-        event.latlng = event.layer.getLatLng();
-        onClick(event);
+        const clusterId = event.propagatedFrom.feature.properties.cluster
+          ? event.propagatedFrom.feature.properties.cluster_id
+          : undefined;
+        const markerId = !event.propagatedFrom.feature.properties.cluster
+          ? event.propagatedFrom.feature.properties.id
+          : undefined;
+
+        onMarkerClick(event.propagatedFrom.getLatLng(), clusterId, markerId);
       }
     },
     [onClick]
@@ -136,10 +162,6 @@ const MarkerCluster: FunctionComponent = () => {
     setMarkersInstance(markers);
 
     map.on('moveend', () => {
-      console.log('moveend!', {
-        zoom: map.getZoom(),
-        center: [map.getCenter().lat, map.getCenter().lng],
-      });
       setZoom(map.getZoom());
       setCenter([map.getCenter().lat, map.getCenter().lng]);
     });
@@ -151,13 +173,16 @@ const MarkerCluster: FunctionComponent = () => {
 
   useEffect(() => {
     if (mapInstance) {
+      // Clear any already rendered cluster/marker HTML
       markersInstance?.clearLayers();
 
-      console.log(1);
+      // Parse any API data to GeoJSON
       const parsedGeoJson = toGeoJSON(data as Record[]);
-      console.log({ parsedGeoJson });
+
+      // Load the parsed GeoJSON data into the cluster index
       clusterIndex.load(parsedGeoJson.features);
 
+      // Get the current map bounds to prevent clustering every data record
       const bounds = mapInstance.getBounds();
       const bbox = [
         bounds.getWest(),
@@ -166,21 +191,31 @@ const MarkerCluster: FunctionComponent = () => {
         bounds.getNorth(),
       ];
 
+      // Return any map data within the current bounds
       const clusterMarkers = clusterIndex.getClusters(
         bbox as BBox,
         mapInstance.getZoom()
       );
-      console.log({ clusterMarkers });
 
       if (markersInstance && parsedGeoJson.features.length) {
-        // markerLayer.addTo(map);
-        // markerLayer.addData(clusterFeatures as any); // Type mismatch here.
-        // @ts-ignore
-        markersInstance?.addData(clusterMarkers);
+        // Render the cluster(s) and marker(s) to the map
+        markersInstance?.addData(clusterMarkers as unknown as GeoJsonObject);
+
+        // Add event listeners to enable dynamic clustering
         markersInstance?.on('click', onClick);
         markersInstance?.on('keyup', onKeyup);
       }
     }
+
+    // Cleanup listeners on component unmount
+    // TODO why is this firing on click
+    // return () => {
+    //   if (markersInstance) {
+    //     markersInstance.off('click', onClick);
+    //     markersInstance.off('keyup', onKeyup);
+    //     markersInstance.remove();
+    //   }
+    // };
   }, [mapInstance, zoom, center]);
 
   return <div className={styles.container} ref={containerRef} />;

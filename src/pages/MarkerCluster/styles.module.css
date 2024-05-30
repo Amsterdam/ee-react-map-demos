@@ -13,6 +13,10 @@
   padding: 2px;
 }
 
+.markerCluster:focus {
+  outline: 8px solid yellow;
+}
+
 .markerCluster div {
   display: flex;
   align-items: center;
