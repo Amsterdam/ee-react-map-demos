@@ -27,6 +27,7 @@ export interface ClusterStyles {
 }
 
 const createClusterIcon = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   feature: Feature<Point, any>,
   latlng: L.LatLng,
   styles: ClusterStyles

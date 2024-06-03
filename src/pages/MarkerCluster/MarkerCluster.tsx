@@ -2,12 +2,7 @@
 // TODO test in non storybook
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, {
-  LatLngTuple,
-  LeafletKeyboardEvent,
-  LeafletMouseEvent,
-  LatLng,
-} from 'leaflet';
+import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
 import Supercluster from 'supercluster';
 import type { BBox, GeoJsonObject } from 'geojson';
 import getCrsRd from '@/utils/getCrsRd';
@@ -45,45 +40,29 @@ const MarkerCluster: FunctionComponent = () => {
   });
 
   const onMarkerClick = useCallback(
-    (latlng: LatLng, clusterId: number, markerId = undefined) => {
-      if (clusterId) {
+    (event: LeafletEvent) => {
+      const { feature } = event.propagatedFrom;
+
+      if (feature.properties.cluster && feature.properties.cluster_id) {
+        // We must be dealing with a cluster click
         mapInstance?.setZoomAround(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          latlng,
-          clusterIndex.getClusterExpansionZoom(clusterId)
-          //event.propagatedFrom.feature.properties.expansion_zoom ?? mapInstance.getZoom() + 1
+          event.propagatedFrom.getLatLng(),
+          clusterIndex.getClusterExpansionZoom(feature.properties.cluster_id)
         );
-      } else if (markerId) {
-        // TODO add alert/console.log on marker click as example
-        alert('marker click');
+      } else if (feature.properties.id) {
+        // We must be dealing with a marker click
+        alert(`Marker click ID ${feature.properties.id}`);
       }
     },
     [mapInstance]
   );
 
-  const onClick = useCallback(
-    (event: LeafletMouseEvent) => {
-      const { feature } = event.propagatedFrom;
-      const { cluster, cluster_id, id } = feature.properties;
-
-      const clusterId = cluster ? cluster_id : undefined;
-      const markerId = !cluster ? id : undefined;
-
-      onMarkerClick(event.propagatedFrom.getLatLng(), clusterId, markerId);
-    },
-    [mapInstance]
-  );
+  const onClick = useCallback(onMarkerClick, [mapInstance]);
 
   const onKeyup = useCallback(
     (event: LeafletKeyboardEvent) => {
       if (event.originalEvent.key === 'Enter') {
-        const { feature } = event.propagatedFrom;
-        const { cluster, cluster_id, id } = feature.properties;
-
-        const clusterId = cluster ? cluster_id : undefined;
-        const markerId = !cluster ? id : undefined;
-
-        onMarkerClick(event.propagatedFrom.getLatLng(), clusterId, markerId);
+        onMarkerClick(event);
       }
     },
     [onClick]
@@ -126,6 +105,7 @@ const MarkerCluster: FunctionComponent = () => {
     setMapInstance(map);
     setMarkersInstance(markers);
 
+    // Listen for map changes to know when to update the clusters
     map.on('moveend', () => {
       setZoom(map.getZoom());
       setCenter([map.getCenter().lat, map.getCenter().lng]);
