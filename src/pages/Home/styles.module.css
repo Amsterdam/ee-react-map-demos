@@ -1,3 +1,53 @@
-.icon {
-  width: 24px;
+.container {
+  height: 100%;
+  min-height: 100%;
+}
+
+.markerCluster {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 0, 0, 0.5);
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.markerCluster:focus {
+  outline: 8px solid yellow;
+}
+
+.markerCluster div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 15px;
+  font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  height: 30px;
+  width: 30px;
+}
+
+.markerClusterSmall {
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+.markerClusterSmall:hover {
+  background: rgba(0, 0, 255);
+}
+
+.markerClusterMedium {
+  background: rgba(0, 128, 0, 0.5);
+}
+
+.markerClusterMedium:hover {
+  background: green;
+}
+
+.markerClusterLarge {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.markerClusterLarge:hover {
+  background: #ff0000;
 }

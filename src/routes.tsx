@@ -1,16 +1,16 @@
 import type { RouteObject } from 'react-router-dom';
 import App from '@/containers/App';
 import Home from '@/pages/Home';
-import Contact from '@/pages/Contact';
+import BaseMap from '@/pages/BaseMap/BaseMap';
 
 const children: RouteObject[] = [
   {
     path: '/',
-    element: <Home />,
+    element: <BaseMap />,
   },
   {
     path: 'contact',
-    element: <Contact />,
+    element: <Home />,
   },
 ];
 
