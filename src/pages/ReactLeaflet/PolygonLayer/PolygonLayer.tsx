@@ -2,13 +2,11 @@ import styles from '@/pages/ReactLeaflet/PolygonLayer/styles.module.css';
 import { MapContainer, TileLayer, Polygon } from 'react-leaflet';
 import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
-import type { MultiPolygon } from 'geojson';
-import type { LatLngExpression, Polygon as PolygonType } from 'leaflet';
+import type { LatLngExpression } from 'leaflet';
 
 import data from './data.json';
 
 const PolygonLayer = (): JSX.Element => {
-  const parsedGeoJson = L.geoJSON(data.geometry as MultiPolygon);
   return (
     <div className={styles.container}>
       <MapContainer
@@ -26,11 +24,7 @@ const PolygonLayer = (): JSX.Element => {
           tms
         />
         <Polygon
-          positions={parsedGeoJson
-            .getLayers()
-            .map(
-              layer => (layer as PolygonType).getLatLngs() as LatLngExpression[]
-            )}
+          positions={data.geometry.coordinates as LatLngExpression[][][]}
         />
       </MapContainer>
     </div>

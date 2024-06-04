@@ -19,20 +19,16 @@ This is the Amsterdam polygon layer on a React-leaflet map. The polygon layer ca
 
 ## Background
 
-### Amsterdam polygon layer
-A PolygonLayer allows users to display and interact with polygon shapes on a map.
+### Amsterdam Polygon layer
+A Polygon layer allows users to display and interact with polygon shapes on a map.
 The polygons are defined by an array of latitude and longitude points,
 and they can be styled with various options such as colour, opacity, and fill patterns.
 The datateam Geo provides various reference maps based on reference data from team BenK (Basis- en Kernregistraties),
 available in different reference systems and visualisations.
 
-### Coordinate Reference System handling
-
-Leaflet by default uses EPSG:3857 (Web Mercator / WGS 84), however, the base layer by default uses Rijksdriehoekscoördinaten. Therefore, we include the `utils/getCrsRd` file to appropriately handle coordinates. [Read more about CRS](#1-getcrsrdts).
-
 ## How to implement
 
-To accomplish the Amstedam base/tile layer there are three files:
+To accomplish the Amstedam Polyygon layer there are three files:
 1. The React components
     * [PolygonLayer.tsx](#1-polygonlayertsx)
 2. The CSS styles (1 file)
