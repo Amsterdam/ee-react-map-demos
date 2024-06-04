@@ -1,0 +1,23 @@
+[
+  {
+    "id": "102125",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [4.895168, 52.370216]
+    }
+  },
+  {
+    "id": "102152",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [4.895168, 52.370216]
+    }
+  },
+  {
+    "id": "102402",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [4.895168, 52.370216]
+    }
+  }
+]

@@ -1,5 +1,3 @@
-// TODO spiderify?
-// TODO test in non storybook
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
