@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ZoomControl from '@/components/ZoomControl/ZoomControl';
 import { Story } from '@storybook/blocks';
-import Map from '../../../components/Map/Map';
+import Map from '@/components/Map/Map';
 
 const meta = {
   title: 'Components/ZoomControl',

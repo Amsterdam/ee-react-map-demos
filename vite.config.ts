@@ -12,6 +12,9 @@ module.exports = defineConfig({
     setupFiles: ['./test/vitest-setup.ts'],
   },
   resolve: {
+    // Resolve random 'TypeError: Failed to fetch dynamically imported module' error
+    // @see https://github.com/storybookjs/storybook/issues/21610#issuecomment-1882417258
+    extensions: ['.mdx', '.mjs', '.js', '.ts', '.tsx'],
     alias: [
       { find: '@', replacement: path.resolve(__dirname, 'src') },
       { find: '@@', replacement: path.resolve(__dirname) },
