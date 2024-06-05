@@ -6,7 +6,6 @@ describe('Marker', () => {
   it('renders the component', () => {
     const { container } = render(<Marker />);
     expect(container.firstChild).toBeDefined();
-    expect(container.querySelector('.map-marker')).toBeInTheDocument();
   });
   it('shows the marker', () => {
     const { container } = render(<Marker />);

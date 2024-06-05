@@ -9,7 +9,6 @@ import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import defaultMarker from '@/utils/icons/defaultMarker';
 
-const position = L.latLng([52.370216, 4.895168]);
 const Marker = (): JSX.Element => (
   <div className={styles.container}>
     <MapContainer
@@ -26,7 +25,10 @@ const Marker = (): JSX.Element => (
         subdomains={['t1', 't2', 't3', 't4']}
         tms
       />
-      <MarkerLeaflet position={position} icon={defaultMarker} />
+      <MarkerLeaflet
+        position={L.latLng([52.370216, 4.895168])}
+        icon={defaultMarker}
+      />
     </MapContainer>
   </div>
 );
