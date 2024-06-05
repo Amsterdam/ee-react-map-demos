@@ -6,7 +6,7 @@ import type { BBox, GeoJsonObject } from 'geojson';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
-import { Record } from './types';
+import { DataRecord } from './types';
 import data from './data.json';
 import createClusterIcon from './utils/createClusterIcon';
 
@@ -126,7 +126,7 @@ const MarkerCluster: FunctionComponent = () => {
       markersInstance?.off();
 
       // Parse any API data to GeoJSON
-      const parsedGeoJson = toGeoJSON(data as Record[]);
+      const parsedGeoJson = toGeoJSON(data as DataRecord[]);
 
       // Load the parsed GeoJSON data into the cluster index
       clusterIndex.load(parsedGeoJson.features);

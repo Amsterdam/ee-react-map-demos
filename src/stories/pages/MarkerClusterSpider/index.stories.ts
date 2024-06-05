@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MarkerCluster from '@/pages/MarkerCluster/MarkerCluster';
 import MarkerClusterSpider from '@/pages/MarkerCluster/MarkerClusterSpider';
 
 const meta = {
-  title: 'React/MarkerCluster',
-  component: MarkerCluster,
+  title: 'React/MarkerClusterSpider',
+  component: MarkerClusterSpider,
   parameters: {
     layout: 'fullscreen',
     options: {
@@ -12,7 +11,7 @@ const meta = {
       bottomPanelHeight: 0,
     },
   },
-} satisfies Meta<typeof MarkerCluster>;
+} satisfies Meta<typeof MarkerClusterSpider>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

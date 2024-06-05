@@ -1,6 +1,6 @@
 import type { Point } from 'geojson';
 
-export type Record = {
+export type DataRecord = {
   id: string;
   geometry: Point;
 };

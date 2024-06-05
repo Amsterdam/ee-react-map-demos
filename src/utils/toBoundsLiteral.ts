@@ -5,8 +5,8 @@ const toBoundsLiteral = (bounds: LatLngBounds): [[number, number], [number, numb
   const northEast = bounds.getNorthEast();
 
   return [
-    [southWest.lat as number, southWest.lng as number],
-    [northEast.lat as number, northEast.lng as number],
+    [southWest.lng as number, southWest.lat as number],
+    [northEast.lng as number, northEast.lat as number],
   ];
 };
 
