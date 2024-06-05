@@ -1,4 +1,4 @@
-import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import { Meta, Source } from '@storybook/blocks';
 import * as WMSLayerStories from './index.stories';
 import WMSLayer from '@/pages/WMSLayer/WMSLayer?raw';
 import styles from '@/pages/WMSLayer/styles.module.css?raw';
@@ -33,7 +33,7 @@ useEffect(() => {
         layers: 'verblijfsobjecten_woonfunctie',
         format: 'image/svg+xml',
         transparent: true,
-        crs: getCrsRd(),
+        crs: getCrsRd()
       }
     )
     .addTo(mapInstance);
