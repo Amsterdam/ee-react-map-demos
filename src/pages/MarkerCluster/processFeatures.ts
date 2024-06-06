@@ -1,157 +1,128 @@
-import { LineString } from 'geojson';
-import L from 'leaflet';
-import Supercluster from 'supercluster';
-import { MapFeature } from './getExternalFeatures';
+import { LineString, Position } from 'geojson';
+import L, { LatLngLiteral } from 'leaflet';
+import { ClusterOptions, MapFeature, MapSuperClusterFeature } from './types';
+import roundNumber from './utils/roundNumber';
+import {
+  createPointsCircle,
+  createPointsSpiral,
+} from './utils/createClusterShapes';
 
-type DatasetClusterFeatureProperties = {
-  id: string;
-  cluster?: boolean;
-  point_count?: number;
+const generateKey = (coordinates: Position) =>
+  `${roundNumber(coordinates[0])}-${roundNumber(coordinates[1])}`;
+
+const getMarkerItems = (features: MapSuperClusterFeature[]) => {
+  const items: Record<string, MapSuperClusterFeature[]> = {};
+  features.forEach(feature => {
+    const key = generateKey(feature.geometry.coordinates);
+
+    if (!items[key]) {
+      items[key] = [feature];
+    } else {
+      items[key].push(feature);
+    }
+  });
+
+  return items;
 };
 
-export type MapSuperClusterFeature =
-  | Supercluster.PointFeature<DatasetClusterFeatureProperties>
-  | Supercluster.ClusterFeature<DatasetClusterFeatureProperties>;
+const buildClusteredMarkerFeature = (
+  { lng, lat }: LatLngLiteral,
+  primaryLatLng: LatLngLiteral,
+  originalFeature: MapSuperClusterFeature,
+  options: ClusterOptions
+) => {
+  const legs: MapFeature<LineString>[] = [];
+  const feature: MapSuperClusterFeature = {
+    ...originalFeature,
+    geometry: {
+      coordinates: [lng, lat],
+      type: 'Point',
+    },
+  };
 
-function round(num: number, decimalPlaces: number = 6) {
-  const num2 = Math.round((num + 'e' + decimalPlaces) as unknown as number);
+  if (options.spiderfyOnMaxZoom) {
+    // Generate spider legs
+    const leg = {
+      type: 'Feature',
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [lng, lat],
+          [primaryLatLng.lng, primaryLatLng.lat],
+        ],
+      },
+      properties: {},
+    };
 
-  return Number(num2 + 'e' + -decimalPlaces);
-}
-
-const twoPi = Math.PI * 2;
-const circleFootSeparation = 23;
-const circleStartAngle = twoPi / 12;
-const spiralLengthStart = 11;
-const spiralLengthFactor = 4;
-const spiralFootSeparation = 26;
-
-// @see https://github.com/jawj/OverlappingMarkerSpiderfier-Leaflet/blob/master/lib/oms.coffee#L92
-function pointsCircle(count: number, centerPt: L.Point) {
-  const circumference = circleFootSeparation * (2 + count);
-  const legLength = circumference / twoPi;
-  const angleStep = twoPi / count;
-  const points = [];
-
-  let angle = 0;
-  let i = 0;
-
-  for (i; i < legLength; i += 1) {
-    angle = circleStartAngle + i * angleStep;
-
-    points.push(
-      new L.Point(
-        centerPt.x + legLength * Math.cos(angle),
-        centerPt.y + legLength * Math.sin(angle)
-      )
-    );
+    legs.push(leg as MapFeature<LineString>);
   }
 
-  return points;
-}
-
-// @see https://github.com/jawj/OverlappingMarkerSpiderfier-Leaflet/blob/master/lib/oms.coffee#L101
-function pointsSpiral(count: number, centerPt: L.Point) {
-  const points = [];
-  let angle = 0;
-  let i = 0;
-  let legLength = spiralLengthStart;
-
-  for (i; i < legLength; i += 1) {
-    angle += spiralFootSeparation / legLength + i * 0.0005;
-
-    const x = centerPt.x + legLength * Math.cos(angle);
-    const y = centerPt.y + legLength * Math.sin(angle);
-
-    legLength += (twoPi * spiralLengthFactor) / angle;
-
-    points.push(L.point(x, y));
-  }
-
-  return points;
-}
+  return {
+    feature,
+    legs,
+  };
+};
 
 const processFeatures = (
   map: L.Map,
   features: MapSuperClusterFeature[],
-  options = { clusterShape: 'circle', spiderfyOnMaxZoom: true }
+  options: ClusterOptions = { clusterShape: 'circle', spiderfyOnMaxZoom: true }
 ) => {
-  const items: Record<string, MapSuperClusterFeature[]> = {};
-  const markersFinal: MapSuperClusterFeature[] = [];
-  const linesFinal: MapFeature<LineString>[] = [];
+  const spiderLines: MapFeature<LineString>[] = [];
 
-  for (const feature of features) {
-    if (!feature.properties.cluster) {
-      const c = `${round(feature.geometry.coordinates[0])}-${round(
-        feature.geometry.coordinates[1]
-      )}`;
+  // Prepare the marker items, which we will later merge into the clusterItems array
+  const markerItems = getMarkerItems(
+    features.filter(feature => !feature.properties.cluster)
+  );
+  const clusterItems = features.filter(feature => feature.properties.cluster);
 
-      if (!items[c]) {
-        items[c] = [feature];
-      } else {
-        items[c].push(feature);
-      }
-    } else {
-      markersFinal.push(feature);
-    }
-  }
-
-  for (const [, features] of Object.entries(items)) {
-    // No point modification needed
+  for (const [, features] of Object.entries(markerItems)) {
     if (features.length === 1) {
-      markersFinal.push(features[0]);
+      // Only one marker exists at this location so no modifications necessary
+      // markersFinal.push(features[0]);
+      clusterItems.push(features[0]);
     } else {
-      const [lng, lat] = features[0].geometry.coordinates;
-      const parentLatLng = [lng, lat];
-      const centerPoint = map.latLngToLayerPoint({
-        lat,
-        lng,
-      });
-      const featureCount = features.length;
-      const pts =
+      // Multiple markers exist at this location, therefore, prepare the zoomed in cluster markers
+      const primaryLatLng = {
+        lng: features[0].geometry.coordinates[0],
+        lat: features[0].geometry.coordinates[1],
+      };
+
+      // Convert the center latlng to a Point (x, y coords)
+      const centerPoint = map.latLngToLayerPoint(primaryLatLng);
+
+      // Create the new marker positions (positioned around the center point)
+      const points =
         options.clusterShape === 'circle'
-          ? pointsCircle(featureCount, centerPoint)
-          : pointsSpiral(featureCount, centerPoint);
+          ? createPointsCircle(features.length, centerPoint)
+          : createPointsSpiral(features.length, centerPoint);
 
-      const modifiedMarkers = pts
-        .filter((pt, index) => !!features[index])
-        .map((pt, index) => {
-          const { lng, lat } = map.layerPointToLatLng(pt);
-          const feature: MapSuperClusterFeature = {
-            ...features[index],
-            geometry: {
-              coordinates: [lng, lat],
-              type: 'Point',
-            },
-          };
+      // Filter out unncessary points otherwise there's 4x too many markers
+      const clusteredMarkerFeatures = points
+        .filter((_point, index) => !!features[index])
+        .map((point, index) => {
+          // Format and convert the point back to GeoJSON + latlng
+          const { lng, lat } = map.layerPointToLatLng(point);
+          const { feature, legs } = buildClusteredMarkerFeature(
+            { lng, lat },
+            primaryLatLng,
+            features[index],
+            options
+          );
 
-          if (options.spiderfyOnMaxZoom) {
-            // Generate spider legs
-            const leg = {
-              type: 'Feature',
-              geometry: {
-                type: 'LineString',
-                coordinates: [
-                  [lat, lng],
-                  [parentLatLng[1], parentLatLng[0]],
-                ],
-              },
-              properties: {},
-            };
-
-            linesFinal.push(leg);
-          }
+          // Handle the spider lines separately for easier separataion between clickable markers and static lines
+          spiderLines.push(...legs);
 
           return feature;
         });
 
-      markersFinal.push(...modifiedMarkers);
+      clusterItems.push(...clusteredMarkerFeatures);
     }
   }
 
   return {
-    markersFinal,
-    linesFinal,
+    markersFinal: clusterItems,
+    spiderLines: spiderLines,
   };
 };
 

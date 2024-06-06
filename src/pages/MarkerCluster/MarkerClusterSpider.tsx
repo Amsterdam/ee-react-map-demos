@@ -6,23 +6,7 @@ import styles from './styles.module.css';
 import createClusterIcon from './utils/createClusterIcon';
 import getExternalFeatures from './getExternalFeatures';
 import processFeatures from './processFeatures';
-
-const CLUSTER_STYLES = {
-  default: styles.markerCluster,
-  small: styles.markerClusterSmall,
-  medium: styles.markerClusterMedium,
-  large: styles.markerClusterLarge,
-};
-
-type ClusterConfig = {
-  clusterShape: 'circle' | 'spiral';
-  spiderfyOnMaxZoom: boolean;
-};
-
-const CLUSTER_OPTIONS: ClusterConfig = {
-  clusterShape: 'circle',
-  spiderfyOnMaxZoom: true,
-};
+import { CLUSTER_OPTIONS, CLUSTER_STYLES, lineStyles } from './mapStyles';
 
 const MarkerClusterSpider: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,7 +14,7 @@ const MarkerClusterSpider: FunctionComponent = () => {
   const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(
     null
   );
-  const [linesInstance, setLinesInstance] = useState<any[]>();
+  const [spiderLinesInstance, setSpiderLinesInstance] = useState<L.GeoJSON | null>();
   const createdMapInstance = useRef(false);
 
   const [center, setCenter] = useState<LatLngTuple>([52.370216, 4.895168]);
@@ -39,7 +23,7 @@ const MarkerClusterSpider: FunctionComponent = () => {
   const onMarkerClick = useCallback(
     (event: LeafletEvent) => {
       const { feature } = event.propagatedFrom;
-      console.log('onMarkerClick', { props: feature.properties });
+
       if (feature.properties.cluster && feature.properties.cluster_id) {
         // We must be dealing with a cluster click
         mapInstance?.setZoomAround(
@@ -97,10 +81,14 @@ const MarkerClusterSpider: FunctionComponent = () => {
     const markers = L.geoJSON(null, {
       pointToLayer: (...args) => createClusterIcon(...args, CLUSTER_STYLES),
     }).addTo(map);
+    const lines = L.geoJSON(null, {
+      style: lineStyles,
+    }).addTo(map);
 
     createdMapInstance.current = true;
     setMapInstance(map);
     setMarkersInstance(markers);
+    setSpiderLinesInstance(lines);
 
     // Listen for map changes to know when to update the clusters
     map.on('moveend', () => {
@@ -122,7 +110,7 @@ const MarkerClusterSpider: FunctionComponent = () => {
     if (!mapInstance) {
       return {
         markersFinal: [],
-        linesFinal: [],
+        spiderLines: [],
       };
     }
 
@@ -139,21 +127,14 @@ const MarkerClusterSpider: FunctionComponent = () => {
       markersInstance?.clearLayers();
       markersInstance?.off();
 
-      console.log({ clusterFeatures });
+      spiderLinesInstance?.clearLayers();
+      spiderLinesInstance?.off();
 
       if (markersInstance && clusterFeatures.markersFinal.length) {
         // Render the cluster(s) and marker(s) to the map
         // markersInstance?.addData(clusterMarkers as unknown as GeoJsonObject);
         markersInstance?.addData(clusterFeatures.markersFinal);
-
-        // console.log('lines', clusterFeatures.linesFinal);
-        clusterFeatures.linesFinal.forEach(line => {
-          L.polyline(line.geometry.coordinates, {
-            weight: 1.5,
-            color: '#222',
-            opacity: 0.5,
-          }).addTo(mapInstance);
-        });
+        spiderLinesInstance?.addData(clusterFeatures.spiderLines);
 
         // Add event listeners to enable dynamic clustering
         markersInstance?.on('click', onClick);
