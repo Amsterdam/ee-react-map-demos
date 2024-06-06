@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseLayer from '@/pages/ReactLeaflet/BaseLayer/BaseLayer';
+import Marker from '@/pages/Marker/Marker';
 
 const meta = {
-  title: 'React-Leaflet/BaseLayer',
-  component: BaseLayer,
+  title: 'React/Marker',
+  component: Marker,
   parameters: {
     layout: 'fullscreen',
     options: {
@@ -11,7 +11,7 @@ const meta = {
       bottomPanelHeight: 0,
     },
   },
-} satisfies Meta<typeof BaseLayer>;
+} satisfies Meta<typeof Marker>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

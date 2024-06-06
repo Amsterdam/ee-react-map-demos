@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseLayer from '@/pages/ReactLeaflet/BaseLayer/BaseLayer';
+import BaseLayer from '@/pages/WMSLayer/WMSLayer';
 
 const meta = {
-  title: 'React-Leaflet/BaseLayer',
+  title: 'React/WMSLayer',
   component: BaseLayer,
   parameters: {
     layout: 'fullscreen',
@@ -16,4 +16,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Base: Story = {};
+export const Default: Story = {};

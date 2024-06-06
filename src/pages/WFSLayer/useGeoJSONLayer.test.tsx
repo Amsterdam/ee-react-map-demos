@@ -36,9 +36,6 @@ describe('useGeoJSONLayer', () => {
   });
 
   it('fetches GeoJSON data and adds it to the map', async () => {
-    // @ts-expect-error mock fetch
-    global.fetch = vi.fn(mockedGeoJsonResponse);
-
     // Test component that uses the hook
     const TestComponent = () => {
       const map = L.map(document.createElement('div'));

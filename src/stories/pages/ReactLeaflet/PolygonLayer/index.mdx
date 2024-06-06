@@ -1,0 +1,59 @@
+import { Meta, Source } from '@storybook/blocks';
+import * as PolygonLayerStories from './index.stories';
+import PolygonLayer from '@/pages/ReactLeaflet/PolygonLayer/PolygonLayer?raw';
+import styles from '@/pages/ReactLeaflet/PolygonLayer/styles.module.css?raw';
+import getCrsRd from '@/utils/getCrsRd?raw';
+
+
+<Meta of={PolygonLayerStories} />
+
+# Amsterdam PolygonLayer
+## Requirements
+
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- CRS handling ([utils/getCrsRd.ts](#1-getcrsrdts))
+
+## Description
+
+This is the Amsterdam polygon layer on a React-leaflet map. The polygon layer can be used to display various geometric shapes on the map, such as boundaries, regions, and other areas of interest.
+
+## Background
+
+### Amsterdam Polygon layer
+A Polygon layer allows users to display and interact with polygon shapes on a map.
+The polygons are defined by an array of latitude and longitude points,
+and they can be styled with various options such as colour, opacity, and fill patterns.
+The datateam Geo provides various reference maps based on reference data from team BenK (Basis- en Kernregistraties),
+available in different reference systems and visualisations.
+
+## How to implement
+
+To accomplish the Amstedam Polyygon layer there are three files:
+1. The React components
+    * [PolygonLayer.tsx](#1-polygonlayertsx)
+2. The CSS styles (1 file)
+    * [styles.module.css](#1-stylesmodulecss)
+3. Utils (1 file)
+    * [getCrsRd.ts](#1-getcrsrdts)
+
+## Usage
+
+The following files are required:
+
+### React Components
+
+#### 1. PolygonLayer.tsx
+
+<Source code={PolygonLayer} />
+
+### CSS Styling
+
+#### 1. styles.module.css
+
+<Source code={styles} />
+
+### Utils
+
+#### 1. getCrsRd.ts
+
+  <Source code={getCrsRd} />

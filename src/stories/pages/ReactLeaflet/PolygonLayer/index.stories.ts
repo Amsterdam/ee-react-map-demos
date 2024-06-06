@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseLayer from '@/pages/ReactLeaflet/BaseLayer/BaseLayer';
+import PolygonLayer from '@/pages/ReactLeaflet/PolygonLayer/PolygonLayer';
 
 const meta = {
-  title: 'React-Leaflet/BaseLayer',
-  component: BaseLayer,
+  title: 'React-Leaflet/PolygonLayer',
+  component: PolygonLayer,
   parameters: {
     layout: 'fullscreen',
     options: {
@@ -11,7 +11,7 @@ const meta = {
       bottomPanelHeight: 0,
     },
   },
-} satisfies Meta<typeof BaseLayer>;
+} satisfies Meta<typeof PolygonLayer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
