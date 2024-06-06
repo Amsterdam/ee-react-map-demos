@@ -75,7 +75,7 @@ type DatasetFeatureProperties = {
   id: string;
 };
 
-type MapFeature<
+export type MapFeature<
   G extends GeoJSON.Geometry = Exclude<
     GeoJSON.Geometry,
     GeoJSON.GeometryCollection

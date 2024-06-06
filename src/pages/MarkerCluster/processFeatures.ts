@@ -1,5 +1,7 @@
+import { LineString } from 'geojson';
 import L from 'leaflet';
 import Supercluster from 'supercluster';
+import { MapFeature } from './getExternalFeatures';
 
 type DatasetClusterFeatureProperties = {
   id: string;
@@ -69,9 +71,14 @@ function pointsSpiral(count: number, centerPt: L.Point) {
   return points;
 }
 
-const processFeatures = (map: L.Map, features: MapSuperClusterFeature[]) => {
+const processFeatures = (
+  map: L.Map,
+  features: MapSuperClusterFeature[],
+  options = { clusterShape: 'circle', spiderfyOnMaxZoom: true }
+) => {
   const items: Record<string, MapSuperClusterFeature[]> = {};
   const markersFinal: MapSuperClusterFeature[] = [];
+  const linesFinal: MapFeature<LineString>[] = [];
 
   for (const feature of features) {
     if (!feature.properties.cluster) {
@@ -95,15 +102,16 @@ const processFeatures = (map: L.Map, features: MapSuperClusterFeature[]) => {
       markersFinal.push(features[0]);
     } else {
       const [lng, lat] = features[0].geometry.coordinates;
+      const parentLatLng = [lng, lat];
       const centerPoint = map.latLngToLayerPoint({
         lat,
         lng,
       });
       const featureCount = features.length;
       const pts =
-        featureCount > 11
-          ? pointsSpiral(featureCount, centerPoint)
-          : pointsCircle(featureCount, centerPoint);
+        options.clusterShape === 'circle'
+          ? pointsCircle(featureCount, centerPoint)
+          : pointsSpiral(featureCount, centerPoint);
 
       const modifiedMarkers = pts
         .filter((pt, index) => !!features[index])
@@ -116,6 +124,24 @@ const processFeatures = (map: L.Map, features: MapSuperClusterFeature[]) => {
               type: 'Point',
             },
           };
+
+          if (options.spiderfyOnMaxZoom) {
+            // Generate spider legs
+            const leg = {
+              type: 'Feature',
+              geometry: {
+                type: 'LineString',
+                coordinates: [
+                  [lat, lng],
+                  [parentLatLng[1], parentLatLng[0]],
+                ],
+              },
+              properties: {},
+            };
+
+            linesFinal.push(leg);
+          }
+
           return feature;
         });
 
@@ -123,7 +149,10 @@ const processFeatures = (map: L.Map, features: MapSuperClusterFeature[]) => {
     }
   }
 
-  return markersFinal;
+  return {
+    markersFinal,
+    linesFinal,
+  };
 };
 
 export default processFeatures;

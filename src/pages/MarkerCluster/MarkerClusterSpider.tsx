@@ -14,12 +14,23 @@ const CLUSTER_STYLES = {
   large: styles.markerClusterLarge,
 };
 
+type ClusterConfig = {
+  clusterShape: 'circle' | 'spiral';
+  spiderfyOnMaxZoom: boolean;
+};
+
+const CLUSTER_OPTIONS: ClusterConfig = {
+  clusterShape: 'circle',
+  spiderfyOnMaxZoom: true,
+};
+
 const MarkerClusterSpider: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(
     null
   );
+  const [linesInstance, setLinesInstance] = useState<any[]>();
   const createdMapInstance = useRef(false);
 
   const [center, setCenter] = useState<LatLngTuple>([52.370216, 4.895168]);
@@ -109,10 +120,17 @@ const MarkerClusterSpider: FunctionComponent = () => {
 
   const clusterFeatures = useMemo(() => {
     if (!mapInstance) {
-      return [];
+      return {
+        markersFinal: [],
+        linesFinal: [],
+      };
     }
 
-    return processFeatures(mapInstance, getExternalFeatures(mapInstance));
+    return processFeatures(
+      mapInstance,
+      getExternalFeatures(mapInstance),
+      CLUSTER_OPTIONS
+    );
   }, [mapInstance, zoom, center]);
 
   useEffect(() => {
@@ -123,10 +141,19 @@ const MarkerClusterSpider: FunctionComponent = () => {
 
       console.log({ clusterFeatures });
 
-      if (markersInstance && clusterFeatures.length) {
+      if (markersInstance && clusterFeatures.markersFinal.length) {
         // Render the cluster(s) and marker(s) to the map
         // markersInstance?.addData(clusterMarkers as unknown as GeoJsonObject);
-        markersInstance?.addData(clusterFeatures);
+        markersInstance?.addData(clusterFeatures.markersFinal);
+
+        // console.log('lines', clusterFeatures.linesFinal);
+        clusterFeatures.linesFinal.forEach(line => {
+          L.polyline(line.geometry.coordinates, {
+            weight: 1.5,
+            color: '#222',
+            opacity: 0.5,
+          }).addTo(mapInstance);
+        });
 
         // Add event listeners to enable dynamic clustering
         markersInstance?.on('click', onClick);
