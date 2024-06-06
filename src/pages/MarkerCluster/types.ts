@@ -27,7 +27,7 @@ export type MapFeature<
     GeoJSON.GeometryCollection
   >,
 > = GeoJSON.Feature<G, DatasetFeatureProperties>;
-export type MapPointFeature = MapFeature<GeoJSON.Point>;
+export type MapPointFeature = MapFeature<Point>;
 
 export type MapSuperClusterFeature =
   | Supercluster.PointFeature<DatasetClusterFeatureProperties>

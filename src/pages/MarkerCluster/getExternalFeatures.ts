@@ -3,7 +3,8 @@ import { toGeoJSON } from '@/utils/toGeoJSON';
 import rawData from './data-xl.json';
 import toBoundsLiteral from '@/utils/toBoundsLiteral';
 import Supercluster, { AnyProps, PointFeature } from 'supercluster';
-import { DataRecord, MapFeature } from './types';
+import { DataRecord } from './types';
+import { Feature, Geometry } from 'geojson';
 
 const isCoordWithingBoundingBox = (
   bbox: [number, number, number, number],
@@ -23,10 +24,12 @@ const isCoordWithingBoundingBox = (
 };
 
 const filterPointFeaturesWithinBoundingBox = (
-  features: MapFeature[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  features: PointFeature<any>[],
   bbox: [number, number, number, number]
 ) => {
-  const featuresFiltered = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const featuresFiltered: PointFeature<any>[] = [];
 
   features.forEach(feature => {
     if (
@@ -44,7 +47,12 @@ const filterPointFeaturesWithinBoundingBox = (
   return featuresFiltered;
 };
 
-const addExpansionZoom = (superClusterIndex: any, feature: any) => {
+// Helpful for cluster events to detect which cluster to follow
+const addExpansionZoom = (
+  superClusterIndex: Supercluster,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  feature: Feature<Geometry, any>
+) => {
   try {
     feature.properties.expansion_zoom =
       superClusterIndex.getClusterExpansionZoom(feature.properties.cluster_id);
@@ -58,7 +66,14 @@ const addExpansionZoom = (superClusterIndex: any, feature: any) => {
 };
 
 const getExternalFeatures = (map: L.Map) => {
-  const bounds = toBoundsLiteral(map.getBounds()).flat();
+  const bounds = toBoundsLiteral(map.getBounds()).flat() as [
+    number,
+    number,
+    number,
+    number,
+  ];
+
+  // Save some resources by handling only data present in the current map view
   const featuresWithinBbox = filterPointFeaturesWithinBoundingBox(
     toGeoJSON(rawData as DataRecord[]).features,
     bounds
@@ -67,7 +82,8 @@ const getExternalFeatures = (map: L.Map) => {
   let clusters: PointFeature<AnyProps>[] = [];
 
   const superClusterIndex = new Supercluster({
-    log: true,
+    // Enable this for console.logs with the timing to build each cluster
+    log: false,
     radius: 40,
     extent: 3000,
     nodeSize: 64,
@@ -78,6 +94,7 @@ const getExternalFeatures = (map: L.Map) => {
     clusters = superClusterIndex.getClusters(bounds, map.getZoom());
 
     for (const feature of clusters) {
+      // Used on cluster events to detect which cluster to zoom into
       addExpansionZoom(superClusterIndex, feature);
     }
   }
