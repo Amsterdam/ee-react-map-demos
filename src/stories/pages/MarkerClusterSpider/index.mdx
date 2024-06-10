@@ -1,4 +1,132 @@
 import { Canvas, Meta, Source, Story } from '@storybook/blocks';
 import * as MarkerClusterSpiderStories from './index.stories';
+import MarkerClusterSpider from '@/pages/MarkerCluster/MarkerClusterSpider?raw';
+import getExternalFeatures from '@/pages/MarkerCluster/getExternalFeatures?raw';
+import processFeatures from '@/pages/MarkerCluster/processFeatures?raw';
+import styles from '@/pages/MarkerCluster/styles.module.css?raw';
+import types from '@/pages/MarkerCluster/types?raw';
+import data from '@/pages/MarkerCluster/data-xl.json?raw';
+import mapStyles from '@/pages/MarkerCluster/mapStyles?raw';
+import roundNumber from '@/pages/MarkerCluster/utils/roundNumber?raw';
+import createClusterShapes from '@/pages/MarkerCluster/utils/createClusterShapes?raw';
 
 <Meta of={MarkerClusterSpiderStories} />
+
+# Marker clustering (spiderfy)
+## Requirements
+
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- [Supercluster](https://www.npmjs.com/package/supercluster)
+
+**For typescript:**
+
+- [@types/geojson](https://www.npmjs.com/package/@types/geojson)
+- [@types/supercluster](https://www.npmjs.com/package/@types/supercluster)
+
+## Description
+
+Marker clustering is a technique used in map development to manage and display a large number of markers efficiently. When there are many markers in close proximity to each other, showing all of them individually can clutter the map, making it difficult to navigate and interpret. Marker clustering combines nearby markers into a single cluster marker, which then splits into individual markers as the map is zoomed in.
+
+### Key Benefits of Marker Clustering
+
+- **Improved Performance**: Reduces the number of markers rendered on the map, leading to faster load times and smoother interactions.
+- **Enhanced Usability**: Prevents the map from becoming cluttered and overwhelming for the user.
+Makes it easier for users to identify areas with high concentrations of markers.
+- **Clearer Visualization**: Provides a more organized and readable map, allowing users to better understand the data distribution.
+
+
+### When to Use Marker Clustering
+
+- **High Density of Markers**: When you have a large number of markers that are densely packed in certain areas.
+- **Performance Optimization**: If the map's performance is lagging due to the high number of markers being displayed.
+- **User Experience**: When you want to improve the user experience by avoiding clutter and making the map more navigable.
+
+
+### Usage Scenarios
+
+- **Address Listings**: Displaying properties in a city where there are many in certain neighborhoods.
+- **Event Locations**: Showing locations of events or points of interest in a metropolitan area.
+- **Geotagged Social Media Posts**: Visualizing posts or photos tagged with location data in a popular tourist destination.
+
+## How to implement
+
+To implement marker clustering with Leaflet, there are X files:
+
+1. The React component
+    * [MarkerClusterSpider.tsx](#1-markerclusterspidertsx)
+        * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
+2. Data handling 1
+    * [getExternalFeatures.ts](#1-getexternalfeaturests)
+      *TODO comment, this could be in backend/API app*
+2. Data handling 2
+    * [processFeatures.ts](#1-processfeaturests)
+      *TODO comment*
+3. The CSS styles
+    * [styles.module.css](#1-stylesmodulecss)
+4. Types for data (included via `getExternalFeatures.ts` and `processFeatures.ts`)
+    * [types.ts](#1-typests) *(This is only required for this demo to work; it ensures data from the external `data.json` matches the expected format.)*
+5. Data
+    * [data-xl.json](#1-dataxljson) *(This static data should be replaced by a fetch call or other static data)*
+6. Map and cluster options and styles
+    * [mapStyles.ts](#1-mapstylests)
+7. Round number util
+  * [utils/roundNumber.ts](#1-utilsroundnumberts)
+8. createClusterShapes
+  * [utils/createClusterShapes.ts](#1-utilscreateclustershapes)
+
+## Usage
+
+### React Components
+
+#### 1. MarkerCluster.tsx
+
+<Source code={MarkerClusterSpider} />
+
+### Data handling 1
+
+#### getExternalFeatures.ts
+
+<Source code={getExternalFeatures} />
+
+### Data handling 2
+
+#### processFeatures.ts
+
+<Source code={processFeatures} />
+
+### CSS Styles
+
+#### styles.module.css
+
+<Source code={styles} />
+
+### Types for data
+
+#### types.ts
+
+<Source code={types} />
+
+### Data
+
+#### 1. data-xl.json
+
+*Code intentionally shortened*
+
+<Source code={`${data.substring(0, 800)}...`} />
+
+### Map Styles
+
+#### 1. mapStyles.ts
+
+<Source code={mapStyles} />
+
+### Utils
+
+#### 1. utils/roundNumber.ts
+
+<Source code={roundNumber} />
+
+#### 2. utils/createClusterShapes.ts
+
+<Source code={createClusterShapes} />

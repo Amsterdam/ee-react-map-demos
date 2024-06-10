@@ -1,4 +1,4 @@
-import type { ClusterConfig } from './types';
+import type { ClusterOptions } from './types';
 import styles from './styles.module.css';
 
 export const CLUSTER_STYLES = {
@@ -8,7 +8,7 @@ export const CLUSTER_STYLES = {
   large: styles.markerClusterLarge,
 };
 
-export const CLUSTER_OPTIONS: ClusterConfig = {
+export const CLUSTER_OPTIONS: ClusterOptions = {
   clusterShape: 'circle',
   spiderfyOnMaxZoom: true,
 };
