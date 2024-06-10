@@ -1,18 +1,21 @@
 import { Canvas, Meta, Source, Story } from '@storybook/blocks';
 import * as MarkerClusterSpiderStories from './index.stories';
-import MarkerClusterSpider from '@/pages/MarkerCluster/MarkerClusterSpider?raw';
-import getExternalFeatures from '@/pages/MarkerCluster/getExternalFeatures?raw';
-import processFeatures from '@/pages/MarkerCluster/processFeatures?raw';
-import styles from '@/pages/MarkerCluster/styles.module.css?raw';
-import types from '@/pages/MarkerCluster/types?raw';
-import data from '@/pages/MarkerCluster/data-xl.json?raw';
-import mapStyles from '@/pages/MarkerCluster/mapStyles?raw';
-import roundNumber from '@/pages/MarkerCluster/utils/roundNumber?raw';
-import createClusterShapes from '@/pages/MarkerCluster/utils/createClusterShapes?raw';
+import MarkerClusterSpider from '@/pages/MarkerClusterSpider/MarkerClusterSpider?raw';
+import getMapData from '@/pages/MarkerClusterSpider/getMapData?raw';
+import processFeatures from '@/pages/MarkerClusterSpider/processFeatures?raw';
+import styles from '@/pages/MarkerClusterSpider/styles.module.css?raw';
+import types from '@/pages/MarkerClusterSpider/types?raw';
+import data from '@/pages/MarkerClusterSpider/data.json?raw';
+import mapStyles from '@/pages/MarkerClusterSpider/mapStyles?raw';
+import roundNumber from '@/pages/MarkerClusterSpider/utils/roundNumber?raw';
+import createClusterShapes from '@/pages/MarkerClusterSpider/utils/createClusterShapes?raw';
 
 <Meta of={MarkerClusterSpiderStories} />
 
 # Marker clustering (spiderfy)
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MarkerCluster)**
+
 ## Requirements
 
 - This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
@@ -25,6 +28,17 @@ import createClusterShapes from '@/pages/MarkerCluster/utils/createClusterShapes
 - [@types/supercluster](https://www.npmjs.com/package/@types/supercluster)
 
 ## Description
+
+This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component. The static data for this example has intentionally been duplicated at two locations: **Dijksgracht 19** and **Papaverweg 33**.
+
+Please note if you are working with data that has no records with the same geometry values, there is a [simpler version](../?path=/story/react-markercluster--default) of this component available.
+
+### Data handling
+
+TODO feeding in data/data flow/service worker approach
+TODO spider, spiral options
+
+## Background
 
 Marker clustering is a technique used in map development to manage and display a large number of markers efficiently. When there are many markers in close proximity to each other, showing all of them individually can clutter the map, making it difficult to navigate and interpret. Marker clustering combines nearby markers into a single cluster marker, which then splits into individual markers as the map is zoomed in.
 
@@ -57,14 +71,14 @@ To implement marker clustering with Leaflet, there are X files:
     * [MarkerClusterSpider.tsx](#1-markerclusterspidertsx)
         * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
 2. Data handling 1
-    * [getExternalFeatures.ts](#1-getexternalfeaturests)
+    * [getMapData.ts](#1-getmapdatats)
       *TODO comment, this could be in backend/API app*
 2. Data handling 2
     * [processFeatures.ts](#1-processfeaturests)
       *TODO comment*
 3. The CSS styles
     * [styles.module.css](#1-stylesmodulecss)
-4. Types for data (included via `getExternalFeatures.ts` and `processFeatures.ts`)
+4. Types for data (included via `getMapData.ts` and `processFeatures.ts`)
     * [types.ts](#1-typests) *(This is only required for this demo to work; it ensures data from the external `data.json` matches the expected format.)*
 5. Data
     * [data-xl.json](#1-dataxljson) *(This static data should be replaced by a fetch call or other static data)*
@@ -74,6 +88,10 @@ To implement marker clustering with Leaflet, there are X files:
   * [utils/roundNumber.ts](#1-utilsroundnumberts)
 8. createClusterShapes
   * [utils/createClusterShapes.ts](#1-utilscreateclustershapes)
+9. createClusterShapes
+  * [utils/toGeoJSON.ts](#1-togeojsonts)
+10. toBoundsLiteral.ts
+  * [utils/toBoundsLiteral.ts](#1-utilstoboundsliteralts)
 
 ## Usage
 
@@ -85,9 +103,9 @@ To implement marker clustering with Leaflet, there are X files:
 
 ### Data handling 1
 
-#### getExternalFeatures.ts
+#### getMapData.ts
 
-<Source code={getExternalFeatures} />
+<Source code={getMapData} />
 
 ### Data handling 2
 

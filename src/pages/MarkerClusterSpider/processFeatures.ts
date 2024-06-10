@@ -121,7 +121,7 @@ const processFeatures = (
   }
 
   return {
-    markersFinal: clusterItems,
+    clusterItems,
     spiderLines: spiderLines,
   };
 };

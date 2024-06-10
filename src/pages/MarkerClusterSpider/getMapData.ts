@@ -1,10 +1,10 @@
 import type { LatLngTuple } from 'leaflet';
-import { toGeoJSON } from '@/utils/toGeoJSON';
-import rawData from './data-xl.json';
-import toBoundsLiteral from '@/utils/toBoundsLiteral';
 import Supercluster, { AnyProps, PointFeature } from 'supercluster';
-import { DataRecord } from './types';
 import { Feature, Geometry } from 'geojson';
+import { toGeoJSON } from '@/utils/toGeoJSON';
+import toBoundsLiteral from '@/utils/toBoundsLiteral';
+import { DataRecord } from '../MarkerCluster/types';
+import rawData from './data.json';
 
 // Simple util to check coords within a bounding box
 const isCoordWithingBoundingBox = (
@@ -67,7 +67,7 @@ const addExpansionZoom = (
   }
 };
 
-const getExternalFeatures = (map: L.Map) => {
+const getMapData = (map: L.Map) => {
   const bounds = toBoundsLiteral(map.getBounds()).flat() as [
     number,
     number,
@@ -104,4 +104,4 @@ const getExternalFeatures = (map: L.Map) => {
   return clusters;
 };
 
-export default getExternalFeatures;
+export default getMapData;

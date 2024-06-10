@@ -3,7 +3,6 @@ import * as MarkerClusterStories from './index.stories';
 import MarkerCluster from '@/pages/MarkerCluster/MarkerCluster?raw';
 import toGeoJSON from '@/utils/toGeoJSON?raw';
 import styles from '@/pages/MarkerCluster/styles.module.css?raw';
-import types from '@/pages/MarkerCluster/types?raw';
 import createClusterIcon from '@/pages/MarkerCluster/utils/createClusterIcon?raw';
 import data from '@/pages/MarkerCluster/data.json?raw';
 
@@ -26,9 +25,13 @@ import data from '@/pages/MarkerCluster/data.json?raw';
 
 ## Description
 
-Marker clustering is a technique used in map development to manage and display a large number of markers efficiently. When there are many markers in close proximity to each other, showing all of them individually can clutter the map, making it difficult to navigate and interpret. Marker clustering combines nearby markers into a single cluster marker, which then splits into individual markers as the map is zoomed in.
+This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component.
 
-TODO Text about this simple version vs spiderfy version
+Please note that this component won't work for markers using the same geometry, they will simply render on top of the previous rendered marker. For handling markers with the same geometry, there is a [more advanced version of this component](../?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
+
+## Background
+
+Marker clustering is a technique used in map development to manage and display a large number of markers efficiently. When there are many markers in close proximity to each other, showing all of them individually can clutter the map, making it difficult to navigate and interpret. Marker clustering combines nearby markers into a single cluster marker, which then splits into individual markers as the map is zoomed in.
 
 ### Key Benefits of Marker Clustering
 
@@ -37,15 +40,13 @@ TODO Text about this simple version vs spiderfy version
 Makes it easier for users to identify areas with high concentrations of markers.
 - **Clearer Visualization**: Provides a more organized and readable map, allowing users to better understand the data distribution.
 
-
 ### When to Use Marker Clustering
 
 - **High Density of Markers**: When you have a large number of markers that are densely packed in certain areas.
 - **Performance Optimization**: If the map's performance is lagging due to the high number of markers being displayed.
 - **User Experience**: When you want to improve the user experience by avoiding clutter and making the map more navigable.
 
-
-### Usage Scenarios
+## Usage Scenarios
 
 - **Address Listings**: Displaying properties in a city where there are many in certain neighborhoods.
 - **Event Locations**: Showing locations of events or points of interest in a metropolitan area.
@@ -63,13 +64,11 @@ To implement marker clustering with Leaflet, there are X files:
       *(This is only required for this demo to work; it helps format the external `data.json` array into GeoJSON format.)*
 3. The CSS styles
     * [styles.module.css](#1-stylesmodulecss)
-4. Type for data
-    * [types.ts](#1-typests) *(This is only required for this demo to work; it ensures data from the external `data.json` matches the expected format.)*
-5. Data
+4. Data
     * [data.json](#1-datajson) *(This static data should be replaced by a fetch call or other static data)*
-6. The cluster icon
+5. The cluster icon
     * [utils/createClusterIcon.ts](#1-utilscreateclustericonts)
-7. Leaflet marker image files
+6. Leaflet marker image files
     * `import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';`
     * `import iconUrl from 'leaflet/dist/images/marker-icon.png';`
     * `import shadowUrl from 'leaflet/dist/images/marker-shadow.png';`
@@ -95,12 +94,6 @@ To implement marker clustering with Leaflet, there are X files:
 #### 1. styles.module.css
 
 <Source code={styles} />
-
-### Type
-
-#### 1. types.ts
-
-<Source code={types} />
 
 ### Data
 

@@ -4,7 +4,7 @@ import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import createClusterIcon from './utils/createClusterIcon';
-import getExternalFeatures from './getExternalFeatures';
+import getMapData from './getMapData';
 import processFeatures from './processFeatures';
 import { CLUSTER_OPTIONS, CLUSTER_STYLES, lineStyles } from './mapStyles';
 
@@ -14,7 +14,8 @@ const MarkerClusterSpider: FunctionComponent = () => {
   const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(
     null
   );
-  const [spiderLinesInstance, setSpiderLinesInstance] = useState<L.GeoJSON | null>();
+  const [spiderLinesInstance, setSpiderLinesInstance] =
+    useState<L.GeoJSON | null>();
   const createdMapInstance = useRef(false);
 
   const [center, setCenter] = useState<LatLngTuple>([52.370216, 4.895168]);
@@ -109,14 +110,14 @@ const MarkerClusterSpider: FunctionComponent = () => {
   const clusterFeatures = useMemo(() => {
     if (!mapInstance) {
       return {
-        markersFinal: [],
+        clusterItems: [],
         spiderLines: [],
       };
     }
 
     return processFeatures(
       mapInstance,
-      getExternalFeatures(mapInstance),
+      getMapData(mapInstance),
       CLUSTER_OPTIONS
     );
   }, [mapInstance, zoom, center]);
@@ -130,10 +131,10 @@ const MarkerClusterSpider: FunctionComponent = () => {
       spiderLinesInstance?.clearLayers();
       spiderLinesInstance?.off();
 
-      if (markersInstance && clusterFeatures.markersFinal.length) {
+      if (markersInstance && clusterFeatures.clusterItems.length) {
         // Render the cluster(s) and marker(s) to the map
         // markersInstance?.addData(clusterMarkers as unknown as GeoJsonObject);
-        markersInstance?.addData(clusterFeatures.markersFinal);
+        markersInstance?.addData(clusterFeatures.clusterItems);
         spiderLinesInstance?.addData(clusterFeatures.spiderLines);
 
         // Add event listeners to enable dynamic clustering

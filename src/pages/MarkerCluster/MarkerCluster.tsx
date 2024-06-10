@@ -2,11 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
 import Supercluster from 'supercluster';
-import type { BBox, GeoJsonObject } from 'geojson';
+import type { BBox, GeoJsonObject, Point } from 'geojson';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
-import { DataRecord } from './types';
 import data from './data.json';
 import createClusterIcon from './utils/createClusterIcon';
 
@@ -126,7 +125,12 @@ const MarkerCluster: FunctionComponent = () => {
       markersInstance?.off();
 
       // Parse any API data to GeoJSON
-      const parsedGeoJson = toGeoJSON(data as DataRecord[]);
+      const parsedGeoJson = toGeoJSON(
+        data as {
+          id: string;
+          geometry: Point;
+        }[]
+      );
 
       // Load the parsed GeoJSON data into the cluster index
       clusterIndex.load(parsedGeoJson.features);
