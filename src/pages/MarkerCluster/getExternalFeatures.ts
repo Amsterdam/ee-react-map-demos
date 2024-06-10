@@ -6,6 +6,7 @@ import Supercluster, { AnyProps, PointFeature } from 'supercluster';
 import { DataRecord } from './types';
 import { Feature, Geometry } from 'geojson';
 
+// Simple util to check coords within a bounding box
 const isCoordWithingBoundingBox = (
   bbox: [number, number, number, number],
   coord: LatLngTuple,
@@ -23,6 +24,7 @@ const isCoordWithingBoundingBox = (
   return false;
 };
 
+// Restrict data to that within specified bounding box
 const filterPointFeaturesWithinBoundingBox = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   features: PointFeature<any>[],

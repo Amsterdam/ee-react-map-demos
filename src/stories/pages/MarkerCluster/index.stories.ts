@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import MarkerCluster from '@/pages/MarkerCluster/MarkerCluster';
-import MarkerClusterSpider from '@/pages/MarkerCluster/MarkerClusterSpider';
 
 const meta = {
   title: 'React/MarkerCluster',

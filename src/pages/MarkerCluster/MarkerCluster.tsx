@@ -29,7 +29,7 @@ const MarkerCluster: FunctionComponent = () => {
   const [zoom, setZoom] = useState(7);
 
   const clusterIndex = new Supercluster({
-    // Enable this for console.logs with the timing to build each cluster
+    // Enable 'log' for console.logs with the timing to build each cluster
     log: false,
     radius: 40,
     extent: 3000,
