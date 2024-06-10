@@ -7,6 +7,8 @@ import createClusterIcon from './utils/createClusterIcon';
 import getMapData from './getMapData';
 import processFeatures from './processFeatures';
 import { CLUSTER_OPTIONS, CLUSTER_STYLES, lineStyles } from './mapStyles';
+import { MapSuperClusterFeature } from './types';
+import { GeoJsonObject } from 'geojson';
 
 const MarkerClusterSpider: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -117,7 +119,7 @@ const MarkerClusterSpider: FunctionComponent = () => {
 
     return processFeatures(
       mapInstance,
-      getMapData(mapInstance),
+      getMapData(mapInstance) as MapSuperClusterFeature[],
       CLUSTER_OPTIONS
     );
   }, [mapInstance, zoom, center]);
@@ -133,9 +135,12 @@ const MarkerClusterSpider: FunctionComponent = () => {
 
       if (markersInstance && clusterFeatures.clusterItems.length) {
         // Render the cluster(s) and marker(s) to the map
-        // markersInstance?.addData(clusterMarkers as unknown as GeoJsonObject);
-        markersInstance?.addData(clusterFeatures.clusterItems);
-        spiderLinesInstance?.addData(clusterFeatures.spiderLines);
+        markersInstance?.addData(
+          clusterFeatures.clusterItems as unknown as GeoJsonObject
+        );
+        spiderLinesInstance?.addData(
+          clusterFeatures.spiderLines as unknown as GeoJsonObject
+        );
 
         // Add event listeners to enable dynamic clustering
         markersInstance?.on('click', onClick);

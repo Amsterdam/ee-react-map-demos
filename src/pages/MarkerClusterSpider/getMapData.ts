@@ -3,7 +3,7 @@ import Supercluster, { AnyProps, PointFeature } from 'supercluster';
 import { Feature, Geometry } from 'geojson';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import toBoundsLiteral from '@/utils/toBoundsLiteral';
-import { DataRecord } from '../MarkerCluster/types';
+import { DataRecord } from './types';
 import rawData from './data.json';
 
 // Simple util to check coords within a bounding box
@@ -67,7 +67,7 @@ const addExpansionZoom = (
   }
 };
 
-const getMapData = (map: L.Map) => {
+const getMapData = (map: L.Map): PointFeature<AnyProps>[] => {
   const bounds = toBoundsLiteral(map.getBounds()).flat() as [
     number,
     number,
