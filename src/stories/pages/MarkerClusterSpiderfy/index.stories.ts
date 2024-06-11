@@ -16,4 +16,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Circle: Story = {};
+
+export const Spiral: Story = {
+  args: {
+    clusterOptions: {
+      clusterShape: 'spiral',
+      spiderfyOnMaxZoom: false,
+    },
+  },
+};
