@@ -1,18 +1,18 @@
 import { Canvas, Meta, Source, Story } from '@storybook/blocks';
-import * as MarkerClusterSpiderStories from './index.stories';
-import MarkerClusterSpider from '@/pages/MarkerClusterSpider/MarkerClusterSpider?raw';
-import getMapData from '@/pages/MarkerClusterSpider/getMapData?raw';
-import processFeatures from '@/pages/MarkerClusterSpider/processFeatures?raw';
-import styles from '@/pages/MarkerClusterSpider/styles.module.css?raw';
-import types from '@/pages/MarkerClusterSpider/types?raw';
-import data from '@/pages/MarkerClusterSpider/data.json?raw';
-import mapStyles from '@/pages/MarkerClusterSpider/mapStyles?raw';
-import roundNumber from '@/pages/MarkerClusterSpider/utils/roundNumber?raw';
-import createClusterShapes from '@/pages/MarkerClusterSpider/utils/createClusterShapes?raw';
+import * as MarkerClusterSpiderfyStories from './index.stories';
+import MarkerClusterSpiderfy from '@/pages/MarkerClusterSpiderfy/MarkerClusterSpiderfy?raw';
+import getMapData from '@/pages/MarkerClusterSpiderfy/getMapData?raw';
+import processFeatures from '@/pages/MarkerClusterSpiderfy/processFeatures?raw';
+import styles from '@/pages/MarkerClusterSpiderfy/styles.module.css?raw';
+import types from '@/pages/MarkerClusterSpiderfy/types?raw';
+import data from '@/pages/MarkerClusterSpiderfy/data.json?raw';
+import mapStyles from '@/pages/MarkerClusterSpiderfy/mapStyles?raw';
+import roundNumber from '@/pages/MarkerClusterSpiderfy/utils/roundNumber?raw';
+import createClusterShapes from '@/pages/MarkerClusterSpiderfy/utils/createClusterShapes?raw';
 import toGeoJSON from '@/utils/toGeoJSON?raw';
 import toBoundsLiteral from '@/utils/toBoundsLiteral?raw';
 
-<Meta of={MarkerClusterSpiderStories} />
+<Meta of={MarkerClusterSpiderfyStories} />
 
 # Marker clustering (spiderfy)
 
@@ -54,9 +54,6 @@ There are three options for how to display the cluster:
 
     *This draws straight lines from the new clustered marker to the original geometry point. It works best with `clusterShape=circle`*
 
-TODO alternative lib - leaflet.markercluster
-TODO MarkerClusterSpider -> MarkerClusterSpiderfy?
-
 ### Alternative library
 
 There is also the [Leaflet.markercluster library](https://github.com/Leaflet/Leaflet.markercluster), which has been used in previous Gemeente Amsterdam projects. This [blog post](https://blog.mapbox.com/clustering-millions-of-points-on-a-map-with-supercluster-272046ec5c97) explains the improved performance from [Supercluster](https://github.com/mapbox/supercluster).
@@ -89,36 +86,31 @@ Makes it easier for users to identify areas with high concentrations of markers.
 To implement marker clustering with Leaflet, there are X files:
 
 1. The React component
-    * [MarkerClusterSpider.tsx](#1-markerclusterspidertsx)
-        * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
+    1. [MarkerClusterSpiderfy.tsx](#1-markerclusterspidertsx) (*This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*)
 2. Data handling
     1. [getMapData.ts](#1-getmapdatats)
     2. [processFeatures.ts](#2-processfeaturests)
 3. The CSS styles
-    * [styles.module.css](#1-stylesmodulecss)
+    1. [styles.module.css](#1-stylesmodulecss)
 4. Types for data (typescript only)
-    * [types.ts](#1-typests) *(These have been kept minimal and are primarily for examples.)*
+    1. [types.ts](#1-typests) *(These have been kept minimal and are primarily for examples.)*
 5. Data
-    * [data.json](#1-datajson) *(This static data should be replaced by a fetch call or other static data)*
+    1. [data.json](#1-datajson) *(This static data should be replaced by a fetch call or other static data)*
 6. Map and cluster options and styles
-    * [mapStyles.ts](#1-mapstylests)
+    1. [mapStyles.ts](#1-mapstylests)
 7. Utils
-    1. Round number util
-        * [utils/roundNumber.ts](#1-utilsroundnumberts)
-    2. createClusterShapes
-        * [utils/createClusterShapes.ts](#2-utilscreateclustershapes)
-    3. toGeoJSON.ts
-        * [utils/toGeoJSON.ts](#3-utilstogeojsonts)
-    4. toBoundsLiteral.ts
-        * [utils/toBoundsLiteral.ts](#4-utilstoboundsliteralts)
+    1. [utils/roundNumber.ts](#1-utilsroundnumberts)
+    2. [utils/createClusterShapes.ts](#2-utilscreateclustershapests)
+    3. [utils/toGeoJSON.ts](#3-utilstogeojsonts)
+    4. [utils/toBoundsLiteral.ts](#4-utilstoboundsliteralts)
 
 ## Usage
 
 ### 1. The React component
 
-#### 1. MarkerClusterSpider.tsx
+#### 1. MarkerClusterSpiderfy.tsx
 
-<Source code={MarkerClusterSpider} />
+<Source code={MarkerClusterSpiderfy} />
 
 ### 2. Data handling
 
