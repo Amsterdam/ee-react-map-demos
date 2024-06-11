@@ -3,7 +3,7 @@ import Supercluster from 'supercluster';
 
 export type ClusterOptions = {
   clusterShape: 'circle' | 'spiral';
-  spiderfyOnMaxZoom: boolean;
+  spiderfyOnMaxZoom?: boolean;
 };
 
 export type DataRecord = {

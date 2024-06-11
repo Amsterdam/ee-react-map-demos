@@ -10,6 +10,7 @@ import {
 const generateKey = (coordinates: Position) =>
   `${roundNumber(coordinates[0])}-${roundNumber(coordinates[1])}`;
 
+// Group markers at the same coordinates under the same coordinates key
 const getMarkerItems = (features: MapSuperClusterFeature[]) => {
   const items: Record<string, MapSuperClusterFeature[]> = {};
   features.forEach(feature => {
@@ -25,6 +26,7 @@ const getMarkerItems = (features: MapSuperClusterFeature[]) => {
   return items;
 };
 
+// Build GeoJSON
 const buildClusteredMarkerFeature = (
   { lng, lat }: LatLngLiteral,
   primaryLatLng: LatLngLiteral,

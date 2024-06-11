@@ -7,10 +7,16 @@ import createClusterIcon from './utils/createClusterIcon';
 import getMapData from './getMapData';
 import processFeatures from './processFeatures';
 import { CLUSTER_OPTIONS, CLUSTER_STYLES, lineStyles } from './mapStyles';
-import { MapSuperClusterFeature } from './types';
+import type { ClusterOptions, MapSuperClusterFeature } from './types';
 import { GeoJsonObject } from 'geojson';
 
-const MarkerClusterSpider: FunctionComponent = () => {
+interface MarkerClusterSpiderProps {
+  clusterOptions: ClusterOptions;
+}
+
+const MarkerClusterSpider: FunctionComponent<MarkerClusterSpiderProps> = ({
+  clusterOptions = CLUSTER_OPTIONS,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(
@@ -120,7 +126,7 @@ const MarkerClusterSpider: FunctionComponent = () => {
     return processFeatures(
       mapInstance,
       getMapData(mapInstance) as MapSuperClusterFeature[],
-      CLUSTER_OPTIONS
+      clusterOptions
     );
   }, [mapInstance, zoom, center]);
 

@@ -11,6 +11,7 @@ export const CLUSTER_STYLES = {
 export const CLUSTER_OPTIONS: ClusterOptions = {
   clusterShape: 'circle',
   spiderfyOnMaxZoom: true,
+  // clusterShape: 'spiral',
 };
 
 export const lineStyles = {

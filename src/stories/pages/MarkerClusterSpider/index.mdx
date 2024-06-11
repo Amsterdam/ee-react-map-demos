@@ -9,6 +9,8 @@ import data from '@/pages/MarkerClusterSpider/data.json?raw';
 import mapStyles from '@/pages/MarkerClusterSpider/mapStyles?raw';
 import roundNumber from '@/pages/MarkerClusterSpider/utils/roundNumber?raw';
 import createClusterShapes from '@/pages/MarkerClusterSpider/utils/createClusterShapes?raw';
+import toGeoJSON from '@/utils/toGeoJSON?raw';
+import toBoundsLiteral from '@/utils/toBoundsLiteral?raw';
 
 <Meta of={MarkerClusterSpiderStories} />
 
@@ -35,8 +37,29 @@ Please note if you are working with data that has no records with the same geome
 
 ### Data handling
 
-TODO feeding in data/data flow/service worker approach
-TODO spider, spiral options
+In the `useMemo` call (lines 112-125) we process the data in two methods.
+
+1. The primary call (`getMapData`) could exist in an API/backend-for-frontend application. This method effectively returns data with features inside the current map's bounding box and creates a supercluster object, with an added `expansion_zoom` data property, which is used later in cluster event listeners.
+
+2. The secondary method (`processFeatures`) separates the markers and cluster items. For markers with the same geometry values, it also generates the GeoJSON for the re-generated cluster markers (new markers surrounding the initial marker positioning).
+
+### Display options
+
+There are three options for how to display the cluster:
+- `clusterShape` = `circle` or `spiral`
+
+    *Circle draws the markers around the original marker geometry. Spiral draws the markers in spiral curve around the original marker geometry.*
+
+- spiderfyOnMaxZoom: `true` or `false`
+
+    *This draws straight lines from the new clustered marker to the original geometry point. It works best with `clusterShape=circle`*
+
+TODO alternative lib - leaflet.markercluster
+TODO MarkerClusterSpider -> MarkerClusterSpiderfy?
+
+### Alternative library
+
+There is also the [Leaflet.markercluster library](https://github.com/Leaflet/Leaflet.markercluster), which has been used in previous Gemeente Amsterdam projects. This [blog post](https://blog.mapbox.com/clustering-millions-of-points-on-a-map-with-supercluster-272046ec5c97) explains the improved performance from [Supercluster](https://github.com/mapbox/supercluster).
 
 ## Background
 
@@ -49,13 +72,11 @@ Marker clustering is a technique used in map development to manage and display a
 Makes it easier for users to identify areas with high concentrations of markers.
 - **Clearer Visualization**: Provides a more organized and readable map, allowing users to better understand the data distribution.
 
-
 ### When to Use Marker Clustering
 
 - **High Density of Markers**: When you have a large number of markers that are densely packed in certain areas.
 - **Performance Optimization**: If the map's performance is lagging due to the high number of markers being displayed.
 - **User Experience**: When you want to improve the user experience by avoiding clutter and making the map more navigable.
-
 
 ### Usage Scenarios
 
@@ -70,76 +91,72 @@ To implement marker clustering with Leaflet, there are X files:
 1. The React component
     * [MarkerClusterSpider.tsx](#1-markerclusterspidertsx)
         * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
-2. Data handling 1
-    * [getMapData.ts](#1-getmapdatats)
-      *TODO comment, this could be in backend/API app*
-2. Data handling 2
-    * [processFeatures.ts](#1-processfeaturests)
-      *TODO comment*
+2. Data handling
+    1. [getMapData.ts](#1-getmapdatats)
+    2. [processFeatures.ts](#2-processfeaturests)
 3. The CSS styles
     * [styles.module.css](#1-stylesmodulecss)
-4. Types for data (included via `getMapData.ts` and `processFeatures.ts`)
-    * [types.ts](#1-typests) *(This is only required for this demo to work; it ensures data from the external `data.json` matches the expected format.)*
+4. Types for data (typescript only)
+    * [types.ts](#1-typests) *(These have been kept minimal and are primarily for examples.)*
 5. Data
-    * [data-xl.json](#1-dataxljson) *(This static data should be replaced by a fetch call or other static data)*
+    * [data.json](#1-datajson) *(This static data should be replaced by a fetch call or other static data)*
 6. Map and cluster options and styles
     * [mapStyles.ts](#1-mapstylests)
-7. Round number util
-  * [utils/roundNumber.ts](#1-utilsroundnumberts)
-8. createClusterShapes
-  * [utils/createClusterShapes.ts](#1-utilscreateclustershapes)
-9. createClusterShapes
-  * [utils/toGeoJSON.ts](#1-togeojsonts)
-10. toBoundsLiteral.ts
-  * [utils/toBoundsLiteral.ts](#1-utilstoboundsliteralts)
+7. Utils
+    1. Round number util
+        * [utils/roundNumber.ts](#1-utilsroundnumberts)
+    2. createClusterShapes
+        * [utils/createClusterShapes.ts](#2-utilscreateclustershapes)
+    3. toGeoJSON.ts
+        * [utils/toGeoJSON.ts](#3-utilstogeojsonts)
+    4. toBoundsLiteral.ts
+        * [utils/toBoundsLiteral.ts](#4-utilstoboundsliteralts)
 
 ## Usage
 
-### React Components
+### 1. The React component
 
-#### 1. MarkerCluster.tsx
+#### 1. MarkerClusterSpider.tsx
 
 <Source code={MarkerClusterSpider} />
 
-### Data handling 1
+### 2. Data handling
 
-#### getMapData.ts
+#### 1. getMapData.ts
 
 <Source code={getMapData} />
 
-### Data handling 2
-
-#### processFeatures.ts
+#### 2. processFeatures.ts
 
 <Source code={processFeatures} />
 
-### CSS Styles
+### 3. CSS Styles
 
-#### styles.module.css
+#### 1. styles.module.css
 
 <Source code={styles} />
 
-### Types for data
+### 4. Types for data
 
-#### types.ts
+#### 1. types.ts
 
 <Source code={types} />
 
-### Data
+### 5. Data
 
-#### 1. data-xl.json
+#### 1. data.json
 
 *Code intentionally shortened*
 
 <Source code={`${data.substring(0, 800)}...`} />
 
-### Map Styles
+### 6. Map Styles
 
 #### 1. mapStyles.ts
 
 <Source code={mapStyles} />
 
-### Utils
+### 7. Utils
 
 #### 1. utils/roundNumber.ts
 
@@ -148,3 +165,11 @@ To implement marker clustering with Leaflet, there are X files:
 #### 2. utils/createClusterShapes.ts
 
 <Source code={createClusterShapes} />
+
+#### 3. utils/toGeoJSON.ts
+
+<Source code={toGeoJSON} />
+
+#### 4. utils/toBoundsLiteral.ts
+
+<Source code={toBoundsLiteral} />
