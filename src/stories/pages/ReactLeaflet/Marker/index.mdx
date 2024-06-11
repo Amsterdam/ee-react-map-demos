@@ -1,0 +1,72 @@
+import { Meta, Source } from '@storybook/blocks';
+import * as MarkerStories from './index.stories';
+import Marker from '@/pages/ReactLeaflet/Marker/Marker?raw';
+import styles from '@/pages/ReactLeaflet/Marker/styles.module.css?raw';
+import getCrsRd from '@/utils/getCrsRd?raw';
+import defaultMarker from '@/utils/icons/defaultMarker?raw';
+
+<Meta of={MarkerStories} />
+
+# Amsterdam Marker
+## Requirements
+
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- CRS handling ([utils/getCrsRd.ts](#1-getcrsrdts))
+
+## Description
+
+The Marker component renders a map centered on Amsterdam with a marker.
+This component uses the React Leaflet library to create and manage the map.
+
+### Large numbers of markers can lead to degraded performance
+Every Marker is an HTML image element and showing one will have a ver slight negative impact on performance.
+Showing tens of thousands of Markers wil have a significant impact.
+Please don't do this without either clustering or setting the 'preferCanvas' option of the Leaflet map to 'true'.
+
+### Create Custom Marker Icon:
+Define a custom marker icon if needed. Make sure to replace the placeholder path with the correct path to your marker icon.
+```js
+import markerIconUrl from '@/path/to/marker-icon.png'; // Correct path to your marker icon
+
+const defaultMarker = L.icon({
+  iconUrl: markerIconUrl,
+  ...
+});
+
+export default defaultMarker;
+```
+
+## How to implement
+
+To accomplish the Amstedam Marker there are the following files:
+1. The React components
+    * [Marker.tsx](#1-markertsx)
+2. The CSS styles (1 file)
+    * [styles.module.css](#1-stylesmodulecss)
+3. Utils (2 files)
+    * [defaultMarker.ts](#1-defaultmarkerts)
+    * [getCrsRd.ts](#2-getcrsrdts)
+
+## Usage
+
+The following files are required:
+
+### React Components
+
+#### 1. Marker.tsx
+<Source code={Marker} />
+
+### CSS Styling
+
+#### 1. styles.module.css
+
+<Source code={styles} />
+
+### Utils
+#### 1. defaultMarker.ts
+
+<Source code={defaultMarker} />
+
+#### 2. getCrsRd.ts
+
+  <Source code={getCrsRd} />
