@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import Supercluster from 'supercluster';
 import type { BBox, GeoJsonObject, Point } from 'geojson';
 import getCrsRd from '@/utils/getCrsRd';
