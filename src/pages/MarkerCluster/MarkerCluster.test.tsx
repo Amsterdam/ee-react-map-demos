@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import L from 'leaflet';
 import MarkerCluster from './MarkerCluster';
 import styles from './styles.module.css';
 
@@ -177,6 +179,8 @@ const fakeClusterData = [
   },
 ];
 
+const getClusterExpansionZoomMock = vi.fn();
+
 vi.mock('supercluster', async () => {
   const actual = await vi.importActual('supercluster');
 
@@ -187,6 +191,7 @@ vi.mock('supercluster', async () => {
         ...actual.default.prototype,
         load: vi.fn(),
         getClusters: vi.fn(() => fakeClusterData),
+        getClusterExpansionZoom: getClusterExpansionZoomMock,
       };
     }),
   };
@@ -199,15 +204,11 @@ describe('MarkerCluster', () => {
       .mockImplementation(() => undefined);
     const { container } = render(<MarkerCluster />);
 
-    // debug();
-
-    expect(
-      container.querySelector('.leaflet-marker-pane img.leaflet-marker-icon')
-    ).toBeInTheDocument();
-
     const marker = container.querySelector(
       '.leaflet-marker-pane img.leaflet-marker-icon'
     );
+
+    expect(marker).toBeInTheDocument();
     fireEvent(marker, new MouseEvent('click', { bubbles: true }));
 
     await waitFor(() => {
@@ -218,7 +219,25 @@ describe('MarkerCluster', () => {
     });
   });
 
-  it('shows length values that corresponds with the fake data length', async () => {
+  it('cluster clicks trigger marker click callbacks', () => {
+    const setZoomAroundSpy = vi
+      .spyOn(L.Map.prototype, 'setZoomAround')
+      .mockImplementation(() => {
+        console.log('setZoomAround called');
+      });
+
+    const { container } = render(<MarkerCluster />);
+    const cluster = container.querySelector(
+      `div.leaflet-marker-icon.${styles.markerCluster}`
+    );
+
+    expect(cluster).toBeInTheDocument();
+    fireEvent(cluster, new MouseEvent('click', { bubbles: true }));
+
+    expect(setZoomAroundSpy).toHaveBeenCalled();
+  });
+
+  it('shows length values that corresponds with the fake data length', () => {
     const { container } = render(<MarkerCluster />);
 
     const individualClusters = container.querySelectorAll(
@@ -243,6 +262,27 @@ describe('MarkerCluster', () => {
     expect(individualMarkers + clusterTotal).toEqual(fakeClusterDataLength);
   });
 
-  // TODO click cluster expect useCallback?
-  // TODO enter key on marker/cluster
+  it('shows an alert on marker enter keypress', async () => {
+    const alertMock = vi
+      .spyOn(window, 'alert')
+      .mockImplementation(() => undefined);
+    const { container } = render(<MarkerCluster />);
+
+    const marker = container.querySelector(
+      '.leaflet-marker-pane img.leaflet-marker-icon'
+    );
+
+    await act(async () => {
+      marker?.focus();
+      expect(marker).toHaveFocus();
+      userEvent.keyboard('{enter}');
+
+      await waitFor(() => {
+        expect(alertMock).toHaveBeenCalledOnce();
+        expect(alertMock).toHaveBeenLastCalledWith(
+          `Marker click ID ${fakeClusterData[0].properties.id}`
+        );
+      });
+    });
+  });
 });
