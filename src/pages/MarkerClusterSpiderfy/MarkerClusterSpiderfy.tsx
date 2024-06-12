@@ -11,7 +11,7 @@ import type { ClusterOptions, MapSuperClusterFeature } from './types';
 import { GeoJsonObject } from 'geojson';
 
 interface MarkerClusterSpiderProps {
-  clusterOptions: ClusterOptions;
+  clusterOptions?: ClusterOptions;
 }
 
 const MarkerClusterSpider: FunctionComponent<MarkerClusterSpiderProps> = ({
@@ -122,6 +122,8 @@ const MarkerClusterSpider: FunctionComponent<MarkerClusterSpiderProps> = ({
         spiderLines: [],
       };
     }
+
+    // console.log('data', getMapData(mapInstance));
 
     return processFeatures(
       mapInstance,

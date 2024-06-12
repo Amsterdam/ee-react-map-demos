@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { render, fireEvent, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import L from 'leaflet';
-import MarkerCluster from './MarkerCluster';
+import MarkerClusterSpiderfy from './MarkerClusterSpiderfy';
 import styles from './styles.module.css';
 
 // In happy-dom the Leaflet Map bounds return the same, for example:
@@ -15,78 +15,163 @@ import styles from './styles.module.css';
 const fakeClusterData = [
   {
     type: 'Feature',
+    id: 1572,
+    properties: {
+      cluster: true,
+      cluster_id: 1572,
+      point_count: 408,
+      point_count_abbreviated: 408,
+      expansion_zoom: 8,
+    },
     geometry: {
       type: 'Point',
-      coordinates: [4.869341186626288, 52.41312161731963],
-    },
-    properties: {
-      id: '110627',
+      coordinates: [4.921538198695474, 52.370872656890185],
     },
   },
   {
     type: 'Feature',
-    id: 1731,
+    id: 1604,
     properties: {
       cluster: true,
-      cluster_id: 1731,
-      point_count: 61,
-      point_count_abbreviated: 61,
+      cluster_id: 1604,
+      point_count: 239,
+      point_count_abbreviated: 239,
+      expansion_zoom: 8,
     },
     geometry: {
       type: 'Point',
-      coordinates: [4.849467668376977, 52.376390617632865],
+      coordinates: [4.813719713538243, 52.36056421790491],
     },
   },
   {
     type: 'Feature',
-    id: 1827,
+    id: 1732,
     properties: {
       cluster: true,
-      cluster_id: 1827,
-      point_count: 35,
-      point_count_abbreviated: 35,
+      cluster_id: 1732,
+      point_count: 325,
+      point_count_abbreviated: 325,
+      expansion_zoom: 8,
     },
     geometry: {
       type: 'Point',
-      coordinates: [4.989830834524969, 52.35849648317432],
+      coordinates: [4.862498650184062, 52.369845768807664],
     },
   },
   {
     type: 'Feature',
-    id: 1859,
+    id: 1796,
     properties: {
       cluster: true,
-      cluster_id: 1859,
-      point_count: 88,
-      point_count_abbreviated: 88,
+      cluster_id: 1796,
+      point_count: 54,
+      point_count_abbreviated: 54,
+      expansion_zoom: 8,
     },
     geometry: {
       type: 'Point',
-      coordinates: [4.962408298795866, 52.314230376446915],
+      coordinates: [4.986799160639435, 52.36176196106081],
     },
   },
   {
     type: 'Feature',
-    id: 2115,
+    id: 1828,
     properties: {
       cluster: true,
-      cluster_id: 2115,
-      point_count: 19,
-      point_count_abbreviated: 19,
+      cluster_id: 1828,
+      point_count: 152,
+      point_count_abbreviated: 152,
+      expansion_zoom: 8,
     },
     geometry: {
       type: 'Point',
-      coordinates: [4.908354407862596, 52.34149413488072],
+      coordinates: [4.960701104841743, 52.31548893880412],
     },
   },
   {
     type: 'Feature',
-    id: 6693,
+    id: 1924,
     properties: {
       cluster: true,
-      cluster_id: 6693,
+      cluster_id: 1924,
+      point_count: 81,
+      point_count_abbreviated: 81,
+      expansion_zoom: 8,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [4.905632072024879, 52.41080735297254],
+    },
+  },
+  {
+    type: 'Feature',
+    id: 1988,
+    properties: {
+      cluster: true,
+      cluster_id: 1988,
+      point_count: 102,
+      point_count_abbreviated: 102,
+      expansion_zoom: 8,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [4.86971686868106, 52.33280064366002],
+    },
+  },
+  {
+    type: 'Feature',
+    id: 2084,
+    properties: {
+      cluster: true,
+      cluster_id: 2084,
+      point_count: 116,
+      point_count_abbreviated: 116,
+      expansion_zoom: 8,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [4.900848331122556, 52.34568473498618],
+    },
+  },
+  {
+    type: 'Feature',
+    id: 2180,
+    properties: {
+      cluster: true,
+      cluster_id: 2180,
+      point_count: 49,
+      point_count_abbreviated: 49,
+      expansion_zoom: 8,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [4.946222451268394, 52.39522780607311],
+    },
+  },
+  {
+    type: 'Feature',
+    id: 2276,
+    properties: {
+      cluster: true,
+      cluster_id: 2276,
+      point_count: 30,
+      point_count_abbreviated: 30,
+      expansion_zoom: 8,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [4.989832878112788, 52.29599612786663],
+    },
+  },
+  {
+    type: 'Feature',
+    id: 6566,
+    properties: {
+      cluster: true,
+      cluster_id: 6566,
       point_count: 2,
       point_count_abbreviated: 2,
+      expansion_zoom: 10,
     },
     geometry: {
       type: 'Point',
@@ -95,86 +180,28 @@ const fakeClusterData = [
   },
   {
     type: 'Feature',
-    id: 1923,
+    id: 2756,
     properties: {
       cluster: true,
-      cluster_id: 1923,
-      point_count: 70,
-      point_count_abbreviated: 70,
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [4.907284089497139, 52.40569099233366],
-    },
-  },
-  {
-    type: 'Feature',
-    id: 2019,
-    properties: {
-      cluster: true,
-      cluster_id: 2019,
+      cluster_id: 2756,
       point_count: 5,
       point_count_abbreviated: 5,
+      expansion_zoom: 8,
     },
     geometry: {
       type: 'Point',
-      coordinates: [4.85016775131224, 52.34004846208785],
+      coordinates: [4.996054172515869, 52.39071868960744],
     },
   },
   {
     type: 'Feature',
-    id: 1603,
-    properties: {
-      cluster: true,
-      cluster_id: 1603,
-      point_count: 80,
-      point_count_abbreviated: 80,
-    },
     geometry: {
       type: 'Point',
-      coordinates: [4.817066341638565, 52.362011642288536],
+      coordinates: [5.028688243101398, 52.4136393328284],
     },
-  },
-  {
-    type: 'Feature',
-    id: 1571,
     properties: {
-      cluster: true,
-      cluster_id: 1571,
-      point_count: 111,
-      point_count_abbreviated: 111,
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [4.930841020635657, 52.36207785729161],
-    },
-  },
-  {
-    type: 'Feature',
-    id: 3620,
-    properties: {
-      cluster: true,
-      cluster_id: 3620,
-      point_count: 4,
-      point_count_abbreviated: 4,
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [4.9565184116363525, 52.391291266895024],
-    },
-  },
-  {
-    type: 'Feature',
-    id: 2307,
-    properties: {
-      cluster: true,
-      cluster_id: 2307,
-      point_count: 24,
-      point_count_abbreviated: 24,
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [4.987105429172529, 52.29661378569142],
+      id: '201169',
+      expansion_zoom: null,
     },
   },
 ];
@@ -197,12 +224,16 @@ vi.mock('supercluster', async () => {
   };
 });
 
-describe('MarkerCluster', () => {
+vi.mock('./getMapData', () => ({
+  default: () => fakeClusterData,
+}));
+
+describe('MarkerClusterSpiderfy', () => {
   it('shows an alert on marker click', async () => {
     const alertMock = vi
       .spyOn(window, 'alert')
       .mockImplementation(() => undefined);
-    const { container } = render(<MarkerCluster />);
+    const { container } = render(<MarkerClusterSpiderfy />);
 
     const marker = container.querySelector(
       '.leaflet-marker-pane img.leaflet-marker-icon'
@@ -211,10 +242,12 @@ describe('MarkerCluster', () => {
     expect(marker).toBeInTheDocument();
     fireEvent(marker, new MouseEvent('click', { bubbles: true }));
 
+    const markerRecord = fakeClusterData.find(record => record.properties.id);
+
     await waitFor(() => {
       expect(alertMock).toHaveBeenCalledOnce();
       expect(alertMock).toHaveBeenLastCalledWith(
-        `Marker click ID ${fakeClusterData[0].properties.id}`
+        `Marker click ID ${markerRecord?.properties.id}`
       );
     });
   });
@@ -223,7 +256,7 @@ describe('MarkerCluster', () => {
     const alertMock = vi
       .spyOn(window, 'alert')
       .mockImplementation(() => undefined);
-    const { container } = render(<MarkerCluster />);
+    const { container } = render(<MarkerClusterSpiderfy />);
 
     const marker = container.querySelector(
       '.leaflet-marker-pane img.leaflet-marker-icon'
@@ -254,7 +287,7 @@ describe('MarkerCluster', () => {
         console.log('setZoomAround called');
       });
 
-    const { container } = render(<MarkerCluster />);
+    const { container } = render(<MarkerClusterSpiderfy />);
     const cluster = container.querySelector(
       `div.leaflet-marker-icon.${styles.markerCluster}`
     );
@@ -266,7 +299,7 @@ describe('MarkerCluster', () => {
   });
 
   it('shows length values that corresponds with the fake data length', () => {
-    const { container } = render(<MarkerCluster />);
+    const { container } = render(<MarkerClusterSpiderfy />);
 
     const individualClusters = container.querySelectorAll(
       `div.leaflet-marker-icon.${styles.markerCluster}`
