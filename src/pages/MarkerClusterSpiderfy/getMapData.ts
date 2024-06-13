@@ -7,7 +7,7 @@ import { DataRecord } from './types';
 import rawData from './data.json';
 
 // Simple util to check coords within a bounding box
-const isCoordWithingBoundingBox = (
+export const isCoordWithingBoundingBox = (
   bbox: [number, number, number, number],
   coord: LatLngTuple,
   xIndex = 1,
@@ -25,7 +25,7 @@ const isCoordWithingBoundingBox = (
 };
 
 // Restrict data to that within specified bounding box
-const filterPointFeaturesWithinBoundingBox = (
+export const filterPointFeaturesWithinBoundingBox = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   features: PointFeature<any>[],
   bbox: [number, number, number, number]

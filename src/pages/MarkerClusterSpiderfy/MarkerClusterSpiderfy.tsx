@@ -123,7 +123,7 @@ const MarkerClusterSpider: FunctionComponent<MarkerClusterSpiderProps> = ({
       };
     }
 
-    // console.log('data', getMapData(mapInstance));
+    console.log('data', getMapData(mapInstance) as MapSuperClusterFeature[]);
 
     return processFeatures(
       mapInstance,
