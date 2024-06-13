@@ -96,7 +96,10 @@ const MarkerCluster: FunctionComponent = () => {
 
     // Empty Layer Group that will receive the clusters data on the fly.
     const markers = L.geoJSON(null, {
-      pointToLayer: (...args) => createClusterIcon(...args, CLUSTER_STYLES),
+      pointToLayer: (...args) => {
+        console.log(...args);
+        return createClusterIcon(...args, CLUSTER_STYLES);
+      },
     }).addTo(map);
 
     createdMapInstance.current = true;
