@@ -11,7 +11,7 @@ const generateKey = (coordinates: Position) =>
   `${roundNumber(coordinates[0])}-${roundNumber(coordinates[1])}`;
 
 // Group markers at the same coordinates under the same coordinates key
-const getMarkerItems = (features: MapSuperClusterFeature[]) => {
+export const getMarkerItems = (features: MapSuperClusterFeature[]) => {
   const items: Record<string, MapSuperClusterFeature[]> = {};
   features.forEach(feature => {
     const key = generateKey(feature.geometry.coordinates);
@@ -124,7 +124,7 @@ const processFeatures = (
 
   return {
     clusterItems,
-    spiderLines: spiderLines,
+    spiderLines,
   };
 };
 

@@ -101,10 +101,6 @@ vi.mock('leaflet', async () => {
     ...actual,
     map: vi.fn().mockImplementation(() => ({
       setView: vi.fn().mockReturnThis(),
-      getBounds: vi.fn(() => ({
-        northEast: { lat: '', lng: '' },
-        southWest: { lat: '', lng: '' },
-      })),
       getZoom: vi.fn(() => 7),
     })),
   };
