@@ -32,7 +32,7 @@ const PolylineLayer: FunctionComponent = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 3,
+      minZoom: 6,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],

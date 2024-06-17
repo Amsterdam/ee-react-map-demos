@@ -1,6 +1,5 @@
 import styles from '@/pages/ReactLeaflet/PolygonLayer/styles.module.css';
 import { MapContainer, TileLayer, Polygon } from 'react-leaflet';
-import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import type { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -10,8 +9,10 @@ const PolygonLayer = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <MapContainer
-        center={L.latLng([52.370216, 4.895168])}
-        zoom={13}
+        center={[52.35672610204171, 4.868821590792892]}
+        zoom={10}
+        maxZoom={16}
+        minZoom={6}
         maxBounds={[
           [52.25168, 4.64034],
           [52.50536, 5.10737],

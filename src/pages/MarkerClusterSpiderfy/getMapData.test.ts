@@ -5,7 +5,6 @@ import getMapData, {
 } from './getMapData';
 import L from 'leaflet';
 
-// TODO update
 const fakeClusterData = [
   {
     type: 'Feature',
