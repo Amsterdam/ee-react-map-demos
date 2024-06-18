@@ -31,9 +31,9 @@ import toBoundsLiteral from '@/utils/toBoundsLiteral?raw';
 
 ## Description
 
-This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component. The static data for this example has intentionally been duplicated at two locations: **Dijksgracht 19** and **Papaverweg 33**.
+This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component. The static data for this example has intentionally been duplicated at two locations: **[Dijksgracht 19](https://data.amsterdam.nl/data/bag/nummeraanduiding/0363200000450029?center=52.3757212%2C4.9183681&term=Dijksgracht+19%2C+1019BT+Amsterdam&zoom=14)** and **[Papaverweg 33](https://data.amsterdam.nl/data/bag/nummeraanduiding/0363200000411392?center=52.3957353%2C4.9069465&term=Papaverweg+33%2C+1032KE+Amsterdam&zoom=14)**.
 
-Please note if you are working with data that has no records with the same geometry values, there is a [simpler version](../?path=/story/react-markercluster--default) of this component available.
+**Heads up** if you are working with data that has no records with the same geometry values, there is a [simpler version](../?path=/story/react-markercluster--default) of this component available.
 
 ### Data handling
 
@@ -50,93 +50,66 @@ There are three options for how to display the cluster:
 
     *Circle draws the markers around the original marker geometry. Spiral draws the markers in spiral curve around the original marker geometry.*
 
-- spiderfyOnMaxZoom: `true` or `false`
+- `spiderfyOnMaxZoom`: `true` or `false`
 
     *This draws straight lines from the new clustered marker to the original geometry point. It works best with `clusterShape=circle`*
-
-### Alternative library
-
-There is also the [Leaflet.markercluster library](https://github.com/Leaflet/Leaflet.markercluster), which has been used in previous Gemeente Amsterdam projects. This [blog post](https://blog.mapbox.com/clustering-millions-of-points-on-a-map-with-supercluster-272046ec5c97) explains the improved performance from [Supercluster](https://github.com/mapbox/supercluster).
-
-## Background
-
-Marker clustering is a technique used in map development to manage and display a large number of markers efficiently. When there are many markers in close proximity to each other, showing all of them individually can clutter the map, making it difficult to navigate and interpret. Marker clustering combines nearby markers into a single cluster marker, which then splits into individual markers as the map is zoomed in.
-
-### Key Benefits of Marker Clustering
-
-- **Improved Performance**: Reduces the number of markers rendered on the map, leading to faster load times and smoother interactions.
-- **Enhanced Usability**: Prevents the map from becoming cluttered and overwhelming for the user.
-Makes it easier for users to identify areas with high concentrations of markers.
-- **Clearer Visualization**: Provides a more organized and readable map, allowing users to better understand the data distribution.
-
-### When to Use Marker Clustering
-
-- **High Density of Markers**: When you have a large number of markers that are densely packed in certain areas.
-- **Performance Optimization**: If the map's performance is lagging due to the high number of markers being displayed.
-- **User Experience**: When you want to improve the user experience by avoiding clutter and making the map more navigable.
-
-### Usage Scenarios
-
-- **Address Listings**: Displaying properties in a city where there are many in certain neighborhoods.
-- **Event Locations**: Showing locations of events or points of interest in a metropolitan area.
-- **Geotagged Social Media Posts**: Visualizing posts or photos tagged with location data in a popular tourist destination.
 
 ## How to implement
 
 To implement marker clustering with Leaflet, there are X files:
 
 1. The React component
-    1. [MarkerClusterSpiderfy.tsx](#1-markerclusterspidertsx) (*This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*)
+    - [MarkerClusterSpiderfy.tsx](#--markerclusterspiderfytsx) (*This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*)
 2. Data handling
-    1. [getMapData.ts](#1-getmapdatats)
-    2. [processFeatures.ts](#2-processfeaturests)
+    - [getMapData.ts](#--getmapdatats)
+    - [processFeatures.ts](#--processfeaturests)
 3. The CSS styles
-    1. [styles.module.css](#1-stylesmodulecss)
+    - [styles.module.css](#--stylesmodulecss)
 4. Types for data (typescript only)
-    1. [types.ts](#1-typests) *(These have been kept minimal and are primarily for examples.)*
+    - [types.ts](#--typests) *(These have been kept minimal and are primarily for examples.)*
 5. Data
-    1. [data.json](#1-datajson) *(This static data should be replaced by a fetch call or other static data)*
+    - [data.json](#--datajson) *(This static data should be replaced by a fetch call or other static data)*
 6. Map and cluster options and styles
-    1. [mapStyles.ts](#1-mapstylests)
+    - [mapStyles.ts](#--mapstylests)
 7. Utils
-    1. [utils/roundNumber.ts](#1-utilsroundnumberts)
-    2. [utils/createClusterShapes.ts](#2-utilscreateclustershapests)
-    3. [utils/toGeoJSON.ts](#3-utilstogeojsonts)
-    4. [utils/toBoundsLiteral.ts](#4-utilstoboundsliteralts)
+    - [utils/roundNumber.ts](#--utilsroundnumberts)
+    - [utils/createClusterShapes.ts](#--utilscreateclustershapests)
+    - [utils/toGeoJSON.ts](#--utilstogeojsonts)
+    - [utils/toBoundsLiteral.ts](#--utilstoboundsliteralts)
 
 ## Usage
 
 ### 1. The React component
 
-#### 1. MarkerClusterSpiderfy.tsx
+#### - MarkerClusterSpiderfy.tsx
 
 <Source code={MarkerClusterSpiderfy} />
 
 ### 2. Data handling
 
-#### 1. getMapData.ts
+#### - getMapData.ts
 
 <Source code={getMapData} />
 
-#### 2. processFeatures.ts
+#### - processFeatures.ts
 
 <Source code={processFeatures} />
 
 ### 3. CSS Styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
 ### 4. Types for data
 
-#### 1. types.ts
+#### - types.ts
 
 <Source code={types} />
 
 ### 5. Data
 
-#### 1. data.json
+#### - data.json
 
 *Code intentionally shortened*
 
@@ -144,24 +117,24 @@ To implement marker clustering with Leaflet, there are X files:
 
 ### 6. Map Styles
 
-#### 1. mapStyles.ts
+#### - mapStyles.ts
 
 <Source code={mapStyles} />
 
 ### 7. Utils
 
-#### 1. utils/roundNumber.ts
+#### - utils/roundNumber.ts
 
 <Source code={roundNumber} />
 
-#### 2. utils/createClusterShapes.ts
+#### - utils/createClusterShapes.ts
 
 <Source code={createClusterShapes} />
 
-#### 3. utils/toGeoJSON.ts
+#### - utils/toGeoJSON.ts
 
 <Source code={toGeoJSON} />
 
-#### 4. utils/toBoundsLiteral.ts
+#### - utils/toBoundsLiteral.ts
 
 <Source code={toBoundsLiteral} />

@@ -27,47 +27,24 @@ import data from '@/pages/MarkerCluster/data.json?raw';
 
 This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component.
 
-Please note that this component won't work for markers using the same geometry, they will simply render on top of the previous rendered marker. For handling markers with the same geometry, there is a [more advanced version of this component](../?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
-
-## Background
-
-Marker clustering is a technique used in map development to manage and display a large number of markers efficiently. When there are many markers in close proximity to each other, showing all of them individually can clutter the map, making it difficult to navigate and interpret. Marker clustering combines nearby markers into a single cluster marker, which then splits into individual markers as the map is zoomed in.
-
-### Key Benefits of Marker Clustering
-
-- **Improved Performance**: Reduces the number of markers rendered on the map, leading to faster load times and smoother interactions.
-- **Enhanced Usability**: Prevents the map from becoming cluttered and overwhelming for the user.
-Makes it easier for users to identify areas with high concentrations of markers.
-- **Clearer Visualization**: Provides a more organized and readable map, allowing users to better understand the data distribution.
-
-### When to Use Marker Clustering
-
-- **High Density of Markers**: When you have a large number of markers that are densely packed in certain areas.
-- **Performance Optimization**: If the map's performance is lagging due to the high number of markers being displayed.
-- **User Experience**: When you want to improve the user experience by avoiding clutter and making the map more navigable.
-
-## Usage Scenarios
-
-- **Address Listings**: Displaying properties in a city where there are many in certain neighborhoods.
-- **Event Locations**: Showing locations of events or points of interest in a metropolitan area.
-- **Geotagged Social Media Posts**: Visualizing posts or photos tagged with location data in a popular tourist destination.
+**Warning** that this component won't work for markers using the same geometry, they will render on top of the previously rendered marker. For handling markers with the same geometry, there is an [advanced variant of this component](../?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
 
 ## How to implement
 
 To implement marker clustering with Leaflet, there are X files:
 
 1. The React component
-    * [MarkerCluster.tsx](#1-markerclustertsx)
+    * [MarkerCluster.tsx](#--markerclustertsx)
         * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
 2. Normalizing external data
-    * [utils/toGeoJSON.ts](#1-utilstogeojsonts)
+    * [utils/toGeoJSON.ts](#--utilstogeojsonts)
       *(This is only required for this demo to work; it helps format the external `data.json` array into GeoJSON format.)*
 3. The CSS styles
-    * [styles.module.css](#1-stylesmodulecss)
+    * [styles.module.css](#--stylesmodulecss)
 4. Data
-    * [data.json](#1-datajson) *(This static data should be replaced by a fetch call or other static data)*
+    * [data.json](#--datajson) *(This static data should be replaced by a fetch call or other static data)*
 5. The cluster icon
-    * [utils/createClusterIcon.ts](#1-utilscreateclustericonts)
+    * [utils/createClusterIcon.ts](#--utilscreateclustericonts)
 6. Leaflet marker image files
     * `import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';`
     * `import iconUrl from 'leaflet/dist/images/marker-icon.png';`
@@ -79,25 +56,25 @@ To implement marker clustering with Leaflet, there are X files:
 
 ### React Components
 
-#### 1. MarkerCluster.tsx
+#### - MarkerCluster.tsx
 
 <Source code={MarkerCluster} />
 
 ### Normalizing external data
 
-#### 1. utils/toGeoJSON.ts
+#### - utils/toGeoJSON.ts
 
 <Source code={toGeoJSON} />
 
 ### CSS Styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
 ### Data
 
-#### 1. data.json
+#### - data.json
 
 *Code intentionally shortened*
 
@@ -105,6 +82,6 @@ To implement marker clustering with Leaflet, there are X files:
 
 ### The cluster icon
 
-#### 1. utils/createClusterIcon.ts
+#### - utils/createClusterIcon.ts
 
 <Source code={createClusterIcon} />
