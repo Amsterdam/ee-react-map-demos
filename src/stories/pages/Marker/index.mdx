@@ -9,7 +9,7 @@ import icon from '@/assets/icons/map-marker.svg?raw';
 
 # Marker
 
-**<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/Marker" target="_blank">GitHub Repo URL</a>**
+**[Background and use cases](../?path=/docs/leaflet-layers--docs#marker)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/Marker" target="_blank">GitHub Repo URL</a>**
 
 ## Requirements
 
@@ -48,12 +48,6 @@ A standard Leaflet marker is a HTML image element. Therefore, if there are 100 m
 The real solution to this is to ideally never render so many markers simultaneously. However, with some APIs that isn't always an easy option. This is where clustering should be implemented or the `preferCanvas` option is set to `true` when creating your Leaflet map.
 
 The `preferCanvas` instructs Leaflet to use the HTML Canvas element, which performs a lot quicker than the traditional HTML DOM tree. <a href="https://leafletjs.com/reference.html#map-prefercanvas" target="_blank">See docs</a>.
-
-## Usage Scenarios
-
-- **Location Pins**: Highlighting specific locations such as restaurants, shops, landmarks, etc.
-- **Data Visualization**: Displaying data points like weather stations, earthquake epicenters, etc.
-- **Interactive Maps**: Providing interactive elements for user interaction, such as selecting meeting points or identifying places of interest.
 
 ## How to implement
 
