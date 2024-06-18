@@ -20,7 +20,7 @@ import icon from '@/assets/icons/map-marker.svg?raw';
 
 A marker is used to display a location on a map. By default, a marker is a HTML image element rendered inside the parent map DOM element. This marker element can be configured, extended and (like in this example) replaced with another icon.
 
-In this code example, the default Leaflet marker ([example](https://leafletjs.com/examples/layers-control/)) is replaced with the `L.icon` ([docs](https://leafletjs.com/reference.html#icon)); another alternative to this is the `L.divIcon` ([docs](https://leafletjs.com/reference.html#divicon)). [Read more Leaflet icons here](../?path=/docs/icons--docs).
+In this code example, the default Leaflet marker (<a href="https://leafletjs.com/examples/layers-control/" target="_blank">example</a>) is replaced with the `L.icon` (<a href="https://leafletjs.com/reference.html#icon" target="_blank">docs</a>); another alternative to this is the `L.divIcon` (<a href="https://leafletjs.com/reference.html#divicon" target="_blank">docs</a>). [Read more Leaflet icons here](../?path=/docs/icons--docs).
 
 The primary code in regards to creating a Leaflet marker, is lines 50-59:
 
@@ -28,7 +28,7 @@ The primary code in regards to creating a Leaflet marker, is lines 50-59:
 useEffect(() => {
   if (mapInstance) {
     const marker = L.marker(L.latLng([52.370216, 4.895168]), {
-      // There are many more options to choose from @see https://leafletjs.com/reference.html#marker
+      // There are many more options to choose from @see <a href="https://leafletjs.com/reference.html#marker" target="_blank">https://leafletjs.com/reference.html#marker</a>
       icon: customMarker
     }).addTo(mapInstance)
       .on('click', () => alert('Marker click!'));
@@ -39,7 +39,7 @@ useEffect(() => {
 
 This creates a marker at the coordinates (52.370216, 4.895168), which is added to the map (via the `addTo` method) and includes an example event listener that will be triggered on marker clicks. Then in the rest of the code, this marker element, can be referred to via the `markerInstance` state variable and interacted with using Leaflet methods.
 
-A Leaflet marker element consists of [events](https://leafletjs.com/reference.html#marker-move), [methods](https://leafletjs.com/reference.html#marker-l-marker) and [options](https://leafletjs.com/reference.html#marker-icon).
+A Leaflet marker element consists of <a href="https://leafletjs.com/reference.html#marker-move" target="_blank">events</a>, <a href="https://leafletjs.com/reference.html#marker-l-marker" target="_blank">methods</a> and <a href="https://leafletjs.com/reference.html#marker-icon" target="_blank">options</a>.
 
 ### Large numbers of markers can lead to degraded performance
 
@@ -47,7 +47,7 @@ A standard Leaflet marker is a HTML image element. Therefore, if there are 100 m
 
 The real solution to this is to ideally never render so many markers simultaneously. However, with some APIs that isn't always an easy option. This is where clustering should be implemented or the `preferCanvas` option is set to `true` when creating your Leaflet map.
 
-The `preferCanvas` instructs Leaflet to use the HTML Canvas element, which performs a lot quicker than the traditional HTML DOM tree. [See docs](https://leafletjs.com/reference.html#map-prefercanvas).
+The `preferCanvas` instructs Leaflet to use the HTML Canvas element, which performs a lot quicker than the traditional HTML DOM tree. <a href="https://leafletjs.com/reference.html#map-prefercanvas" target="_blank">See docs</a>.
 
 ## Usage Scenarios
 

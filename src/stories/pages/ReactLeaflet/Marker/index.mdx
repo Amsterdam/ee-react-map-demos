@@ -22,12 +22,15 @@ The Marker component renders a map centered on Amsterdam with a marker.
 This component uses the React Leaflet library to create and manage the map.
 
 ### Large numbers of markers can lead to degraded performance
+
 Every Marker is an HTML image element and showing one will have a ver slight negative impact on performance.
 Showing tens of thousands of Markers wil have a significant impact.
 Please don't do this without either clustering or setting the 'preferCanvas' option of the Leaflet map to 'true'.
 
 ### Create Custom Marker Icon:
+
 Define a custom marker icon if needed. Make sure to replace the placeholder path with the correct path to your marker icon.
+
 ```js
 import markerIconUrl from '@/path/to/marker-icon.png'; // Correct path to your marker icon
 
@@ -66,10 +69,11 @@ The following files are required:
 <Source code={styles} />
 
 ### Utils
+
 #### 1. defaultMarker.ts
 
 <Source code={defaultMarker} />
 
 #### 2. getCrsRd.ts
 
-  <Source code={getCrsRd} />
+<Source code={getCrsRd} />
