@@ -42,7 +42,7 @@ A Leaflet marker element consists of [events](https://leafletjs.com/reference.ht
 
 A standard Leaflet marker is a HTML image element. Therefore, if there are 100 markers, then there are 100 HTML image elements - each one with its own events, listeners and side-effects - another element to add to the DOM tree. Modern browsers and devices are quite efficient so negative performance often won't be noticed until you are handling tens of thousands of markers.
 
-The real solution to this is to ideally never render so many markers simultaneously. However, with some APIs that isn't always an easy option. This is where clustering ideally should be implemented or the `preferCanvas` option is set to `true` when creating your Leaflet map.
+The real solution to this is to ideally never render so many markers simultaneously. However, with some APIs that isn't always an easy option. This is where clustering should be implemented or the `preferCanvas` option is set to `true` when creating your Leaflet map.
 
 The `preferCanvas` instructs Leaflet to use the HTML Canvas element, which performs a lot quicker than the traditional HTML DOM tree. [See docs](https://leafletjs.com/reference.html#map-prefercanvas).
 
@@ -57,37 +57,36 @@ The `preferCanvas` instructs Leaflet to use the HTML Canvas element, which perfo
 To implement a Leaflet marker, there are four files:
 
 1. The React component
-    * [Marker.tsx](#1-markertsx)
-      * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
+    * [Marker.tsx](#--markertsx)
 2. The custom icon
-    * [icons/customMarker.tsx](#1-iconscustommarkertsx)
+    * [icons/customMarker.tsx](#--iconscustommarkertsx)
 3. The CSS styles (1 file)
-    * [styles.module.css](#1-stylesmodulecss)
+    * [styles.module.css](#--stylesmodulecss)
 4. Image
-    * [assets/icons/map-marker.svg](#1-map-markersvg)
+    * [assets/icons/map-marker.svg](#--map-markersvg)
 
 ## Usage
 
-### React Components
+### 1. React Components
 
-#### 1. Marker.tsx
+#### - Marker.tsx
 
 <Source code={Marker} />
 
 ### Custom icon
 
-#### 1. icons/customMarker.tsx
+#### - icons/customMarker.tsx
 
 <Source code={customMarker} />
 
 ### CSS Styling
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
 ### Assets
 
-#### 1. map-marker.svg
+#### - map-marker.svg
 
 <Source code={icon} />
