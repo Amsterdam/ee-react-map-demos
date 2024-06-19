@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { MapContext } from './MapContext';
+import { MapContext, useMapInstance } from './MapContext';
 import { DEFAULT_MAP_OPTIONS } from './defaultMapOptions';
 import 'leaflet/dist/leaflet.css';
 import styles from './MapStyles.module.css';
@@ -17,6 +17,7 @@ export default function Map({
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);
+  const { setPosition } = useMapInstance();
 
   useEffect(() => {
     if (mapRef.current === null || createdMapInstance.current !== false) {
@@ -37,6 +38,8 @@ export default function Map({
     map.attributionControl.setPrefix(false);
 
     setMapInstance(map);
+
+    map.on('moveend', () => setPosition(map.getCenter()));
 
     return () => {
       mapInstance?.remove();
