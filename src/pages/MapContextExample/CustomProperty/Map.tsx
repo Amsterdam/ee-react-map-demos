@@ -1,16 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, { circleMarker } from 'leaflet';
+import L, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from '../map.module.css';
 import { useMapInstance } from './MapContext';
 import customMarker from './icons/customMarker';
+import './marker.css';
 
+// TODO cleanup unused context state
+// TODO cleanup typescript warnings + definitions
 const Map: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [markerInstances, setMarkerInstances] = useState<L.Marker[]>([]);
   const createdMapInstance = useRef(false);
+  const [featureLayer, setFeatureLayer] = useState<LayerGroup | null>(null);
 
   const {
     mapInstance,
@@ -59,11 +63,11 @@ const Map: FunctionComponent = () => {
       setPosition([map.getCenter().lat, map.getCenter().lng]);
     });
 
-    const layer = L.geoJson(markerData, {
+    const layerGroup = L.geoJson(markerData, {
       pointToLayer: (feature, latlng) =>
         L.marker(latlng, {
-          opacity: 0.4,
-          icon: customMarker,
+          // opacity: 0.4,
+          icon: L.icon(customMarker),
         }).on('click', () => {
           // console.log(setDisplayAlert);
           setDisplayAlert(true);
@@ -71,34 +75,10 @@ const Map: FunctionComponent = () => {
         }),
     });
 
-    layer.addTo(map);
+    layerGroup.addTo(map);
+    setFeatureLayer(layerGroup);
 
-    // markerData.forEach(data => {
-    //   const layer = L.geoJson(data, {
-    //     pointToLayer: (_feature, latlng) =>
-    //       circleMarker(latlng, {
-    //         fillColor: '#247514',
-    //         fill: true,
-    //         color: '#247514',
-    //         radius: 3,
-    //         className: 'c-marker',
-    //       }),
-    //   });
-    // const markerEl = L.marker(data, {
-    //   opacity: 0.4,
-    //   icon: customMarker,
-    // })
-    //   .addTo(map)
-    // .on('click', () => {
-    //   // console.log(setDisplayAlert);
-    //   setDisplayAlert(true);
-    //   setSelectedMarker(data.properties.id);
-    // });
-
-    // console.log(markerEl);
-    // setMarkerInstances([...markerInstances, markerEl]);
-    // });
-
+    // TODO cleanup layerGroup on unmount
     // On component unmount, destroy the map and all related events
     return () => {
       if (mapInstance) mapInstance.remove();
@@ -107,12 +87,29 @@ const Map: FunctionComponent = () => {
 
   // TODO change data to carparking?
   // TODO allow multiselect
-  // TODO on hover change style
-  // TODO on click change style
   useEffect(() => {
-    // if (selectedMarker && markerInstance) {
-    //   markerInstance.setOpacity(1);
-    // }
+    // Reset any already active markers
+    if (featureLayer) {
+      const markers = featureLayer.getLayers();
+
+      if (markers) {
+        markers.forEach(marker => marker.setIcon(L.icon(customMarker)));
+      }
+    }
+
+    if (selectedMarker && featureLayer) {
+      // markerInstance.setOpacity(1);
+      console.log('getLayers', featureLayer.getLayers());
+      const marker = featureLayer
+        .getLayers()
+        .find(layer => layer?.feature.properties?.id === selectedMarker);
+
+      if (marker) {
+        marker.setIcon(
+          L.icon({ ...customMarker, className: 'c-marker c-marker--selected' })
+        );
+      }
+    }
   }, [selectedMarker, markerInstances]);
 
   return <div className={styles.container} ref={containerRef} />;
