@@ -1,35 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, { Layer, LayerGroup } from 'leaflet';
+import L, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from '../map.module.css';
 import { useMapInstance } from './MapContext';
 import customMarker from './icons/customMarker';
+import { SingleMarkerSelectExampleLayer } from './types';
 import './marker.css';
 
-// TODO rename types
-// Define the structure of your GeoJSON properties, this ideally matches an API definition
-interface MyGeoJSONProperties {
-  id: string;
-}
-
-// Define the GeoJSON Feature with our properties
-interface MyGeoJSONFeature extends GeoJSON.Feature<GeoJSON.GeometryObject> {
-  properties: MyGeoJSONProperties;
-}
-
-// Extend the Layer type to include the custom feature
-interface MyLayer extends Layer {
-  feature?: MyGeoJSONFeature;
-}
-
-// TODO cleanup unused context state
-// TODO cleanup typescript warnings + definitions
-// TODO multiselect version with car parking
 const Map: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  // const [markerInstances, setMarkerInstances] = useState<L.Marker[]>([]);
   const createdMapInstance = useRef(false);
   const [featureLayer, setFeatureLayer] = useState<LayerGroup | null>(null);
 
@@ -51,7 +32,7 @@ const Map: FunctionComponent = () => {
 
     const map = new L.Map(containerRef.current, {
       center: L.latLng(position),
-      zoom: 12,
+      zoom: 10,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
           attribution: '',
@@ -61,7 +42,7 @@ const Map: FunctionComponent = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 3,
+      minZoom: 6,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -128,11 +109,10 @@ const Map: FunctionComponent = () => {
       const marker = featureLayer
         .getLayers()
         .find(
-          (layer): layer is MyLayer =>
-            (layer as MyLayer)?.feature?.properties?.id === selectedMarker
+          (layer): layer is SingleMarkerSelectExampleLayer =>
+            (layer as SingleMarkerSelectExampleLayer)?.feature?.properties
+              ?.id === selectedMarker
         );
-      // Above replaces this in a TS friendly manner
-      // .find(layer => layer?.feature.properties?.id === selectedMarker);
 
       if (marker) {
         (marker as L.Marker).setIcon(

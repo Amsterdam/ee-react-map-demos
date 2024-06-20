@@ -10,3 +10,17 @@ import * as MapContextExampleStories from './index.stories';
 Context provides a way to share values between components without passing props through every level of the component tree. This is particularly useful for global state management, such as theme settings, user authentication, and localization, where certain data needs to be accessible by many components at different levels of the hierarchy.
 
 It is a powerful tool for managing state across a component tree, but it should be used judiciously to balance the ease of state management with performance considerations.
+
+
+## CustomProperty/Map.tsx
+```
+const marker = featureLayer
+  .getLayers()
+  .find(
+    (layer): layer is MapContextExampleLayer =>
+      (layer as MapContextExampleLayer)?.feature?.properties?.id ===
+      selectedMarker
+  );
+// Above replaces this in a TS friendly manner
+// .find(layer => layer?.feature.properties?.id === selectedMarker);
+```

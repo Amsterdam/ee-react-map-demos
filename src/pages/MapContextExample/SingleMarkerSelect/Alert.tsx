@@ -1,21 +1,10 @@
 import type { FunctionComponent } from 'react';
-import Map from './Map';
 import styles from '../styles.module.css';
 import { useMapInstance } from './MapContext';
-import MapProvider from './MapProvider';
 
-const MapPosition: FunctionComponent = () => {
-  const {
-    mapInstance,
-    position,
-    initialPosition,
-    displayAlert,
-    setDisplayAlert,
-    selectedMarker,
-    setSelectedMarker,
-  } = useMapInstance();
-
-  console.log({ displayAlert });
+const Alert: FunctionComponent = () => {
+  const { displayAlert, setDisplayAlert, selectedMarker, setSelectedMarker } =
+    useMapInstance();
 
   if (displayAlert) {
     return (
@@ -41,15 +30,4 @@ const MapPosition: FunctionComponent = () => {
   return null;
 };
 
-const MapContextExample: FunctionComponent = () => {
-  // const mapInstance = useMapInstance();
-
-  return (
-    <MapProvider>
-      <Map />
-      <MapPosition />
-    </MapProvider>
-  );
-};
-
-export default MapContextExample;
+export default Alert;
