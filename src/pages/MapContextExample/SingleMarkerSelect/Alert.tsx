@@ -8,7 +8,7 @@ const Alert: FunctionComponent = () => {
 
   if (displayAlert) {
     return (
-      <div className={styles.position}>
+      <div className={styles.alert}>
         {selectedMarker ? (
           <>
             You clicked on a marker with the ID {selectedMarker}!

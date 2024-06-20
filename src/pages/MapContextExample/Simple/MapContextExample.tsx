@@ -8,7 +8,7 @@ const MapPosition: FunctionComponent = () => {
   const { position } = useMapInstance();
 
   return (
-    <div className={styles.position}>
+    <div className={styles.alert}>
       {position ? `${position[0]}, ${position[1]}` : ''}
     </div>
   );

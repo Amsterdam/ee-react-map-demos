@@ -1,6 +1,7 @@
-.position {
+.alert {
   background: #fff;
   border: 2px solid #000;
+  font-family: 'Amsterdam Sans', Arial, sans-serif;
   left: 50%;
   padding: 20px 14px;
   position: absolute;

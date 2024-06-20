@@ -14,8 +14,8 @@ const MapPosition: FunctionComponent = () => {
   });
 
   return (
-    <div className={styles.position}>{position?.lat}</div>
-    // <div className={styles.position}>{mapInstance?.getCenter().lat}</div>
+    <div className={styles.alert}>{position?.lat}</div>
+    // <div className={styles.alert}>{mapInstance?.getCenter().lat}</div>
   );
 };
 

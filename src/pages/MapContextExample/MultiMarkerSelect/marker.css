@@ -1,0 +1,11 @@
+.c-layer {
+  opacity: 0.5;
+}
+
+.c-layer:hover {
+  opacity: 1;
+}
+
+.c-layer--selected {
+  opacity: 1;
+}
