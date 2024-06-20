@@ -1,17 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import type { FunctionComponent } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
-import styles from './map.module.css';
+import styles from '../map.module.css';
 import { useMapInstance } from './MapContext';
 
 const Map: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  // const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);
 
-  const { mapInstance, setMapInstance } = useMapInstance();
+  const { mapInstance, setMapInstance, position, setPosition } =
+    useMapInstance();
 
   useEffect(() => {
     if (containerRef.current === null || createdMapInstance.current !== false) {
@@ -19,7 +19,7 @@ const Map: FunctionComponent = () => {
     }
 
     const map = new L.Map(containerRef.current, {
-      center: L.latLng([52.370216, 4.895168]),
+      center: L.latLng(position),
       zoom: 12,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
@@ -43,6 +43,10 @@ const Map: FunctionComponent = () => {
 
     createdMapInstance.current = true;
     setMapInstance(map);
+
+    map.on('moveend', () =>
+      setPosition([map.getCenter().lat, map.getCenter().lng])
+    );
 
     // On component unmount, destroy the map and all related events
     return () => {

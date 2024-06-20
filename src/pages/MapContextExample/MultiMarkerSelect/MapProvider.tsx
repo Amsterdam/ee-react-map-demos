@@ -13,7 +13,6 @@ const MapProvider: FunctionComponent<{ children: ReactNode | ReactNode[] }> = ({
   const [markerData, setMarkerData] = useState<GeoJSONFeature[]>(
     data as GeoJSONFeature[]
   );
-  const [displayAlert, setDisplayAlert] = useState(false);
   const [selectedMarkers, setSelectedMarkers] = useState<string[]>([]);
 
   return (
@@ -23,8 +22,6 @@ const MapProvider: FunctionComponent<{ children: ReactNode | ReactNode[] }> = ({
         setMapInstance,
         position,
         setPosition,
-        displayAlert,
-        setDisplayAlert,
         markerData,
         setMarkerData,
         selectedMarkers,

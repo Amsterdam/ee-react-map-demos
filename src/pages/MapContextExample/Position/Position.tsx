@@ -3,13 +3,11 @@ import Map from './Map';
 import MapProvider from './MapProvider';
 import Alert from './Alert';
 
-// TODO tests
-// TODO docs
-const MultiMarkerSelect: FunctionComponent = () => (
+const MapContextExample: FunctionComponent = () => (
   <MapProvider>
     <Map />
     <Alert />
   </MapProvider>
 );
 
-export default MultiMarkerSelect;
+export default MapContextExample;

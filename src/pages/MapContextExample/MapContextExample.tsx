@@ -1,37 +1,24 @@
-import { useState, type FunctionComponent } from 'react';
-import Map from './Map';
-import styles from './styles.module.css';
-import { MapContext, useMapInstance } from './MapContext';
-import L from 'leaflet';
-import MapProvider from './MapProvider';
+import type { FunctionComponent } from 'react';
+import SingleMarkerSelect from './SingleMarkerSelect/SingleMarkerSelect';
+import MultiMarkerSelect from './MultiMarkerSelect/MultiMarkerSelect';
+import Position from './Position/Position';
 
-const MapPosition: FunctionComponent = () => {
-  const { mapInstance, setMapInstance } = useMapInstance();
-  const [position, setPosition] = useState<L.LatLng | null>(null);
+interface MapContextExampleProps {
+  type?: 'position' | 'single-select' | 'multi-select';
+}
 
-  mapInstance?.on('moveend', () => {
-    setPosition(mapInstance.getCenter());
-  });
+const MapContextExample: FunctionComponent<MapContextExampleProps> = ({
+  type,
+}) => {
+  if (type === 'single-select') {
+    return <SingleMarkerSelect />;
+  }
 
-  return (
-    <div className={styles.alert}>{position?.lat}</div>
-    // <div className={styles.alert}>{mapInstance?.getCenter().lat}</div>
-  );
-};
+  if (type === 'multi-select') {
+    return <MultiMarkerSelect />;
+  }
 
-const MapContextExample: FunctionComponent = () => {
-  const mapInstance = useMapInstance();
-
-  const [position, setPosition] = useState<L.LatLng>(
-    L.latLng([52.370216, 4.895168])
-  );
-
-  return (
-    <MapProvider>
-      <Map />
-      <MapPosition />
-    </MapProvider>
-  );
+  return <Position />;
 };
 
 export default MapContextExample;

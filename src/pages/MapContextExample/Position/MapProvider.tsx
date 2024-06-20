@@ -1,15 +1,16 @@
-import type { FunctionComponent } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import { useState } from 'react';
 import { LatLngTuple } from 'leaflet';
 import { MapContext } from './MapContext';
 
-const MapProvider: FunctionComponent = ({ children }) => {
+const MapProvider: FunctionComponent<{ children: ReactNode | ReactNode[] }> = ({
+  children,
+}) => {
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
-  const [position, setPosition] = useState<LatLngTuple | null>([
-    52.370216, 4.895168,
+  const [position, setPosition] = useState<LatLngTuple>([
+    52.370192857022566, 4.895172252375137,
   ]);
 
-  console.log({ position });
   return (
     <MapContext.Provider
       value={{

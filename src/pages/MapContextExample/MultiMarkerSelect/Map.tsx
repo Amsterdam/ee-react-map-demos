@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, { LayerGroup, LeafletMouseEvent } from 'leaflet';
+import L, { LayerGroup, LeafletMouseEvent, Polygon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from '../map.module.css';
@@ -66,7 +66,6 @@ const Map: FunctionComponent = () => {
 
   const onMarkerClick = useCallback(
     (e: LeafletMouseEvent) => {
-      console.log(e);
       if (selectedMarkers.includes(e.sourceTarget.feature.properties.id)) {
         setSelectedMarkers([
           ...selectedMarkers.filter(
@@ -95,13 +94,15 @@ const Map: FunctionComponent = () => {
       },
       onEachFeature: function (_feature, layer) {
         layer.on('mouseover', function () {
-          layer.setStyle({
+          (layer as Polygon).setStyle({
             fillColor: '#ffff00',
           });
         });
         layer.on('mouseout', function () {
-          if (!selectedMarkers.includes(layer.feature.properties.id)) {
-            layer.setStyle({
+          const layerId = (layer as MultiMarkerSelectExampleLayer).feature
+            ?.properties.id;
+          if (layerId && !selectedMarkers.includes(layerId)) {
+            (layer as Polygon).setStyle({
               fillColor: '#3388ff',
               color: '#3388ff',
             });
@@ -127,13 +128,16 @@ const Map: FunctionComponent = () => {
     }
 
     if (selectedMarkers.length) {
-      const polygons = featureLayer.getLayers(); // as L.Polygon[];
-      const selectedPolygons = polygons.filter(
-        (polygon): polygon is MultiMarkerSelectExampleLayer =>
-          selectedMarkers.includes(
-            (polygon as MultiMarkerSelectExampleLayer)?.feature?.properties?.id
-          )
-      );
+      const polygons = featureLayer.getLayers() as L.Polygon[];
+      const selectedPolygons = polygons.filter(polygon => {
+        const layerId = polygon?.feature?.properties?.id;
+
+        if (layerId) {
+          return selectedMarkers.includes(layerId);
+        }
+
+        return false;
+      });
 
       if (selectedPolygons) {
         selectedPolygons.forEach(selectedPolygon => {

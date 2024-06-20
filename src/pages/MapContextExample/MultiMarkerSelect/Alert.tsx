@@ -6,10 +6,6 @@ import data from './data.json';
 const Alert: FunctionComponent = () => {
   const { selectedMarkers, setSelectedMarkers } = useMapInstance();
 
-  // const displayAlert = useMemo(
-  //   () => selectedMarkers.length > 0,
-  //   [selectedMarkers]
-  // );
   const selectedStr = useMemo(
     () =>
       selectedMarkers.map(selectedMarker => {
@@ -25,8 +21,6 @@ const Alert: FunctionComponent = () => {
       }),
     [selectedMarkers]
   );
-
-  console.log({ selectedStr });
 
   if (selectedStr.length) {
     return (

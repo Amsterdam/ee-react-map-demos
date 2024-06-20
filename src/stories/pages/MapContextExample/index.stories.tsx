@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MapContextExample from '@/pages/MapContextExample/MultiMarkerSelect/MultiMarkerSelect';
+import MapContextExample from '@/pages/MapContextExample/MapContextExample';
 
 const meta = {
   title: 'React/MapContextExample',
@@ -16,4 +16,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Position: Story = {};
+
+export const SingleSelect: Story = {
+  args: {
+    type: 'single-select',
+  },
+};
+
+export const MultiSelect: Story = {
+  args: {
+    type: 'multi-select',
+  },
+};

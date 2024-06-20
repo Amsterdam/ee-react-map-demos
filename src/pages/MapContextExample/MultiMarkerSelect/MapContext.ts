@@ -6,8 +6,6 @@ export interface MapState {
   mapInstance: Map | null;
   position: LatLngTuple;
   markerData: GeoJSONFeature[];
-  displayAlert: boolean;
-  // selectedMarker: number | null;
   selectedMarkers: string[];
 }
 
@@ -17,7 +15,6 @@ export interface MapContextProps extends MapState {
   setMapInstance: Action<'mapInstance'>;
   setPosition: Action<'position'>;
   setMarkerData: Action<'markerData'>;
-  setDisplayAlert: Action<'displayAlert'>;
   setSelectedMarkers: Action<'selectedMarkers'>;
 }
 

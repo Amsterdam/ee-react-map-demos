@@ -79,7 +79,6 @@ const Map: FunctionComponent = () => {
           // opacity: 0.4,
           icon: L.icon(customMarker),
         }).on('click', () => {
-          // console.log(setDisplayAlert);
           setDisplayAlert(true);
           setSelectedMarker(feature.properties.id);
         }),
