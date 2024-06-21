@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import getMapData, {
   filterPointFeaturesWithinBoundingBox,
-  isCoordWithingBoundingBox,
+  isCoordWithinBoundingBox,
 } from './getMapData';
 import L from 'leaflet';
+import rawData from './data.json';
+import { DataRecord } from './types';
 
 const fakeClusterData = [
   {
@@ -128,14 +130,15 @@ describe('getMapData', () => {
       new L.Map(document.createElement('div'), {
         center: [52.370216, 4.895168],
         zoom: 7,
-      })
+      }),
+      rawData as DataRecord[]
     );
     expect(mapData).toEqual(fakeClusterData);
   });
 
-  it('isCoordWithingBoundingBox checks coordinates truly inside bounding box', () => {
-    expect(isCoordWithingBoundingBox([10, 10, 20, 20], [15, 15])).toBe(true);
-    expect(isCoordWithingBoundingBox([10, 10, 20, 20], [5, 33])).toBe(false);
+  it('isCoordWithinBoundingBox checks coordinates truly inside bounding box', () => {
+    expect(isCoordWithinBoundingBox([10, 10, 20, 20], [15, 15])).toBe(true);
+    expect(isCoordWithinBoundingBox([10, 10, 20, 20], [5, 33])).toBe(false);
   });
 
   it('filterPointFeaturesWithinBoundingBox checks features are truly inside bounding box', () => {
