@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Supercluster from 'supercluster';
-import type { BBox, GeoJsonObject, Point } from 'geojson';
+import type { BBox, Point } from 'geojson';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
@@ -16,18 +16,24 @@ const CLUSTER_STYLES = {
   large: styles.markerClusterLarge,
 };
 
+type MockDataType = {
+  id: string;
+  geometry: Point;
+};
+
+type MockProperties = Omit<MockDataType, 'geometry'>;
+
 const MarkerCluster = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
-  const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(
-    null
-  );
+  const [markersInstance, setMarkersInstance] =
+    useState<L.GeoJSON<MockProperties> | null>(null);
   const createdMapInstance = useRef(false);
 
   const [center, setCenter] = useState<LatLngTuple>([52.370216, 4.895168]);
   const [zoom, setZoom] = useState(7);
 
-  const clusterIndex = new Supercluster({
+  const clusterIndex = new Supercluster<MockProperties>({
     // Enable 'log' for console.logs with the timing to build each cluster
     log: false,
     radius: 40,
@@ -125,12 +131,7 @@ const MarkerCluster = () => {
       markersInstance?.off();
 
       // Parse any API data to GeoJSON
-      const parsedGeoJson = toGeoJSON(
-        data as {
-          id: string;
-          geometry: Point;
-        }[]
-      );
+      const parsedGeoJson = toGeoJSON<MockDataType>(data as MockDataType[]);
 
       // Load the parsed GeoJSON data into the cluster index
       clusterIndex.load(parsedGeoJson.features);
@@ -152,7 +153,7 @@ const MarkerCluster = () => {
 
       if (markersInstance && parsedGeoJson.features.length) {
         // Render the cluster(s) and marker(s) to the map
-        markersInstance?.addData(clusterMarkers as unknown as GeoJsonObject);
+        clusterMarkers.forEach(m => markersInstance?.addData(m));
 
         // Add event listeners to enable dynamic clustering
         markersInstance?.on('click', onClick);
