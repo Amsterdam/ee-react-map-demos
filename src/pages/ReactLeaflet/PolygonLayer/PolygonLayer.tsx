@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Polygon } from 'react-leaflet';
 import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import type { LatLngExpression } from 'leaflet';
-
+import 'leaflet/dist/leaflet.css';
 import data from './data.json';
 
 const PolygonLayer = (): JSX.Element => {
