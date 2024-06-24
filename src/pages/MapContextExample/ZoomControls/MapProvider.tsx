@@ -6,10 +6,14 @@ import { MapContext } from './MapContext';
 import styles from '../map.module.css';
 
 export type MapProps = {
+  scrollWheelZoom: boolean;
   children?: React.ReactNode;
 };
 
-const MapProvider: FunctionComponent<MapProps> = ({ children }) => {
+const MapProvider: FunctionComponent<MapProps> = ({
+  scrollWheelZoom,
+  children,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);
@@ -30,6 +34,7 @@ const MapProvider: FunctionComponent<MapProps> = ({ children }) => {
         }),
       ],
       zoomControl: false,
+      scrollWheelZoom,
       maxZoom: 16,
       minZoom: 6,
       crs: getCrsRd(),
