@@ -29,3 +29,9 @@ export const MultiSelect: Story = {
     type: 'multi-select',
   },
 };
+
+export const ZoomControls: Story = {
+  args: {
+    type: 'zoom',
+  },
+};

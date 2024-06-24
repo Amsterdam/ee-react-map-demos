@@ -2,9 +2,12 @@ import type { FunctionComponent } from 'react';
 import SingleMarkerSelect from './SingleMarkerSelect/SingleMarkerSelect';
 import MultiMarkerSelect from './MultiMarkerSelect/MultiMarkerSelect';
 import Position from './Position/Position';
+import ZoomControls from './ZoomControls/ZoomControls';
 
+// TODO tests
+// TODO docs
 interface MapContextExampleProps {
-  type?: 'position' | 'single-select' | 'multi-select';
+  type?: 'position' | 'single-select' | 'multi-select' | 'zoom';
 }
 
 const MapContextExample: FunctionComponent<MapContextExampleProps> = ({
@@ -16,6 +19,10 @@ const MapContextExample: FunctionComponent<MapContextExampleProps> = ({
 
   if (type === 'multi-select') {
     return <MultiMarkerSelect />;
+  }
+
+  if (type === 'zoom') {
+    return <ZoomControls />;
   }
 
   return <Position />;

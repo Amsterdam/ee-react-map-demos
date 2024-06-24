@@ -3,11 +3,10 @@ import {
   EnlargeIcon,
   MinimiseIcon,
 } from '@amsterdam/design-system-react-icons';
+import { useMapInstance } from './MapContext';
+import styles from './controls.module.css';
 
-import styles from './styles.module.css';
-import { useMapInstance } from '@/components/Map/MapContext';
-
-const ZoomControl = () => {
+const Controls = () => {
   const mapInstance = useMapInstance();
 
   const handleZoomInClick = () => {
@@ -35,4 +34,4 @@ const ZoomControl = () => {
   );
 };
 
-export default ZoomControl;
+export default Controls;
