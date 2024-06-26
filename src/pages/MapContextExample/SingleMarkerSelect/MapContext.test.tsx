@@ -17,11 +17,13 @@ const TestComponent = () => {
     mapInstance,
     position,
     markerData,
-    selectedMarkers,
+    displayAlert,
+    selectedMarker,
     setMapInstance,
     setPosition,
     setMarkerData,
-    setSelectedMarkers,
+    setDisplayAlert,
+    setSelectedMarker,
   } = useMapInstance();
 
   return (
@@ -38,17 +40,11 @@ const TestComponent = () => {
             {
               type: 'Feature',
               properties: {
-                id: '1',
-                street: 'Amsterdamstraat',
+                id: 1,
               },
               geometry: {
-                type: 'Polygon',
-                coordinates: [
-                  [
-                    [0, 0],
-                    [0, 0],
-                  ],
-                ],
+                type: 'Point',
+                coordinates: [0, 0],
               },
             },
           ])
@@ -56,26 +52,29 @@ const TestComponent = () => {
       >
         Set Marker Data
       </button>
-      <button onClick={() => setSelectedMarkers(['marker1'])}>
-        Set Selected Markers
-      </button>
+      <button onClick={() => setDisplayAlert(true)}>Set Display Alert</button>
+      <button onClick={() => setSelectedMarker(1)}>Set Selected Marker</button>
       <div data-testid="mapInstance">
         {mapInstance !== null ? 'Map Set' : 'No Map'}
       </div>
       <div data-testid="position">{position.join(',')}</div>
       <div data-testid="markerData">{markerData.length}</div>
-      <div data-testid="selectedMarkers">{selectedMarkers.join(',')}</div>
+      <div data-testid="displayAlert">
+        {displayAlert ? 'Show Alert' : 'No Alert'}
+      </div>
+      <div data-testid="selectedMarker">{selectedMarker}</div>
     </div>
   );
 };
 
-describe('MultiMarkerSelect MapContext', () => {
+describe('SingleMarkerSelect MapContext', () => {
   it('provides and updates context values', async () => {
     const initialState: MapState = {
       mapInstance: null,
       position: [0, 0],
       markerData: [],
-      selectedMarkers: [],
+      displayAlert: false,
+      selectedMarker: null,
     };
 
     const Wrapper = ({ children }: { children: React.ReactNode }) => {
@@ -88,19 +87,22 @@ describe('MultiMarkerSelect MapContext', () => {
       const [markerData, setMarkerData] = useState<GeoJSONFeature[]>(
         initialState.markerData
       );
-      const [selectedMarkers, setSelectedMarkers] = useState<string[]>(
-        initialState.selectedMarkers
+      const [displayAlert, setDisplayAlert] = useState(false);
+      const [selectedMarker, setSelectedMarker] = useState<number | null>(
+        initialState.selectedMarker
       );
 
       const value: MapContextProps = {
         mapInstance,
         position,
         markerData,
-        selectedMarkers,
+        displayAlert,
+        selectedMarker,
         setMapInstance,
         setPosition,
         setMarkerData,
-        setSelectedMarkers,
+        setDisplayAlert,
+        setSelectedMarker,
       };
 
       return (
@@ -118,7 +120,8 @@ describe('MultiMarkerSelect MapContext', () => {
     expect(screen.getByTestId('mapInstance').textContent).toBe('No Map');
     expect(screen.getByTestId('position').textContent).toBe('0,0');
     expect(screen.getByTestId('markerData').textContent).toBe('0');
-    expect(screen.getByTestId('selectedMarkers').textContent).toBe('');
+    expect(screen.getByTestId('displayAlert').textContent).toBe('No Alert');
+    expect(screen.getByTestId('selectedMarker').textContent).toBe('');
 
     // Validate state changes
     await act(async () => {
@@ -137,9 +140,14 @@ describe('MultiMarkerSelect MapContext', () => {
     expect(screen.getByTestId('markerData').textContent).toBe('1');
 
     await act(async () => {
-      await userEvent.click(screen.getByText('Set Selected Markers'));
+      await userEvent.click(screen.getByText('Set Display Alert'));
     });
-    expect(screen.getByTestId('selectedMarkers').textContent).toBe('marker1');
+    expect(screen.getByTestId('displayAlert').textContent).toBe('Show Alert');
+
+    await act(async () => {
+      await userEvent.click(screen.getByText('Set Selected Marker'));
+    });
+    expect(screen.getByTestId('selectedMarker').textContent).toBe('1');
   });
 
   it('throws error when not used within MapContext provider', () => {

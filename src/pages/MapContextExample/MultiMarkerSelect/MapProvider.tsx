@@ -5,9 +5,9 @@ import { MapContext } from './MapContext';
 import { GeoJSONFeature } from './types';
 import data from './data.json';
 
-const MapProvider: FunctionComponent<{ children: ReactNode | ReactNode[] }> = ({
-  children,
-}) => {
+const MapProvider: FunctionComponent<{
+  children?: ReactNode | ReactNode[];
+}> = ({ children }) => {
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const [position, setPosition] = useState<LatLngTuple>([52.36036, 4.89956]);
   const [markerData, setMarkerData] = useState<GeoJSONFeature[]>(

@@ -76,7 +76,6 @@ const Map: FunctionComponent = () => {
     const layerGroup = L.geoJson(markerData, {
       pointToLayer: (feature, latlng) =>
         L.marker(latlng, {
-          // opacity: 0.4,
           icon: L.icon(customMarker),
         }).on('click', () => {
           setDisplayAlert(true);
