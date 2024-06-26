@@ -23,7 +23,7 @@ export const MapContext = createContext<MapContextProps | null>(null);
 export function useMapInstance(): NonNullable<MapContextProps> {
   const resolved = useContext(MapContext);
 
-  if (resolved !== undefined || resolved !== null) {
+  if (resolved !== undefined && resolved !== null) {
     return resolved as NonNullable<MapContextProps>;
   }
 
