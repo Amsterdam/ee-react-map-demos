@@ -4,8 +4,6 @@ import MultiMarkerSelect from './MultiMarkerSelect/MultiMarkerSelect';
 import Position from './Position/Position';
 import ZoomControls from './ZoomControls/ZoomControls';
 
-// TODO tests
-// TODO docs
 interface MapContextExampleProps {
   type?: 'position' | 'single-select' | 'multi-select' | 'zoom';
 }

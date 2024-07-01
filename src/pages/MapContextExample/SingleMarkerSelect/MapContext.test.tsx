@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
@@ -77,7 +77,7 @@ describe('SingleMarkerSelect MapContext', () => {
       selectedMarker: null,
     };
 
-    const Wrapper = ({ children }: { children: React.ReactNode }) => {
+    const Wrapper = ({ children }: PropsWithChildren) => {
       const [mapInstance, setMapInstance] = useState<Map | null>(
         initialState.mapInstance
       );

@@ -1,4 +1,10 @@
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import {
+  FunctionComponent,
+  PropsWithChildren,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
@@ -7,8 +13,7 @@ import styles from '../map.module.css';
 
 export type MapProps = {
   scrollWheelZoom: boolean;
-  children?: React.ReactNode;
-};
+} & PropsWithChildren;
 
 const MapProvider: FunctionComponent<MapProps> = ({
   scrollWheelZoom,

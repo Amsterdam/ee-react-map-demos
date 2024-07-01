@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import type { Map } from 'leaflet';
@@ -19,7 +19,7 @@ const TestComponent = () => {
 
 describe('ZoomControls MapContext', () => {
   it('provides and updates context values', async () => {
-    const Wrapper = ({ children }: { children: React.ReactNode }) => {
+    const Wrapper = ({ children }: PropsWithChildren) => {
       const [mapInstance] = useState<Map | null>(vi.fn() as unknown as Map);
 
       const value: { mapInstance: Map | null } = {
