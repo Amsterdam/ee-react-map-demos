@@ -1,0 +1,75 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as ZoomControlsFullScreenStories from './index.stories';
+import MapContext from '@/pages/MapContextExample/ZoomControlsFullScreen/MapContext.ts?raw';
+import MapProvider from '@/pages/MapContextExample/ZoomControlsFullScreen/MapProvider.tsx?raw';
+import ZoomControlsFullScreen from '@/pages/MapContextExample/ZoomControlsFullScreen/ZoomControlsFullScreen.tsx?raw';
+import ZoomControls from '@/pages/MapContextExample/ZoomControlsFullScreen/ZoomControls.tsx?raw';
+import Header from '@/pages/MapContextExample/ZoomControlsFullScreen/Header.tsx?raw';
+import Footer from '@/pages/MapContextExample/ZoomControlsFullScreen/Footer.tsx?raw';
+import styles from '@/pages/MapContextExample/ZoomControlsFullScreen/styles.module.css?raw';
+import stylesMap from '@/pages/MapContextExample/map.module.css?raw';
+
+<Meta of={ZoomControlsFullScreenStories} />
+
+# Context - Zoom Controls (Full screen)
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MapContextExample/ZoomControlsFullScreen)**
+
+## Description
+
+Using the [Amsterdam Design System](https://designsystem.amsterdam/) we implemented some custom buttons to act as the [Leaflet map zoom controls](https://leafletjs.com/reference.html#control-zoom) in a full webpage.
+
+In this example, the Map context exports a single element - the Leaflet map object. This enables you to interact with your Leaflet map natively in any component (that is a child to the Map context provider component).
+
+## How to implement
+
+To accomplish the ZoomControls component, there are 8 files:
+
+1. The React components
+    * [ZoomControlsFullScreen.tsx](#--zoomcontrolsfullscreentsx)
+    * [MapContext.ts](#--mapcontextts)
+    * [MapProvider.tsx](#--mapprovidertsx)
+    * [ZoomControls.tsx](#--zoomcontrolstsx)
+    * [Header.tsx](#--headertsx)
+    * [Footer.tsx](#--footertsx)
+2. CSS styles
+    * [styles.module.css](#--stylesmodulecss)
+    * [map.module.css](#--mapmodulecss)
+
+## Usage
+
+### React Components
+
+#### - ZoomControlsFullScreen.tsx
+
+<Source code={ZoomControlsFullScreen} />
+
+#### - MapContext.ts
+
+<Source code={MapContext} />
+
+#### - MapProvider.tsx
+
+<Source code={MapProvider} />
+
+#### - ZoomControls.tsx
+
+<Source code={ZoomControls} />
+
+#### - Header.tsx
+
+<Source code={Header} />
+
+#### - Footer.tsx
+
+<Source code={Footer} />
+
+### CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+#### - map.module.css
+
+<Source code={stylesMap} />

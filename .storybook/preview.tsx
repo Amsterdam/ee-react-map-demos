@@ -30,7 +30,6 @@ export const parameters = {
         'React',
         'React-Context-Examples',
         'React-Leaflet',
-        'Patterns',
       ],
     },
   },
