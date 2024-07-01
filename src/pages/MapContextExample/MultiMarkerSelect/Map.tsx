@@ -82,6 +82,27 @@ const Map: FunctionComponent = () => {
     [featureLayer, selectedMarkers]
   );
 
+  const onMouseOver = useCallback((e: LeafletMouseEvent) => {
+    (e.target as Polygon).setStyle({
+      fillColor: '#ffff00',
+    });
+  }, []);
+
+  const onMouseOut = useCallback(
+    (e: LeafletMouseEvent) => {
+      const layerId = (e.target as MultiMarkerSelectExampleLayer).feature
+        ?.properties.id;
+
+      if (layerId && !selectedMarkers.includes(layerId)) {
+        (e.target as Polygon).setStyle({
+          fillColor: '#3388ff',
+          color: '#3388ff',
+        });
+      }
+    },
+    [selectedMarkers]
+  );
+
   // Add the markers
   useEffect(() => {
     if (mapInstance === null) {
@@ -93,21 +114,8 @@ const Map: FunctionComponent = () => {
         opacity: 0.5,
       },
       onEachFeature: function (_feature, layer) {
-        layer.on('mouseover', function () {
-          (layer as Polygon).setStyle({
-            fillColor: '#ffff00',
-          });
-        });
-        layer.on('mouseout', function () {
-          const layerId = (layer as MultiMarkerSelectExampleLayer).feature
-            ?.properties.id;
-          if (layerId && !selectedMarkers.includes(layerId)) {
-            (layer as Polygon).setStyle({
-              fillColor: '#3388ff',
-              color: '#3388ff',
-            });
-          }
-        });
+        layer.on('mouseover', onMouseOver);
+        layer.on('mouseout', onMouseOut);
         layer.on('click', onMarkerClick);
       },
     });

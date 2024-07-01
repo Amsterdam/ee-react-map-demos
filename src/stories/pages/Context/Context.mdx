@@ -9,3 +9,38 @@ import { Meta } from '@storybook/blocks';
 Context provides a way to share values between components without passing props through every level of the component tree. This is particularly useful for global state management, such as theme settings, user authentication, and localization, where certain data needs to be accessible by many components at different levels of the hierarchy.
 
 It is a powerful tool for managing state across a component tree, but it should be used judiciously to balance the ease of state management with performance considerations.
+
+## With Leaflet
+
+When using Leaflet and React, it is quite easy to generate a component with many lines of code due to the necessity to reference the Leaflet map or related map objects (for example, markers, layers...).
+
+Often as your project grows the map component also grows becoming increasingly bloated, full of conditional statements and a lot of state management. This is when it would be logical to implement some context for the map component.
+
+Using this context, you can shift a lot of your data handling and state management to a parent provider component. Then any child components to this provider component can be injected
+ with any state and methods via a hook method. Therefore, saving the need to pass props through multiple components.
+
+For projects with maps that serve minimal features (for example - renders marker(s); single layers; and/or there is minimal user-interaction with the map), it is probably overkill to implement context for your map component.
+
+## Common structure
+
+- Setup a 'Provider' component, to setup the initial state. Wrap this `Provider` component around all components that should inherit context state and methods. (TODO tidy up)
+
+## Examples
+
+These examples demonstrate multiple uses of React context and Leaflet maps usage.
+
+### MultiMarkerSelect *(Advanced)*
+
+Using Amsterdam taxi stands from the [Parkeervakken (Parking Spaces) API](https://api.data.amsterdam.nl/v1/parkeervakken/), you can select multiple layers. The context stores the selected layer IDs.
+
+### Position *(Simple)*
+
+Using the Amsterdam [BaseLayer](../?path=/docs/react-baselayer--docs) we display the map center point coordinates, including when the map moves.
+
+### SingleMarkerSelect *(Advanced)*
+
+Similar to the [MultiMarkerSelect example](../?path=/story/react-context-examples-multimarkerselect--default) this is using locations of glass disposal points from the [Afvalwijzer (Waste guide) API](https://api.data.amsterdam.nl/v1/afvalwijzer). You can select a single marker. The context stores the selected marker ID.
+
+### ZoomControls *(Simple)*
+
+This demonstrates custom control buttons (from the [Amsterdam design system](https://designsystem.amsterdam.nl/)) that control the map zoom levels. It uses context to interact directly with the Leaflet map object.

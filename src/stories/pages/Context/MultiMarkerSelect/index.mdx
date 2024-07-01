@@ -7,3 +7,55 @@ import * as MultiMarkerSelectStories from './index.stories';
 
 ## Description
 
+Using Amsterdam taxi stands from the [Parkeervakken (Parking Spaces) API](https://api.data.amsterdam.nl/v1/parkeervakken/), you can select multiple Polygon layers.
+
+The selected layer(s) state is accessible via state variable `selectedMarkers` and settable via the state method `setSelectedMarkers`.
+
+When adding the layers to the map (lines 107-130), a `click` event listener is added to each Polygon layer; alongside a `mouseover` and `mouseout` event. In the `click` event listener callback, we add/remove the event-triggered layer from the context's state.
+
+The context handles the following state and methods:
+
+* mapInstance - *Referencing the active Leaflet map*
+* setMapInstance - *For setting the active Leaflet map into state*
+* position - *Referencing the current centre point of the Leaflet map object*
+* setPosition - *For setting the current centre point of the Leaflet map object into state*
+* markerData - *Data to output on the map, usually derived from a fetch request to an API*
+* setMarkerData - *For setting the map data into state*
+* selectedMarkers - *An array of IDs, which correspond to the Polygon layer data*
+* setSelectedMarkers - *For setting the selected layers into state*
+
+## CustomProperty/Map.tsx
+
+```
+const marker = featureLayer
+  .getLayers()
+  .find(
+    (layer): layer is MapContextExampleLayer =>
+      (layer as MapContextExampleLayer)?.feature?.properties?.id ===
+      selectedMarker
+  );
+// Above replaces this in a TS friendly manner
+// .find(layer => layer?.feature.properties?.id === selectedMarker);
+```
+
+## How to implement
+
+To accomplish the
+1. The React components
+  * Alert.tsx
+  * Map.tsx
+  * MapContext.ts
+  * MapProvider.tsx
+  * MultiMarkerSelect.ts
+  * types.ts
+
+2.
+  * data.json
+
+## Usage
+
+The following files are required:
+
+### React Components
+
+
