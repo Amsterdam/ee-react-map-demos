@@ -8,10 +8,13 @@ import Alert from '@/pages/MapContextExample/MultiMarkerSelect/Alert?raw';
 import data from '@/pages/MapContextExample/MultiMarkerSelect/data.json?raw';
 import types from '@/pages/MapContextExample/MultiMarkerSelect/types?raw';
 import styles from '@/pages/MapContextExample/styles.module.css?raw';
+import mapStyles from '@/pages/MapContextExample/map.module.css?raw';
 
 <Meta of={MultiMarkerSelectStories} />
 
 # Context - Multiple Marker Select
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MapContextExample/MultiMarkerSelect)**
 
 ## Description
 
@@ -32,23 +35,10 @@ The context handles the following state and methods:
 * `selectedMarkers` - *An array of IDs, which correspond to the Polygon layer data*
 * `setSelectedMarkers` - *For setting the selected layers into state*
 
-## CustomProperty/Map.tsx
-
-```
-const marker = featureLayer
-  .getLayers()
-  .find(
-    (layer): layer is MapContextExampleLayer =>
-      (layer as MapContextExampleLayer)?.feature?.properties?.id ===
-      selectedMarker
-  );
-// Above replaces this in a TS friendly manner
-// .find(layer => layer?.feature.properties?.id === selectedMarker);
-```
-
 ## How to implement
 
-To accomplish the
+To accomplish the MultiMarkerSelect component, there are 9 files:
+
 1. The React components
     * [MapContext.ts](#--mapcontextts)
     * [MapProvider.tsx](#--mapprovidertsx)
@@ -57,6 +47,7 @@ To accomplish the
     * [Alert.tsx](#--alerttsx)
 2. CSS styles
     * [styles.module.css](#--stylesmodulecss)
+    * [map.module.css](#--mapmodulecss)
 3. Type definitions
     * [types.ts](#--typests)
 4. Data
@@ -86,17 +77,21 @@ To accomplish the
 
 <Source code={Alert} />
 
-### Type definitions
-
-#### - types.ts
-
-<Source code={types} />
-
 ### CSS styles
 
 #### - styles.module.css
 
 <Source code={styles} />
+
+#### - map.module.css
+
+<Source code={mapStyles} />
+
+### Type definitions
+
+#### - types.ts
+
+<Source code={types} />
 
 #### - types.ts
 

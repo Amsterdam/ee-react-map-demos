@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, { LayerGroup } from 'leaflet';
+import L, { LayerGroup, LeafletMouseEvent } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from '../map.module.css';
@@ -24,6 +24,11 @@ const Map: FunctionComponent = () => {
     selectedMarker,
     setSelectedMarker,
   } = useMapInstance();
+
+  const onMarkerClick = useCallback((e: LeafletMouseEvent) => {
+    setDisplayAlert(true);
+    setSelectedMarker(e.target.feature.properties.id);
+  }, []);
 
   useEffect(() => {
     if (containerRef.current === null || createdMapInstance.current !== false) {
@@ -74,13 +79,10 @@ const Map: FunctionComponent = () => {
     }
 
     const layerGroup = L.geoJson(markerData, {
-      pointToLayer: (feature, latlng) =>
+      pointToLayer: (_feature, latlng) =>
         L.marker(latlng, {
           icon: L.icon(customMarker),
-        }).on('click', () => {
-          setDisplayAlert(true);
-          setSelectedMarker(feature.properties.id);
-        }),
+        }).on('click', onMarkerClick),
     });
 
     layerGroup.addTo(mapInstance);
@@ -107,7 +109,7 @@ const Map: FunctionComponent = () => {
       const marker = featureLayer
         .getLayers()
         .find(
-          (layer): layer is SingleMarkerSelectExampleLayer =>
+          layer =>
             (layer as SingleMarkerSelectExampleLayer)?.feature?.properties
               ?.id === selectedMarker
         );

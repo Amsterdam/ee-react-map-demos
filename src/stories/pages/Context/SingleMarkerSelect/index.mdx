@@ -1,9 +1,117 @@
 import { Canvas, Meta, Source, Story } from '@storybook/blocks';
-import * as Position from './index.stories';
+import * as SingleMarkerStories from './index.stories';
+import MapContext from '@/pages/MapContextExample/SingleMarkerSelect/MapContext?raw';
+import MapProvider from '@/pages/MapContextExample/SingleMarkerSelect/MapProvider?raw';
+import SingleMarkerSelect from '@/pages/MapContextExample/SingleMarkerSelect/SingleMarkerSelect?raw';
+import Map from '@/pages/MapContextExample/SingleMarkerSelect/Map?raw';
+import Alert from '@/pages/MapContextExample/SingleMarkerSelect/Alert?raw';
+import stylesMarker from '@/pages/MapContextExample/SingleMarkerSelect/marker.css?raw';
+import styles from '@/pages/MapContextExample/styles.module.css?raw';
+import mapStyles from '@/pages/MapContextExample/map.module.css?raw';
+import customMarker from '@/pages/MapContextExample/SingleMarkerSelect/icons/customMarker?raw';
+import types from '@/pages/MapContextExample/SingleMarkerSelect/types?raw';
+import data from '@/pages/MapContextExample/SingleMarkerSelect/data.json?raw';
 
-<Meta of={Position} />
+<Meta of={SingleMarkerStories} />
 
-# Context - Position
+# Context - Single Marker Select
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MapContextExample/SingleMarkerSelect)**
 
 ## Description
 
+Using the Amsterdam [Afvalwijzer (Waste guide) API](https://api.data.amsterdam.nl/v1/afvalwijzer) we take a select number of glass disposal points. With this map you can select a single marker and the context stores the selected marker ID.
+
+The selected marker is accessible via state variable `selectedMarker` and settable via the state method `setSelectedMarker`.
+
+When adding the markers to the map (lines 76-95) we add a `click` event listener, which on callback sets `displayAlert` to `true` and the marker's data ID as the `selectedMarker`. This `displayAlert` boolean is unnecessary but added as example code.
+
+The context handles the following state and methods:
+
+* `mapInstance` - *Referencing the active Leaflet map*
+* `setMapInstance` - *For setting the active Leaflet map into state*
+* `position` - *Referencing the current centre point of the Leaflet map object*
+* `setPosition` - *For setting the current centre point of the Leaflet map object into state*
+* `markerData` - *Data to output on the map, usually derived from a fetch request to an API*
+* `setMarkerData` - *For setting the map data into state*
+* `displayAlert` - *A boolean to display (or not display) the alert*
+* `setDisplayAlert` - *For setting the alert display state*
+* `selectedMarker` - *An ID or null, which correspond to the marker data*
+* `setSelectedMarker` - *For setting the selected marker ID into state*
+
+## How to implement
+
+To accomplish the MultiMarkerSelect component, there are 11 files:
+
+1. The React components
+    * [MapContext.ts](#--mapcontextts)
+    * [MapProvider.tsx](#--mapprovidertsx)
+    * [SingleMarkerSelect.tsx](#--singlemarkerselecttsx)
+    * [Map.tsx](#--maptsx)
+    * [Alert.tsx](#--alerttsx)
+2. CSS styles
+    * [marker.css](#--markercss)
+    * [styles.module.css](#--stylesmodulecss)
+    * [map.module.css](#--mapmodulecss)
+3. Icons
+    * [icons/customMarker.tsx](#--iconscustommarkertsx)
+4. Type definitions
+    * [types.ts](#--typests)
+5. Data
+    * [data.json](#--datajson) *(This static data should be replaced by a fetch call or other static data)*
+
+## Usage
+
+### React Components
+
+#### - MapContext.ts
+
+<Source code={MapContext} />
+
+#### - MapProvider.tsx
+
+<Source code={MapProvider} />
+
+#### - SingleMarkerSelect.tsx
+
+<Source code={SingleMarkerSelect} />
+
+#### - Map.tsx
+
+<Source code={Map} />
+
+#### - Alert.tsx
+
+<Source code={Alert} />
+
+### CSS styles
+
+#### - marker.css
+
+<Source code={stylesMarker} />
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+#### - map.module.css
+
+<Source code={mapStyles} />
+
+### Icons
+
+#### - icons/customMarker.tsx
+
+<Source code={customMarker} />
+
+### Type definitions
+
+#### - types.ts
+
+<Source code={types} />
+
+### Data
+
+#### - data.json
+
+<Source code={data} />

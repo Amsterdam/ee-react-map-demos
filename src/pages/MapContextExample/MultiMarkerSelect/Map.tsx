@@ -22,6 +22,45 @@ const Map: FunctionComponent = () => {
     setSelectedMarkers,
   } = useMapInstance();
 
+  const onMarkerClick = useCallback(
+    (e: LeafletMouseEvent) => {
+      if (selectedMarkers.includes(e.sourceTarget.feature.properties.id)) {
+        setSelectedMarkers([
+          ...selectedMarkers.filter(
+            marker => marker !== e.sourceTarget.feature.properties.id
+          ),
+        ]);
+      } else {
+        setSelectedMarkers([
+          ...selectedMarkers,
+          e.sourceTarget.feature.properties.id,
+        ]);
+      }
+    },
+    [featureLayer, selectedMarkers]
+  );
+
+  const onMouseOver = useCallback((e: LeafletMouseEvent) => {
+    (e.target as Polygon).setStyle({
+      fillColor: '#ffff00',
+    });
+  }, []);
+
+  const onMouseOut = useCallback(
+    (e: LeafletMouseEvent) => {
+      const layerId = (e.target as MultiMarkerSelectExampleLayer).feature
+        ?.properties.id;
+
+      if (layerId && !selectedMarkers.includes(layerId)) {
+        (e.target as Polygon).setStyle({
+          fillColor: '#3388ff',
+          color: '#3388ff',
+        });
+      }
+    },
+    [selectedMarkers]
+  );
+
   useEffect(() => {
     if (containerRef.current === null || createdMapInstance.current !== false) {
       return;
@@ -63,45 +102,6 @@ const Map: FunctionComponent = () => {
       if (mapInstance) mapInstance.remove();
     };
   }, []);
-
-  const onMarkerClick = useCallback(
-    (e: LeafletMouseEvent) => {
-      if (selectedMarkers.includes(e.sourceTarget.feature.properties.id)) {
-        setSelectedMarkers([
-          ...selectedMarkers.filter(
-            marker => marker !== e.sourceTarget.feature.properties.id
-          ),
-        ]);
-      } else {
-        setSelectedMarkers([
-          ...selectedMarkers,
-          e.sourceTarget.feature.properties.id,
-        ]);
-      }
-    },
-    [featureLayer, selectedMarkers]
-  );
-
-  const onMouseOver = useCallback((e: LeafletMouseEvent) => {
-    (e.target as Polygon).setStyle({
-      fillColor: '#ffff00',
-    });
-  }, []);
-
-  const onMouseOut = useCallback(
-    (e: LeafletMouseEvent) => {
-      const layerId = (e.target as MultiMarkerSelectExampleLayer).feature
-        ?.properties.id;
-
-      if (layerId && !selectedMarkers.includes(layerId)) {
-        (e.target as Polygon).setStyle({
-          fillColor: '#3388ff',
-          color: '#3388ff',
-        });
-      }
-    },
-    [selectedMarkers]
-  );
 
   // Add the markers
   useEffect(() => {
