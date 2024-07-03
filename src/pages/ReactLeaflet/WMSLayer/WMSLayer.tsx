@@ -1,15 +1,10 @@
-import type { FunctionComponent, ReactNode } from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, WMSTileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
-interface BaseLayerProps {
-  children?: ReactNode;
-}
-
-const BaseLayer: FunctionComponent<BaseLayerProps> = ({ children }) => (
+const WMSLayer = (): JSX.Element => (
   <div className={styles.container}>
     <MapContainer
       center={L.latLng([52.370216, 4.895168])}
@@ -26,9 +21,15 @@ const BaseLayer: FunctionComponent<BaseLayerProps> = ({ children }) => (
         subdomains={['t1', 't2', 't3', 't4']}
         tms
       />
-      {children}
+      <WMSTileLayer
+        url="https://map.data.amsterdam.nl/maps/adresseerbare_objecten?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms"
+        layers="verblijfsobjecten_woonfunctie"
+        format="image/svg+xml"
+        // Ensure transparent is true otherwise the Amsterdam base layer won't be visible through the WMS layer
+        transparent={true}
+      />
     </MapContainer>
   </div>
 );
 
-export default BaseLayer;
+export default WMSLayer;

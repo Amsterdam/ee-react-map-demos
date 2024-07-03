@@ -19,6 +19,7 @@ const Marker = (): JSX.Element => (
         [52.50536, 5.10737],
       ]}
       crs={getCrsRd()}
+      attributionControl={false}
     >
       <TileLayer
         url="https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png"
