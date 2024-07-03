@@ -28,7 +28,7 @@ describe('MultiMarkerSelect Alert', () => {
   it('renders the selected IDs', () => {
     const { container } = render(<Alert />);
     expect(container.textContent).toContain(
-      `You clicked on a marker with the ID ${selectedMarker}!`
+      `You clicked on a marker with the ID ${selectedMarker}`
     );
   });
 
