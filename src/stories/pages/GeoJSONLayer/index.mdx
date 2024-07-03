@@ -1,0 +1,124 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as GeoJSONLayerStories from './index.stories';
+import GeoJSONLayer from '@/pages/GeoJSONLayer/GeoJSONLayer?raw';
+import styles from '@/pages/GeoJSONLayer/styles.module.css?raw';
+import types from '@/pages/GeoJSONLayer/types?raw';
+import data from '@/pages/GeoJSONLayer/data.json?raw';
+
+<Meta of={GeoJSONLayerStories} />
+
+# GeoJSONLayer
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/GeoJSONLayer)**
+
+## Requirements
+
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+
+## Description
+
+GeoJSON is a widely-used format for encoding geographic data structures using JavaScript Object Notation (JSON). Here is an example of Amsterdam trees data in GeoJSON format (from the [Bomen endpoint in the Amsterdam DSO API](https://api.data.amsterdam.nl/v1/docs/datasets/bomen.html)):
+
+```geojson
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:EPSG::4326" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "stamgegevens.919933",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [4.904670904743209, 52.33981350119924]
+      },
+      "properties": {
+        "id": 919933,
+        "gbdBuurtId": "03630980000301",
+        "typeBeheerderPlus": "R&E_VOR_Bomen",
+        "boomhoogteklasseActueel": "e. 15 tot 18 m.",
+        "typeEigenaarPlus": "Gemeente Amsterdam",
+        "jaarVanAanleg": 1948,
+        "soortnaam": "Tilia americana",
+        "stamdiameterklasse": null,
+        "standplaatsGedetailleerd": null,
+        "typeObject": "Boom niet vrij uitgroeiend",
+        "typeSoortnaam": "Bomen",
+        "soortnaamKort": "Tilia",
+        "soortnaamTop": "Linde (Tilia)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "stamgegevens.919934",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [4.902692060023387, 52.340093024617616]
+      },
+      "properties": {
+        "id": 919934,
+        "gbdBuurtId": "03630980000301",
+        "typeBeheerderPlus": "R&E_VOR_Bomen",
+        "boomhoogteklasseActueel": "c. 9 tot 12 m.",
+        "typeEigenaarPlus": "Gemeente Amsterdam",
+        "jaarVanAanleg": 1978,
+        "soortnaam": "Ulmus hollandica 'Vegeta'",
+        "stamdiameterklasse": null,
+        "standplaatsGedetailleerd": "Tegels",
+        "typeObject": "Boom niet vrij uitgroeiend",
+        "typeSoortnaam": "Bomen",
+        "soortnaamKort": "Ulmus",
+        "soortnaamTop": "Iep (Ulmus)"
+      }
+    }
+  ]
+}
+```
+
+If data is available in GeoJSON format, for mapping, it often provides the easiest solution.
+
+### Usage scenarios
+
+- **Visualizing Spatial Data:**
+
+Points of Interest (POI): Display locations such as restaurants, tourist spots, and public services on a map.
+Geospatial Analysis: Show results of geospatial analyses, such as cluster analysis or heat maps of density.
+
+- **Thematic Mapping:**
+
+Choropleth Maps: Color-coding regions (e.g., countries, states) based on data attributes like population density, income levels, or election results.
+Environmental Data: Display regions affected by natural phenomena (e.g., flood zones, earthquake epicenters).
+
+- **Interactive Maps:**
+
+User Interaction: Allow users to click on features to get more information, such as popup windows showing data about the feature.
+Dynamic Styling: Change the style of features based on user interactions or other dynamic inputs (e.g., highlight a region when hovered over).
+
+- **Routing and Navigation:**
+
+Path Visualization: Display routes for navigation purposes, such as walking paths, driving routes, or public transit lines.
+Network Analysis: Show network connections, such as transportation networks or utility lines.
+
+- **Administrative and Political Boundaries:**
+
+Country/State Borders: Display administrative boundaries for countries, states, cities, or districts.
+Electoral Maps: Show electoral boundaries and results, allowing users to explore voting patterns and results.
+
+- **Event Mapping:**
+
+Historical Events: Visualize the locations of historical events, battles, or natural disasters over time.
+Live Data Feeds: Display real-time data such as the locations of current events, traffic conditions, or weather updates.
+
+- **Resource Management:**
+
+Natural Resources: Map the locations of resources like forests, water bodies, or mineral deposits.
+Agricultural Data: Show areas of different crop types, soil quality, or land use patterns.
+
+
+- **Urban Planning:**
+
+Infrastructure Development: Display current and planned infrastructure projects such as new roads, public transit, or parks.
+Zoning Maps: Show land use zoning and urban planning information.
