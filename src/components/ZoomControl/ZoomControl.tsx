@@ -1,4 +1,4 @@
-import { Button, Icon, VisuallyHidden } from '@amsterdam/design-system-react';
+import { Button, Icon } from '@amsterdam/design-system-react';
 import { FunctionComponent } from 'react';
 import {
   EnlargeIcon,
@@ -25,11 +25,11 @@ const ZoomControl: FunctionComponent = () => {
   return (
     <div className={styles.buttons}>
       <Button variant="secondary" onClick={handleZoomInClick}>
-        <VisuallyHidden>Zoom in</VisuallyHidden>
+        <span className="ams-visually-hidden">Zoom in</span>
         <Icon svg={EnlargeIcon} size="level-5" />
       </Button>
       <Button variant="secondary" onClick={handleZoomOutClick}>
-        <VisuallyHidden>Zoom out</VisuallyHidden>
+        <span className="ams-visually-hidden">Zoom out</span>
         <Icon svg={MinimiseIcon} size="level-5" />
       </Button>
     </div>
