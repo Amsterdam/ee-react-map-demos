@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SingleMarkerSelect from '@/pages/MapContextExample/SingleMarkerSelect/SingleMarkerSelect';
+import SingleMarkerSelect from '@/pages/ContextExamples/SingleMarkerSelect/SingleMarkerSelect';
 
 const meta = {
   title: 'React-Context-Examples/SingleMarkerSelect',

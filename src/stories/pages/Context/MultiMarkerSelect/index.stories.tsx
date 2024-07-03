@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MultiMarkerSelect from '@/pages/MapContextExample/MultiMarkerSelect/MultiMarkerSelect';
+import MultiMarkerSelect from '@/pages/ContextExamples/MultiMarkerSelect/MultiMarkerSelect';
 
 const meta = {
   title: 'React-Context-Examples/MultiMarkerSelect',

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ZoomControlsFullScreen from '@/pages/MapContextExample/ZoomControlsFullScreen/ZoomControlsFullScreen';
+import ZoomControlsFullScreen from '@/pages/ContextExamples/ZoomControlsFullScreen/ZoomControlsFullScreen';
 
 const meta = {
   title: 'React-Context-Examples/ZoomControlsFullScreen',

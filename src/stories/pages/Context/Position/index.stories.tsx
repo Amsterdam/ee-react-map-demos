@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Position from '@/pages/MapContextExample/Position/Position';
+import Position from '@/pages/ContextExamples/Position/Position';
 
 const meta = {
   title: 'React-Context-Examples/Position',

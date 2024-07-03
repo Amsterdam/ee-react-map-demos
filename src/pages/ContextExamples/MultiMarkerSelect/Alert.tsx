@@ -1,4 +1,9 @@
 import { useMemo, type FunctionComponent } from 'react';
+import {
+  Alert as AmsAlert,
+  Button,
+  OrderedList,
+} from '@amsterdam/design-system-react';
 import styles from '../styles.module.css';
 import { useMapInstance } from './MapContext';
 import data from './data.json';
@@ -24,15 +29,17 @@ const Alert: FunctionComponent = () => {
 
   if (selectedStr.length) {
     return (
-      <div className={styles.alert}>
-        <>
-          <p>You have selected the following markers</p>
-          <ol>{selectedStr}</ol>
-
-          <button type="button" onClick={() => setSelectedMarkers([])}>
+      <div className={styles['alert-wrapper']}>
+        <AmsAlert heading="Selected markers" severity="info">
+          <OrderedList size="small">{selectedStr}</OrderedList>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() => setSelectedMarkers([])}
+          >
             Reset
-          </button>
-        </>
+          </Button>
+        </AmsAlert>
       </div>
     );
   }
