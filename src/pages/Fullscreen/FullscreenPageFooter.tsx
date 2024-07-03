@@ -7,7 +7,6 @@ import {
   LinkList,
   PageMenu,
   Paragraph,
-  VisuallyHidden,
 } from '@amsterdam/design-system-react';
 import { ChattingIcon, PhoneIcon } from '@amsterdam/design-system-react-icons';
 
@@ -16,9 +15,7 @@ export const FullscreenPageFooter = () => {
     <>
       <Footer>
         <Footer.Top>
-          <VisuallyHidden>
-            <Heading>Colofon</Heading>
-          </VisuallyHidden>
+          <Heading className="ams-visually-hidden">Colofon</Heading>
           <Grid gapVertical="large" paddingVertical="medium">
             <Grid.Cell span={3}>
               <Column gap="extra-small">
