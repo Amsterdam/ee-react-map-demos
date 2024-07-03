@@ -39,6 +39,10 @@ The context handles the following state and methods:
 * `selectedMarker` - *An ID or null, which correspond to the marker data*
 * `setSelectedMarker` - *For setting the selected marker ID into state*
 
+#### Z-index warning
+
+Note that when rendering custom elements on top of a Leaflet map, you will need to handle the CSS `z-index` property. By default Leaflet renders some of its panes (DOM elements) with the `z-index` property set. Therefore, custom components may only be visible under the map DOM elements. It's useful to set a app constant to handle this z-index value. <a href="https://leafletjs.com/examples/map-panes/" target="_blank">More info</a>.
+
 ## How to implement
 
 To accomplish the MultiMarkerSelect component, there are 11 files:

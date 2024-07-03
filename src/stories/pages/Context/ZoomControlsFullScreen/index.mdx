@@ -21,6 +21,10 @@ Using the [Amsterdam Design System](https://designsystem.amsterdam/) we implemen
 
 In this example, the Map context exports a single element - the Leaflet map object. This enables you to interact with your Leaflet map natively in any component (that is a child to the Map context provider component).
 
+#### Z-index warning
+
+Note that when rendering custom elements on top of a Leaflet map, you will need to handle the CSS `z-index` property. By default Leaflet renders some of its panes (DOM elements) with the `z-index` property set. Therefore, custom components may only be visible under the map DOM elements. It's useful to set a app constant to handle this z-index value. <a href="https://leafletjs.com/examples/map-panes/" target="_blank">More info</a>.
+
 ## How to implement
 
 To accomplish the ZoomControls component, there are 8 files:
