@@ -78,47 +78,10 @@ GeoJSON is a widely-used format for encoding geographic data structures using Ja
 }
 ```
 
-If data is available in GeoJSON format, for mapping, it often provides the easiest solution.
+If data is available in GeoJSON format, it often provides a universal solution for mapping libraries. In Leaflet it avoids the need to parse API data into a preferred format and then creating each Leaflet layer depending on the data type.
 
-### Usage scenarios
+In the above example, each record has the Geometry type `Point`. Assuming valid GeoJSON data is provided, Leaflet knows which layer type to render (for the above example, Leaflet, by default, will return `L.marker`).
 
-- **Visualizing Spatial Data:**
+The default marker type and styling options returned from `L.geoJSON` can be customized through the secondary <a href="https://leafletjs.com/reference.html#geojson-option" target="_blank">GeoJSON options argument</a>.
 
-Points of Interest (POI): Display locations such as restaurants, tourist spots, and public services on a map.
-Geospatial Analysis: Show results of geospatial analyses, such as cluster analysis or heat maps of density.
-
-- **Thematic Mapping:**
-
-Choropleth Maps: Color-coding regions (e.g., countries, states) based on data attributes like population density, income levels, or election results.
-Environmental Data: Display regions affected by natural phenomena (e.g., flood zones, earthquake epicenters).
-
-- **Interactive Maps:**
-
-User Interaction: Allow users to click on features to get more information, such as popup windows showing data about the feature.
-Dynamic Styling: Change the style of features based on user interactions or other dynamic inputs (e.g., highlight a region when hovered over).
-
-- **Routing and Navigation:**
-
-Path Visualization: Display routes for navigation purposes, such as walking paths, driving routes, or public transit lines.
-Network Analysis: Show network connections, such as transportation networks or utility lines.
-
-- **Administrative and Political Boundaries:**
-
-Country/State Borders: Display administrative boundaries for countries, states, cities, or districts.
-Electoral Maps: Show electoral boundaries and results, allowing users to explore voting patterns and results.
-
-- **Event Mapping:**
-
-Historical Events: Visualize the locations of historical events, battles, or natural disasters over time.
-Live Data Feeds: Display real-time data such as the locations of current events, traffic conditions, or weather updates.
-
-- **Resource Management:**
-
-Natural Resources: Map the locations of resources like forests, water bodies, or mineral deposits.
-Agricultural Data: Show areas of different crop types, soil quality, or land use patterns.
-
-
-- **Urban Planning:**
-
-Infrastructure Development: Display current and planned infrastructure projects such as new roads, public transit, or parks.
-Zoning Maps: Show land use zoning and urban planning information.
+Alternative GeoJSON types inlude `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, and `MultiPolygon`.
