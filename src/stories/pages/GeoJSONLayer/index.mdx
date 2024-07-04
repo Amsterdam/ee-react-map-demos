@@ -11,6 +11,13 @@ import data from '@/pages/GeoJSONLayer/data.json?raw';
 
 **[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/GeoJSONLayer)**
 
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
 ## Requirements
 
 - This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
@@ -85,3 +92,34 @@ In the above example, each record has the Geometry type `Point`. Assuming valid 
 The default marker type and styling options returned from `L.geoJSON` can be customized through the secondary <a href="https://leafletjs.com/reference.html#geojson-option" target="_blank">GeoJSON options argument</a>.
 
 Alternative GeoJSON types inlude `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, and `MultiPolygon`.
+
+## How to implement
+
+1. The React component
+    * [GeoJSONLayer.tsx](#--geojsonlayertsx)
+2. The CSS styles
+    * [styles.module.css](#--stylesmodulecss)
+3. Type definitions
+    * [types.ts](#--typests)
+4. Data
+    * [data.json](#--datajson) *(This static data should be replaced by a fetch all or other static data)
+
+## Usage
+
+### React components
+
+#### - GeoJSONLayer.tsx
+
+<Source code={GeoJSONLayer} />
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+#### - types.ts
+
+<Source code={types} />
+
+#### - data.json
+
+<Source code={`${data.substring(0, 1600)}`} />
