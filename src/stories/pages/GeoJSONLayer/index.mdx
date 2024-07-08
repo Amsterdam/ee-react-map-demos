@@ -1,0 +1,125 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as GeoJSONLayerStories from './index.stories';
+import GeoJSONLayer from '@/pages/GeoJSONLayer/GeoJSONLayer?raw';
+import styles from '@/pages/GeoJSONLayer/styles.module.css?raw';
+import types from '@/pages/GeoJSONLayer/types?raw';
+import data from '@/pages/GeoJSONLayer/data.json?raw';
+
+<Meta of={GeoJSONLayerStories} />
+
+# GeoJSONLayer
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/GeoJSONLayer)**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+
+## Description
+
+GeoJSON is a widely-used format for encoding geographic data structures using JavaScript Object Notation (JSON). Here is an example of Amsterdam trees data in GeoJSON format (from the [Bomen endpoint in the Amsterdam DSO API](https://api.data.amsterdam.nl/v1/docs/datasets/bomen.html)):
+
+```geojson
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:EPSG::4326" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "stamgegevens.919933",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [4.904670904743209, 52.33981350119924]
+      },
+      "properties": {
+        "id": 919933,
+        "gbdBuurtId": "03630980000301",
+        "typeBeheerderPlus": "R&E_VOR_Bomen",
+        "boomhoogteklasseActueel": "e. 15 tot 18 m.",
+        "typeEigenaarPlus": "Gemeente Amsterdam",
+        "jaarVanAanleg": 1948,
+        "soortnaam": "Tilia americana",
+        "stamdiameterklasse": null,
+        "standplaatsGedetailleerd": null,
+        "typeObject": "Boom niet vrij uitgroeiend",
+        "typeSoortnaam": "Bomen",
+        "soortnaamKort": "Tilia",
+        "soortnaamTop": "Linde (Tilia)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "stamgegevens.919934",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [4.902692060023387, 52.340093024617616]
+      },
+      "properties": {
+        "id": 919934,
+        "gbdBuurtId": "03630980000301",
+        "typeBeheerderPlus": "R&E_VOR_Bomen",
+        "boomhoogteklasseActueel": "c. 9 tot 12 m.",
+        "typeEigenaarPlus": "Gemeente Amsterdam",
+        "jaarVanAanleg": 1978,
+        "soortnaam": "Ulmus hollandica 'Vegeta'",
+        "stamdiameterklasse": null,
+        "standplaatsGedetailleerd": "Tegels",
+        "typeObject": "Boom niet vrij uitgroeiend",
+        "typeSoortnaam": "Bomen",
+        "soortnaamKort": "Ulmus",
+        "soortnaamTop": "Iep (Ulmus)"
+      }
+    }
+  ]
+}
+```
+
+If data is available in GeoJSON format, it often provides a universal solution for mapping libraries. In Leaflet it avoids the need to parse API data into a preferred format and then creating each Leaflet layer depending on the data type.
+
+In the above example, each record has the Geometry type `Point`. Assuming valid GeoJSON data is provided, Leaflet knows which layer type to render (for the above example, Leaflet, by default, will return `L.marker`).
+
+The default marker type and styling options returned from `L.geoJSON` can be customized through the secondary <a href="https://leafletjs.com/reference.html#geojson-option" target="_blank">GeoJSON options argument</a>.
+
+Alternative GeoJSON types inlude `Point`, `LineString`, `Polygon`, `MultiPoint`, `MultiLineString`, and `MultiPolygon`.
+
+## How to implement
+
+1. The React component
+    * [GeoJSONLayer.tsx](#--geojsonlayertsx)
+2. The CSS styles
+    * [styles.module.css](#--stylesmodulecss)
+3. Type definitions
+    * [types.ts](#--typests)
+4. Data
+    * [data.json](#--datajson) *(This static data should be replaced by a fetch all or other static data)
+
+## Usage
+
+### React components
+
+#### - GeoJSONLayer.tsx
+
+<Source code={GeoJSONLayer} />
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+#### - types.ts
+
+<Source code={types} />
+
+#### - data.json
+
+<Source code={`${data.substring(0, 1600)}`} />
