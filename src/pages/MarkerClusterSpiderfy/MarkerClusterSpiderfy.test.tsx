@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { render, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import L from 'leaflet';
 import MarkerClusterSpiderfy from './MarkerClusterSpiderfy';
@@ -240,7 +240,7 @@ describe('MarkerClusterSpiderfy', () => {
     );
 
     expect(marker).toBeInTheDocument();
-    fireEvent(marker, new MouseEvent('click', { bubbles: true }));
+    await act(() => userEvent.click(marker as Element));
 
     const markerRecord = fakeClusterData.find(record => record.properties.id);
 
@@ -280,7 +280,7 @@ describe('MarkerClusterSpiderfy', () => {
     });
   });
 
-  it('cluster clicks trigger marker click callbacks', () => {
+  it('cluster clicks trigger marker click callbacks', async () => {
     const setZoomAroundSpy = vi
       .spyOn(L.Map.prototype, 'setZoomAround')
       .mockImplementation(() => {
@@ -293,8 +293,7 @@ describe('MarkerClusterSpiderfy', () => {
     );
 
     expect(cluster).toBeInTheDocument();
-    fireEvent(cluster, new MouseEvent('click', { bubbles: true }));
-
+    await act(() => userEvent.click(cluster as Element));
     expect(setZoomAroundSpy).toHaveBeenCalled();
   });
 
@@ -310,7 +309,8 @@ describe('MarkerClusterSpiderfy', () => {
     ).length;
     const clusterTotal = individualClustersArr.reduce(
       (accumulator, cluster) =>
-        accumulator + parseInt(cluster.querySelector('span').textContent),
+        accumulator +
+        parseInt(cluster.querySelector('span')?.textContent as string),
       0
     );
     const fakeClusterDataLength = fakeClusterData.reduce(
