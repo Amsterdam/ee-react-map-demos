@@ -171,14 +171,31 @@ const Footer = () => {
       <Grid paddingVertical="small">
         <Grid.Cell span="all">
           <PageMenu>
-            <PageMenu.Link href="#">Home</PageMenu.Link>
-            <PageMenu.Link href="#">Zoeken</PageMenu.Link>
-            <PageMenu.Link href="#">Nieuws</PageMenu.Link>
-            <PageMenu.Link href="#">Burgerzaken</PageMenu.Link>
-            <PageMenu.Link href="#">Kunst en cultuur</PageMenu.Link>
-            <PageMenu.Link href="#">Projecten</PageMenu.Link>
-            <PageMenu.Link href="#">Project</PageMenu.Link>
-            <PageMenu.Link href="#">Parkeren</PageMenu.Link>
+            {/* target="_self" to prevent storybook clicking through on # links */}
+            <PageMenu.Link href="#" target="_self">
+              Home
+            </PageMenu.Link>
+            <PageMenu.Link href="#" target="_self">
+              Zoeken
+            </PageMenu.Link>
+            <PageMenu.Link href="#" target="_self">
+              Nieuws
+            </PageMenu.Link>
+            <PageMenu.Link href="#" target="_self">
+              Burgerzaken
+            </PageMenu.Link>
+            <PageMenu.Link href="#" target="_self">
+              Kunst en cultuur
+            </PageMenu.Link>
+            <PageMenu.Link href="#" target="_self">
+              Projecten
+            </PageMenu.Link>
+            <PageMenu.Link href="#" target="_self">
+              Project
+            </PageMenu.Link>
+            <PageMenu.Link href="#" target="_self">
+              Parkeren
+            </PageMenu.Link>
           </PageMenu>
         </Grid.Cell>
       </Grid>
