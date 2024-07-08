@@ -235,13 +235,9 @@ describe('MarkerCluster', () => {
       userEvent.keyboard('{enter}');
 
       await waitFor(() => {
-        const markerRecord = fakeClusterData.find(
-          record => record.properties.id
-        );
-
         expect(alertMock).toHaveBeenCalledOnce();
         expect(alertMock).toHaveBeenLastCalledWith(
-          `Marker click ID ${markerRecord?.properties.id}`
+          `Marker click ID ${fakeClusterData[0].properties.id}`
         );
       });
     });
@@ -276,7 +272,8 @@ describe('MarkerCluster', () => {
     ).length;
     const clusterTotal = individualClustersArr.reduce(
       (accumulator, cluster) =>
-        accumulator + parseInt(cluster.querySelector('span').textContent),
+        accumulator +
+        parseInt(cluster.querySelector('span')?.textContent as string),
       0
     );
     const fakeClusterDataLength = fakeClusterData.reduce(
