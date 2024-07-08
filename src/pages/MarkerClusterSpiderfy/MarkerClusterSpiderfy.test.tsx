@@ -215,6 +215,7 @@ vi.mock('supercluster', async () => {
     ...actual,
     default: vi.fn(() => {
       return {
+        // @ts-expect-error actual.default is unknown
         ...actual.default.prototype,
         load: vi.fn(),
         getClusters: vi.fn(() => fakeClusterData),
@@ -263,7 +264,7 @@ describe('MarkerClusterSpiderfy', () => {
     );
 
     await act(async () => {
-      marker?.focus();
+      (marker as HTMLElement)?.focus();
       expect(marker).toHaveFocus();
       userEvent.keyboard('{enter}');
 
