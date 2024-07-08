@@ -284,7 +284,7 @@ describe('MarkerClusterSpiderfy', () => {
     const setZoomAroundSpy = vi
       .spyOn(L.Map.prototype, 'setZoomAround')
       .mockImplementation(() => {
-        console.log('setZoomAround called');
+        return {} as L.Map;
       });
 
     const { container } = render(<MarkerClusterSpiderfy />);

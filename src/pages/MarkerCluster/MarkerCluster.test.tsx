@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { render, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import L from 'leaflet';
 import MarkerCluster from './MarkerCluster';
@@ -209,7 +209,7 @@ describe('MarkerCluster', () => {
     );
 
     expect(marker).toBeInTheDocument();
-    fireEvent(marker, new MouseEvent('click', { bubbles: true }));
+    await act(() => userEvent.click(marker as Element));
 
     await waitFor(() => {
       expect(alertMock).toHaveBeenCalledOnce();
@@ -247,11 +247,11 @@ describe('MarkerCluster', () => {
     });
   });
 
-  it('cluster clicks trigger marker click callbacks', () => {
+  it('cluster clicks trigger marker click callbacks', async () => {
     const setZoomAroundSpy = vi
       .spyOn(L.Map.prototype, 'setZoomAround')
       .mockImplementation(() => {
-        console.log('setZoomAround called');
+        return {} as L.Map;
       });
 
     const { container } = render(<MarkerCluster />);
@@ -260,8 +260,7 @@ describe('MarkerCluster', () => {
     );
 
     expect(cluster).toBeInTheDocument();
-    fireEvent(cluster, new MouseEvent('click', { bubbles: true }));
-
+    await act(() => userEvent.click(cluster as Element));
     expect(setZoomAroundSpy).toHaveBeenCalled();
   });
 
