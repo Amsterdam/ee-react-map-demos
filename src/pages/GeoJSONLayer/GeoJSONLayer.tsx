@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import type { FunctionComponent } from 'react';
 import L, { circleMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
@@ -8,7 +7,7 @@ import styles from './styles.module.css';
 import { Boom } from './types';
 import data from './data.json';
 
-const GeoJSONLayer: FunctionComponent = () => {
+const GeoJSONLayer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);

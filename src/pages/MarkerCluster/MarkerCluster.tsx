@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { FunctionComponent } from 'react';
 import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Supercluster from 'supercluster';
@@ -17,7 +16,7 @@ const CLUSTER_STYLES = {
   large: styles.markerClusterLarge,
 };
 
-const MarkerCluster: FunctionComponent = () => {
+const MarkerCluster = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(

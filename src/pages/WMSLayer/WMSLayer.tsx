@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import type { FunctionComponent } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
-const WMSLayer: FunctionComponent = () => {
+const WMSLayer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);

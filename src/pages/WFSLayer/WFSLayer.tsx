@@ -1,12 +1,11 @@
 import { useRef } from 'react';
-import type { FunctionComponent } from 'react';
 import 'leaflet/dist/leaflet.css';
 
 import styles from './styles.module.css';
 import useGeoJSONLayer from './useGeoJSONLayer';
 import useLeafletMap from './useLeafletMap';
 
-const WFSLayer: FunctionComponent = () => {
+const WFSLayer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapInstance = useLeafletMap(containerRef);
 

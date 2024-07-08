@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import type { FunctionComponent } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
-const BaseLayer: FunctionComponent = () => {
+const BaseLayer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Use state instead of a ref for storing the Leaflet map object otherwise you may run into DOM issues when React StrictMode is enabled

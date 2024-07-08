@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { FunctionComponent } from 'react';
 import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
@@ -14,9 +13,9 @@ interface MarkerClusterSpiderProps {
   clusterOptions?: ClusterOptions;
 }
 
-const MarkerClusterSpider: FunctionComponent<MarkerClusterSpiderProps> = ({
+const MarkerClusterSpider = ({
   clusterOptions = CLUSTER_OPTIONS,
-}) => {
+}: MarkerClusterSpiderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const [markersInstance, setMarkersInstance] = useState<L.GeoJSON | null>(
