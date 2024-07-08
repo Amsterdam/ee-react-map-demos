@@ -1,14 +1,11 @@
 import type { LatLngTuple } from 'leaflet';
-import Supercluster, { AnyProps, PointFeature } from 'supercluster';
-import { Feature, Geometry } from 'geojson';
+import Supercluster, { PointFeature } from 'supercluster';
+import { BBox, Feature, GeoJsonProperties, Geometry, Point } from 'geojson';
 import { toGeoJSON } from '@/utils/toGeoJSON';
-import toBoundsLiteral from '@/utils/toBoundsLiteral';
-import { DataRecord } from './types';
-import rawData from './data.json';
 
 // Simple util to check coords within a bounding box
-export const isCoordWithingBoundingBox = (
-  bbox: [number, number, number, number],
+export const isCoordWithinBoundingBox = (
+  bbox: BBox,
   coord: LatLngTuple,
   xIndex = 1,
   yIndex = 0
@@ -25,19 +22,17 @@ export const isCoordWithingBoundingBox = (
 };
 
 // Restrict data to that within specified bounding box
-export const filterPointFeaturesWithinBoundingBox = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  features: PointFeature<any>[],
-  bbox: [number, number, number, number]
+export const filterPointFeaturesWithinBoundingBox = <P>(
+  features: PointFeature<P>[],
+  bbox: BBox
 ) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const featuresFiltered: PointFeature<any>[] = [];
+  const featuresFiltered: PointFeature<P>[] = [];
 
   features.forEach(feature => {
     if (
-      isCoordWithingBoundingBox(
+      isCoordWithinBoundingBox(
         bbox,
-        feature.geometry.coordinates as LatLngTuple,
+        feature.geometry.coordinates as [number, number],
         0,
         1
       )
@@ -50,14 +45,17 @@ export const filterPointFeaturesWithinBoundingBox = (
 };
 
 // Helpful for cluster events to detect which cluster to follow
-const addExpansionZoom = (
+const addExpansionZoom = <D extends Supercluster.ClusterProperties>(
   superClusterIndex: Supercluster,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  feature: Feature<Geometry, any>
+  feature: Feature<Geometry, D>
 ) => {
   try {
-    feature.properties.expansion_zoom =
-      superClusterIndex.getClusterExpansionZoom(feature.properties.cluster_id);
+    feature.properties = {
+      ...feature.properties,
+      expansion_zoom: superClusterIndex.getClusterExpansionZoom(
+        feature.properties.cluster_id
+      ),
+    };
   } catch (error) {
     console.error(
       "Can't add expansion zoom to cluster",
@@ -67,23 +65,30 @@ const addExpansionZoom = (
   }
 };
 
-const getMapData = (map: L.Map): PointFeature<AnyProps>[] => {
-  const bounds = toBoundsLiteral(map.getBounds()).flat() as [
-    number,
-    number,
-    number,
-    number,
+const getMapData = <D extends { geometry: Point }>(
+  map: L.Map,
+  rawData: D[]
+) => {
+  const bounds = map.getBounds();
+  const bbox: BBox = [
+    bounds.getWest(),
+    bounds.getSouth(),
+    bounds.getEast(),
+    bounds.getNorth(),
   ];
 
   // Save some resources by handling only data present in the current map view
   const featuresWithinBbox = filterPointFeaturesWithinBoundingBox(
-    toGeoJSON(rawData as DataRecord[]).features,
-    bounds
+    toGeoJSON(rawData).features,
+    bbox
   );
 
-  let clusters: PointFeature<AnyProps>[] = [];
+  type Dprops = (typeof featuresWithinBbox)[0];
 
-  const superClusterIndex = new Supercluster({
+  const superClusterIndex = new Supercluster<
+    Dprops['properties'],
+    Dprops['properties']
+  >({
     // Enable this for console.logs with the timing to build each cluster
     log: false,
     radius: 40,
@@ -93,15 +98,24 @@ const getMapData = (map: L.Map): PointFeature<AnyProps>[] => {
   }).load(featuresWithinBbox);
 
   if (superClusterIndex) {
-    clusters = superClusterIndex.getClusters(bounds, map.getZoom());
+    const clusters = superClusterIndex.getClusters(bbox, map.getZoom());
 
     for (const feature of clusters) {
-      // Used on cluster events to detect which cluster to zoom into
-      addExpansionZoom(superClusterIndex, feature);
+      if (isCluster(feature)) {
+        // Used on cluster events to detect which cluster to zoom into
+        addExpansionZoom(superClusterIndex, feature);
+      }
     }
+    return clusters;
   }
 
-  return clusters;
+  return [];
 };
+
+function isCluster<P extends GeoJsonProperties>(
+  feature: Supercluster.ClusterFeature<P> | PointFeature<P>
+): feature is Supercluster.ClusterFeature<P> {
+  return feature.properties?.cluster !== undefined;
+}
 
 export default getMapData;

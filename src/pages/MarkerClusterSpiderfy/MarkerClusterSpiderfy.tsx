@@ -6,8 +6,9 @@ import createClusterIcon from './utils/createClusterIcon';
 import getMapData from './getMapData';
 import processFeatures from './processFeatures';
 import { CLUSTER_OPTIONS, CLUSTER_STYLES, lineStyles } from './mapStyles';
-import type { ClusterOptions, MapSuperClusterFeature } from './types';
-import { GeoJsonObject } from 'geojson';
+import type { ClusterOptions, DataRecord } from './types';
+import type { GeoJsonObject } from 'geojson';
+import rawData from './data.json';
 
 interface MarkerClusterSpiderProps {
   clusterOptions?: ClusterOptions;
@@ -124,7 +125,7 @@ const MarkerClusterSpider = ({
 
     return processFeatures(
       mapInstance,
-      getMapData(mapInstance) as MapSuperClusterFeature[],
+      getMapData(mapInstance, rawData as DataRecord[]),
       clusterOptions
     );
   }, [mapInstance, zoom, center]);

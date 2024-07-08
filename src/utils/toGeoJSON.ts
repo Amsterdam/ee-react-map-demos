@@ -6,6 +6,10 @@ export function toGeoJSON<DataType extends { geometry: Geometry }>(
   type DataGeometry = DataType['geometry'];
   type DataProperties = Omit<DataType, 'geometry'>;
 
+  if (!data.length) {
+    throw new Error('Data was empty');
+  }
+
   const features = data.map(data => {
     const { geometry, ...other } = data;
 

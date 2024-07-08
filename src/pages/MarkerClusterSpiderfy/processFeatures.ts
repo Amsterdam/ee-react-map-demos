@@ -81,7 +81,6 @@ const processFeatures = (
   for (const [, features] of Object.entries(markerItems)) {
     if (features.length === 1) {
       // Only one marker exists at this location so no modifications necessary
-      // markersFinal.push(features[0]);
       clusterItems.push(features[0]);
     } else {
       // Multiple markers exist at this location, therefore, prepare the zoomed in cluster markers
