@@ -3,6 +3,7 @@ import styles from '@/pages/ReactLeaflet/PolylineLayer/styles.module.css';
 import L, { LatLngTuple } from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import data from './data.json';
+import 'leaflet/dist/leaflet.css';
 
 const PolylineLayer = (): JSX.Element => {
   return (
