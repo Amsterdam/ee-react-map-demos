@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import L, { circleMarker } from 'leaflet';
-
 import 'leaflet/dist/leaflet.css';
 import styles from './styles.module.css';
 import { Boom } from './types';

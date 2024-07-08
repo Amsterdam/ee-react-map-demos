@@ -7,6 +7,7 @@ describe('GeoJSONLayer', () => {
     const { container } = render(<GeoJSONLayer />);
     expect(container.firstChild).toBeDefined();
   });
+
   it('renders markers on the map', () => {
     const { container } = render(<GeoJSONLayer />);
     const markers = container.querySelectorAll('.c-marker');
