@@ -1,0 +1,112 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as MultiMarkerSelectStories from './index.stories';
+import MapContext from '@/pages/ContextExamples/MultiMarkerSelect/MapContext?raw';
+import MultiMarkerSelect from '@/pages/ContextExamples/MultiMarkerSelect/MultiMarkerSelect?raw';
+import MapProvider from '@/pages/ContextExamples/MultiMarkerSelect/MapProvider?raw';
+import Map from '@/pages/ContextExamples/MultiMarkerSelect/Map?raw';
+import Alert from '@/pages/ContextExamples/MultiMarkerSelect/Alert?raw';
+import data from '@/pages/ContextExamples/MultiMarkerSelect/data.json?raw';
+import types from '@/pages/ContextExamples/MultiMarkerSelect/types?raw';
+import styles from '@/pages/ContextExamples/styles.module.css?raw';
+import mapStyles from '@/pages/ContextExamples/map.module.css?raw';
+
+<Meta of={MultiMarkerSelectStories} />
+
+# Context - Multiple Marker Select
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ContextExamples/MultiMarkerSelect)**
+
+#### Table of Contents
+
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Description
+
+Using Amsterdam taxi stands from the [Parkeervakken (Parking Spaces) API](https://api.data.amsterdam.nl/v1/parkeervakken/), you can select multiple Polygon layers.
+
+The selected layer(s) state is accessible via state variable `selectedMarkers` and settable via the state method `setSelectedMarkers`.
+
+When adding the layers to the map (lines 107-130), a `click` event listener is added to each Polygon layer; alongside a `mouseover` and `mouseout` event. In the `click` event listener callback, we add/remove the event-triggered layer from the context's state.
+
+The context handles the following state and methods:
+
+* `mapInstance` - *Referencing the active Leaflet map*
+* `setMapInstance` - *For setting the active Leaflet map into state*
+* `position` - *Referencing the current centre point of the Leaflet map object*
+* `setPosition` - *For setting the current centre point of the Leaflet map object into state*
+* `markerData` - *Data to output on the map, usually derived from a fetch request to an API*
+* `setMarkerData` - *For setting the map data into state*
+* `selectedMarkers` - *An array of IDs, which correspond to the Polygon layer data*
+* `setSelectedMarkers` - *For setting the selected layers into state*
+
+#### Z-index warning
+
+Note that when rendering custom elements on top of a Leaflet map, you will need to handle the CSS `z-index` property. By default Leaflet renders some of its panes (DOM elements) with the `z-index` property set. Therefore, custom components may only be visible under the map DOM elements. It's useful to set a app constant to handle this z-index value. <a href="https://leafletjs.com/examples/map-panes/" target="_blank">More info</a>.
+
+## How to implement
+
+To accomplish the MultiMarkerSelect component, there are 9 files:
+
+1. The React components
+    * [MapContext.ts](#--mapcontextts)
+    * [MapProvider.tsx](#--mapprovidertsx)
+    * [MultiMarkerSelect.tsx](#--multimarkerselecttsx)
+    * [Map.tsx](#--maptsx)
+    * [Alert.tsx](#--alerttsx)
+2. CSS styles
+    * [styles.module.css](#--stylesmodulecss)
+    * [map.module.css](#--mapmodulecss)
+3. Type definitions
+    * [types.ts](#--typests)
+4. Data
+    * [data.json](#--datajson) *(This static data should be replaced by a fetch call or other static data)*
+
+## Usage
+
+### React Components
+
+#### - MapContext.ts
+
+<Source code={MapContext} />
+
+#### - MapProvider.tsx
+
+<Source code={MapProvider} />
+
+#### - MultiMarkerSelect.tsx
+
+<Source code={MultiMarkerSelect} />
+
+#### - Map.tsx
+
+<Source code={Map} />
+
+#### - Alert.tsx
+
+<Source code={Alert} />
+
+### CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+#### - map.module.css
+
+<Source code={mapStyles} />
+
+### Type definitions
+
+#### - types.ts
+
+<Source code={types} />
+
+### Data
+
+#### - data.json
+
+*Code intentionally shortened*
+
+<Source code={`${data.substring(0, 800)}...`} />

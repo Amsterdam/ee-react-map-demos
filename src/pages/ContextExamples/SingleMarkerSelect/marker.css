@@ -1,0 +1,11 @@
+.c-marker {
+  opacity: 0.7;
+}
+
+.c-marker:hover {
+  opacity: 1;
+}
+
+.c-marker--selected {
+  opacity: 1;
+}
