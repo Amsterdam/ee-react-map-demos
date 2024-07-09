@@ -41,31 +41,31 @@ Leaflet by default uses EPSG:3857 (Web Mercator / WGS 84), however, the base lay
 
 To accomplish the Amstedam base/tile layer there are three files:
 1. The React components
-    * [BaseLayer.tsx](#1-baselayertsx)
+    * [BaseLayer.tsx](#--baselayertsx)
 2. The CSS styles (1 file)
-    * [styles.module.css](#1-stylesmodulecss)
+    * [styles.module.css](#--stylesmodulecss)
 3. Utils (1 file)
-    * [getCrsRd.ts](#1-getcrsrdts)
+    * [getCrsRd.ts](#--getcrsrdts)
        - This util file handles the CRS (Coordinate Reference System) because Gemeente Amsterdam by default uses <a href="https://www.kadaster.nl/zakelijk/registraties/basisregistraties/rijksdriehoeksmeting/rijksdriehoeksstelsel" target="_blank">Rijksdriehoekscoördinaten</a>. Leaflet by default uses <a href="https://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS84 (World Geodetic System)</a>.
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React component
 
-#### 1. BaseLayer.tsx
+#### - BaseLayer.tsx
 
 <Source code={BaseLayer} />
 
-### CSS Styling
+### 2. CSS styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
-### Utils
+### 3. Utils
 
-#### 1. getCrsRd.ts
+#### - getCrsRd.ts
 
   <Source code={getCrsRd} />
