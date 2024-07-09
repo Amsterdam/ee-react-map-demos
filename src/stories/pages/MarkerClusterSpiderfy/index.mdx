@@ -44,20 +44,20 @@ This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Superc
 
 ### Data handling
 
-In the `useMemo` call (lines 112-125) we process the data in two methods.
+In the `useMemo` call (lines 112-125) we process the data in two methods:
 
-1. The primary call (`getMapData`) could exist in an API/backend-for-frontend application. This method effectively returns data with features inside the current map's bounding box and creates a supercluster object, with an added `expansion_zoom` data property, which is used later in cluster event listeners.
+1. The primary call (`getMapData`) could exist in an API/backend-for-frontend application. This method returns data with features inside the map's current bounding box and creates a supercluster object. The supercluster object contains an extra data property `expansion_zoom`, which is used later in cluster event listeners.
 
 2. The secondary method (`processFeatures`) separates the markers and cluster items. For markers with the same geometry values, it also generates the GeoJSON for the re-generated cluster markers (new markers surrounding the initial marker positioning).
 
 ### Display options
 
-There are three options for how to display the cluster:
-- `clusterShape` = `circle` or `spiral`
+There are two options for how to display the cluster:
+1. `clusterShape` = `circle` or `spiral`
 
     *Circle draws the markers around the original marker geometry. Spiral draws the markers in spiral curve around the original marker geometry.*
 
-- `spiderfyOnMaxZoom`: `true` or `false`
+2. `spiderfyOnMaxZoom`: `true` or `false`
 
     *This draws straight lines from the new clustered marker to the original geometry point. It works best with `clusterShape=circle`*
 

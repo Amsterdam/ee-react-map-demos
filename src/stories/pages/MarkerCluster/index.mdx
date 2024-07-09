@@ -34,11 +34,11 @@ import data from '@/pages/MarkerCluster/data.json?raw';
 
 This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component.
 
-**Warning** that this component won't work for markers using the same geometry, they will render on top of the previously rendered marker. For handling markers with the same geometry, there is an [advanced variant of this component](../?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
+**Warning** This component won't work for markers with the same coordinates value. They will render on top of the previously rendered marker. For handling markers with the same coordinates, there is an [advanced variant of this component](../?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
 
 ## How to implement
 
-To implement marker clustering with Leaflet, there are X files:
+To implement marker clustering with Leaflet, there are 8 files:
 
 1. The React component
     * [MarkerCluster.tsx](#--markerclustertsx)
