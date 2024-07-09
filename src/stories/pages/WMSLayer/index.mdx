@@ -5,7 +5,9 @@ import styles from '@/pages/WMSLayer/styles.module.css?raw';
 
 <Meta of={WMSLayerStories} />
 
-# Amsterdam WMSLayer
+# WMS Layer
+
+**[Background](../?path=/docs/leaflet-layers--docs#wms-web-map-service)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/WMSLayer" target="_blank">GitHub Repo URL</a>**
 
 ## Requirements
 
@@ -40,26 +42,27 @@ useEffect(() => {
 }, [mapInstance]);
 ```
 
-## Usage Scenarios
+## How to implement
 
-- **Environmental Monitoring**: Displaying real-time data on air quality, water quality, or weather patterns.
-- **Urban Planning**: Showing zoning maps, land use plans, or transportation networks.
-- **Historical Maps**: Overlaying historical maps on current maps to show changes over time.
-- **Disaster Management**: Displaying flood zones, earthquake impacts, or wildfire extents.
-- **Biodiversity and Conservation**: Showing protected areas, wildlife habitats, or vegetation types.
+To accomplish a WMS layer there are 2 files:
+
+1. The React component
+   - [WMSLayer.tsx](#--wmslayertsx)
+2. The CSS styles (1 file)
+   - [styles.module.css](#--stylesmodulecss)
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React component
 
-#### 1. WMSLayer.tsx
+#### - WMSLayer.tsx
 
 <Source code={WMSLayer} />
 
-### CSS Styling
+### 2. CSS styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />

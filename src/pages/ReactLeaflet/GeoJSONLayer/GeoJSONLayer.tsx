@@ -1,28 +1,26 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import L, { circleMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { Feature, Point } from 'geojson';
 import styles from './styles.module.css';
 import { Boom } from './types';
 import data from './data.json';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
-import { Feature, Point } from 'geojson';
 
 const GeoJSONLayer = (): JSX.Element => {
   const pointToLayer = (
     _feature: Feature<Point, never>,
     latlng: L.LatLngExpression
-  ) => {
-    return circleMarker(latlng, {
+  ) =>
+    circleMarker(latlng, {
       fillColor: '#247514',
       fill: true,
       color: '#247514',
       radius: 3,
       className: 'c-marker',
     });
-  };
 
-  console.log('pointlayer: ', { pointToLayer });
   return (
     <div className={styles.container}>
       <MapContainer

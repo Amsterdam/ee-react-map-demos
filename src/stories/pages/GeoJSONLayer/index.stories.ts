@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import GeoJSONLayer from '@/pages/GeoJSONLayer/GeoJSONLayer';
 
 const meta = {
-  title: 'React/GeoJSONLayer',
+  title: 'React/GeoJSON',
   component: GeoJSONLayer,
   parameters: {
     layout: 'fullscreen',

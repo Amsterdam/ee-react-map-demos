@@ -7,11 +7,14 @@ import defaultMarker from '@/utils/icons/defaultMarker?raw';
 
 <Meta of={MarkerStories} />
 
-# Amsterdam Marker
+# Marker
+
+**[Background and use cases](../?path=/docs/leaflet-layers--docs#marker)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ReactLeaflet/Marker" target="_blank">GitHub Repo URL</a>**
+
 ## Requirements
 
 - [See global requirements list](../?path=/docs/global-requirements--docs)
-- CRS handling ([utils/getCrsRd.ts](#1-getcrsrdts))
+- This example is built upon the [BaseMap component example](../?path=/docs/react-leaflet-baselayer--docs).
 
 ## Description
 
@@ -19,12 +22,15 @@ The Marker component renders a map centered on Amsterdam with a marker.
 This component uses the React Leaflet library to create and manage the map.
 
 ### Large numbers of markers can lead to degraded performance
+
 Every Marker is an HTML image element and showing one will have a ver slight negative impact on performance.
 Showing tens of thousands of Markers wil have a significant impact.
 Please don't do this without either clustering or setting the 'preferCanvas' option of the Leaflet map to 'true'.
 
 ### Create Custom Marker Icon:
+
 Define a custom marker icon if needed. Make sure to replace the placeholder path with the correct path to your marker icon.
+
 ```js
 import markerIconUrl from '@/path/to/marker-icon.png'; // Correct path to your marker icon
 
@@ -39,34 +45,36 @@ export default defaultMarker;
 ## How to implement
 
 To accomplish the Amstedam Marker there are the following files:
-1. The React components
-    * [Marker.tsx](#1-markertsx)
+1. The React component
+    * [Marker.tsx](#--markertsx)
 2. The CSS styles (1 file)
-    * [styles.module.css](#1-stylesmodulecss)
+    * [styles.module.css](#--stylesmodulecss)
 3. Utils (2 files)
-    * [defaultMarker.ts](#1-defaultmarkerts)
-    * [getCrsRd.ts](#2-getcrsrdts)
+    * [defaultMarker.ts](#--defaultmarkerts)
+    * [getCrsRd.ts](#--getcrsrdts)
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React Component
 
-#### 1. Marker.tsx
+#### - Marker.tsx
+
 <Source code={Marker} />
 
-### CSS Styling
+### 2. CSS styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
-### Utils
-#### 1. defaultMarker.ts
+### 3. Utils
+
+#### - defaultMarker.ts
 
 <Source code={defaultMarker} />
 
-#### 2. getCrsRd.ts
+#### - getCrsRd.ts
 
-  <Source code={getCrsRd} />
+<Source code={getCrsRd} />

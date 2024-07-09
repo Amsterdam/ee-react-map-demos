@@ -11,9 +11,12 @@ import useGeoJSONData from '@/pages/ReactLeaflet/WFSLayer/useGeoJSONData?raw';
 
 # Amsterdam WFSLayer
 
+**[Background](../?path=/docs/leaflet-layers--docs#wfs-web-feature-service)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ReactLeaflet/WFSLayer" target="_blank">GitHub Repo URL</a>**
+
 ## Requirements
 
 - [See global requirements list](../?path=/docs/global-requirements--docs)
+- This example is built upon the [BaseMap component example](../?path=/docs/react-leaflet-baselayer--docs).
 - GeoJson data endpoint
 
 ## Description
@@ -31,35 +34,35 @@ A WFS (Web Feature Service) layer is a layer that is served as a GeoJson file. T
 To accomplish the Amsterdam WFS layer there are four files:
 
 1. The React components
-   - [Baselayer.tsx](#1-baselayertsx)
-   - [WFSLayer.tsx](#2-wfslayertsx)
+   - [Baselayer.tsx](#--baselayertsx)
+   - [WFSLayer.tsx](#--wfslayertsx)
 2. The custom hooks (1 file)
-   - [useGeoJsonData.ts](#1-usegeojsondatats)
+   - [useGeoJsonData.ts](#--usegeojsondatats)
 3. The CSS styles (1 file)
-   - [styles.module.css](#1-stylesmodulecss)
+   - [styles.module.css](#--stylesmodulecss)
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React components
 
-#### 1. BaseLayer.tsx
+#### - BaseLayer.tsx
 
 <Source code={Baselayer} />
 
-#### 2. WFSLayer.tsx
+#### - WFSLayer.tsx
 
 <Source code={WFSLayer} />
 
-### Custom Hooks
+### 2. Custom Hooks
 
-#### 1. useGeoJsonData.ts
+#### - useGeoJsonData.ts
 
 <Source code={useGeoJSONData} />
 
-### CSS Styling
+### 3. CSS Styling
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />

@@ -9,6 +9,8 @@ import data from '@/pages/PolygonLayer/data.json?raw';
 
 # PolygonLayer
 
+**[Background](../?path=/docs/leaflet-layers--docs#polygon)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/PolygonLayer" target="_blank">GitHub Repo URL</a>**
+
 ## Requirements
 
 - This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
@@ -16,7 +18,7 @@ import data from '@/pages/PolygonLayer/data.json?raw';
 
 ## Description
 
-A polygon layer is used to display a location or area on a map. By default, a polygon layer is a HTML SVG element rendered inside the parent map DOM element. This polygon layer can be configured, extended and restyled ([see docs](https://leafletjs.com/reference.html#polygon)).
+A polygon layer is used to display a location or area on a map. By default, a polygon layer is a HTML SVG element rendered inside the parent map DOM element. This polygon layer can be configured, extended and restyled (<a href="https://leafletjs.com/reference.html#polygon" target="_blank">see docs</a>).
 
 The primary code in regards to creating a Leaflet polygon layer, is in `PolygonLayer.tsx` lines 64-87, as displayed here:
 
@@ -47,50 +49,43 @@ useEffect(() => {
 }, [data, mapInstance]);
 ```
 
-## Usage Scenarios
-
-- **Mapping Regions**: Representing administrative boundaries such as countries, states, or municipalities.
-- **Highlighting Zones**: Indicating specific zones like school districts, voting districts, or postal codes.
-- **Spatial Analysis**: Visualizing areas affected by events such as weather phenomena, natural disasters, or market areas.
-- **Interactive Applications**: Enabling users to draw and interact with polygons to create custom regions for analysis or reporting.
-
 ## How to implement
 
 To implement a Leaflet polygon layer there are three files required, this example also uses an extra file for demo data:
 
-1. The React components
-    - [PolygonLayer.tsx](#1-polygonlayertsx)
+1. The React component
+    - [PolygonLayer.tsx](#--polygonlayertsx)
 2. The CSS styles (1 file)
-    - [styles.module.css](#1-stylesmodulecss)
+    - [styles.module.css](#--stylesmodulecss)
 3. The layer styles
-    - [layerStyles.ts](#1-layerstylests)
+    - [layerStyles.ts](#--layerstylests)
 4. Demo data (1 file)
-    - [data.json](#1-datajson) *- This data represents the coordinates for Vondelpark.*
+    - [data.json](#--datajson) *- This data represents the coordinates for Vondelpark.*
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React component
 
-#### 1. PolygonLayer.tsx
+#### - PolygonLayer.tsx
 
 <Source code={PolygonLayer} />
 
-### CSS Styling
+### 2. CSS styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
-### Layer styles
+### 3. Layer styles
 
-#### 1. layerStyles.ts
+#### - layerStyles.ts
 
 <Source code={layerStyles} />
 
-### Utils
+### 4. Demo data
 
-#### 1. data.json
+#### - data.json
 
 <Source code={data} />

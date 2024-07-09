@@ -6,7 +6,10 @@ import getCrsRd from '@/utils/getCrsRd?raw';
 
 <Meta of={BaseLayerStories} />
 
-# Amsterdam BaseLayer
+# BaseLayer
+
+**[Background](../?path=/docs/leaflet-layers--docs#tilelayer)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/BaseLayer" target="_blank">GitHub Repo URL</a>**
+
 ## Requirements
 
 - [See global requirements list](../?path=/docs/global-requirements--docs)
@@ -20,7 +23,7 @@ This is the Amsterdam base/tile layer on a plain Leaflet map.
 
 ### Amsterdam base/tile layer
 
-A [TileLayer](https://leafletjs.com/reference.html#tilelayer) is composed of images, such as satellite imagery, that are composed of square tiles mosaicked together in columns and rows, giving the layer the appearance that it is one continuous image. These layers have several levels of detail (LOD) that permit users to zoom in to any region of the map and load additional tiles that depict features in higher resolution at larger map scales.
+A <a href="https://leafletjs.com/reference.html#tilelayer" target="_blank">TileLayer</a> is composed of images, such as satellite imagery, that are composed of square tiles mosaicked together in columns and rows, giving the layer the appearance that it is one continuous image. These layers have several levels of detail (LOD) that permit users to zoom in to any region of the map and load additional tiles that depict features in higher resolution at larger map scales.
 
 The datateam Geo makes various reference maps based on reference data from team BenK (Basis- en Kernregistraties). They are available in [various reference systems (Rijksdriehoek and Web Mercator)](../?path=/docs/coordinate-reference-systems-crs--docs) and the following visualizations:
 
@@ -28,7 +31,7 @@ The datateam Geo makes various reference maps based on reference data from team 
 - Black and white (zwart-wit)
 - Light (light)
 
-These tiles are hosted in a [Azure Blob Store](https://azure.microsoft.com/en-us/products/storage/blobs) and accessed via [Azure Front Door](https://azure.microsoft.com/nl-nl/products/frontdoor). The maptitles are made with [MapProxy](https://github.com/Amsterdam/mapproxy) based on [MapServer](https://github.com/Amsterdam/mapserver).
+These tiles are hosted in a <a href="https://azure.microsoft.com/en-us/products/storage/blobs" target="_blank">Azure Blob Store</a> and accessed via <a href="https://azure.microsoft.com/nl-nl/products/frontdoor" target="_blank">Azure Front Door</a>. The maptitles are made with <a href="https://github.com/Amsterdam/mapproxy" target="_blank">MapProxy</a> based on <a href="https://github.com/Amsterdam/mapserver" target="_blank">MapServer</a>.
 
 ### Coordinate Reference System handling
 
@@ -38,31 +41,31 @@ Leaflet by default uses EPSG:3857 (Web Mercator / WGS 84), however, the base lay
 
 To accomplish the Amstedam base/tile layer there are three files:
 1. The React components
-    * [BaseLayer.tsx](#1-baselayertsx)
+    * [BaseLayer.tsx](#--baselayertsx)
 2. The CSS styles (1 file)
-    * [styles.module.css](#1-stylesmodulecss)
+    * [styles.module.css](#--stylesmodulecss)
 3. Utils (1 file)
-    * [getCrsRd.ts](#1-getcrsrdts)
-       - This util file handles the CRS (Coordinate Reference System) because Gemeente Amsterdam by default uses [Rijksdriehoekscoördinaten](https://www.kadaster.nl/zakelijk/registraties/basisregistraties/rijksdriehoeksmeting/rijksdriehoeksstelsel). Leaflet by default uses [WGS84 (World Geodetic System)](https://en.wikipedia.org/wiki/World_Geodetic_System).
+    * [getCrsRd.ts](#--getcrsrdts)
+       - This util file handles the CRS (Coordinate Reference System) because Gemeente Amsterdam by default uses <a href="https://www.kadaster.nl/zakelijk/registraties/basisregistraties/rijksdriehoeksmeting/rijksdriehoeksstelsel" target="_blank">Rijksdriehoekscoördinaten</a>. Leaflet by default uses <a href="https://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS84 (World Geodetic System)</a>.
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React component
 
-#### 1. BaseLayer.tsx
+#### - BaseLayer.tsx
 
 <Source code={BaseLayer} />
 
-### CSS Styling
+### 2. CSS styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
-### Utils
+### 3. Utils
 
-#### 1. getCrsRd.ts
+#### - getCrsRd.ts
 
   <Source code={getCrsRd} />

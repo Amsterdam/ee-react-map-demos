@@ -1,6 +1,5 @@
 import { Canvas, Meta, Source, Story } from '@storybook/blocks';
 import * as WFSLayerStories from './index.stories';
-
 import WFSLayer from '@/pages/WFSLayer/WFSLayer?raw';
 import styles from '@/pages/WFSLayer/styles.module.css?raw';
 import getCrsRd from '@/utils/getCrsRd?raw';
@@ -9,7 +8,9 @@ import useLeafletMap from '@/pages/WFSLayer/useLeafletMap?raw';
 
 <Meta of={WFSLayerStories} />
 
-# Amsterdam WFSLayer
+# WFS Layer
+
+**[Background](../?path=/docs/leaflet-layers--docs#wfs-web-feature-service)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/WFSLayer" target="_blank">GitHub Repo URL</a>**
 
 ## Requirements
 
@@ -18,7 +19,7 @@ import useLeafletMap from '@/pages/WFSLayer/useLeafletMap?raw';
 
 ## Description
 
-This is the Amsterdam WFS layer on a plain Leaflet map.
+This is a WFS layer on a plain Leaflet map.
 
 ## Background
 
@@ -28,38 +29,38 @@ A WFS (Web Feature Service) layer is a layer that is served as a GeoJson file. T
 
 ## How to implement
 
-To accomplish the Amsterdam WFS layer there are four files:
+To accomplish a WFS layer there are 4 files:
 
-1. The React components
-   - [WFSLayer.tsx](#1-wfslayertsx)
+1. The React component
+   - [WFSLayer.tsx](#--wfslayertsx)
 2. The custom hooks (2 files)
-   - [useGeoJsonLayer.ts](#1-usegeojsonlayerts)
-   - [useLeafletMap.ts](#1-useleafletmapts)
+   - [useGeoJsonLayer.ts](#--usegeojsonlayerts)
+   - [useLeafletMap.ts](#--useleafletmapts)
 3. The CSS styles (1 file)
-   - [styles.module.css](#1-stylesmodulecss)
+   - [styles.module.css](#--stylesmodulecss)
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React component
 
-#### 1. WFSLayer.tsx
+#### - WFSLayer.tsx
 
 <Source code={WFSLayer} />
 
-### Custom Hooks
+### 2. Custom hooks
 
-#### 1. useGeoJsonLayer.ts
+#### - useGeoJsonLayer.ts
 
 <Source code={useGeoJSONLayer} />
 
-#### 2. useLeafletMap.ts
+#### - useLeafletMap.ts
 
 <Source code={useLeafletMap} />
 
-### CSS Styling
+### 3. CSS styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />

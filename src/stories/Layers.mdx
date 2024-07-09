@@ -1,133 +1,203 @@
 import { Meta } from '@storybook/blocks';
 
-<Meta title="Layers inside Leaflet" />
+<Meta title="Leaflet - Layers" />
 
-# Layers inside Leaflet
+# Leaflet - Layers
 
-Leaflet has a number of layers that can be added to a map. These layers can be used to display different types of data on the map. The most common layers are:
+Leaflet has a number of layers that can be added to a map. These layers can be used to display different types of data on a map.
 
-- **TileLayer:** Used to display tile layers on the map. This is the most common layer used in Leaflet.
-- **Marker:** Used to display markers on the map. Markers are used to display points of interest on the map.
-- **Popup:** Used to display popups on the map. Popups are used to display additional information about a point of interest on the map.
-- **Tooltip:** Used to display tooltips on the map. Tooltips are used to display additional information about a point of interest on the map when the user hovers over it.
-- **ImageOverlay:** Used to display images on the map. Images can be used to display additional information about a point of interest on the map.
-- **VideoOverlay:** Used to display videos on the map. Videos can be used to display additional information about a point of interest on the map.
-- **Canvas:** Used to display custom canvas elements on the map. Canvas elements can be used to display custom graphics on the map.
+## UI layers
 
-In addition to these layers, Leaflet also supports various types of data sources that can be displayed as layers on the map:
+- **[Marker](#marker):** Used to display locations on a map. Markers are used to display points of interest on a map.
+- **[Popup](#popup):** Used to display popups on a map. Popups are used to display additional information about a point of interest on a map.
+- **[Tooltip](#tooltip):** Used to display tooltips on a map. Tooltips are used to display additional information about a point of interest on a map when the user hovers over it.
 
-- **WFS (Web Feature Service):** This is a standard protocol for requesting geospatial data from a server. In Leaflet, you can use a plugin like `leaflet-wfs` to add WFS layers to your map. WFS layers are used to display vector data on the map.
-- **WMS (Web Map Service):** This is another standard protocol for requesting geospatial data from a server. Leaflet has built-in support for WMS layers. WMS layers are used to display raster data on the map.
-- **MVT (Mapbox Vector Tiles):** This is a format for encoding vector tile data. In Leaflet, you can use a plugin like `leaflet-vector-tiles` to add MVT layers to your map. MVT layers are used to display vector data on the map.
-- **GeoJSON:** This is a format for encoding geographic data structures. Leaflet has built-in support for GeoJSON layers. GeoJSON layers are used to display vector data on the map, and they can be styled to represent different types of features.
+
+## Raster layers
+
+- **[ImageOverlay](#imageoverlay):** Used to display images on a map. Images can be used to display additional information about a point of interest on a map.
+- **[TileLayer](#tilelayer):** Used to display tile layers on a map. This is the most common layer used in Leaflet.
+- **[VideoOverlay](#videooverlay):** Used to display videos on a map. Videos can be used to display additional information about a point of interest on a map.
+- **[WMS (Web Map Service)](#wms-web-map-service):** This is another standard protocol for requesting geospatial data from a server. Leaflet has built-in support for WMS layers. WMS layers are used to display raster data on a map.
+
+## Vector layers
+
+- **[Canvas](#canvas):** Used to display custom canvas elements on a map. Canvas elements can be used to display custom graphics on a map.
+- **[Circle](#circle)**: Used to draw circle overlays on a map
+- **[CircleMarker](#circlemarker)**: Used to draw a circle of a fixed size with radius specified in pixels on a map.
+- **[Polyline](#polyline)**: Used to draw a series of connected line segments on the map. It can represent routes, paths, or any linear features.
+- **[Polygon](#polygon)**: Similar to a Polyline but it forms a closed shape, meaning the first and last points are connected.
+- **[Rectangle](#rectangle)**: Used to draw rectangle overlays on a map
+- **[SVGOverlay](#svgoverlay)**: Used to load, display and provide DOM access to an SVG file over specific bounds of the map.
+
+## Other layers
+
+In addition to these layers, Leaflet also supports various types of data sources that can be displayed as layers on a map:
+
+- **[GeoJSON](#geojson):** This is a format for encoding geographic data structures. Leaflet has built-in support for GeoJSON layers. GeoJSON layers are used to display vector data on a map, and they can be styled to represent different types of features.
+- **[MVT (Mapbox Vector Tiles)](#mvt-mapbox-vector-tiles):** This is a format for encoding vector tile data. In Leaflet, you can use a plugin like `leaflet-vector-tiles` to add MVT layers to your map. MVT layers are used to display vector data on a map.
+- **[WFS (Web Feature Service)](#wfs-web-feature-service):** This is a standard protocol for requesting geospatial data from a server. WFS layers are used to display vector data on a map.
 
 In this guide, we'll take a closer look at some of the most common layers in Leaflet and how you can use them to create interactive maps.
 
-## TileLayer
-
-The `TileLayer` in Leaflet is used to display tile layers on the map. Tile layers are images that are loaded and displayed on the map as the user pans and zooms.
-Leaflet has built-in support for a number of tile layer providers, including OpenStreetMap, Mapbox, and Stamen.
-You can also create custom tile layers using your own tile server or by using a third-party tile provider.
-
-The `TileLayer` is used in the BaseLayer examples in this guide. The BaseLayer examples show how to create a simple map with a tile layer as the base layer.
-See:
-
-- [BaseLayer react](../?path=/docs/react-baselayer--docs)
-- [BaseLayer react-leaflet](../?path=/docs/react-leaflet-baselayer--docs)
+# UI layers
 
 ## Marker
 
-The `Marker` in Leaflet is used to display markers on the map. Markers are used to display points of interest on the map, such as restaurants, shops, or tourist attractions.
+The **Marker** in Leaflet is used to display locations on a map. Markers are used to display points of interest on a map, such as restaurants, shops, or tourist attractions.
 Markers can be customized with icons, popups, and tooltips to provide additional information about the point of interest.
 
 The Marker examples show how to create a simple map with markers at specific locations.
 See:
 
-** Coming Soon **
+- Example: [Marker (React + Leaflet)](../?path=/docs/react-marker--docs)
+- Example: [Marker (React + React-leaflet)](../?path=/docs/react-leaflet-marker--docs)
+
+### Usage scenarios
+
+- **Location Pins**: Highlighting specific locations such as restaurants, shops, landmarks, etc.
+- **Data Visualization**: Displaying data points like weather stations, earthquake epicenters, etc.
+- **Interactive Maps**: Providing interactive elements for user interaction, such as selecting meeting points or identifying places of interest.
 
 ## Popup
 
-The `Popup` in Leaflet is used to display popups on the map. Popups are used to display additional information about a point of interest on the map.
+The **Popup** in Leaflet is used to display popups on a map. Popups are used to display additional information about a point of interest on a map.
 Popups can contain text, images, videos, and other HTML elements.
-
-The Popup examples show how to create a simple map with popups at specific locations.
-
-** Coming Soon **
 
 ## Tooltip
 
-The `Tooltip` in Leaflet is used to display tooltips on the map. Tooltips are used to display additional information about a point of interest on the map when the user hovers over it.
+The **Tooltip** in Leaflet is used to display tooltips on a map. Tooltips are used to display additional information about a point of interest on a map when the user hovers over it.
 Tooltips can contain text, images, videos, and other HTML elements.
 
-The Tooltip examples show how to create a simple map with tooltips at specific locations.
-
-** Coming Soon **
+# Raster layers
 
 ## ImageOverlay
 
-The `ImageOverlay` in Leaflet is used to display images on the map. Images can be used to display additional information about a point of interest on the map.
-Image overlays can be used to display floor plans, historical maps, or other images that provide context for the map.
+The **ImageOverlay** in Leaflet is used to display images on a map. Images can be used to display additional information about a point of interest on a map.
+Image overlays can be used to display floor plans, historical maps, or other images that provide context for a map.
 
-The ImageOverlay examples show how to create a simple map with an image overlay.
+## TileLayer
 
-** Coming Soon **
+The **TileLayer** in Leaflet is used to display tile layers on a map. Tile layers are images that are loaded and displayed on a map as the user pans and zooms.
+Leaflet has built-in support for a number of tile layer providers, including OpenStreetMap, Mapbox, and Stamen.
+You can also create custom tile layers using your own tile server or by using a third-party tile provider.
+
+The TileLayer is used in the BaseLayer examples in this guide. The BaseLayer examples show how to create a simple map with a tile layer as the base layer.
+See:
+
+- Example: [BaseLayer (React + Leaflet)](../?path=/docs/react-baselayer--docs)
+- Example: [BaseLayer (React + React-leaflet)](../?path=/docs/react-leaflet-baselayer--docs)
 
 ## VideoOverlay
 
-The `VideoOverlay` in Leaflet is used to display videos on the map. Videos can be used to display additional information about a point of interest on the map.
-VideoOverlay can be used to display videos of events, attractions, or other points of interest on the map.
+The **VideoOverlay** in Leaflet is used to display videos on a map. Videos can be used to display additional information about a point of interest on a map.
+VideoOverlay can be used to display videos of events, attractions, or other points of interest on a map.
 
 The VideoOverlay examples show how to create a simple map with a video overlay.
 
-** Coming Soon **
+## WMS (Web Map Service)
+
+The **WMS** layer in Leaflet is used to display raster data on a map, it can be used to display satellite imagery, aerial photography, and other raster data.
+WMS is a standard protocol for requesting geospatial data from a server. Leaflet has built-in support for WMS layers (using `L.tileLayer.wms`).
+
+The WMS examples show how to create a simple map with a WMS layer.
+
+See:
+
+- Example: [WMSLayer (React + Leaflet)](../?path=/docs/react-wmslayer--docs)
+
+### Usage scenarios
+
+- Environmental Monitoring: Displaying real-time data on air quality, water quality, or weather patterns.
+- Urban Planning: Showing zoning maps, land use plans, or transportation networks.
+- Historical Maps: Overlaying historical maps on current maps to show changes over time.
+- Disaster Management: Displaying flood zones, earthquake impacts, or wildfire extents.
+- Biodiversity and Conservation: Showing protected areas, wildlife habitats, or vegetation types.
+
+# Vector layers
 
 ## Canvas
 
-The `Canvas` in Leaflet is used to display custom canvas elements on the map. Canvas elements can be used to display custom graphics on the map.
-Canvas elements can be used to create custom visualizations, animations, or interactive elements on the map.
+The **Canvas** in Leaflet is used to display custom canvas elements on a map. Canvas elements can be used to display custom graphics on a map.
+Canvas elements can be used to create custom visualizations, animations, or interactive elements on a map.
 
-The Canvas examples show how to create a simple map with a custom canvas element.
+## Circle
 
-** Coming Soon **
+A **Circle** in Leaflet is used to draw circle overlays on a map. Unlike a CircleMarker, a Circle uses the map's CRS (Coordinate Reference System) and scales its radius with the map's zoom level.
+
+**Use case**: Useful for marking areas with a specific radius, such as denoting a range around a point of interest.
+
+## CircleMarker
+
+The **CircleMarker** in Leaflet is used to draw fixed circles on a map. It is essentially a circle icon that remains a consistent size no matter the map zoom level.
+
+**Use case**: Useful for pinpointing locations with a consistent visual size, such as marking cities or specific points on a map.
+
+## Polyline
+
+A **Polyline** in Leaflet is used to draw a series of connected line segments on the map. It can represent routes, paths, or any linear features.
+
+### Usage Scenarios
+
+- Routing and Navigation: Displaying the route for a navigation system.
+- Hiking and Biking Trails: Visualizing outdoor recreational trails.
+- Geographical Boundaries and Borders: Defining administrative or geographical boundaries.
+- Public Transportation Routes: Mapping bus, train, or tram routes.
+- Historical Paths and Routes: Visualizing historical routes or trade paths.
+- Event Tracking and Routes: Showing routes for events like marathons or parades.
+- Data Visualization: Representing data flows or connections.
+
+## Polygon
+
+The Polygon layer in Leaflet is similar to a [Polyline](#polyline) but it forms a closed shape, meaning the first and last points are connected.
+
+### Usage Scenarios
+
+- Mapping Regions: Representing administrative boundaries such as countries, states, or municipalities.
+- Highlighting Zones: Indicating specific zones like school districts, voting districts, or postal codes.
+- Spatial Analysis: Visualizing areas affected by events such as weather phenomena, natural disasters, or market areas.
+- Interactive Applications: Enabling users to draw and interact with polygons to create custom regions for analysis or reporting.
+
+## Rectangle
+
+The Rectangle layer in Leaflet is a specialized polygon that represents a rectangle defined by its corners.
+
+**Use case**: Useful for highlighting rectangular areas such as bounding boxes, city blocks, or property boundaries.
+
+## SVGOverlay
+
+The SVGOverlay layer in Leaflet allows you to overlay an SVG (Scalable Vector Graphics) image onto the map. It can be positioned and scaled according to the map's zoom level and bounds.
+
+**Use case**: Useful for adding custom vector graphics that need to scale and transform with the map, such as custom markers, diagrams, or illustrations.
+
+# Other layers
+
+## GeoJSON
+
+**GeoJSON** in Leaflet is used to display vector data on a map. GeoJSON layers are used to display vector data on a map.
+GeoJSON layers can be used to display points, lines, polygons, and other vector features on a map.
+
+The GeoJSON examples show how to create a simple map with a GeoJSON layer.
+
+- Example: [GeoJSON (React + Leafet)](../?path=/docs/react-geojson--docs)
+
+## MVT (Mapbox Vector Tiles)
+
+**MVT** in Leaflet is used to display vector data on a map, it can be used to display points, lines, polygons, and other vector features on a map.
+
+You can use a plugin like `leaflet-vector-tiles` to add MVT layers to your map.
 
 ## WFS (Web Feature Service)
 
-The WFS layer in Leaflet is used to display vector data on the map, it can be used to display points, lines, polygons, and other vector features.
-`WFS` is a standard protocol for requesting geospatial data from a server.
+The **WFS** layer in Leaflet is used to display vector data on a map, it can be used to display points, lines, polygons, and other vector features.
+WFS is a standard protocol for requesting geospatial data from a server.
 
-You can use a plugin like `leaflet-wfs` to add WFS layers to your map. However, it's not always necessary to use a plugin if you're comfortable with handling the WFS request and response yourself.
+You can use a plugin like <a href="https://github.com/Flexberry/Leaflet-WFST" target="_blank">leaflet-wfst</a> to add WFS layers to your map. However, it's not always necessary to use a plugin if you're comfortable with handling the WFS request and response yourself.
 The leaflet-wfs plugin and similar plugins provide a more convenient way to work with WFS services by handling the request and response for you. They can also provide additional features like automatic refreshing of the layer when the data changes.
 
 The WFS examples show how to create a simple map with a WFS layer. (without the use of a plugin)
 
 See:
 
-- [WFSLayer react](../?path=/docs/react-wfslayer--docs)
-- [WFSLayer react-leaflet](../?path=/docs/react-leaflet-wfslayer--docs)
-
-## WMS (Web Map Service)
-
-The WMS layer in Leaflet is used to display raster data on the map, it can be used to display satellite imagery, aerial photography, and other raster data.
-`WMS` is a standard protocol for requesting geospatial data from a server. Leaflet has built-in support for WMS layers.
-
-The WMS examples show how to create a simple map with a WMS layer.
-
-** Coming Soon **
-
-## MVT (Mapbox Vector Tiles)
-
-The `MVT` in Leaflet is used to display vector data on the map, it can be used to display points, lines, polygons, and other vector features on the map.
-
-You can use a plugin like `leaflet-vector-tiles` to add MVT layers to your map.
-The MVT examples show how to create a simple map with a MVT layer.
-
-** Coming Soon **
-
-## GeoJSON
-
-The `GeoJSON` in Leaflet is used to display vector data on the map. GeoJSON layers are used to display vector data on the map.
-GeoJSON layers can be used to display points, lines, polygons, and other vector features on the map.
-
-The GeoJSON examples show how to create a simple map with a GeoJSON layer.
-
-** Coming Soon **
+- Example: [WFSLayer (React + Leaflet)](../?path=/docs/react-wfslayer--docs)
+- Example: [WFSLayer (React + React-leaflet)](../?path=/docs/react-leaflet-wfslayer--docs)

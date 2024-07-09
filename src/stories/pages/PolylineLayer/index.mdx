@@ -9,6 +9,8 @@ import data from '@/pages/PolylineLayer/data.json?raw';
 
 # PolylineLayer
 
+**[Background](../?path=/docs/leaflet-layers--docs#polyline)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/PolylineLayer" target="_blank">GitHub Repo URL</a>**
+
 ## Requirements
 
 - This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
@@ -16,7 +18,7 @@ import data from '@/pages/PolylineLayer/data.json?raw';
 
 ## Description
 
-A polyline layer is used to display lines on a map. By default, a polyline layer is a HTML SVG element rendered inside the parent map DOM element. This polyline layer can be configured, extended and restyled ([see docs](https://leafletjs.com/reference.html#polyline)).
+A polyline layer is used to display lines on a map. By default, a polyline layer is a HTML SVG element rendered inside the parent map DOM element. This polyline layer can be configured, extended and restyled (<a href="https://leafletjs.com/reference.html#polyline" target="_blank">see docs</a>).
 
 The primary code in regards to creating a Leaflet polyline layer, is lines 64-87:
 
@@ -45,54 +47,44 @@ useEffect(() => {
 }, [data, mapInstance]);
 ```
 
-## Usage Scenarios
-
-- **Routing and Navigation**: Displaying the route for a navigation system.
-- **Hiking and Biking Trails**: Visualizing outdoor recreational trails.
-- **Geographical Boundaries and Borders**: Defining administrative or geographical boundaries.
-- **Public Transportation Routes**: Mapping bus, train, or tram routes.
-- **Historical Paths and Routes**: Visualizing historical routes or trade paths.
-- **Event Tracking and Routes**: Showing routes for events like marathons or parades.
-- **Data Visualization**: Representing data flows or connections.
-
 ## How to implement
 
 To implement a Leaflet polygon layer there are three files required, this example also uses an extra file for demo data:
 
-1. The React components
-    - [PolylineLayer.tsx](#1-polylinelayertsx)
+1. The React component
+    - [PolylineLayer.tsx](#--polylinelayertsx)
 2. The CSS styles (1 file)
-    - [styles.module.css](#1-stylesmodulecss)
+    - [styles.module.css](#--stylesmodulecss)
 3. The layer styles
-    - [layerStyles.ts](#1-layerstylests)
+    - [layerStyles.ts](#--layerstylests)
 4. Demo data (1 file)
-    - [data.json](#1-datajson)
+    - [data.json](#--datajson)
       - This data represents the coordinates for Vondelpark.
 
 ## Usage
 
 The following files are required:
 
-### React Components
+### 1. React component
 
-#### 1. PolylineLayer.tsx
+#### - PolylineLayer.tsx
 
 <Source code={PolylineLayer} />
 
-### CSS Styling
+### 2. CSS styles
 
-#### 1. styles.module.css
+#### - styles.module.css
 
 <Source code={styles} />
 
-### Layer styles
+### 3. Layer styles
 
-#### 1. layerStyles.ts
+#### - layerStyles.ts
 
 <Source code={layerStyles} />
 
-### Utils
+### 4. Demo data
 
-#### 1. data.json
+#### - data.json
 
 <Source code={data} />
