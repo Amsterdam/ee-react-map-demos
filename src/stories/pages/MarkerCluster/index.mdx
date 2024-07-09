@@ -1,0 +1,94 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as MarkerClusterStories from './index.stories';
+import MarkerCluster from '@/pages/MarkerCluster/MarkerCluster?raw';
+import toGeoJSON from '@/utils/toGeoJSON?raw';
+import styles from '@/pages/MarkerCluster/styles.module.css?raw';
+import createClusterIcon from '@/pages/MarkerCluster/utils/createClusterIcon?raw';
+import data from '@/pages/MarkerCluster/data.json?raw';
+
+<Meta of={MarkerClusterStories} />
+
+# Marker clustering (simple)
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MarkerCluster)**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- [Supercluster](https://www.npmjs.com/package/supercluster)
+
+**For typescript:**
+
+- [@types/geojson](https://www.npmjs.com/package/@types/geojson)
+- [@types/supercluster](https://www.npmjs.com/package/@types/supercluster)
+
+## Description
+
+This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component.
+
+**Warning** This component won't work for markers with the same coordinates value. They will render on top of the previously rendered marker. For handling markers with the same coordinates, there is an [advanced variant of this component](../?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
+
+## How to implement
+
+To implement marker clustering with Leaflet, there are 8 files:
+
+1. The React component
+    * [MarkerCluster.tsx](#--markerclustertsx)
+        * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
+2. Normalizing external data
+    * [utils/toGeoJSON.ts](#--utilstogeojsonts)
+      *(This is only required for this demo to work; it helps format the external `data.json` array into GeoJSON format.)*
+3. The CSS styles
+    * [styles.module.css](#--stylesmodulecss)
+4. Data
+    * [data.json](#--datajson) *(This static data should be replaced by a fetch call or other static data)*
+5. The cluster icon
+    * [utils/createClusterIcon.ts](#--utilscreateclustericonts)
+6. Leaflet marker image files
+    * `import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';`
+    * `import iconUrl from 'leaflet/dist/images/marker-icon.png';`
+    * `import shadowUrl from 'leaflet/dist/images/marker-shadow.png';`
+
+      *It is necessary to import these images otherwise the default cluster images will reference an incorrect URL*
+
+## Usage
+
+### React Components
+
+#### - MarkerCluster.tsx
+
+<Source code={MarkerCluster} />
+
+### Normalizing external data
+
+#### - utils/toGeoJSON.ts
+
+<Source code={toGeoJSON} />
+
+### CSS Styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+### Data
+
+#### - data.json
+
+*Code intentionally shortened*
+
+<Source code={`${data.substring(0, 800)}...`} />
+
+### The cluster icon
+
+#### - utils/createClusterIcon.ts
+
+<Source code={createClusterIcon} />

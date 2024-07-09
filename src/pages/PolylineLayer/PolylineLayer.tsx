@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import type { FunctionComponent } from 'react';
 import L, { LatLngTuple } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
@@ -7,7 +6,7 @@ import styles from './styles.module.css';
 import data from './data.json';
 import { lineHoverStyles, lineStyles } from './layerStyles';
 
-const PolylineLayer: FunctionComponent = () => {
+const PolylineLayer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);
@@ -32,7 +31,7 @@ const PolylineLayer: FunctionComponent = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 3,
+      minZoom: 6,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],

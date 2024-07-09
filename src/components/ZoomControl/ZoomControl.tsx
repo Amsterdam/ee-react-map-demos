@@ -1,5 +1,4 @@
 import { Button, Icon } from '@amsterdam/design-system-react';
-import { FunctionComponent } from 'react';
 import {
   EnlargeIcon,
   MinimiseIcon,
@@ -8,7 +7,7 @@ import {
 import styles from './styles.module.css';
 import { useMapInstance } from '@/components/Map/MapContext';
 
-const ZoomControl: FunctionComponent = () => {
+const ZoomControl = () => {
   const mapInstance = useMapInstance();
 
   const handleZoomInClick = () => {

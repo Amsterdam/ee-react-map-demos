@@ -24,7 +24,7 @@ const useLeafletMap = (container: RefObject<HTMLDivElement>) => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 3,
+      minZoom: 6,
       crs: getCrsRd(),
       maxBounds: [
         [52.36966606270195, 4.886568897250246],

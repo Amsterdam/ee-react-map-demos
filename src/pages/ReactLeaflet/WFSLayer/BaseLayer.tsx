@@ -1,4 +1,4 @@
-import type { FunctionComponent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -9,11 +9,13 @@ interface BaseLayerProps {
   children?: ReactNode;
 }
 
-const BaseLayer: FunctionComponent<BaseLayerProps> = ({ children }) => (
+const BaseLayer = ({ children }: BaseLayerProps) => (
   <div className={styles.container}>
     <MapContainer
       center={L.latLng([52.370216, 4.895168])}
       zoom={13}
+      maxZoom={16}
+      minZoom={6}
       maxBounds={[
         [52.36966606270195, 4.886568897250246],
         [52.37253554766886, 4.892099548064893],
