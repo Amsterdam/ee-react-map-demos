@@ -35,15 +35,23 @@ export const RightArrow = () => <svg
 
 # Gemeente Amsterdam Map Demos
 
-This project aims to include demos and examples of common use-cases of maps. The selected map library is [Leaflet](https://leafletjs.com/) implemented in the frontend library [React](https://react.dev/).
+This project aims to include demos and examples of common use-cases of maps for Gemeente Amsterdam. The preferred map library is [Leaflet](https://leafletjs.com/) implemented in the frontend library [React](https://react.dev/).
 
 Each demo is offered in two flavours:
 
 1. [React](https://react.dev/) and [Leaflet](https://leafletjs.com/) for those who prefer native JavaScript/TypeScript.
 2. [React](https://react.dev/) and [React-leaflet](https://react-leaflet.js.org/) for those who prefer JSX.
 
-### TODO Change these blocks below to screenshots + description + links to each demo?
+We try to includes docs using the following structure for each demo:
 
+- General description
+- Background/useful to know caveats
+- Files required to implement
+- And the code from each file
+
+### Context
+
+We also provide some more advanced examples using React's context. These are included in a separate group. (TODO link)
 
 <div className="sb-container">
   <div className="sb-section">
@@ -52,43 +60,32 @@ Each demo is offered in two flavours:
         src={Styling}
         alt="A wall of logos representing different styling technologies"
       />
-      <h4 className="sb-section-item-heading">Add styling and CSS</h4>
-      <p className="sb-section-item-paragraph">Like with web applications, there are many ways to include CSS within Storybook. Learn more about setting up styling within Storybook.</p>
-      <a
-        href="https://storybook.js.org/docs/react/configure/styling-and-css"
-        target="_blank"
-      >Learn more<RightArrow /></a>
+      <h4 className="sb-section-item-heading">Amsterdam Base Layer</h4>
+      <p className="sb-section-item-paragraph">How to implement a map using the Amsterdam base layer tiles.</p>
+      <a href="#">Learn more<RightArrow /></a>
     </div>
     <div className="sb-section-item">
       <img
         src={Context}
         alt="An abstraction representing the composition of data for a component"
       />
-      <h4 className="sb-section-item-heading">Provide context and mocking</h4>
-      <p className="sb-section-item-paragraph">Often when a story doesn't render, it's because your component is expecting a specific environment or context (like a theme provider) to be available.</p>
-      <a
-        href="https://storybook.js.org/docs/react/writing-stories/decorators#context-for-mocking"
-        target="_blank"
-      >Learn more<RightArrow /></a>
+      <h4 className="sb-section-item-heading">Marker</h4>
+      <p className="sb-section-item-paragraph">How to implement a Leaflet point marker.</p>
+      <a href="https://storybook.js.org/docs/react/writing-stories/decorators#context-for-mocking">Learn more<RightArrow /></a>
     </div>
     <div className="sb-section-item">
       <img src={Assets} alt="A representation of typography and image assets" />
       <div>
-        <h4 className="sb-section-item-heading">Load assets and resources</h4>
-        <p className="sb-section-item-paragraph">To link static files (like fonts) to your projects and stories, use the
-        `staticDirs` configuration option to specify folders to load when
-        starting Storybook.</p>
-        <a
-          href="https://storybook.js.org/docs/react/configure/images-and-assets"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">GeoJSON</h4>
+        <p className="sb-section-item-paragraph">Learn the powers of the GeoJSON layer</p>
+        <a href="#">Learn more<RightArrow /></a>
       </div>
     </div>
   </div>
 </div>
 <div className="sb-container">
   <div className='sb-section-title'>
-    # Do more with Storybook
+    # Do more with maps
 
     Now that you know the basics, let's explore other parts of Storybook that will improve your experience. This list is just to get you started. You can customise Storybook in many ways to fit your needs.
   </div>
@@ -97,77 +94,35 @@ Each demo is offered in two flavours:
     <div className="sb-features-grid">
       <div className="sb-grid-item">
         <img src={Docs} alt="A screenshot showing the autodocs tag being set, pointing a docs page being generated" />
-        <h4 className="sb-section-item-heading">Autodocs</h4>
-        <p className="sb-section-item-paragraph">Auto-generate living,
-          interactive reference documentation from your components and stories.</p>
-        <a
-          href="https://storybook.js.org/docs/react/writing-docs/autodocs"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">Multiple Marker Selection</h4>
+        <p className="sb-section-item-paragraph">Amsterdam taxistandplaats using multiple marker selection...</p>
+        <a href="#">Learn more<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
         <img src={Share} alt="A browser window showing a Storybook being published to a chromatic.com URL" />
-        <h4 className="sb-section-item-heading">Publish to Chromatic</h4>
-        <p className="sb-section-item-paragraph">Publish your Storybook to review and collaborate with your entire team.</p>
-        <a
-          href="https://storybook.js.org/docs/react/sharing/publish-storybook#publish-storybook-with-chromatic"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">Marker Clustering</h4>
+        <p className="sb-section-item-paragraph">... ... ... ...</p>
+        <a href="#">Learn more<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
         <img src={FigmaPlugin} alt="Windows showing the Storybook plugin in Figma" />
-        <h4 className="sb-section-item-heading">Figma Plugin</h4>
-        <p className="sb-section-item-paragraph">Embed your stories into Figma to cross-reference the design and live
-          implementation in one place.</p>
-        <a
-          href="https://storybook.js.org/docs/react/sharing/design-integrations#embed-storybook-in-figma-with-the-plugin"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">Zoom Controls + Amsterdam-Design-System</h4>
+        <p className="sb-section-item-paragraph">Amsterdam-design-system combined with Leaflet and React...</p>
+        <a href="#">Learn more<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
         <img src={Testing} alt="Screenshot of tests passing and failing" />
-        <h4 className="sb-section-item-heading">Testing</h4>
-        <p className="sb-section-item-paragraph">Use stories to test a component in all its variations, no matter how
-          complex.</p>
-        <a
-          href="https://storybook.js.org/docs/react/writing-tests"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <img src={Accessibility} alt="Screenshot of accessibility tests passing and failing" />
-        <h4 className="sb-section-item-heading">Accessibility</h4>
-        <p className="sb-section-item-paragraph">Automatically test your components for a11y issues as you develop.</p>
-        <a
-          href="https://storybook.js.org/docs/react/writing-tests/accessibility-testing"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <img src={Theming} alt="Screenshot of Storybook in light and dark mode" />
-        <h4 className="sb-section-item-heading">Theming</h4>
-        <p className="sb-section-item-paragraph">Theme Storybook's UI to personalize it to your project.</p>
-        <a
-          href="https://storybook.js.org/docs/react/configure/theming"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">WFS Layer</h4>
+        <p className="sb-section-item-paragraph">WFS layers contain data and map imagery...</p>
+        <a href="#">Learn more<RightArrow /></a>
       </div>
     </div>
   </div>
 </div>
-<div className='sb-addon'>
-  <div className='sb-addon-text'>
-    <h4>Addons</h4>
-    <p className="sb-section-item-paragraph">Integrate your tools with Storybook to connect workflows.</p>
-    <a
-        href="https://storybook.js.org/integrations/"
-        target="_blank"
-      >Discover all addons<RightArrow /></a>
-  </div>
-  <div className='sb-addon-img'>
-    <img src={AddonLibrary} alt="Integrate your tools with Storybook to connect workflows." />
-  </div>
-</div>
+
+## Feedback
+
+... ... ... ...
 
 <div className="sb-section sb-socials">
     <div className="sb-section-item">
@@ -180,37 +135,16 @@ Each demo is offered in two flavours:
       >Star on GitHub<RightArrow /></a>
     </div>
     <div className="sb-section-item">
-      <img src={Discord} alt="Discord logo" className="sb-explore-image"/>
-      <div>
-        Get support and chat with frontend developers.
-
-        <a
-          href="https://discord.gg/storybook"
-          target="_blank"
-        >Join Discord server<RightArrow /></a>
-      </div>
-    </div>
-    <div className="sb-section-item">
-      <img src={Youtube} alt="Youtube logo" className="sb-explore-image"/>
-      <div>
-        Watch tutorials, feature previews and interviews.
-
-        <a
-          href="https://www.youtube.com/@chromaticui"
-          target="_blank"
-        >Watch on YouTube<RightArrow /></a>
-      </div>
-    </div>
-    <div className="sb-section-item">
       <img src={Tutorials} alt="A book" className="sb-explore-image"/>
       <p>Follow guided walkthroughs on for key workflows.</p>
 
       <a
           href="https://storybook.js.org/tutorials/"
           target="_blank"
-        >Discover tutorials<RightArrow /></a>
+        >developers.amsterdam<RightArrow /></a>
     </div>
 </div>
+
 
 <style>
   {`
