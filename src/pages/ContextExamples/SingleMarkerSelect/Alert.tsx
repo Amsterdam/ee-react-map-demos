@@ -1,9 +1,5 @@
 import type { FunctionComponent } from 'react';
-import {
-  Alert as AmsAlert,
-  Button,
-  Paragraph,
-} from '@amsterdam/design-system-react';
+import { Button, Paragraph } from '@amsterdam/design-system-react';
 import styles from '../styles.module.css';
 import { useMapInstance } from './MapContext';
 
@@ -13,28 +9,27 @@ const Alert: FunctionComponent = () => {
 
   if (displayAlert) {
     return (
-      <div className={styles['alert-wrapper']}>
-        <AmsAlert severity="info">
-          {selectedMarker ? (
-            <>
-              <Paragraph size="small">
-                You clicked on a marker with the ID{' '}
-                <strong>{selectedMarker}</strong>
-              </Paragraph>
-              <Button
-                variant="primary"
-                type="button"
-                onClick={() => {
-                  setDisplayAlert(false);
-                  setSelectedMarker(null);
-                }}
-              >
-                Close
-              </Button>
-            </>
-          ) : null}
-        </AmsAlert>
-      </div>
+      <section
+        className={`${styles['alert-wrapper']} ams-alert ams-alert--info`}
+      >
+        <div className="ams-alert__content">
+          <Paragraph size="small">
+            You clicked on a marker with the ID{' '}
+            <strong>{selectedMarker}</strong>
+          </Paragraph>
+          <br />
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() => {
+              setDisplayAlert(false);
+              setSelectedMarker(null);
+            }}
+          >
+            Reset
+          </Button>
+        </div>
+      </section>
     );
   }
 
