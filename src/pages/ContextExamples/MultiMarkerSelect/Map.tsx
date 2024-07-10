@@ -43,6 +43,7 @@ const Map: FunctionComponent = () => {
   const onMouseOver = useCallback((e: LeafletMouseEvent) => {
     (e.target as Polygon).setStyle({
       fillColor: '#ffff00',
+      fillOpacity: 0.8,
     });
   }, []);
 
@@ -54,6 +55,7 @@ const Map: FunctionComponent = () => {
       if (layerId && !selectedMarkers.includes(layerId)) {
         (e.target as Polygon).setStyle({
           fillColor: '#3388ff',
+          fillOpacity: 0.2,
           color: '#3388ff',
         });
       }
@@ -151,7 +153,7 @@ const Map: FunctionComponent = () => {
         selectedPolygons.forEach(selectedPolygon => {
           selectedPolygon.setStyle({
             fillColor: '#ffff00',
-            fillOpacity: 0.8,
+            fillOpacity: 1,
             opacity: 1,
           });
         });
