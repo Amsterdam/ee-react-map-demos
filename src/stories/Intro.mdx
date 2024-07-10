@@ -1,19 +1,14 @@
 import { Meta } from "@storybook/blocks";
 
 import Github from "./assets/github.svg";
-import Discord from "./assets/discord.svg";
-import Youtube from "./assets/youtube.svg";
-import Tutorials from "./assets/tutorials.svg";
-import Styling from "./assets/styling.png";
-import Context from "./assets/context.png";
-import Assets from "./assets/assets.png";
-import Docs from "./assets/docs.png";
-import Share from "./assets/share.png";
-import FigmaPlugin from "./assets/figma-plugin.png";
-import Testing from "./assets/testing.png";
-import Accessibility from "./assets/accessibility.png";
-import Theming from "./assets/theming.png";
-import AddonLibrary from "./assets/addon-library.png";
+import Intro00 from './assets/intro-00.png';
+import Intro01 from './assets/intro-01.png';
+import Intro02 from './assets/intro-02.png';
+import Intro03 from './assets/intro-03.png';
+import Intro04 from './assets/intro-04.png';
+import Intro05 from './assets/intro-05.png';
+import Intro06 from './assets/intro-06.png';
+import DocumentCheckmark from './assets/DocumentCheckmark.svg';
 
 export const RightArrow = () => <svg
     viewBox="0 0 14 14"
@@ -39,82 +34,77 @@ This project aims to include demos and examples of common use-cases of maps for 
 
 Each demo is offered in two flavours:
 
-1. [React](https://react.dev/) and [Leaflet](https://leafletjs.com/) for those who prefer native JavaScript/TypeScript.
+1. [React](https://react.dev/) and [Leaflet](https://leafletjs.com/) for those who prefer native JavaScript/TypeScript. *There are also some React and Leaflet examples that use <a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank">React's context</a>, which assists with larger/advanced maps features.*
 2. [React](https://react.dev/) and [React-leaflet](https://react-leaflet.js.org/) for those who prefer JSX.
 
-We try to includes docs using the following structure for each demo:
+For each demo we also try to includes documentation with following structure:
 
 - General description
 - Background/useful to know caveats
-- Files required to implement
+- Overview of the files required to implement
 - And the code from each file
 
-### Context
-
-We also provide some more advanced examples using React's context. These are included in a separate group. (TODO link)
+## Starter demos
 
 <div className="sb-container">
   <div className="sb-section">
     <div className="sb-section-item">
       <img
-        src={Styling}
-        alt="A wall of logos representing different styling technologies"
+        src={Intro00}
+        alt="The Amsterdam base layer map tile"
       />
       <h4 className="sb-section-item-heading">Amsterdam Base Layer</h4>
-      <p className="sb-section-item-paragraph">How to implement a map using the Amsterdam base layer tiles.</p>
-      <a href="#">Learn more<RightArrow /></a>
+      <p className="sb-section-item-paragraph">How to implement a Leaflet map using the Amsterdam base tile layer.</p>
+      <a href="../?path=/docs/react-baselayer--docs">Learn more<RightArrow /></a>
     </div>
     <div className="sb-section-item">
       <img
-        src={Context}
-        alt="An abstraction representing the composition of data for a component"
+        src={Intro01}
+        alt="A marker on the Amsterdam base title layer map"
       />
       <h4 className="sb-section-item-heading">Marker</h4>
       <p className="sb-section-item-paragraph">How to implement a Leaflet point marker.</p>
-      <a href="https://storybook.js.org/docs/react/writing-stories/decorators#context-for-mocking">Learn more<RightArrow /></a>
+      <a href="../?path=/docs/react-marker--docs">Learn more<RightArrow /></a>
     </div>
     <div className="sb-section-item">
-      <img src={Assets} alt="A representation of typography and image assets" />
+      <img src={Intro02} alt="An example of GeoJSON map layer" />
       <div>
         <h4 className="sb-section-item-heading">GeoJSON</h4>
-        <p className="sb-section-item-paragraph">Learn the powers of the GeoJSON layer</p>
-        <a href="#">Learn more<RightArrow /></a>
+        <p className="sb-section-item-paragraph">Learn about the format and powers of the GeoJSON layer.</p>
+        <a href="../?path=/docs/react-geojson--docs">Learn more<RightArrow /></a>
       </div>
     </div>
   </div>
 </div>
+
+## Advanced demos
+
 <div className="sb-container">
-  <div className='sb-section-title'>
-    # Do more with maps
-
-    Now that you know the basics, let's explore other parts of Storybook that will improve your experience. This list is just to get you started. You can customise Storybook in many ways to fit your needs.
-  </div>
-
   <div className="sb-section">
     <div className="sb-features-grid">
       <div className="sb-grid-item">
-        <img src={Docs} alt="A screenshot showing the autodocs tag being set, pointing a docs page being generated" />
+        <img src={Intro03} alt="A screenshot showing the multiple marker selection demo" />
         <h4 className="sb-section-item-heading">Multiple Marker Selection</h4>
-        <p className="sb-section-item-paragraph">Amsterdam taxistandplaats using multiple marker selection...</p>
-        <a href="#">Learn more<RightArrow /></a>
+        <p className="sb-section-item-paragraph">Learn how to display and select Amsterdam taxi stand locations in a Leaflet map with the help of React's context.</p>
+        <a href="../?path=/docs/react-context-examples-multimarkerselect--docs">Learn more<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
-        <img src={Share} alt="A browser window showing a Storybook being published to a chromatic.com URL" />
+        <img src={Intro04} alt="A screenshot showing a marker cluster demo" />
         <h4 className="sb-section-item-heading">Marker Clustering</h4>
-        <p className="sb-section-item-paragraph">... ... ... ...</p>
-        <a href="#">Learn more<RightArrow /></a>
+        <p className="sb-section-item-paragraph">Learn how to handle large numbers of markers through clustering.</p>
+        <a href="../?path=/docs/react-markerclusterspiderfy--docs">Learn more<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
-        <img src={FigmaPlugin} alt="Windows showing the Storybook plugin in Figma" />
+        <img src={Intro05} alt="A screenshot showing a Leaflet map combined with elements from Amsterdam-design-system" />
         <h4 className="sb-section-item-heading">Zoom Controls + Amsterdam-Design-System</h4>
-        <p className="sb-section-item-paragraph">Amsterdam-design-system combined with Leaflet and React...</p>
-        <a href="#">Learn more<RightArrow /></a>
+        <p className="sb-section-item-paragraph">Learn how to implement custom zoom controls and wrap a Leaflet map with components from Amsterdam Design System</p>
+        <a href="../?path=/docs/react-context-examples-zoomcontrolsfullscreen--docs">Learn more<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
-        <img src={Testing} alt="Screenshot of tests passing and failing" />
+        <img src={Intro06} alt="A screenshot of an Amsterdam WFS layer" />
         <h4 className="sb-section-item-heading">WFS Layer</h4>
-        <p className="sb-section-item-paragraph">WFS layers contain data and map imagery...</p>
-        <a href="#">Learn more<RightArrow /></a>
+        <p className="sb-section-item-paragraph">Learn how to connect with a WFS endpoint and show the buildings of Amsterdam on a Leaflet map.</p>
+        <a href="../?path=/docs/react-wfslayer--docs">Learn more<RightArrow /></a>
       </div>
     </div>
   </div>
@@ -122,24 +112,26 @@ We also provide some more advanced examples using React's context. These are inc
 
 ## Feedback
 
-... ... ... ...
+Contributions and feedback are highly appreciated, if you have spotted something that you think is incorrect or unsure about please <a href="https://github.com/Amsterdam/ee-react-map-demos/issues/new" target="_blank">create a issue</a> in the <a href="https://github.com/Amsterdam/ee-react-map-demos" target="_blank">GitHub repository</a>. Missing an example you think is necessary? Think an improvement can be made to an existing demo? Feel free to <a href="https://github.com/Amsterdam/ee-react-map-demos/compare" target="_blank">make a pull request</a>!
+
+Otherwise if you have any questions or other matters regarding implementing maps or a demo here, you can contact us via Teams (DV - Engineering Enablement) or Slack (#engineering-enablement).
 
 <div className="sb-section sb-socials">
     <div className="sb-section-item">
       <img src={Github} alt="Github logo" className="sb-explore-image"/>
-      Join our contributors building the future of UI development.
+      This project's repository.
 
       <a
-        href="https://github.com/storybookjs/storybook"
+        href="https://github.com/Amsterdam/ee-react-map-demos"
         target="_blank"
-      >Star on GitHub<RightArrow /></a>
+      >Browse on GitHub<RightArrow /></a>
     </div>
     <div className="sb-section-item">
-      <img src={Tutorials} alt="A book" className="sb-explore-image"/>
-      <p>Follow guided walkthroughs on for key workflows.</p>
+      <img src={DocumentCheckmark} alt="A book" className="sb-explore-image"/>
+      <p>Browse the City of Amsterdam technology standards and guidance.</p>
 
       <a
-          href="https://storybook.js.org/tutorials/"
+          href="https://developers.amsterdam/"
           target="_blank"
         >developers.amsterdam<RightArrow /></a>
     </div>
