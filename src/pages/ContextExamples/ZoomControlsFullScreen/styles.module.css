@@ -8,3 +8,15 @@
   /* This z-index value should ideally come from an application constant that is greater than the Leaflet top z-index */
   z-index: 400;
 }
+
+.fullscreen {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100dvh;
+  width: 100dvw;
+}
+
+.container {
+  height: 100%;
+  width: 100dvw;
+}
