@@ -37,3 +37,4 @@ export const parameters = {
     viewports,
   },
 };
+export const tags = ['autodocs'];
