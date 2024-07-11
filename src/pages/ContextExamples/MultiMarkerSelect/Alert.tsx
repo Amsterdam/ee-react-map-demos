@@ -1,9 +1,5 @@
 import { useMemo, type FunctionComponent } from 'react';
-import {
-  Alert as AmsAlert,
-  Button,
-  OrderedList,
-} from '@amsterdam/design-system-react';
+import { Button, UnorderedList } from '@amsterdam/design-system-react';
 import styles from '../styles.module.css';
 import { useMapInstance } from './MapContext';
 import data from './data.json';
@@ -22,16 +18,29 @@ const Alert: FunctionComponent = () => {
           str = `${str} - ${origin.properties.street}`;
         }
 
-        return <li key={`alert-${selectedMarker}`}>{str}</li>;
+        return (
+          <UnorderedList.Item key={`alert-${selectedMarker}`}>
+            {str}
+          </UnorderedList.Item>
+        );
       }),
     [selectedMarkers]
   );
 
   if (selectedStr.length) {
     return (
-      <div className={styles['alert-wrapper']}>
-        <AmsAlert heading="Selected markers" severity="info">
-          <OrderedList size="small">{selectedStr}</OrderedList>
+      <section
+        className={`${styles['alert-wrapper']} ams-alert ams-alert--info`}
+      >
+        <div className="ams-alert__content">
+          <h2 className="ams-heading ams-heading--4">Selected markers</h2>
+          <ul
+            className="ams-unordered-list ams-unordered-list--small"
+            style={{ marginInlineStart: 0, marginTop: '12px' }}
+          >
+            {selectedStr}
+          </ul>
+          <br />
           <Button
             variant="primary"
             type="button"
@@ -39,8 +48,8 @@ const Alert: FunctionComponent = () => {
           >
             Reset
           </Button>
-        </AmsAlert>
-      </div>
+        </div>
+      </section>
     );
   }
 

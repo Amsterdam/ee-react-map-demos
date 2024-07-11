@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Testing" />
+
+# Testing
+
+Whenever writing code, it is important to write tests to ensure that the output of your code is what you expected. With maps, this can be quite a challenge.
+
+Each demo in this project has tests for each file. Test files are stored in the same directories, with `.test` suffixed to the filename. You can find these files in the <a href="https://github.com/Amsterdam/ee-react-map-demos/tree/develop/src/pages" target="_blank">GitHub repository</a> in the `src/pages` directory.
+
+## Why is testing maps difficult?
+
+Testing maps in SPA (Single Page Application) JavsScript applications is challenging. This is because testing engines (for example, <a href="https://jestjs.io/" target="_blank">Jest</a> or <a href="https://vitest.dev/" target="_blank">Vitest</a>) do not use native browsers evironments. They often use a virtualized DOM (Document Object Model) engine, for example, <a href="https://github.com/jsdom/jsdom" target="_blank">jsdom</a> or <a href="https://github.com/capricorn86/happy-dom" target="_blank">Happy DOM</a>.
+
+These engines mimic your browser but only provide a lightweight, simulated DOM environment. They don't have the full capabilities of a web browser, particularly the advanced rendering capabilities needed for complex visual components like maps. This ranges from CSS, layout calculations, Canvas and SVG support to the timing it takes your map components to render.
+
+## What to do?
+
+**Mocking** is crucial - Use mock objects and functions to simulate the behavior of the Leaflet library (and possibly other libraries dependent on your map) without requiring it to render the real map.
+
+For example in `src/pages/MarkerCluster/MarkerCluster.test.tsx` we mock the main methods from `Supercluster` (the library used for marker clustering) because the Leaflet map returns the same map bounds. This means that the south-west coordinates point is the same as the nort-west coordinates point, so the map effectively renders nothing and Supercluster will also return nothing.
+
+If possible, move the focus of your test away from the visual logic of the map.
+
+**Integration Testing** is very useful for this type of test. Run tests in a real browser environment using tools like Cypress or Selenium, which provide full browser capabilities for more accurate testing of map rendering and interactions.
