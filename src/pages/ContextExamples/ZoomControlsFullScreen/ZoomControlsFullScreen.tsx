@@ -1,23 +1,18 @@
-import { AspectRatio, Screen, SkipLink } from '@amsterdam/design-system-react';
 import Header from './Header';
-import Footer from './Footer';
 import MapProvider from './MapProvider';
 import ZoomControls from './ZoomControls';
+import styles from './styles.module.css';
 
 const ZoomControlsFullScreen = () => {
   return (
-    <>
-      <SkipLink href="#main">Direct naar inhoud</SkipLink>
-      <Screen maxWidth="wide">
-        <Header />
-        <AspectRatio ratio="wide">
-          <MapProvider>
-            <ZoomControls />
-          </MapProvider>
-        </AspectRatio>
-        <Footer />
-      </Screen>
-    </>
+    <div className={styles.fullscreen}>
+      <Header />
+      <div className={styles.container}>
+        <MapProvider>
+          <ZoomControls />
+        </MapProvider>
+      </div>
+    </div>
   );
 };
 

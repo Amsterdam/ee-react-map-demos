@@ -32,8 +32,7 @@ const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
         }),
       ],
       zoomControl: false,
-      // Prevent the map zooming when we try to scroll the page
-      scrollWheelZoom: false,
+      scrollWheelZoom: true,
       maxZoom: 16,
       minZoom: 6,
       crs: getCrsRd(),
