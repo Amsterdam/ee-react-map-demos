@@ -26,6 +26,8 @@ const GeoJSONLayer = (): JSX.Element => {
       <MapContainer
         center={L.latLng([52.370216, 4.895168])}
         zoom={8}
+        maxZoom={16}
+        minZoom={6}
         maxBounds={[
           [52.25168, 4.64034],
           [52.50536, 5.10737],

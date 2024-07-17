@@ -9,6 +9,8 @@ const WMSLayer = (): JSX.Element => (
     <MapContainer
       center={L.latLng([52.370216, 4.895168])}
       zoom={13}
+      maxZoom={16}
+      minZoom={6}
       maxBounds={[
         [52.36966606270195, 4.886568897250246],
         [52.37253554766886, 4.892099548064893],
