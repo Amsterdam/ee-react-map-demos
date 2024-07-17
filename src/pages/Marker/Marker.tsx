@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import type { FunctionComponent } from 'react';
 import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import customMarker from './icons/customMarker';
 
-const Marker: FunctionComponent = () => {
+const Marker = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const [, setMarkerInstance] = useState<L.Marker | null>(null);
@@ -29,7 +28,7 @@ const Marker: FunctionComponent = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 3,
+      minZoom: 6,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],

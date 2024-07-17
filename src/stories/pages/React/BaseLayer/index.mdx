@@ -1,0 +1,79 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as BaseLayerStories from './index.stories';
+import BaseLayer from '@/pages/BaseLayer/BaseLayer?raw';
+import styles from '@/pages/BaseLayer/styles.module.css?raw';
+import getCrsRd from '@/utils/getCrsRd?raw';
+
+<Meta of={BaseLayerStories} />
+
+# BaseLayer
+
+**[Background](../?path=/docs/leaflet-layers--docs#tilelayer)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/BaseLayer" target="_blank">GitHub Repo URL</a>**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [Background](#background)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- CRS handling ([utils/getCrsRd.ts](#1-getcrsrdts))
+
+## Description
+
+This is the Amsterdam base/tile layer on a plain Leaflet map.
+
+## Background
+
+### Amsterdam base/tile layer
+
+A <a href="https://leafletjs.com/reference.html#tilelayer" target="_blank">TileLayer</a> is composed of images, such as satellite imagery, that are composed of square tiles mosaicked together in columns and rows, giving the layer the appearance that it is one continuous image. These layers have several levels of detail (LOD) that permit users to zoom in to any region of the map and load additional tiles that depict features in higher resolution at larger map scales.
+
+The datateam Geo makes various reference maps based on reference data from team BenK (Basis- en Kernregistraties). They are available in [various reference systems (Rijksdriehoek and Web Mercator)](../?path=/docs/coordinate-reference-systems-crs--docs) and the following visualizations:
+
+- Standard (standaard)
+- Black and white (zwart-wit)
+- Light (light)
+
+These tiles are hosted in a <a href="https://azure.microsoft.com/en-us/products/storage/blobs" target="_blank">Azure Blob Store</a> and accessed via <a href="https://azure.microsoft.com/nl-nl/products/frontdoor" target="_blank">Azure Front Door</a>. The maptitles are made with <a href="https://github.com/Amsterdam/mapproxy" target="_blank">MapProxy</a> based on <a href="https://github.com/Amsterdam/mapserver" target="_blank">MapServer</a>.
+
+### Coordinate Reference System handling
+
+Leaflet by default uses EPSG:3857 (Web Mercator / WGS 84), however, the base layer by default uses Rijksdriehoekscoördinaten. Therefore, we include the `utils/getCrsRd` file to appropriately handle coordinates. [Read more about CRS](#1-getcrsrdts).
+
+## How to implement
+
+To accomplish the Amsterdam base/tile layer there are three files:
+1. The React components
+    * [BaseLayer.tsx](#--baselayertsx)
+2. The CSS styles (1 file)
+    * [styles.module.css](#--stylesmodulecss)
+3. Utils (1 file)
+    * [getCrsRd.ts](#--getcrsrdts)
+       - This util file handles the CRS (Coordinate Reference System) because Gemeente Amsterdam by default uses <a href="https://www.kadaster.nl/zakelijk/registraties/basisregistraties/rijksdriehoeksmeting/rijksdriehoeksstelsel" target="_blank">Rijksdriehoekscoördinaten</a>. Leaflet by default uses <a href="https://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS84 (World Geodetic System)</a>.
+
+## Usage
+
+The following files are required:
+
+### 1. React component
+
+#### - BaseLayer.tsx
+
+<Source code={BaseLayer} />
+
+### 2. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+### 3. Utils
+
+#### - getCrsRd.ts
+
+  <Source code={getCrsRd} />

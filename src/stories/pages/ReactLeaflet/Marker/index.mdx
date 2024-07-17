@@ -1,0 +1,87 @@
+import { Meta, Source } from '@storybook/blocks';
+import * as MarkerStories from './index.stories';
+import Marker from '@/pages/ReactLeaflet/Marker/Marker?raw';
+import styles from '@/pages/ReactLeaflet/Marker/styles.module.css?raw';
+import getCrsRd from '@/utils/getCrsRd?raw';
+import defaultMarker from '@/utils/icons/defaultMarker?raw';
+
+<Meta of={MarkerStories} />
+
+# Marker
+
+**[Background and use cases](../?path=/docs/leaflet-layers--docs#marker)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ReactLeaflet/Marker" target="_blank">GitHub Repo URL</a>**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- This example is built upon the [BaseMap component example](../?path=/docs/react-leaflet-baselayer--docs).
+
+## Description
+
+The Marker component renders a map centered on Amsterdam with a marker.
+This component uses the React Leaflet library to create and manage the map.
+
+### Large numbers of markers can lead to degraded performance
+
+Every Marker is an HTML image element and showing one will have a ver slight negative impact on performance.
+Showing tens of thousands of Markers wil have a significant impact.
+Please don't do this without either clustering or setting the 'preferCanvas' option of the Leaflet map to 'true'.
+
+### Create Custom Marker Icon:
+
+Define a custom marker icon if needed. Make sure to replace the placeholder path with the correct path to your marker icon.
+
+```js
+import markerIconUrl from '@/path/to/marker-icon.png'; // Correct path to your marker icon
+
+const defaultMarker = L.icon({
+  iconUrl: markerIconUrl,
+  ...
+});
+
+export default defaultMarker;
+```
+
+## How to implement
+
+To accomplish the Amstedam Marker there are the following files:
+1. The React component
+    * [Marker.tsx](#--markertsx)
+2. The CSS styles (1 file)
+    * [styles.module.css](#--stylesmodulecss)
+3. Utils (2 files)
+    * [defaultMarker.ts](#--defaultmarkerts)
+    * [getCrsRd.ts](#--getcrsrdts)
+
+## Usage
+
+The following files are required:
+
+### 1. React Component
+
+#### - Marker.tsx
+
+<Source code={Marker} />
+
+### 2. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+### 3. Utils
+
+#### - defaultMarker.ts
+
+<Source code={defaultMarker} />
+
+#### - getCrsRd.ts
+
+<Source code={getCrsRd} />

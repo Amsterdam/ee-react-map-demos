@@ -1,0 +1,96 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as MarkerStories from './index.stories';
+import Marker from '@/pages/Marker/Marker?raw';
+import styles from '@/pages/Marker/styles.module.css?raw';
+import customMarker from '@/pages/Marker/icons/customMarker?raw';
+import icon from '@/assets/icons/map-marker.svg?raw';
+
+<Meta of={MarkerStories} />
+
+# Marker
+
+**[Background and use cases](../?path=/docs/leaflet-layers--docs#marker)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/Marker" target="_blank">GitHub Repo URL</a>**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+
+## Description
+
+A marker is used to display a location on a map. By default, a marker is a HTML image element rendered inside the parent map DOM element. This marker element can be configured, extended and (like in this example) replaced with another icon.
+
+In this code example, the default Leaflet marker (<a href="https://leafletjs.com/examples/layers-control/" target="_blank">example</a>) is replaced with the `L.icon` (<a href="https://leafletjs.com/reference.html#icon" target="_blank">docs</a>); another alternative to this is the `L.divIcon` (<a href="https://leafletjs.com/reference.html#divicon" target="_blank">docs</a>). [Read more Leaflet icons here](../?path=/docs/icons--docs).
+
+The primary code in regards to creating a Leaflet marker, is lines 50-59:
+
+```js
+useEffect(() => {
+  if (mapInstance) {
+    const marker = L.marker(L.latLng([52.370216, 4.895168]), {
+      // There are many more options to choose from @see <a href="https://leafletjs.com/reference.html#marker" target="_blank">https://leafletjs.com/reference.html#marker</a>
+      icon: customMarker
+    }).addTo(mapInstance)
+      .on('click', () => alert('Marker click!'));
+    setMarkerInstance(marker);
+  }
+}, [mapInstance]);
+```
+
+This creates a marker at the coordinates (52.370216, 4.895168), which is added to the map (via the `addTo` method) and includes an example event listener that will be triggered on marker clicks. Then in the rest of the code, this marker element, can be referred to via the `markerInstance` state variable and interacted with using Leaflet methods.
+
+A Leaflet marker element consists of <a href="https://leafletjs.com/reference.html#marker-move" target="_blank">events</a>, <a href="https://leafletjs.com/reference.html#marker-l-marker" target="_blank">methods</a> and <a href="https://leafletjs.com/reference.html#marker-icon" target="_blank">options</a>.
+
+### Large numbers of markers can lead to degraded performance
+
+A standard Leaflet marker is a HTML image element. Therefore, if there are 100 markers, then there are 100 HTML image elements - each one with its own events, listeners and side-effects - another element to add to the DOM tree. Modern browsers and devices are quite efficient so negative performance often won't be noticed until you are handling tens of thousands of markers.
+
+The real solution to this is to ideally never render so many markers simultaneously. However, with some APIs that isn't always an easy option. This is where clustering should be implemented or the `preferCanvas` option is set to `true` when creating your Leaflet map.
+
+The `preferCanvas` instructs Leaflet to use the HTML Canvas element, which performs a lot quicker than the traditional HTML DOM tree. <a href="https://leafletjs.com/reference.html#map-prefercanvas" target="_blank">See docs</a>.
+
+## How to implement
+
+To implement a Leaflet marker, there are four files:
+
+1. The React component
+    * [Marker.tsx](#--markertsx)
+2. The custom icon
+    * [icons/customMarker.tsx](#--iconscustommarkertsx)
+3. The CSS styles (1 file)
+    * [styles.module.css](#--stylesmodulecss)
+4. Assets
+    * [assets/icons/map-marker.svg](#--map-markersvg)
+
+## Usage
+
+### 1. React component
+
+#### - Marker.tsx
+
+<Source code={Marker} />
+
+### 2. Custom icon
+
+#### - icons/customMarker.tsx
+
+<Source code={customMarker} />
+
+### 3. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+### 4. Assets
+
+#### - map-marker.svg
+
+<Source code={icon} />

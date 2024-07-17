@@ -1,0 +1,147 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as MarkerClusterSpiderfyStories from './index.stories';
+import MarkerClusterSpiderfy from '@/pages/MarkerClusterSpiderfy/MarkerClusterSpiderfy?raw';
+import getMapData from '@/pages/MarkerClusterSpiderfy/getMapData?raw';
+import processFeatures from '@/pages/MarkerClusterSpiderfy/processFeatures?raw';
+import styles from '@/pages/MarkerClusterSpiderfy/styles.module.css?raw';
+import types from '@/pages/MarkerClusterSpiderfy/types?raw';
+import data from '@/pages/MarkerClusterSpiderfy/data.json?raw';
+import mapStyles from '@/pages/MarkerClusterSpiderfy/mapStyles?raw';
+import roundNumber from '@/pages/MarkerClusterSpiderfy/utils/roundNumber?raw';
+import createClusterShapes from '@/pages/MarkerClusterSpiderfy/utils/createClusterShapes?raw';
+import toGeoJSON from '@/utils/toGeoJSON?raw';
+import toBoundsLiteral from '@/utils/toBoundsLiteral?raw';
+
+<Meta of={MarkerClusterSpiderfyStories} />
+
+# Marker clustering (spiderfy)
+
+**[Background and use cases](../?path=/docs/marker-clustering--docs)** | **[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MarkerCluster)**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- [Supercluster](https://www.npmjs.com/package/supercluster)
+
+**For typescript:**
+
+- [@types/geojson](https://www.npmjs.com/package/@types/geojson)
+- [@types/supercluster](https://www.npmjs.com/package/@types/supercluster)
+
+## Description
+
+This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component. The static data for this example has intentionally been duplicated at two locations: **[Dijksgracht 19](https://data.amsterdam.nl/data/bag/nummeraanduiding/0363200000450029?center=52.3757212%2C4.9183681&term=Dijksgracht+19%2C+1019BT+Amsterdam&zoom=14)** and **[Papaverweg 33](https://data.amsterdam.nl/data/bag/nummeraanduiding/0363200000411392?center=52.3957353%2C4.9069465&term=Papaverweg+33%2C+1032KE+Amsterdam&zoom=14)**.
+
+**Heads up** if you are working with data that has no records with the same geometry values, there is a [simpler version](../?path=/story/react-markercluster--default) of this component available.
+
+### Data handling
+
+In the `useMemo` call (lines 112-125) we process the data in two methods:
+
+1. The primary call (`getMapData`) could exist in an API/backend-for-frontend application. This method returns data with features inside the map's current bounding box and creates a supercluster object. The supercluster object contains an extra data property `expansion_zoom`, which is used later in cluster event listeners.
+
+2. The secondary method (`processFeatures`) separates the markers and cluster items. For markers with the same geometry values, it also generates the GeoJSON for the re-generated cluster markers (new markers surrounding the initial marker positioning).
+
+### Display options
+
+There are two options for how to display the cluster:
+1. `clusterShape` = `circle` or `spiral`
+
+    *Circle draws the markers around the original marker geometry. Spiral draws the markers in spiral curve around the original marker geometry.*
+
+2. `spiderfyOnMaxZoom`: `true` or `false`
+
+    *This draws straight lines from the new clustered marker to the original geometry point. It works best with `clusterShape=circle`*
+
+## How to implement
+
+To implement marker clustering with Leaflet, there are X files:
+
+1. The React component
+    - [MarkerClusterSpiderfy.tsx](#--markerclusterspiderfytsx) (*This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*)
+2. Data handling
+    - [getMapData.ts](#--getmapdatats)
+    - [processFeatures.ts](#--processfeaturests)
+3. The CSS styles
+    - [styles.module.css](#--stylesmodulecss)
+4. Types for data (typescript only)
+    - [types.ts](#--typests) *(These have been kept minimal and are primarily for examples.)*
+5. Data
+    - [data.json](#--datajson) *(This static data should be replaced by a fetch call or other static data)*
+6. Map and cluster options and styles
+    - [mapStyles.ts](#--mapstylests)
+7. Utils
+    - [utils/roundNumber.ts](#--utilsroundnumberts)
+    - [utils/createClusterShapes.ts](#--utilscreateclustershapests)
+    - [utils/toGeoJSON.ts](#--utilstogeojsonts)
+    - [utils/toBoundsLiteral.ts](#--utilstoboundsliteralts)
+
+## Usage
+
+### 1. The React component
+
+#### - MarkerClusterSpiderfy.tsx
+
+<Source code={MarkerClusterSpiderfy} />
+
+### 2. Data handling
+
+#### - getMapData.ts
+
+<Source code={getMapData} />
+
+#### - processFeatures.ts
+
+<Source code={processFeatures} />
+
+### 3. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+### 4. Types for data
+
+#### - types.ts
+
+<Source code={types} />
+
+### 5. Data
+
+#### - data.json
+
+*Code intentionally shortened*
+
+<Source code={`${data.substring(0, 800)}...`} />
+
+### 6. Map Styles
+
+#### - mapStyles.ts
+
+<Source code={mapStyles} />
+
+### 7. Utils
+
+#### - utils/roundNumber.ts
+
+<Source code={roundNumber} />
+
+#### - utils/createClusterShapes.ts
+
+<Source code={createClusterShapes} />
+
+#### - utils/toGeoJSON.ts
+
+<Source code={toGeoJSON} />
+
+#### - utils/toBoundsLiteral.ts
+
+<Source code={toBoundsLiteral} />

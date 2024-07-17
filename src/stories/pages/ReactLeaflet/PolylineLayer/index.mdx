@@ -1,0 +1,60 @@
+import { Meta, Source } from '@storybook/blocks';
+import * as PolylineLayerStories from './index.stories';
+import PolylineLayer from '@/pages/ReactLeaflet/PolylineLayer/PolylineLayer?raw';
+import styles from '@/pages/ReactLeaflet/PolylineLayer/styles.module.css?raw';
+import getCrsRd from '@/utils/getCrsRd?raw';
+
+<Meta of={PolylineLayerStories} />
+
+# PolylineLayer
+
+**[Background](../?path=/docs/leaflet-layers--docs#polyline)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ReactLeaflet/PolylineLayer" target="_blank">GitHub Repo URL</a>**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- This example is built upon the [BaseMap component example](../?path=/docs/react-leaflet-baselayer--docs).
+
+## Description
+
+This is a polyline layer on a React-leaflet map. A polyline layer is used to display lines on a map. It can be configured, extended and restyled (<a href="https://leafletjs.com/reference.html#polyline" target="_blank">see docs</a>). You can create a Polyline object with multiple separate lines (MultiPolyline) by passing an array of arrays of geographic points.
+
+## How to implement
+
+To accomplish the Amstedam base/tile layer there are three files:
+
+1. The React component
+    * [PolylineLayer.tsx](#--polylinelayertsx)
+2. The CSS styles (1 file)
+    * [styles.module.css](#--stylesmodulecss)
+3. Utils (1 file)
+    * [getCrsRd.ts](#--getcrsrdts)
+
+## Usage
+
+The following files are required:
+
+### 1. React component
+
+#### - PolylineLayer.tsx
+
+<Source code={PolylineLayer} />
+
+### 2. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+### 3. Utils
+
+#### - getCrsRd.ts
+
+<Source code={getCrsRd} />

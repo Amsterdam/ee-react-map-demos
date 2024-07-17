@@ -28,9 +28,8 @@ export const parameters = {
         'Coordinate*',
         'Global',
         'React',
+        'React-Context-Examples',
         'React-Leaflet',
-        'Components',
-        'Patterns',
       ],
     },
   },
@@ -38,3 +37,4 @@ export const parameters = {
     viewports,
   },
 };
+export const tags = ['autodocs'];

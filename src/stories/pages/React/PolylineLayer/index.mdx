@@ -1,0 +1,97 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as PolylineLayerStories from './index.stories';
+import PolylineLayer from '@/pages/PolylineLayer/PolylineLayer?raw';
+import styles from '@/pages/PolylineLayer/styles.module.css?raw';
+import layerStyles from '@/pages/PolylineLayer/layerStyles?raw';
+import data from '@/pages/PolylineLayer/data.json?raw';
+
+<Meta of={PolylineLayerStories} />
+
+# PolylineLayer
+
+**[Background and use cases](../?path=/docs/leaflet-layers--docs#polyline)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/PolylineLayer" target="_blank">GitHub Repo URL</a>**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+
+## Description
+
+A polyline layer is used to display lines on a map. By default, a polyline layer is a HTML SVG element rendered inside the parent map DOM element. This polyline layer can be configured, extended and restyled (<a href="https://leafletjs.com/reference.html#polyline" target="_blank">see docs</a>).
+
+The primary code in regards to creating a Leaflet polyline layer, is lines 64-87:
+
+```js
+useEffect(() => {
+  if (mapInstance) {
+    // TypeScript will often throw errors with Leaflet coordinate sets if you don't explicitly cast the type
+    polylineRef.current = L.polyline(
+      data.geometry.coordinates[0] as LatLngTuple[],
+      lineStyles
+    )
+      .addTo(mapInstance)
+      .on('mouseover', () => {
+        polylineRef.current?.setStyle(lineHoverStyles);
+      })
+      .on('mouseout', () => {
+        polylineRef.current?.setStyle(lineStyles);
+      });
+  }
+
+  return () => {
+    if (polylineRef.current && mapInstance) {
+      mapInstance.removeLayer(polylineRef.current);
+    }
+  };
+}, [data, mapInstance]);
+```
+
+## How to implement
+
+To implement a Leaflet polygon layer there are three files required, this example also uses an extra file for demo data:
+
+1. The React component
+    - [PolylineLayer.tsx](#--polylinelayertsx)
+2. The CSS styles (1 file)
+    - [styles.module.css](#--stylesmodulecss)
+3. The layer styles
+    - [layerStyles.ts](#--layerstylests)
+4. Demo data (1 file)
+    - [data.json](#--datajson)
+      - This data represents the coordinates for Vondelpark.
+
+## Usage
+
+The following files are required:
+
+### 1. React component
+
+#### - PolylineLayer.tsx
+
+<Source code={PolylineLayer} />
+
+### 2. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
+
+### 3. Layer styles
+
+#### - layerStyles.ts
+
+<Source code={layerStyles} />
+
+### 4. Demo data
+
+#### - data.json
+
+<Source code={data} />

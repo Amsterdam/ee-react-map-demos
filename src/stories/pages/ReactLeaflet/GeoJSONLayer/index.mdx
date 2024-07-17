@@ -1,0 +1,57 @@
+import {Meta, Source } from '@storybook/blocks';
+import styles from '@/pages/ReactLeaflet/GeoJSONLayer/styles.module.css?raw';
+import * as GeoJSONLayerStories from './index.stories';
+import GeoJSONLayer from '@/pages/ReactLeaflet/GeoJSONLayer/GeoJSONLayer?raw';
+
+<Meta of={GeoJSONLayerStories} />
+
+# GeoJSONLayer
+
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ReactLeaflet/GeoJSONLayer)**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- [See global requirements list](../?path=/docs/global-requirements--docs)
+- CRS handling ([utils/getCrsRd.ts](#1-getcrsrdts))
+
+## Description
+
+This is a GeoJSON layer on a React-leaflet map.
+
+## Background
+
+### Amsterdam GeoJSON/tile layer
+
+GeoJSON is a widely-used format for encoding geographic data structures using JavaScript Object Notation (JSON). If data is available in GeoJSON format, it often provides a universal solution for mapping libraries. The React-Leafelt GeoJSON component accepts a GeoJSON object as data.
+The markers of a React-Leaflet GeoJSON component can be styled by the pointToLayer
+## How to implement
+
+To accomplish the Amstedam GeoJSON/tile layer there are two files:
+1. The React component
+    * [GeoJSONLayer.tsx](#--geojsonlayertsx)
+2. The CSS styles (1 file)
+    * [styles.module.css](#--stylesmodulecss)
+
+
+## Usage
+
+The following files are required:
+
+### 1. React component
+
+#### - GeoJSONLayer.tsx
+
+<Source code={GeoJSONLayer} />
+
+### 2. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />

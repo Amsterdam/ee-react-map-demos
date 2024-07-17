@@ -1,0 +1,67 @@
+import { Canvas, Meta, Source, Story } from '@storybook/blocks';
+import * as WFSLayerStories from './index.stories';
+import WFSLayer from '@/pages/WFSLayer/WFSLayer?raw';
+import styles from '@/pages/WFSLayer/styles.module.css?raw';
+import getCrsRd from '@/utils/getCrsRd?raw';
+import useGeoJSONLayer from '@/pages/WFSLayer/useGeoJSONLayer?raw';
+import useLeafletMap from '@/pages/WFSLayer/useLeafletMap?raw';
+
+<Meta of={WFSLayerStories} />
+
+# WFS Layer
+
+**[Background](../?path=/docs/leaflet-layers--docs#wfs-web-feature-service)** | **<a href="https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/WFSLayer" target="_blank">GitHub Repo URL</a>**
+
+#### Table of Contents
+
+- [Requirements](#requirements)
+- [Description](#description)
+- [How to implement](#how-to-implement)
+- [Usage](#usage)
+
+## Requirements
+
+- [BaseLayer](../?path=/docs/react-baselayer--docs)
+- GeoJson data endpoint
+
+## Description
+
+This is a WFS layer on a plain Leaflet map.
+
+## How to implement
+
+To accomplish a WFS layer there are 4 files:
+
+1. The React component
+   - [WFSLayer.tsx](#--wfslayertsx)
+2. The custom hooks (2 files)
+   - [useGeoJsonLayer.ts](#--usegeojsonlayerts)
+   - [useLeafletMap.ts](#--useleafletmapts)
+3. The CSS styles (1 file)
+   - [styles.module.css](#--stylesmodulecss)
+
+## Usage
+
+The following files are required:
+
+### 1. React component
+
+#### - WFSLayer.tsx
+
+<Source code={WFSLayer} />
+
+### 2. Custom hooks
+
+#### - useGeoJsonLayer.ts
+
+<Source code={useGeoJSONLayer} />
+
+#### - useLeafletMap.ts
+
+<Source code={useLeafletMap} />
+
+### 3. CSS styles
+
+#### - styles.module.css
+
+<Source code={styles} />
