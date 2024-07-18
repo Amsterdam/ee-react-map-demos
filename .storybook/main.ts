@@ -28,8 +28,6 @@ const config: StorybookConfig = {
   docs: {},
   staticDirs: ['./static'],
   viteFinal: async (config, { configType }) => {
-    console.log('configType');
-    console.log(configType);
     if (configType === 'PRODUCTION') {
       config.base = '/ee-react-map-demos/';
     }

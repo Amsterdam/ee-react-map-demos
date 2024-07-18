@@ -10,7 +10,7 @@ import data from '@/pages/MarkerCluster/data.json?raw';
 
 # Marker clustering (simple)
 
-**[Background and use cases](../?path=/docs/marker-clustering--docs)** | **[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MarkerCluster)**
+**[Background and use cases](./?path=/docs/marker-clustering--docs)** | **[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/MarkerCluster)**
 
 #### Table of Contents
 
@@ -21,8 +21,8 @@ import data from '@/pages/MarkerCluster/data.json?raw';
 
 ## Requirements
 
-- This example is built upon the [BaseMap component example](../?path=/docs/react-baselayer--docs).
-- [See global requirements list](../?path=/docs/global-requirements--docs)
+- This example is built upon the [BaseMap component example](./?path=/docs/react-baselayer--docs).
+- [See global requirements list](./?path=/docs/global-requirements--docs)
 - [Supercluster](https://www.npmjs.com/package/supercluster)
 
 **For typescript:**
@@ -34,7 +34,7 @@ import data from '@/pages/MarkerCluster/data.json?raw';
 
 This is a simple implementation of the [Mapbox](https://www.mapbox.com/) [Supercluster library](https://github.com/mapbox/supercluster) in a React component.
 
-**Warning** This component won't work for markers with the same coordinates value. They will render on top of the previously rendered marker. For handling markers with the same coordinates, there is an [advanced variant of this component](../?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
+**Warning** This component won't work for markers with the same coordinates value. They will render on top of the previously rendered marker. For handling markers with the same coordinates, there is an [advanced variant of this component](./?path=/story/react-markerclusterspider--default) where the clustered markers can be configured to display in a 'spider' or spiral.
 
 ## How to implement
 
@@ -42,7 +42,7 @@ To implement marker clustering with Leaflet, there are 8 files:
 
 1. The React component
     * [MarkerCluster.tsx](#--markerclustertsx)
-        * *This is based on the [BaseMap component example](../?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](../?path=/docs/react-baselayer--docs#1-getcrsrdts).*
+        * *This is based on the [BaseMap component example](./?path=/docs/react-baselayer--docs) so includes a dependency on [`utils/getCrsRd`](./?path=/docs/react-baselayer--docs#1-getcrsrdts).*
 2. Normalizing external data
     * [utils/toGeoJSON.ts](#--utilstogeojsonts)
       *(This is only required for this demo to work; it helps format the external `data.json` array into GeoJSON format.)*
