@@ -2,7 +2,7 @@ name: Build and Publish Storybook to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [develop, feature/test-gh-pages-path]
 
 permissions:
   contents: read
