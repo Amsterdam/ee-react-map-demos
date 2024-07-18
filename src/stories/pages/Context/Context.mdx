@@ -18,23 +18,23 @@ Often with React and Leaflet, you may find the need to communicate/interact with
 
 This is when <a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank">React context</a> can help, these examples demonstrate various mapping solutions using React's context.
 
-#### [Multiple Marker Select](../?path=/docs/react-context-examples-multimarkerselect--docs) *(Advanced)*
+#### [Multiple Marker Select](./?path=/docs/react-context-examples-multimarkerselect--docs) *(Advanced)*
 
 Using Amsterdam taxi stands from the [Parkeervakken (Parking Spaces) API](https://api.data.amsterdam.nl/v1/parkeervakken/), you can select multiple layers. The context stores the selected layer IDs.
 
-#### [Position](../?path=/docs/react-context-examples-position--docs) *(Simple)*
+#### [Position](./?path=/docs/react-context-examples-position--docs) *(Simple)*
 
-Using the Amsterdam [BaseLayer](../?path=/docs/react-baselayer--docs) we display the map center point coordinates, including when the map moves.
+Using the Amsterdam [BaseLayer](./?path=/docs/react-baselayer--docs) we display the map center point coordinates, including when the map moves.
 
-#### [Single marker select](../?path=/docs/react-context-examples-singlemarkerselect--docs) *(Advanced)*
+#### [Single marker select](./?path=/docs/react-context-examples-singlemarkerselect--docs) *(Advanced)*
 
-Similar to the [MultiMarkerSelect example](../?path=/story/react-context-examples-multimarkerselect--default) this is using locations of glass disposal points from the [Afvalwijzer (Waste guide) API](https://api.data.amsterdam.nl/v1/afvalwijzer). You can select a single marker. The context stores the selected marker ID.
+Similar to the [MultiMarkerSelect example](./?path=/story/react-context-examples-multimarkerselect--default) this is using locations of glass disposal points from the [Afvalwijzer (Waste guide) API](https://api.data.amsterdam.nl/v1/afvalwijzer). You can select a single marker. The context stores the selected marker ID.
 
-#### [Zoom controls](../?path=/docs/react-context-examples-zoom-controls--docs) *(Simple)*
+#### [Zoom controls](./?path=/docs/react-context-examples-zoomcontrols--docs) *(Simple)*
 
 This demonstrates custom control buttons (from the [Amsterdam design system](https://designsystem.amsterdam.nl/)) that control the map zoom levels. It uses context to interact directly with the Leaflet map object.
 
-#### [Full-screen zoom controls](../?path=/docs/react-context-examples-full-screen-zoom-controls--docs) *(Simple)*
+#### [Full-screen zoom controls](./?path=/docs/react-context-examples-zoomcontrolsfullscreen--docs) *(Simple)*
 
 Wrapped in components from the [Amsterdam design system](https://designsystem.amsterdam.nl/), this demonstrates custom control buttons that control the map zoom levels in an Amsterdam style webpage. It uses context to interact directly with the Leaflet map object.
 
@@ -67,7 +67,7 @@ If the answer to any of the following is **no**, context probably isn't useful f
 
 ## Advanced structure tips
 
-- Setup a 'Provider' component, to setup the initial state. Wrap this `Provider` component around all components that should inherit context state and methods. [See example](../?path=/docs/react-context-examples-multimarkerselect--docs#--mapprovidertsx).
+- Setup a 'Provider' component, to setup the initial state. Wrap this `Provider` component around all components that should inherit context state and methods. [See example](./?path=/docs/react-context-examples-multimarkerselect--docs#--mapprovidertsx).
 
 - When combined with TypeScript, definitions and undefined/null properties can make things confusing. This is where TypeScript's [`NonNullable`](https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype) is useful. For example:
 
