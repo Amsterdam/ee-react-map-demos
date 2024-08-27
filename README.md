@@ -1,6 +1,6 @@
 # React Map Demos
 
-Team responsible: Engineering Enablement team
+Team responsible: Engineering Enablement
 
 ## Aims of this repo
 
