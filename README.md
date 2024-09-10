@@ -1,30 +1,14 @@
-# Engineering Enablement React Template
+# React Map Demos
 
-Team responsible: Engineering Enablement team
-
-This starter kit is built on top of Vite 5.x for writing React based applications in TypeScript.
+Team responsible: Engineering Enablement
 
 ## Aims of this repo
 
-This repository aims to provide developers with a simple and unopinionated codebase to develop frontend-based React applications with. Simple meaning minimal config and maintenance overheads.
-
-## Features
-
-- ESLint - scripts linter
-- Stylelint - styles linter
-- Prettier - formatter
-- Vitest - test framework
-- Husky + lint-staged - pre-commit git hook set up for formatting
+This project uses [Storybook](https://storybook.js.org/) to provide demos and examples of common use-cases of maps for Gemeente Amsterdam. The preferred map library is [Leaflet](https://leafletjs.com/) implemented in the frontend library [React](https://react.dev/).
 
 ## How to use this repo?
 
-You can create a repository based on this [repository template](https://github.com/amsterdam/ee-react-template/generate) or simply clone the repository:
-
-```bash
-git clone https://github.com/amsterdam/ee-react-template.git
-cd ee-react-template
-npm i
-```
+This project is generated from a [repository template](https://github.com/amsterdam/ee-react-template).
 
 ### Usage
 
