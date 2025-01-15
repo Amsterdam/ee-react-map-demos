@@ -61,13 +61,14 @@ const MapProvider: FunctionComponent<MapProps> = ({
   }, [mapInstance, containerRef]);
 
   return (
-    <div ref={containerRef} className={styles.container}>
+    <>
+      <div ref={containerRef} className={styles.container} />
       {!!mapInstance && (
         <MapContext.Provider value={{ mapInstance }}>
           {children}
         </MapContext.Provider>
       )}
-    </div>
+    </>
   );
 };
 
