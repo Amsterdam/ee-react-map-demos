@@ -4,9 +4,7 @@ const Header = () => {
   return (
     <Grid>
       <Grid.Cell span="all">
-        <AmsHeader
-          menu={<button className="ams-header__menu-button">Menu</button>}
-        />
+        <AmsHeader />
       </Grid.Cell>
     </Grid>
   );
