@@ -1,4 +1,4 @@
-import { Button, Icon } from '@amsterdam/design-system-react';
+import { Button } from '@amsterdam/design-system-react';
 import {
   EnlargeIcon,
   MinimiseIcon,
@@ -22,13 +22,21 @@ const Controls = () => {
 
   return (
     <div className={styles.buttons}>
-      <Button variant="secondary" onClick={handleZoomInClick}>
-        <span className="ams-visually-hidden">Zoom in</span>
-        <Icon svg={EnlargeIcon} size="level-5" />
+      <Button
+        variant="secondary"
+        iconOnly
+        icon={EnlargeIcon}
+        onClick={handleZoomInClick}
+      >
+        Zoom in
       </Button>
-      <Button variant="secondary" onClick={handleZoomOutClick}>
-        <span className="ams-visually-hidden">Zoom out</span>
-        <Icon svg={MinimiseIcon} size="level-5" />
+      <Button
+        variant="secondary"
+        iconOnly
+        icon={MinimiseIcon}
+        onClick={handleZoomOutClick}
+      >
+        Zoom out
       </Button>
     </div>
   );
