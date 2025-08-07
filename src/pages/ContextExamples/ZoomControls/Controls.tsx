@@ -1,8 +1,5 @@
 import { Button } from '@amsterdam/design-system-react';
-import {
-  EnlargeIcon,
-  MinimiseIcon,
-} from '@amsterdam/design-system-react-icons';
+import { PlusIcon, MinusIcon } from '@amsterdam/design-system-react-icons';
 import { useMapInstance } from './MapContext';
 import styles from './controls.module.css';
 
@@ -25,7 +22,7 @@ const Controls = () => {
       <Button
         variant="secondary"
         iconOnly
-        icon={EnlargeIcon}
+        icon={PlusIcon}
         onClick={handleZoomInClick}
       >
         Zoom in
@@ -33,7 +30,7 @@ const Controls = () => {
       <Button
         variant="secondary"
         iconOnly
-        icon={MinimiseIcon}
+        icon={MinusIcon}
         onClick={handleZoomOutClick}
       >
         Zoom out

@@ -1,10 +1,10 @@
-import { Grid, Header as AmsHeader } from '@amsterdam/design-system-react';
+import { Grid, PageHeader } from '@amsterdam/design-system-react';
 
 const Header = () => {
   return (
     <Grid>
       <Grid.Cell span="all">
-        <AmsHeader />
+        <PageHeader />
       </Grid.Cell>
     </Grid>
   );
