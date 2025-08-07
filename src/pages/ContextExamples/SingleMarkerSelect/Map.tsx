@@ -62,7 +62,6 @@ const Map: FunctionComponent = () => {
     setMapInstance(map);
 
     map.on('moveend', () => {
-      // setDisplayAlert(true);
       setPosition([map.getCenter().lat, map.getCenter().lng]);
     });
 
