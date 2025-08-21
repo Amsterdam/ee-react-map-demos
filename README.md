@@ -32,7 +32,7 @@ By default `npm run start` will fire up a dev server with a random port (often 5
 
 ## How to contribute to this repo?
 
-Simply create and submit a pull request. You can also contact us via Teams (DV - Engineering Enablement) or Slack (#engineering-enablement).
+Simply create and submit a pull request. You can also contact us via Teams (DV - Enablement) or Slack (#dv-enablement).
 
 ## Acknowledgments
 

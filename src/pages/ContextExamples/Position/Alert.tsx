@@ -8,7 +8,7 @@ const Alert: FunctionComponent = () => {
 
   return (
     <div className={styles['alert-wrapper']}>
-      <AmsAlert severity="info">
+      <AmsAlert heading="Coordinates" headingLevel={3} severity="success">
         <Paragraph size="small">
           {position ? `${position[0]}, ${position[1]}` : ''}
         </Paragraph>

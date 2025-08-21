@@ -1,8 +1,5 @@
-import { Button, Icon } from '@amsterdam/design-system-react';
-import {
-  EnlargeIcon,
-  MinimiseIcon,
-} from '@amsterdam/design-system-react-icons';
+import { Button } from '@amsterdam/design-system-react';
+import { PlusIcon, MinusIcon } from '@amsterdam/design-system-react-icons';
 import { useMapInstance } from './MapContext';
 import styles from './controls.module.css';
 
@@ -22,13 +19,21 @@ const Controls = () => {
 
   return (
     <div className={styles.buttons}>
-      <Button variant="secondary" onClick={handleZoomInClick}>
-        <span className="ams-visually-hidden">Zoom in</span>
-        <Icon svg={EnlargeIcon} size="level-5" />
+      <Button
+        variant="secondary"
+        iconOnly
+        icon={PlusIcon}
+        onClick={handleZoomInClick}
+      >
+        Zoom in
       </Button>
-      <Button variant="secondary" onClick={handleZoomOutClick}>
-        <span className="ams-visually-hidden">Zoom out</span>
-        <Icon svg={MinimiseIcon} size="level-5" />
+      <Button
+        variant="secondary"
+        iconOnly
+        icon={MinusIcon}
+        onClick={handleZoomOutClick}
+      >
+        Zoom out
       </Button>
     </div>
   );
