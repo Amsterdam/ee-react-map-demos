@@ -51,7 +51,7 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-storybook": "^0.8.0",
-    "happy-dom": "^20.0.0",
+    "happy-dom": "^20.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
     "postcss": "^8.5.1",
