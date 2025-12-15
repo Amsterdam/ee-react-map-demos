@@ -107,20 +107,23 @@ vi.mock('leaflet', async () => {
   };
 });
 
-vi.mock('supercluster', async () => {
-  const actual = await vi.importActual('supercluster');
+vi.mock(import('supercluster'), async importOriginal => {
+  const actual = await importOriginal();
 
   return {
     ...actual,
-    default: vi.fn(() => {
-      return {
-        ...actual.default.prototype,
-        load: vi.fn(() => ({
-          getClusters: vi.fn(() => fakeClusterData),
-          getClusterExpansionZoom: vi.fn(() => 1),
-        })),
-      };
-    }),
+    default: vi.fn(
+      class {
+        constructor() {}
+
+        load = vi.fn(() => {
+          return {
+            getClusters: vi.fn(() => fakeClusterData),
+            getClusterExpansionZoom: vi.fn(() => 1),
+          };
+        });
+      }
+    ),
   };
 });
 
