@@ -1,6 +1,6 @@
 import type { FunctionComponent, PropsWithChildren } from 'react';
 import { useState } from 'react';
-import { LatLngTuple } from 'leaflet';
+import type { LatLngTuple } from 'leaflet';
 import { MapContext } from './MapContext';
 
 const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {

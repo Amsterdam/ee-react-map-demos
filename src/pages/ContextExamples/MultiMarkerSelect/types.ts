@@ -1,4 +1,4 @@
-import { Feature, Polygon } from 'geojson';
+import type { Feature, Polygon } from 'geojson';
 import { Layer } from 'leaflet';
 
 // Define the structure of your GeoJSON data

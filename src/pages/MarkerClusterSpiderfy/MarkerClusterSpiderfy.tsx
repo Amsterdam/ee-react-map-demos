@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
+import L, {
+  type LatLngTuple,
+  type LeafletKeyboardEvent,
+  type LeafletEvent,
+} from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import createClusterIcon from './utils/createClusterIcon';

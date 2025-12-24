@@ -35,7 +35,7 @@ export function createPointsCircle(count: number, centerPt: L.Point) {
 }
 
 // @see https://github.com/jawj/OverlappingMarkerSpiderfier-Leaflet/blob/master/lib/oms.coffee#L101
-export function createPointsSpiral(count: number, centerPt: L.Point) {
+export function createPointsSpiral(_count: number, centerPt: L.Point) {
   const points = [];
   let angle = 0;
   let i = 0;

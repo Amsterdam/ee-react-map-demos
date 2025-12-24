@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import { CLUSTER_OPTIONS } from './mapStyles';
 import processFeatures, { getMarkerItems } from './processFeatures';
-import { MapSuperClusterFeature } from './types';
+import type { MapSuperClusterFeature } from './types';
 
 vi.mock('leaflet', async () => {
   const actual = await vi.importActual('leaflet');

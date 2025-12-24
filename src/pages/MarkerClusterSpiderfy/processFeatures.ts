@@ -1,6 +1,10 @@
-import { LineString, Position } from 'geojson';
-import L, { LatLngLiteral } from 'leaflet';
-import { ClusterOptions, MapFeature, MapSuperClusterFeature } from './types';
+import type { LineString, Position } from 'geojson';
+import L, { type LatLngLiteral } from 'leaflet';
+import type {
+  ClusterOptions,
+  MapFeature,
+  MapSuperClusterFeature,
+} from './types';
 import roundNumber from './utils/roundNumber';
 import {
   createPointsCircle,

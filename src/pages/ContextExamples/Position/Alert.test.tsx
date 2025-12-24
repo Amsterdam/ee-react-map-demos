@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import Alert from './Alert';
-import { LatLngTuple } from 'leaflet';
+import type { LatLngTuple } from 'leaflet';
 
 const position: LatLngTuple = [52.36036, 4.89956];
 

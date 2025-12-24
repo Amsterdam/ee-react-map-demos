@@ -5,7 +5,7 @@ import getMapData, {
 } from './getMapData';
 import L from 'leaflet';
 import rawData from './data.json';
-import { DataRecord } from './types';
+import type { DataRecord } from './types';
 
 const fakeClusterData = [
   {

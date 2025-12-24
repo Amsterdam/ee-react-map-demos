@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react';
+import { type PropsWithChildren, useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import type { Map } from 'leaflet';

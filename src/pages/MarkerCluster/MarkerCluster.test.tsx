@@ -181,22 +181,19 @@ const fakeClusterData = [
 
 const getClusterExpansionZoomMock = vi.fn();
 
-vi.mock(import('supercluster'), async importOriginal => {
-  const actual = await importOriginal();
+vi.mock('supercluster', async () => {
+  class SuperclusterMock {
+    constructor() {}
+
+    load = vi.fn(() => ({}));
+
+    getClusters = vi.fn(() => fakeClusterData);
+
+    getClusterExpansionZoom = getClusterExpansionZoomMock;
+  }
 
   return {
-    ...actual,
-    default: vi.fn(
-      class {
-        constructor() {}
-
-        getClusters = vi.fn(() => fakeClusterData);
-        getClusterExpansionZoom = getClusterExpansionZoomMock;
-        load = vi.fn(() => {
-          return {};
-        });
-      }
-    ),
+    default: SuperclusterMock as unknown as typeof import('supercluster'),
   };
 });
 

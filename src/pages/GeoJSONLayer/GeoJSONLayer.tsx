@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
-import { Boom } from './types';
+import type { Boom } from './types';
 import data from './data.json';
 
 const GeoJSONLayer = () => {

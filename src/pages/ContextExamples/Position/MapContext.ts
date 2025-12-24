@@ -1,5 +1,10 @@
 import type { LatLngTuple, Map } from 'leaflet';
-import { Dispatch, SetStateAction, createContext, useContext } from 'react';
+import {
+  type Dispatch,
+  type SetStateAction,
+  createContext,
+  useContext,
+} from 'react';
 
 export interface MapState {
   mapInstance: Map | null;

@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, { LayerGroup, LeafletMouseEvent } from 'leaflet';
+import L, { LayerGroup, type LeafletMouseEvent } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from '../map.module.css';
 import { useMapInstance } from './MapContext';
 import customMarker from './icons/customMarker';
-import { SingleMarkerSelectExampleLayer } from './types';
+import type { SingleMarkerSelectExampleLayer } from './types';
 import './marker.css';
 
 const Map: FunctionComponent = () => {

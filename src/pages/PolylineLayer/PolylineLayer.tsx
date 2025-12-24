@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import L, { LatLngTuple } from 'leaflet';
+import L, { type LatLngTuple } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
