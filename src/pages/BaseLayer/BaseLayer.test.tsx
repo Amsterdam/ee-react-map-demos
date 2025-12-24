@@ -17,7 +17,7 @@ describe('BaseLayer', () => {
     )?.src.substring(0, 38);
 
     expect(
-      /^https:\/\/(t1|t2|t3|t4)\.data\.amsterdam\.nl\/topo_rd\//.test(imgSrc)
+      /^https:\/\/(t1|t2|t3|t4)\.data\.amsterdam\.nl\/topo_wm\//.test(imgSrc)
     ).toBe(true);
   });
 });
