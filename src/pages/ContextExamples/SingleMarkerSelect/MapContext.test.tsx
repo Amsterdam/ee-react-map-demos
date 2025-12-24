@@ -1,15 +1,15 @@
-import { PropsWithChildren, useState } from 'react';
+import { type PropsWithChildren, useState } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
 import type { Map, LatLngTuple } from 'leaflet';
 import {
   MapContext,
-  MapContextProps,
-  MapState,
+  type MapContextProps,
+  type MapState,
   useMapInstance,
 } from './MapContext';
-import { GeoJSONFeature } from './types';
+import type { GeoJSONFeature } from './types';
 
 // Helper component to test the context
 const TestComponent = () => {

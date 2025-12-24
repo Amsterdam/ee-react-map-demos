@@ -1,9 +1,9 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import L, { circleMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Feature, Point } from 'geojson';
+import type { Feature, Point } from 'geojson';
 import styles from './styles.module.css';
-import { Boom } from './types';
+import type { Boom } from './types';
 import data from './data.json';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';

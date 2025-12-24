@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
-import L, { LayerGroup, LeafletMouseEvent, Polygon } from 'leaflet';
+import L, { LayerGroup, type LeafletMouseEvent, Polygon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from '../map.module.css';
 import { useMapInstance } from './MapContext';
-import { MultiMarkerSelectExampleLayer } from './types';
+import type { MultiMarkerSelectExampleLayer } from './types';
 
 const Map: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);

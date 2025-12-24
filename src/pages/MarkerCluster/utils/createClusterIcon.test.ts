@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import L from 'leaflet';
 import createClusterIcon from './createClusterIcon';
 import styles from '../styles.module.css';
-import { Feature, Point } from 'geojson';
+import type { Feature, Point } from 'geojson';
 
 const CLUSTER_STYLES = {
   default: styles.markerCluster,

@@ -1,6 +1,12 @@
 import type { LatLngTuple } from 'leaflet';
-import Supercluster, { PointFeature } from 'supercluster';
-import { BBox, Feature, GeoJsonProperties, Geometry, Point } from 'geojson';
+import Supercluster, { type PointFeature } from 'supercluster';
+import type {
+  BBox,
+  Feature,
+  GeoJsonProperties,
+  Geometry,
+  Point,
+} from 'geojson';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 
 // Simple util to check coords within a bounding box

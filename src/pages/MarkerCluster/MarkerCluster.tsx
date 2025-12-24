@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import L, { LatLngTuple, LeafletKeyboardEvent, LeafletEvent } from 'leaflet';
+import L, {
+  type LatLngTuple,
+  type LeafletKeyboardEvent,
+  type LeafletEvent,
+} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Supercluster from 'supercluster';
 import type { BBox, Point } from 'geojson';

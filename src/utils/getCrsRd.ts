@@ -1,5 +1,5 @@
-import L, { CRS, LatLng, PointExpression } from 'leaflet';
-import proj4, { InterfaceCoordinates } from 'proj4';
+import L, { CRS, LatLng, type PointExpression } from 'leaflet';
+import proj4, { type InterfaceCoordinates } from 'proj4';
 
 export const CRS_CONFIG = {
   RD: {

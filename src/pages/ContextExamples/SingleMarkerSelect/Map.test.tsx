@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import Map from './Map';
 import MapProvider from './MapProvider';
 import data from './data.json';
-import { GeoJSONFeature } from './types';
+import type { GeoJSONFeature } from './types';
 
 describe('SingleMarkerSelect Map', () => {
   it('renders the component', () => {

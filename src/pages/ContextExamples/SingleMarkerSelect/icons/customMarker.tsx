@@ -1,4 +1,4 @@
-import { IconOptions } from 'leaflet';
+import type { IconOptions } from 'leaflet';
 import MapMarkerIcon from '../../../../assets/icons/map-marker.svg';
 
 const customMarkerOptions: IconOptions = {
