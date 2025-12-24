@@ -5,6 +5,4 @@
   gap: var(--ams-space-sm, 8px);
   position: absolute;
   right: var(--ams-space-md, 24px);
-  /* This z-index value should ideally come from an application constant that is greater than the Leaflet top z-index */
-  z-index: 400;
 }

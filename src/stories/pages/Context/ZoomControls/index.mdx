@@ -27,7 +27,12 @@ In this example, the Map context exports a single element - the Leaflet map obje
 
 #### Z-index warning
 
-Note that when rendering custom elements on top of a Leaflet map, you will need to handle the CSS `z-index` property. By default Leaflet renders some of its panes (DOM elements) with the `z-index` property set. Therefore, custom components may only be visible under the map DOM elements. It's useful to set a app constant to handle this z-index value. <a href="https://leafletjs.com/examples/map-panes/" target="_blank">More info</a>.
+**Note:** When rendering custom elements on top of a Leaflet map, you need to account for CSS z-index stacking.
+
+Leaflet renders its internal panes as stacked DOM elements with predefined z-index values. As a result, custom components may be rendered behind Leaflet’s map layers and appear invisible.
+
+To prevent this, apply `isolation: isolate` to the map container so it forms its own stacking context. Previously, this was handled by relying on a fixed, application-wide z-index constant.
+<a href="https://leafletjs.com/examples/map-panes/" target="_blank">More information</a>
 
 ## How to implement
 
