@@ -1,5 +1,6 @@
 .container {
   height: 100%;
+  isolation: isolate;
   position: relative;
   width: 100%;
 }
