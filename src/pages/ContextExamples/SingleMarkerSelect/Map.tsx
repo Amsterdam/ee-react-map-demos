@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FunctionComponent } from 'react';
 import L, { LayerGroup, type LeafletMouseEvent } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import getCrsRd from '@/utils/getCrsRd';
 import styles from '../map.module.css';
 import { useMapInstance } from './MapContext';
 import customMarker from './icons/customMarker';
@@ -48,7 +47,6 @@ const Map: FunctionComponent = () => {
       zoomControl: false,
       maxZoom: 16,
       minZoom: 6,
-      crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],

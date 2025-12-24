@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
 const WMSLayer = () => {
@@ -28,7 +27,6 @@ const WMSLayer = () => {
       zoomControl: false,
       maxZoom: 16,
       minZoom: 6,
-      crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],
@@ -59,8 +57,6 @@ const WMSLayer = () => {
           format: 'image/svg+xml',
           // Ensure transparent is true otherwise the Amsterdam base layer won't be visible through the WMS layer
           transparent: true,
-          // Default for Amsterdam is Rijksdriehoek whereas Leaflet works in WGS84 so be sure to handle the CRS properly
-          crs: getCrsRd(),
         }
       )
       .addTo(mapInstance);

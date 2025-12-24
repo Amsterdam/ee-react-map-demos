@@ -1,7 +1,6 @@
 import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
 import styles from '@/pages/ReactLeaflet/PolylineLayer/styles.module.css';
 import L, { type LatLngTuple } from 'leaflet';
-import getCrsRd from '@/utils/getCrsRd';
 import data from './data.json';
 import 'leaflet/dist/leaflet.css';
 
@@ -17,7 +16,6 @@ const PolylineLayer = (): JSX.Element => {
           [52.25168, 4.64034],
           [52.50536, 5.10737],
         ]}
-        crs={getCrsRd()}
         attributionControl={false}
       >
         <TileLayer

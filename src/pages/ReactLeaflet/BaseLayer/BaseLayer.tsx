@@ -1,7 +1,6 @@
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
 const BaseLayer = (): JSX.Element => (
@@ -15,7 +14,6 @@ const BaseLayer = (): JSX.Element => (
         [52.25168, 4.64034],
         [52.50536, 5.10737],
       ]}
-      crs={getCrsRd()}
       attributionControl={false}
     >
       <TileLayer

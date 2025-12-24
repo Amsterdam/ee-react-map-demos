@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import L, { type LatLngTuple } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import data from './data.json';
 import { lineHoverStyles, lineStyles } from './layerStyles';
@@ -32,7 +31,6 @@ const PolylineLayer = () => {
       zoomControl: false,
       maxZoom: 16,
       minZoom: 6,
-      crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],

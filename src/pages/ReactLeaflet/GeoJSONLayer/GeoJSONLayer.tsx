@@ -5,7 +5,6 @@ import type { Feature, Point } from 'geojson';
 import styles from './styles.module.css';
 import type { Boom } from './types';
 import data from './data.json';
-import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 
 const GeoJSONLayer = (): JSX.Element => {
@@ -32,7 +31,6 @@ const GeoJSONLayer = (): JSX.Element => {
           [52.25168, 4.64034],
           [52.50536, 5.10737],
         ]}
-        crs={getCrsRd()}
         attributionControl={false}
       >
         <TileLayer

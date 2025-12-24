@@ -7,7 +7,6 @@ import L, {
 import 'leaflet/dist/leaflet.css';
 import Supercluster from 'supercluster';
 import type { BBox, Point } from 'geojson';
-import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
 import data from './data.json';
@@ -85,16 +84,14 @@ const MarkerCluster = () => {
       center,
       zoom,
       layers: [
-        L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.data.amsterdam.nl/topo_wm/{z}/{x}/{y}.png', {
           attribution: '',
           subdomains: ['t1', 't2', 't3', 't4'],
-          tms: true,
         }),
       ],
       zoomControl: false,
-      maxZoom: 16,
-      minZoom: 6, // TODO in ARM this is 3?
-      crs: getCrsRd(),
+      maxZoom: 18,
+      minZoom: 11,
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],

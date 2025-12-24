@@ -5,7 +5,6 @@ import {
   TileLayer,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import defaultMarker from '@/utils/icons/defaultMarker';
 
@@ -20,7 +19,6 @@ const Marker = (): JSX.Element => (
         [52.25168, 4.64034],
         [52.50536, 5.10737],
       ]}
-      crs={getCrsRd()}
       attributionControl={false}
     >
       <TileLayer

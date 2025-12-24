@@ -4,7 +4,6 @@ import L, {
   type LeafletKeyboardEvent,
   type LeafletEvent,
 } from 'leaflet';
-import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import createClusterIcon from './utils/createClusterIcon';
 import getMapData from './getMapData';
@@ -81,7 +80,6 @@ const MarkerClusterSpider = ({
       zoomControl: false,
       maxZoom: 16,
       minZoom: 6,
-      crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],

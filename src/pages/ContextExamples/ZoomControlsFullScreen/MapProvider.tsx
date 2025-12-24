@@ -8,7 +8,6 @@ import {
 import styles from '../map.module.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import getCrsRd from '@/utils/getCrsRd';
 import { MapContext } from './MapContext';
 
 const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
@@ -35,7 +34,6 @@ const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
       scrollWheelZoom: true,
       maxZoom: 16,
       minZoom: 6,
-      crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],

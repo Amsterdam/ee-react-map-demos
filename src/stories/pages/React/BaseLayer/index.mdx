@@ -47,7 +47,7 @@ Leaflet by default uses EPSG:3857 (Web Mercator / WGS 84), however, the base lay
 
 ## How to implement
 
-To accomplish the Amsterdam base/tile layer there are three files:
+To accomplish the Amsterdam base/tile layer there are 3 files, assuming the [global requirements](./?path=/docs/global-requirements--docs) are already implemented:
 1. The React components
     * [BaseLayer.tsx](#--baselayertsx)
 2. The CSS styles (1 file)
@@ -57,8 +57,6 @@ To accomplish the Amsterdam base/tile layer there are three files:
        - This util file handles the CRS (Coordinate Reference System) because Gemeente Amsterdam by default uses <a href="https://www.kadaster.nl/zakelijk/registraties/basisregistraties/rijksdriehoeksmeting/rijksdriehoeksstelsel" target="_blank">Rijksdriehoekscoördinaten</a>. Leaflet by default uses <a href="https://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS84 (World Geodetic System)</a>.
 
 ## Usage
-
-The following files are required:
 
 ### 1. React component
 

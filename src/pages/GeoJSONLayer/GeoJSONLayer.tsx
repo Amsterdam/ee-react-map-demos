@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import L, { circleMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 import styles from './styles.module.css';
 import type { Boom } from './types';
@@ -19,11 +18,10 @@ const GeoJSONLayer = () => {
 
     const map = new L.Map(containerRef.current, {
       center: [52.370216, 4.895168],
-      zoom: 8,
+      zoom: 12,
       zoomControl: true,
-      maxZoom: 16,
-      minZoom: 6,
-      crs: getCrsRd(),
+      maxZoom: 18,
+      minZoom: 11,
       maxBounds: [
         [52.25168, 4.64034],
         [52.50536, 5.10737],
@@ -31,10 +29,9 @@ const GeoJSONLayer = () => {
       attributionControl: false,
     });
 
-    L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.data.amsterdam.nl/topo_wm/{z}/{x}/{y}.png', {
       attribution: '',
       subdomains: ['t1', 't2', 't3', 't4'],
-      tms: true,
     }).addTo(map);
 
     createdMapInstance.current = true;
