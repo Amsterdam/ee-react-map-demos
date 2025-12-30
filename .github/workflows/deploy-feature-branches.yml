@@ -51,13 +51,13 @@ jobs:
 
       - name: Create a version mark
         run: |
-          touch ./storybook/dist/${{ github.sha }}.txt
+          touch ./storybook-static/${{ github.sha }}.txt
 
       - name: Pushing to pages branch
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
           branch: gh-pages
-          folder: storybook/dist
+          folder: storybook-static
           target-folder: demo-${{ env.BRANCH_NAME }}
 
       - name: Wait for GitHub Pages to be deployed
