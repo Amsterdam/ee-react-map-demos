@@ -47,12 +47,7 @@ jobs:
       - name: Build packages
         env:
           STORYBOOK_BUILD_PATH: demo-${{ env.BRANCH_NAME }}
-        run: npm run build
-
-      # - name: Build Storybook
-      #   env:
-      #     STORYBOOK_BUILD_PATH: demo-${{ env.BRANCH_NAME }}
-      #   run: npm run build -w @amsterdam/ee-ads-rhf-storybook
+        run: npm run build-storybook
 
       - name: Create a version mark
         run: |
