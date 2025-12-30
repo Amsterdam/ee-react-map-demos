@@ -1,0 +1,86 @@
+# Based on https://evilmartians.com/chronicles/super-github-pages-budget-frontend-staging-with-storybook-and-more
+
+name: Feature branch build and deploy
+
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+    types: [reopened]
+    branches-ignore: [main]
+
+permissions:
+  contents: write
+  deployments: write
+
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+      - name: Create branch name without text before first forward slash
+        run: |
+          RAW_BRANCH_NAME=${{ github.head_ref || github.ref_name }}
+          BRANCH_NAME=$(echo $RAW_BRANCH_NAME | sed 's/[^/]*\///')
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Check out
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Create deployment
+        uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8 # v1.5.0
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: demo-${{ env.BRANCH_NAME }}
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          cache: 'npm'
+          node-version: '22.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build packages
+        env:
+          STORYBOOK_BUILD_PATH: demo-${{ env.BRANCH_NAME }}
+        run: npm run build
+
+      # - name: Build Storybook
+      #   env:
+      #     STORYBOOK_BUILD_PATH: demo-${{ env.BRANCH_NAME }}
+      #   run: npm run build -w @amsterdam/ee-ads-rhf-storybook
+
+      - name: Create a version mark
+        run: |
+          touch ./storybook/dist/${{ github.sha }}.txt
+
+      - name: Pushing to pages branch
+        uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
+        with:
+          branch: gh-pages
+          folder: storybook/dist
+          target-folder: demo-${{ env.BRANCH_NAME }}
+
+      - name: Wait for GitHub Pages to be deployed
+        uses: nick-fields/retry@ce71cc2ab81d554ebbe88c79ab5975992d79ba08 # v3.0.2
+        with:
+          timeout_minutes: 10
+          max_attempts: 40
+          retry_wait_seconds: 15
+          command: |
+            curl -sf https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/demo-${{ env.BRANCH_NAME }}/${{ github.sha }}.txt
+
+      - name: Update deployment status
+        uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8 # v1.5.0
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/demo-${{ env.BRANCH_NAME }}
