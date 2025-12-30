@@ -1,0 +1,1 @@
+function u(e){if(!e.length)throw new Error("Data was empty");return{type:"FeatureCollection",features:e.map(t=>{const{geometry:o,...r}=t;return{type:"Feature",geometry:o,properties:{...r}}})}}export{u as t};

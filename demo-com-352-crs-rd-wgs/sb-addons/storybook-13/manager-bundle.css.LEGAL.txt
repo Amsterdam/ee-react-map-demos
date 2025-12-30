@@ -1,0 +1,8 @@
+Bundled license information:
+
+@amsterdam/design-system-assets/font/index.css:
+  /**
+   * @license SEE LICENSE.md
+   * Copyright Gemeente Amsterdam
+   * All rights reserved
+   */

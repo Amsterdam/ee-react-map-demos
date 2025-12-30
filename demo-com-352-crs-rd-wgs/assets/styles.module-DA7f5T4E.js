@@ -1,0 +1,8 @@
+const n=`.alert-wrapper {
+  background: #fff;
+  left: 50%;
+  position: absolute;
+  top: 20px;
+  transform: translateX(-50%);
+}
+`;export{n as s};
