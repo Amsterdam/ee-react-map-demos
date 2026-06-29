@@ -27,7 +27,7 @@ describe('WMSLayer', () => {
         format: 'image/svg+xml',
         transparent: true,
       }),
-      {}
+      undefined
     );
   });
 });
