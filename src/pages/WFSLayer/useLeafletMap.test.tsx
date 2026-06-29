@@ -6,7 +6,7 @@ describe('useLeafletMap', () => {
   it('initializes a Leaflet map', async () => {
     // Test component that uses the hook
     const TestComponent = () => {
-      const containerRef = useRef<HTMLDivElement>(null);
+      const containerRef = useRef<HTMLDivElement | null>(null);
       const mapInstance = useLeafletMap(containerRef);
 
       return (
