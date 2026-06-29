@@ -17,7 +17,7 @@ const TestComponent = () => {
   );
 };
 
-describe('ZoomControlsFullScreen MapContext', () => {
+describe('DesignSystemPageZoomControls MapContext', () => {
   it('provides and updates context values', async () => {
     const Wrapper = ({ children }: PropsWithChildren) => {
       const [mapInstance] = useState<Map | null>(vi.fn() as unknown as Map);

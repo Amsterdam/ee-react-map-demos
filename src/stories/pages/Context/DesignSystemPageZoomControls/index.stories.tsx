@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import ZoomControlsFullScreen from '@/pages/ContextExamples/ZoomControlsFullScreen/ZoomControlsFullScreen';
+import DesignSystemPageZoomControls from '@/pages/ContextExamples/DesignSystemPageZoomControls/DesignSystemPageZoomControls';
 
 const meta = {
-  title: 'React-Context-Examples/ZoomControlsFullScreen',
-  component: ZoomControlsFullScreen,
+  title: 'React-Context-Examples/DesignSystemPageZoomControls',
+  component: DesignSystemPageZoomControls,
   parameters: {
     layout: 'fullscreen',
     options: {
@@ -11,7 +11,7 @@ const meta = {
       bottomPanelHeight: 0,
     },
   },
-} satisfies Meta<typeof ZoomControlsFullScreen>;
+} satisfies Meta<typeof DesignSystemPageZoomControls>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

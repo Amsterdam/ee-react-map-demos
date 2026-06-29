@@ -7,11 +7,10 @@
   right: var(--ams-space-md, 24px);
 }
 
-.fullscreen {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100dvh;
-  width: 100dvw;
+.map {
+  height: 80dvh;
+  min-width: var(--ams-space-2xl);
+  position: relative;
 }
 
 .container {
