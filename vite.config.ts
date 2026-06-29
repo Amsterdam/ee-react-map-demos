@@ -1,10 +1,9 @@
-/// <reference types="vitest" />
 import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import svgr from 'vite-plugin-svgr';
 
-module.exports = defineConfig({
+export default defineConfig({
   plugins: [react(), svgr()],
   test: {
     globals: true,

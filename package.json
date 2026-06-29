@@ -61,9 +61,9 @@
     "stylelint-order": "^6.0.4",
     "stylelint-prettier": "^5.0.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3",
+    "typescript": "6.0.3",
     "vite": "^8.1.0",
-    "vite-plugin-svgr": "^4.5.0",
+    "vite-plugin-svgr": "^5.2.0",
     "vitest": "^4.1.9"
   },
   "dependencies": {

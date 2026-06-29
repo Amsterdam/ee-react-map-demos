@@ -9,12 +9,11 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "strict": true,
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "verbatimModuleSyntax": true,
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -29,6 +28,6 @@
     ],
     "jsx": "react-jsx"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "test/**", ".history/**"]
+  "include": ["src", "test"],
+  "exclude": ["node_modules", ".history/**"]
 }
