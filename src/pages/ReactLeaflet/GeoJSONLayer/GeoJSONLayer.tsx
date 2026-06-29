@@ -8,7 +8,7 @@ import data from './data.json';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 
-const GeoJSONLayer = (): JSX.Element => {
+const GeoJSONLayer = () => {
   const pointToLayer = (
     _feature: Feature<Point, never>,
     latlng: L.LatLngExpression

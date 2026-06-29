@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
-const WMSLayer = (): JSX.Element => (
+const WMSLayer = () => (
   <div className={styles.container}>
     <MapContainer
       center={L.latLng([52.370216, 4.895168])}

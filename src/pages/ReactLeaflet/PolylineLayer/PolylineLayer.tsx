@@ -5,7 +5,7 @@ import getCrsRd from '@/utils/getCrsRd';
 import data from './data.json';
 import 'leaflet/dist/leaflet.css';
 
-const PolylineLayer = (): JSX.Element => {
+const PolylineLayer = () => {
   return (
     <div className={styles.container}>
       <MapContainer

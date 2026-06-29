@@ -5,7 +5,7 @@ import type { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import data from './data.json';
 
-const PolygonLayer = (): JSX.Element => {
+const PolygonLayer = () => {
   return (
     <div className={styles.container}>
       <MapContainer

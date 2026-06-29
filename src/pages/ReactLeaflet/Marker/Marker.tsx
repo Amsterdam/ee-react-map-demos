@@ -9,7 +9,7 @@ import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 import defaultMarker from '@/utils/icons/defaultMarker';
 
-const Marker = (): JSX.Element => (
+const Marker = () => (
   <div className={styles.container}>
     <MapContainer
       center={L.latLng([52.370216, 4.895168])}
