@@ -1,0 +1,11 @@
+.intro-feedback-grid {
+  display: grid;
+  gap: var(--ams-space-m);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 37.5rem) {
+  .intro-feedback-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
