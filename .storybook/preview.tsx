@@ -18,7 +18,7 @@ export const decorators = [
 
 export const parameters = {
   backgrounds: {
-    disable: true,
+    disabled: true,
   },
   options: {
     storySort: {
@@ -34,7 +34,7 @@ export const parameters = {
     },
   },
   viewport: {
-    viewports,
+    options: viewports,
   },
 };
 export const tags = ['autodocs'];

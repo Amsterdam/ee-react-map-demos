@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import WMSLayer from '@/pages/ReactLeaflet/WMSLayer/WMSLayer';
 
 const meta = {

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import WFSLayer from '@/pages/WFSLayer/WFSLayer';
 
 const meta = {
