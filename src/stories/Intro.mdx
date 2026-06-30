@@ -38,7 +38,7 @@ This project aims to include demos and examples of common use-cases of maps for 
 
 Each demo is offered in two flavours:
 
-1. [React](https://react.dev/) and [Leaflet](https://leafletjs.com/) for those who prefer native JavaScript/TypeScript. _There are also some React and Leaflet examples that use <a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank">React's context</a>, which assists with larger/advanced maps features._
+1. [React](https://react.dev/) and [Leaflet](https://leafletjs.com/) for those who prefer native JavaScript/TypeScript. _There are also some React and Leaflet examples that use <a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank" className="sbdocs sbdocs-a">React's context</a>, which assists with larger/advanced maps features._
 2. [React](https://react.dev/) and [React-leaflet](https://react-leaflet.js.org/) for those who prefer JSX.
 
 For each demo we also try to include documentation with following structure:
@@ -50,22 +50,13 @@ For each demo we also try to include documentation with following structure:
 
 ## Starter demos
 
-<div
-  style={{
-    display: 'grid',
-    gap: 'var(--ams-space-m)',
-    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-    marginBlock: 'var(--ams-space-l)',
-  }}
->
+<div className="intro-primary-grid cards-grid">
   <div>
     <Card>
       <Card.Image alt="The Amsterdam base layer map tile" src={Intro00} />
       <Card.HeadingGroup>
-        <Card.Heading level={3}>
-          <Card.Link href="./?path=/docs/react-baselayer--docs">
-            Amsterdam Base Layer
-          </Card.Link>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-baselayer--docs">Amsterdam Base Layer</Card.Link>
         </Card.Heading>
       </Card.HeadingGroup>
       <Paragraph>
@@ -80,7 +71,7 @@ For each demo we also try to include documentation with following structure:
         src={Intro01}
       />
       <Card.HeadingGroup>
-        <Card.Heading level={3}>
+        <Card.Heading level={2}>
           <Card.Link href="./?path=/docs/react-marker--docs">Marker</Card.Link>
         </Card.Heading>
       </Card.HeadingGroup>
@@ -91,10 +82,8 @@ For each demo we also try to include documentation with following structure:
     <Card>
       <Card.Image alt="An example of GeoJSON map layer" src={Intro02} />
       <Card.HeadingGroup>
-        <Card.Heading level={3}>
-          <Card.Link href="./?path=/docs/react-geojson--docs">
-            GeoJSON
-          </Card.Link>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-geojson--docs">GeoJSON</Card.Link>
         </Card.Heading>
       </Card.HeadingGroup>
       <Paragraph>
@@ -106,14 +95,7 @@ For each demo we also try to include documentation with following structure:
 
 ## Advanced demos
 
-<div
-  style={{
-    display: 'grid',
-    gap: 'var(--ams-space-m)',
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    marginBlock: 'var(--ams-space-l)',
-  }}
->
+<div className="intro-secondary-grid cards-grid">
   <div>
     <Card>
       <Card.Image
@@ -121,10 +103,8 @@ For each demo we also try to include documentation with following structure:
         alt="A screenshot showing the multiple marker selection demo"
       />
       <Card.HeadingGroup>
-        <Card.Heading level={3}>
-          <Card.Link href="./?path=/docs/react-context-examples-multimarkerselect--docs">
-            Multiple Marker Selection
-          </Card.Link>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-context-examples-multimarkerselect--docs">Multiple Marker Selection</Card.Link>
         </Card.Heading>
       </Card.HeadingGroup>
       <Paragraph>
@@ -140,10 +120,8 @@ For each demo we also try to include documentation with following structure:
         alt="A screenshot showing a marker cluster demo"
       />
       <Card.HeadingGroup>
-        <Card.Heading level={3}>
-          <Card.Link href="./?path=/docs/react-markerclusterspiderfy--docs">
-            Marker Clustering
-          </Card.Link>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-markerclusterspiderfy--docs">Marker Clustering</Card.Link>
         </Card.Heading>
       </Card.HeadingGroup>
       <Paragraph>
@@ -158,10 +136,8 @@ For each demo we also try to include documentation with following structure:
         alt="A screenshot showing a Leaflet map combined with elements from Amsterdam Design System"
       />
       <Card.HeadingGroup>
-        <Card.Heading level={3}>
-          <Card.Link href="./?path=/docs/react-context-examples-designsystempagezoomcontrols--docs">
-            Zoom Controls + Amsterdam Design System
-          </Card.Link>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-context-examples-designsystempagezoomcontrols--docs">Amsterdam Design System + Zoom Controls</Card.Link>
         </Card.Heading>
       </Card.HeadingGroup>
       <Paragraph>
@@ -174,10 +150,8 @@ For each demo we also try to include documentation with following structure:
     <Card>
       <Card.Image src={Intro06} alt="A screenshot of an Amsterdam WFS layer" />
       <Card.HeadingGroup>
-        <Card.Heading level={3}>
-          <Card.Link href="./?path=/docs/react-wfslayer--docs">
-            WFS Layer
-          </Card.Link>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-wfslayer--docs">WFS Layer</Card.Link>
         </Card.Heading>
       </Card.HeadingGroup>
       <Paragraph>
@@ -190,7 +164,7 @@ For each demo we also try to include documentation with following structure:
 
 ## Feedback
 
-Contributions and feedback are highly appreciated, if you have spotted something that you think is incorrect or unsure about please <a href="https://github.com/Amsterdam/ee-react-map-demos/issues/new" target="_blank">create an issue</a> in the <a href="https://github.com/Amsterdam/ee-react-map-demos" target="_blank">GitHub repository</a>. Missing an example you think is necessary? Think an improvement can be made to an existing demo? Feel free to <a href="https://github.com/Amsterdam/ee-react-map-demos/compare" target="_blank">make a pull request</a>!
+Contributions and feedback are highly appreciated, if you have spotted something that you think is incorrect or unsure about please <a href="https://github.com/Amsterdam/ee-react-map-demos/issues/new" target="_blank" className="sbdocs sbdocs-a">create an issue</a> in the <a href="https://github.com/Amsterdam/ee-react-map-demos" target="_blank" className="sbdocs sbdocs-a">GitHub repository</a>. Missing an example you think is necessary? Think an improvement can be made to an existing demo? Feel free to <a href="https://github.com/Amsterdam/ee-react-map-demos/compare" target="_blank" className="sbdocs sbdocs-a">make a pull request</a>!
 
 Otherwise if you have any questions or other matters regarding implementing maps or a demo here, you can contact us via Teams (DV - Enablement) or Slack (#dv-enablement).
 
@@ -208,6 +182,7 @@ Otherwise if you have any questions or other matters regarding implementing maps
       <a
         href="https://github.com/Amsterdam/ee-react-map-demos"
         target="_blank"
+        className="sbdocs sbdocs-a"
       >Browse on GitHub<RightArrow /></a>
     </div>
     <div className="sb-section-item">
@@ -223,6 +198,7 @@ Otherwise if you have any questions or other matters regarding implementing maps
       <a
           href="https://developers.amsterdam/"
           target="_blank"
+          className="sbdocs sbdocs-a"
         >developers.amsterdam<RightArrow /></a>
     </div>
 
