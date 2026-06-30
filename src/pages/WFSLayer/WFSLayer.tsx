@@ -6,7 +6,7 @@ import useGeoJSONLayer from './useGeoJSONLayer';
 import useLeafletMap from './useLeafletMap';
 
 const WFSLayer = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useLeafletMap(containerRef);
 
   useGeoJSONLayer(

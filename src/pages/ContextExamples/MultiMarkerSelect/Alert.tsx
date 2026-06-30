@@ -1,4 +1,4 @@
-import { useMemo, type FunctionComponent } from 'react';
+import { type FunctionComponent, useMemo } from 'react';
 import { Button, UnorderedList } from '@amsterdam/design-system-react';
 import styles from '../styles.module.css';
 import { useMapInstance } from './MapContext';

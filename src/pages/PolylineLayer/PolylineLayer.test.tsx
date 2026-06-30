@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import PolylineLayer from './PolylineLayer';
-import { lineStyles, lineHoverStyles } from './layerStyles';
+import { lineHoverStyles, lineStyles } from './layerStyles';
 
 describe('PolylineLayer', () => {
   it('renders the component', () => {

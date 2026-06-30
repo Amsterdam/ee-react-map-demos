@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { GeoJSON, MapContainer, TileLayer } from 'react-leaflet';
 import L, { circleMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Feature, Point } from 'geojson';
@@ -8,7 +8,7 @@ import data from './data.json';
 import getCrsRd from '@/utils/getCrsRd';
 import { toGeoJSON } from '@/utils/toGeoJSON';
 
-const GeoJSONLayer = (): JSX.Element => {
+const GeoJSONLayer = () => {
   const pointToLayer = (
     _feature: Feature<Point, never>,
     latlng: L.LatLngExpression

@@ -17,7 +17,7 @@ vi.mock('./MapContext', () => {
   };
 });
 
-describe('ZoomControlsFullScreen ZoomControls', () => {
+describe('DesignSystemPageZoomControls ZoomControls', () => {
   it('renders the component', () => {
     const { container } = render(<ZoomControls />);
     expect(container.firstChild).toBeDefined();

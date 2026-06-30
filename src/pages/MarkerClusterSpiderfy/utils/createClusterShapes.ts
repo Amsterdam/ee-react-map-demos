@@ -1,7 +1,8 @@
 import L from 'leaflet';
 
-// Most of this code is taken from https://github.com/fritz-c/OverlappingMarkerSpiderfier
-// This same library is used in the leaflet.markercluster library for spidery-ing
+// Most of this code is taken from:
+// https://github.com/fritz-c/OverlappingMarkerSpiderfier
+// The same library is used by leaflet.markercluster for spiderfying.
 
 const twoPi = Math.PI * 2;
 const circleFootSeparation = 23;

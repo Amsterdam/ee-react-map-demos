@@ -1,8 +1,8 @@
 import type { LatLngTuple, Map } from 'leaflet';
 import {
+  createContext,
   type Dispatch,
   type SetStateAction,
-  createContext,
   useContext,
 } from 'react';
 import type { GeoJSONFeature } from './types';

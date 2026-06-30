@@ -1,4 +1,5 @@
-// Leaflet was built before Webpack, Vite (and other build engines) were used so certain assets and elements require manual configuration
+// Leaflet predates modern bundlers like Webpack and Vite.
+// Some assets and elements therefore need manual configuration.
 // @see https://github.com/Leaflet/Leaflet/issues/4968#issuecomment-483402699
 import L from 'leaflet';
 import type { Feature, Point } from 'geojson';

@@ -1,6 +1,7 @@
 import L from 'leaflet';
 
-// Leaflet uses lat-lng (or north-east) whereas GeoJSON uses lng-lat (or east-north).
+// Leaflet uses lat-lng (north-east), while GeoJSON uses
+// lng-lat (east-north).
 // @see https://macwright.com/lonlat/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reverseLatLng = (input: any) =>

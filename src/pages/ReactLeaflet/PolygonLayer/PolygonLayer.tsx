@@ -1,11 +1,11 @@
 import styles from '@/pages/ReactLeaflet/PolygonLayer/styles.module.css';
-import { MapContainer, TileLayer, Polygon } from 'react-leaflet';
+import { MapContainer, Polygon, TileLayer } from 'react-leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import type { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import data from './data.json';
 
-const PolygonLayer = (): JSX.Element => {
+const PolygonLayer = () => {
   return (
     <div className={styles.container}>
       <MapContainer

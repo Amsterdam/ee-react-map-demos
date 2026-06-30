@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useGeoJSONData = (url: string) => {
   const [data, setData] = useState(null);

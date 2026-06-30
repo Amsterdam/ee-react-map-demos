@@ -3,7 +3,7 @@ import type { RefObject } from 'react';
 import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 
-const useLeafletMap = (container: RefObject<HTMLDivElement>) => {
+const useLeafletMap = (container: RefObject<HTMLDivElement | null>) => {
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);
 

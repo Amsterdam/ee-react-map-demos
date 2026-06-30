@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import PolygonLayer from '@/pages/ReactLeaflet/PolygonLayer/PolygonLayer';
 
 const meta = {

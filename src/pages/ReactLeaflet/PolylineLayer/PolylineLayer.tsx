@@ -1,11 +1,11 @@
-import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
+import { MapContainer, Polyline, TileLayer } from 'react-leaflet';
 import styles from '@/pages/ReactLeaflet/PolylineLayer/styles.module.css';
 import L, { type LatLngTuple } from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import data from './data.json';
 import 'leaflet/dist/leaflet.css';
 
-const PolylineLayer = (): JSX.Element => {
+const PolylineLayer = () => {
   return (
     <div className={styles.container}>
       <MapContainer

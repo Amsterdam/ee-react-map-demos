@@ -1,4 +1,6 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Card, Paragraph } from '@amsterdam/design-system-react';
+import './Intro.css';
 
 import Github from './assets/github.svg';
 import Intro00 from './assets/intro-00.png';
@@ -10,7 +12,8 @@ import Intro05 from './assets/intro-05.png';
 import Intro06 from './assets/intro-06.png';
 import DocumentCheckmark from './assets/DocumentCheckmark.svg';
 
-export const RightArrow = () => <svg
+export const RightArrow = () => (
+  <svg
     viewBox="0 0 14 14"
     width="8px"
     height="14px"
@@ -20,11 +23,12 @@ export const RightArrow = () => <svg
       shapeRendering: 'inherit',
       verticalAlign: 'middle',
       fill: 'currentColor',
-      'path fill': 'currentColor'
+      'path fill': 'currentColor',
     }}
->
-  <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
-</svg>
+  >
+    <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
+  </svg>
+);
 
 <Meta title="Introduction" />
 
@@ -34,7 +38,7 @@ This project aims to include demos and examples of common use-cases of maps for 
 
 Each demo is offered in two flavours:
 
-1. [React](https://react.dev/) and [Leaflet](https://leafletjs.com/) for those who prefer native JavaScript/TypeScript. *There are also some React and Leaflet examples that use <a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank">React's context</a>, which assists with larger/advanced maps features.*
+1. [React](https://react.dev/) and [Leaflet](https://leafletjs.com/) for those who prefer native JavaScript/TypeScript. _There are also some React and Leaflet examples that use <a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank" className="sbdocs sbdocs-a">React's context</a>, which assists with larger/advanced maps features._
 2. [React](https://react.dev/) and [React-leaflet](https://react-leaflet.js.org/) for those who prefer JSX.
 
 For each demo we also try to include documentation with following structure:
@@ -46,252 +50,156 @@ For each demo we also try to include documentation with following structure:
 
 ## Starter demos
 
-<div className="sb-container">
-  <div className="sb-section">
-    <div className="sb-section-item">
-      <img
-        src={Intro00}
-        alt="The Amsterdam base layer map tile"
-      />
-      <h4 className="sb-section-item-heading">Amsterdam Base Layer</h4>
-      <p className="sb-section-item-paragraph">How to implement a Leaflet map using the Amsterdam base tile layer.</p>
-      <a href="./?path=/docs/react-baselayer--docs">Learn more<RightArrow /></a>
-    </div>
-    <div className="sb-section-item">
-      <img
-        src={Intro01}
+<div className="intro-primary-grid cards-grid">
+  <div>
+    <Card>
+      <Card.Image alt="The Amsterdam base layer map tile" src={Intro00} />
+      <Card.HeadingGroup>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-baselayer--docs">Amsterdam Base Layer</Card.Link>
+        </Card.Heading>
+      </Card.HeadingGroup>
+      <Paragraph>
+        How to implement a Leaflet map using the Amsterdam base tile layer.
+      </Paragraph>
+    </Card>
+  </div>
+  <div>
+    <Card>
+      <Card.Image
         alt="A marker on the Amsterdam base title layer map"
+        src={Intro01}
       />
-      <h4 className="sb-section-item-heading">Marker</h4>
-      <p className="sb-section-item-paragraph">How to implement a Leaflet point marker.</p>
-      <a href="./?path=/docs/react-marker--docs">Learn more<RightArrow /></a>
-    </div>
-    <div className="sb-section-item">
-      <img src={Intro02} alt="An example of GeoJSON map layer" />
-      <div>
-        <h4 className="sb-section-item-heading">GeoJSON</h4>
-        <p className="sb-section-item-paragraph">Learn about the format and powers of the GeoJSON layer.</p>
-        <a href="./?path=/docs/react-geojson--docs">Learn more<RightArrow /></a>
-      </div>
-    </div>
+      <Card.HeadingGroup>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-marker--docs">Marker</Card.Link>
+        </Card.Heading>
+      </Card.HeadingGroup>
+      <Paragraph>How to implement a Leaflet point marker.</Paragraph>
+    </Card>
+  </div>
+  <div>
+    <Card>
+      <Card.Image alt="An example of GeoJSON map layer" src={Intro02} />
+      <Card.HeadingGroup>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-geojson--docs">GeoJSON</Card.Link>
+        </Card.Heading>
+      </Card.HeadingGroup>
+      <Paragraph>
+        Learn about the format and powers of the GeoJSON layer.
+      </Paragraph>
+    </Card>
   </div>
 </div>
 
 ## Advanced demos
 
-<div className="sb-container">
-  <div className="sb-section">
-    <div className="sb-features-grid">
-      <div className="sb-grid-item">
-        <img src={Intro03} alt="A screenshot showing the multiple marker selection demo" />
-        <h4 className="sb-section-item-heading">Multiple Marker Selection</h4>
-        <p className="sb-section-item-paragraph">Learn how to display and select Amsterdam taxi stand locations in a Leaflet map with the help of React's context.</p>
-        <a href="./?path=/docs/react-context-examples-multimarkerselect--docs">Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <img src={Intro04} alt="A screenshot showing a marker cluster demo" />
-        <h4 className="sb-section-item-heading">Marker Clustering</h4>
-        <p className="sb-section-item-paragraph">Learn how to handle large numbers of markers through clustering.</p>
-        <a href="./?path=/docs/react-markerclusterspiderfy--docs">Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <img src={Intro05} alt="A screenshot showing a Leaflet map combined with elements from Amsterdam Design System" />
-        <h4 className="sb-section-item-heading">Zoom Controls + Amsterdam Design System</h4>
-        <p className="sb-section-item-paragraph">Learn how to implement custom zoom controls and wrap a Leaflet map with components from Amsterdam Design System</p>
-        <a href="./?path=/docs/react-context-examples-zoomcontrolsfullscreen--docs">Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <img src={Intro06} alt="A screenshot of an Amsterdam WFS layer" />
-        <h4 className="sb-section-item-heading">WFS Layer</h4>
-        <p className="sb-section-item-paragraph">Learn how to connect with a WFS endpoint and show the buildings of Amsterdam on a Leaflet map.</p>
-        <a href="./?path=/docs/react-wfslayer--docs">Learn more<RightArrow /></a>
-      </div>
-    </div>
+<div className="intro-secondary-grid cards-grid">
+  <div>
+    <Card>
+      <Card.Image
+        src={Intro03}
+        alt="A screenshot showing the multiple marker selection demo"
+      />
+      <Card.HeadingGroup>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-context-examples-multimarkerselect--docs">Multiple Marker Selection</Card.Link>
+        </Card.Heading>
+      </Card.HeadingGroup>
+      <Paragraph>
+        Learn how to display and select Amsterdam taxi stand locations in a
+        Leaflet map with the help of React's context.
+      </Paragraph>
+    </Card>
+  </div>
+  <div>
+    <Card>
+      <Card.Image
+        src={Intro04}
+        alt="A screenshot showing a marker cluster demo"
+      />
+      <Card.HeadingGroup>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-markerclusterspiderfy--docs">Marker Clustering</Card.Link>
+        </Card.Heading>
+      </Card.HeadingGroup>
+      <Paragraph>
+        Learn how to handle large numbers of markers through clustering.
+      </Paragraph>
+    </Card>
+  </div>
+  <div>
+    <Card>
+      <Card.Image
+        src={Intro05}
+        alt="A screenshot showing a Leaflet map combined with elements from Amsterdam Design System"
+      />
+      <Card.HeadingGroup>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-context-examples-designsystempagezoomcontrols--docs">Amsterdam Design System + Zoom Controls</Card.Link>
+        </Card.Heading>
+      </Card.HeadingGroup>
+      <Paragraph>
+        Learn how to implement custom zoom controls and wrap a Leaflet map with
+        components from Amsterdam Design System
+      </Paragraph>
+    </Card>
+  </div>
+  <div>
+    <Card>
+      <Card.Image src={Intro06} alt="A screenshot of an Amsterdam WFS layer" />
+      <Card.HeadingGroup>
+        <Card.Heading level={2}>
+          <Card.Link href="./?path=/docs/react-wfslayer--docs">WFS Layer</Card.Link>
+        </Card.Heading>
+      </Card.HeadingGroup>
+      <Paragraph>
+        Learn how to connect with a WFS endpoint and show the buildings of
+        Amsterdam on a Leaflet map.
+      </Paragraph>
+    </Card>
   </div>
 </div>
 
 ## Feedback
 
-Contributions and feedback are highly appreciated, if you have spotted something that you think is incorrect or unsure about please <a href="https://github.com/Amsterdam/ee-react-map-demos/issues/new" target="_blank">create an issue</a> in the <a href="https://github.com/Amsterdam/ee-react-map-demos" target="_blank">GitHub repository</a>. Missing an example you think is necessary? Think an improvement can be made to an existing demo? Feel free to <a href="https://github.com/Amsterdam/ee-react-map-demos/compare" target="_blank">make a pull request</a>!
+Contributions and feedback are highly appreciated, if you have spotted something that you think is incorrect or unsure about please <a href="https://github.com/Amsterdam/ee-react-map-demos/issues/new" target="_blank" className="sbdocs sbdocs-a">create an issue</a> in the <a href="https://github.com/Amsterdam/ee-react-map-demos" target="_blank" className="sbdocs sbdocs-a">GitHub repository</a>. Missing an example you think is necessary? Think an improvement can be made to an existing demo? Feel free to <a href="https://github.com/Amsterdam/ee-react-map-demos/compare" target="_blank" className="sbdocs sbdocs-a">make a pull request</a>!
 
 Otherwise if you have any questions or other matters regarding implementing maps or a demo here, you can contact us via Teams (DV - Enablement) or Slack (#dv-enablement).
 
-<div className="sb-section sb-socials">
+<div className="intro-feedback-grid">
     <div className="sb-section-item">
-      <img src={Github} alt="Github logo" className="sb-explore-image"/>
-      This project's repository.
+      <img
+        src={Github}
+        alt="Github logo"
+        className="sb-explore-image"
+        width="32"
+        height="32"
+      />
+      <Paragraph>This project's repository.</Paragraph>
 
       <a
         href="https://github.com/Amsterdam/ee-react-map-demos"
         target="_blank"
+        className="sbdocs sbdocs-a"
       >Browse on GitHub<RightArrow /></a>
     </div>
     <div className="sb-section-item">
-      <img src={DocumentCheckmark} alt="A book" className="sb-explore-image"/>
-      <p>Browse the City of Amsterdam technology standards and guidance.</p>
+      <img
+        src={DocumentCheckmark}
+        alt="A book"
+        className="sb-explore-image"
+        width="32"
+        height="32"
+      />
+      <Paragraph>Browse the City of Amsterdam technology standards and guidance.</Paragraph>
 
       <a
           href="https://developers.amsterdam/"
           target="_blank"
+          className="sbdocs sbdocs-a"
         >developers.amsterdam<RightArrow /></a>
     </div>
+
 </div>
-
-
-<style>
-  {`
-  .sb-container {
-    margin-bottom: 48px;
-  }
-
-  .sb-section {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-  }
-
-  img {
-    object-fit: cover;
-  }
-
-  .sb-section-title {
-    margin-bottom: 32px;
-  }
-
-  .sb-section a:not(h1 a, h2 a, h3 a) {
-    font-size: 14px;
-  }
-
-  .sb-section-item, .sb-grid-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sb-section-item-heading {
-    padding-top: 20px !important;
-    padding-bottom: 5px !important;
-    margin: 0 !important;
-  }
-  .sb-section-item-paragraph {
-    margin: 0;
-    padding-bottom: 10px;
-  }
-
-  .sb-chevron {
-    margin-left: 5px;
-  }
-
-  .sb-features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 32px 20px;
-  }
-
-  .sb-socials {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .sb-socials p {
-    margin-bottom: 10px;
-  }
-
-  .sb-explore-image {
-    max-height: 32px;
-    align-self: flex-start;
-  }
-
-  .sb-addon {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    position: relative;
-    background-color: #EEF3F8;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    background: #EEF3F8;
-    height: 180px;
-    margin-bottom: 48px;
-    overflow: hidden;
-  }
-
-  .sb-addon-text {
-    padding-left: 48px;
-    max-width: 240px;
-  }
-
-  .sb-addon-text h4 {
-    padding-top: 0px;
-  }
-
-  .sb-addon-img {
-    position: absolute;
-    left: 345px;
-    top: 0;
-    height: 100%;
-    width: 200%;
-    overflow: hidden;
-  }
-
-  .sb-addon-img img {
-    width: 650px;
-    transform: rotate(-15deg);
-    margin-left: 40px;
-    margin-top: -72px;
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0);
-    backface-visibility: hidden;
-  }
-
-  @media screen and (max-width: 800px) {
-    .sb-addon-img {
-      left: 300px;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .sb-section {
-      flex-direction: column;
-    }
-
-    .sb-features-grid {
-      grid-template-columns: repeat(1, 1fr);
-    }
-
-    .sb-socials {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .sb-addon {
-      height: 280px;
-      align-items: flex-start;
-      padding-top: 32px;
-      overflow: hidden;
-    }
-
-    .sb-addon-text {
-      padding-left: 24px;
-    }
-
-    .sb-addon-img {
-      right: 0;
-      left: 0;
-      top: 130px;
-      bottom: 0;
-      overflow: hidden;
-      height: auto;
-      width: 124%;
-    }
-
-    .sb-addon-img img {
-      width: 1200px;
-      transform: rotate(-12deg);
-      margin-left: 0;
-      margin-top: 48px;
-      margin-bottom: -40px;
-      margin-left: -24px;
-    }
-  }
-  `}
-</style>

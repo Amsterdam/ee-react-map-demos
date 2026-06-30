@@ -1,4 +1,4 @@
-import type { Geometry, Feature, FeatureCollection } from 'geojson';
+import type { Feature, FeatureCollection, Geometry } from 'geojson';
 
 export function toGeoJSON<DataType extends { geometry: Geometry }>(
   data: DataType[]

@@ -1,18 +1,18 @@
-import { Canvas, Meta, Source, Story } from '@storybook/blocks';
-import * as ZoomControlsFullScreenStories from './index.stories';
-import MapContext from '@/pages/ContextExamples/ZoomControlsFullScreen/MapContext.ts?raw';
-import MapProvider from '@/pages/ContextExamples/ZoomControlsFullScreen/MapProvider.tsx?raw';
-import ZoomControlsFullScreen from '@/pages/ContextExamples/ZoomControlsFullScreen/ZoomControlsFullScreen.tsx?raw';
-import ZoomControls from '@/pages/ContextExamples/ZoomControlsFullScreen/ZoomControls.tsx?raw';
-import Header from '@/pages/ContextExamples/ZoomControlsFullScreen/Header.tsx?raw';
-import styles from '@/pages/ContextExamples/ZoomControlsFullScreen/styles.module.css?raw';
+import { Canvas, Meta, Source, Story } from '@storybook/addon-docs/blocks';
+import * as DesignSystemPageZoomControlsStories from './index.stories';
+import MapContext from '@/pages/ContextExamples/DesignSystemPageZoomControls/MapContext.ts?raw';
+import MapProvider from '@/pages/ContextExamples/DesignSystemPageZoomControls/MapProvider.tsx?raw';
+import DesignSystemPageZoomControls from '@/pages/ContextExamples/DesignSystemPageZoomControls/DesignSystemPageZoomControls.tsx?raw';
+import ZoomControls from '@/pages/ContextExamples/DesignSystemPageZoomControls/ZoomControls.tsx?raw';
+import Header from '@/pages/ContextExamples/DesignSystemPageZoomControls/Header.tsx?raw';
+import styles from '@/pages/ContextExamples/DesignSystemPageZoomControls/styles.module.css?raw';
 import stylesMap from '@/pages/ContextExamples/map.module.css?raw';
 
-<Meta of={ZoomControlsFullScreenStories} />
+<Meta of={DesignSystemPageZoomControlsStories} />
 
-# Context - Zoom Controls (Full screen)
+# Context - Amsterdam Design System Page + Zoom Controls
 
-**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ContextExamples/ZoomControlsFullScreen)**
+**[GitHub Repo URL](https://github.com/Amsterdam/ee-react-map-demos/tree/main/src/pages/ContextExamples/DesignSystemPageZoomControls)**
 
 #### Table of Contents
 
@@ -22,7 +22,7 @@ import stylesMap from '@/pages/ContextExamples/map.module.css?raw';
 
 ## Description
 
-Using the [Amsterdam Design System](https://designsystem.amsterdam/) we implemented some custom buttons to act as the [Leaflet map zoom controls](https://leafletjs.com/reference.html#control-zoom) in a full webpage.
+Using the [Amsterdam Design System](https://designsystem.amsterdam/) [Page component](https://designsystem.amsterdam/?path=/docs/components-containers-page--docs) we implemented some custom buttons to act as the [Leaflet map zoom controls](https://leafletjs.com/reference.html#control-zoom) in a full webpage.
 
 In this example, the Map context exports a single element - the Leaflet map object. This enables you to interact with your Leaflet map natively in any component (that is a child to the Map context provider component).
 
@@ -33,14 +33,17 @@ In this example, the Map context exports a single element - the Leaflet map obje
 Leaflet renders its internal panes as stacked DOM elements with predefined z-index values. As a result, custom components may be rendered behind Leaflet’s map layers and appear invisible.
 
 To prevent this, apply `isolation: isolate` to the map container so it forms its own stacking context. Previously, this was handled by relying on a fixed, application-wide z-index constant.
-<a href="https://leafletjs.com/examples/map-panes/" target="_blank">More information</a>
+
+<a href="https://leafletjs.com/examples/map-panes/" target="_blank">
+  More information
+</a>
 
 ## How to implement
 
 To accomplish the ZoomControls component, there are 8 files:
 
 1. The React components
-   - [ZoomControlsFullScreen.tsx](#--zoomcontrolsfullscreentsx)
+   - [DesignSystemPageZoomControls.tsx](#--designsystempagezoomcontrolstsx)
    - [MapContext.ts](#--mapcontextts)
    - [MapProvider.tsx](#--mapprovidertsx)
    - [ZoomControls.tsx](#--zoomcontrolstsx)
@@ -53,9 +56,9 @@ To accomplish the ZoomControls component, there are 8 files:
 
 ### React Components
 
-#### - ZoomControlsFullScreen.tsx
+#### - DesignSystemPageZoomControls.tsx
 
-<Source code={ZoomControlsFullScreen} />
+<Source code={DesignSystemPageZoomControls} />
 
 #### - MapContext.ts
 

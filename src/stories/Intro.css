@@ -1,0 +1,59 @@
+.intro-primary-grid {
+  display: grid;
+  gap: var(--ams-grid-row-gap-xl);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  margin-block: var(--ams-space-l);
+}
+
+.intro-secondary-grid {
+  display: grid;
+  gap: var(--ams-grid-row-gap-xl);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  margin-block: var(--ams-space-l);
+}
+
+.cards-grid h2 {
+  border-bottom: 0;
+  color: var(--ams-heading-color);
+  font-family: var(--ams-heading-font-family);
+  font-size: var(--ams-heading-2-font-size);
+  font-weight: var(--ams-heading-font-weight);
+  margin: 0;
+}
+
+.cards-grid a {
+  color: var(--ams-card-link-color);
+  font-family: var(--ams-heading-font-family);
+  text-decoration: none;
+  text-decoration-line: var(--ams-card-link-text-decoration-line);
+  text-decoration-thickness: var(--ams-card-link-text-decoration-thickness);
+  text-underline-offset: var(--ams-card-link-text-underline-offset);
+}
+
+.cards-grid p {
+  color: var(--ams-paragraph-color);
+  font-family: var(--ams-paragraph-font-family);
+  font-size: var(--ams-paragraph-font-size);
+  line-height: var(--ams-paragraph-line-height);
+  margin: 0;
+}
+
+.intro-feedback-grid {
+  display: grid;
+  gap: var(--ams-space-m);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 37.5rem) {
+  .intro-primary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .intro-secondary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .intro-feedback-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

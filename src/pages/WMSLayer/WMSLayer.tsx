@@ -57,9 +57,11 @@ const WMSLayer = () => {
         {
           layers: 'verblijfsobjecten_woonfunctie',
           format: 'image/svg+xml',
-          // Ensure transparent is true otherwise the Amsterdam base layer won't be visible through the WMS layer
+          // Ensure `transparent` is true, otherwise the Amsterdam base
+          // layer will not be visible through the WMS layer.
           transparent: true,
-          // Default for Amsterdam is Rijksdriehoek whereas Leaflet works in WGS84 so be sure to handle the CRS properly
+          // Amsterdam uses Rijksdriehoek while Leaflet defaults to WGS84,
+          // so make sure the CRS is handled properly.
           crs: getCrsRd(),
         }
       )

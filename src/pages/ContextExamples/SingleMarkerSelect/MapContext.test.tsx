@@ -1,8 +1,8 @@
 import { type PropsWithChildren, useState } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect } from 'vitest';
-import type { Map, LatLngTuple } from 'leaflet';
+import { describe, expect, it } from 'vitest';
+import type { LatLngTuple, Map } from 'leaflet';
 import {
   MapContext,
   type MapContextProps,

@@ -8,7 +8,8 @@ export const DEFAULT_MAP_OPTIONS = {
   minZoom: 6,
   // Ensure proper handling for Rijksdriehoekcoördinaten
   crs: getCrsRd(),
-  // Prevent the user browsing too far outside Amsterdam otherwise the map will render blank greyspace. Amsterdam tile layer only supports Amsterdam and the immediate surrounding areas
+  // Prevent browsing too far outside Amsterdam.
+  // The tile layer only supports Amsterdam and nearby areas.
   maxBounds: [
     [52.25168, 4.64034],
     [52.50536, 5.10737],

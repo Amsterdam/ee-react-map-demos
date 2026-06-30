@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';
 
-const WMSLayer = (): JSX.Element => (
+const WMSLayer = () => (
   <div className={styles.container}>
     <MapContainer
       center={L.latLng([52.370216, 4.895168])}
@@ -27,7 +27,8 @@ const WMSLayer = (): JSX.Element => (
         url="https://map.data.amsterdam.nl/maps/adresseerbare_objecten?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms"
         layers="verblijfsobjecten_woonfunctie"
         format="image/svg+xml"
-        // Ensure transparent is true otherwise the Amsterdam base layer won't be visible through the WMS layer
+        // Ensure `transparent` is true, otherwise the Amsterdam base layer
+        // will not be visible through the WMS layer.
         transparent={true}
       />
     </MapContainer>

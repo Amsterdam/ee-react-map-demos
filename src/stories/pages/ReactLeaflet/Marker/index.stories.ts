@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Marker from '@/pages/ReactLeaflet/Marker/Marker';
 
 const meta = {
