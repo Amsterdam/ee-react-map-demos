@@ -11,7 +11,8 @@ export default defineConfig({
     setupFiles: ['./test/vitest-setup.ts'],
   },
   resolve: {
-    // Resolve random 'TypeError: Failed to fetch dynamically imported module' error
+    // Resolve random "TypeError: Failed to fetch dynamically imported
+    // module" errors.
     // @see https://github.com/storybookjs/storybook/issues/21610#issuecomment-1882417258
     extensions: ['.mdx', '.mjs', '.js', '.ts', '.tsx'],
     alias: [

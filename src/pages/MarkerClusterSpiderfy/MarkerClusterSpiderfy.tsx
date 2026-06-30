@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import L, {
   type LatLngTuple,
-  type LeafletKeyboardEvent,
   type LeafletEvent,
+  type LeafletKeyboardEvent,
 } from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 import styles from './styles.module.css';

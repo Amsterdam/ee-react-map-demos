@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import L, {
   type LatLngTuple,
-  type LeafletKeyboardEvent,
   type LeafletEvent,
+  type LeafletKeyboardEvent,
 } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Supercluster from 'supercluster';

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { render, waitFor, act } from '@testing-library/react';
+import { act, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import L from 'leaflet';
 import MarkerCluster from './MarkerCluster';
@@ -10,7 +10,8 @@ import styles from './styles.module.css';
 //   _southWest: { lat: 52.37013184724128, lng: 4.895024918433285 },
 //   _northEast: { lat: 52.37013184724128, lng: 4.895024918433285 }
 // },
-// Therefore, Supercluster will render nothing, so we mock the return methods from Supercluster to return data.
+// Therefore, Supercluster renders nothing in tests.
+// Mock the return methods to provide test data.
 
 const fakeClusterData = [
   {

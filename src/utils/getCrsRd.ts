@@ -25,9 +25,10 @@ export const CRS_CONFIG = {
 export const proj4RD = proj4(CRS_CONFIG.WGS84.code, CRS_CONFIG.RD.projection);
 
 /**
- * This method will return RD-coordinates (RD stands for "Rijksdriehoekscoördinaten") in the geodetic coordinate system
- * that is used at national level for the European Netherlands as a basis for geographical indications and files.
- * CRS stands for coordinate reference system, a term used by geographers to explain what the coordinates mean in a coordinate vector.
+ * Returns RD coordinates (RD = "Rijksdriehoekscoordinaten") in the
+ * geodetic coordinate system used nationally in the European Netherlands
+ * for geographical indications and files.
+ * CRS means coordinate reference system, describing coordinate meaning.
  *
  * @param maxZoom
  * @param zeroScale
@@ -64,7 +65,7 @@ const getCrsRd = (
         proj4def: CRS_CONFIG.RD.projection,
       },
       transformation: new L.Transformation(1, 285401.92, -1, 903401.92),
-      // eslint-disable-next-line @typescript-eslint/unbound-method
+
       distance: L.CRS.Earth.distance,
       R: CRS_CONFIG.EARTH_RADIUS,
       scale: (zoom: number) => {

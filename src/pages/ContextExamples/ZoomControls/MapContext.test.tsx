@@ -1,6 +1,6 @@
 import { type PropsWithChildren, useState } from 'react';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { Map } from 'leaflet';
 import { MapContext, useMapInstance } from './MapContext';
 

@@ -76,7 +76,7 @@ const processFeatures = (
 ) => {
   const spiderLines: MapFeature<LineString>[] = [];
 
-  // Prepare the marker items, which we will later merge into the clusterItems array
+  // Prepare marker items, then merge them into the clusterItems array.
   const markerItems = getMarkerItems(
     features.filter(feature => !feature.properties.cluster)
   );
@@ -87,7 +87,8 @@ const processFeatures = (
       // Only one marker exists at this location so no modifications necessary
       clusterItems.push(features[0]);
     } else {
-      // Multiple markers exist at this location, therefore, prepare the zoomed in cluster markers
+      // Multiple markers exist at this location.
+      // Prepare the zoomed-in cluster markers.
       const primaryLatLng = {
         lng: features[0].geometry.coordinates[0],
         lat: features[0].geometry.coordinates[1],
@@ -115,7 +116,8 @@ const processFeatures = (
             options
           );
 
-          // Handle the spider lines separately for easier separataion between clickable markers and static lines
+          // Handle spider lines separately for easier separation
+          // between clickable markers and static lines.
           spiderLines.push(...legs);
 
           return feature;

@@ -6,7 +6,7 @@ import './preview.css';
 
 import { withThemeByClassName } from '@storybook/addon-themes';
 import { viewports } from './viewports';
-import { StoryFn, StoryContext } from '@storybook/react';
+import { StoryContext, StoryFn } from '@storybook/react';
 import { CSSProperties } from 'react';
 
 export const decorators = [

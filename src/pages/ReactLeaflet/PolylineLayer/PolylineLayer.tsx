@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
+import { MapContainer, Polyline, TileLayer } from 'react-leaflet';
 import styles from '@/pages/ReactLeaflet/PolylineLayer/styles.module.css';
 import L, { type LatLngTuple } from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';

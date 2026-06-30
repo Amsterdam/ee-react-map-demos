@@ -52,7 +52,8 @@ const PolylineLayer = () => {
   // Create the polygon layer and add it to the map
   useEffect(() => {
     if (mapInstance) {
-      // TypeScript will often throw errors with Leaflet coordinate sets if you don't explicitly cast the type
+      // TypeScript often throws errors with Leaflet coordinate sets
+      // unless the type is explicitly cast.
       polylineRef.current = L.polyline(
         data.geometry.coordinates[0] as LatLngTuple[],
         { ...lineStyles, className: 'c-layer' }

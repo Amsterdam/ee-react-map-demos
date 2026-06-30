@@ -62,7 +62,7 @@ const addExpansionZoom = <D extends Supercluster.ClusterProperties>(
         feature.properties.cluster_id
       ),
     };
-  } catch (error) {
+  } catch {
     console.error(
       "Can't add expansion zoom to cluster",
       feature.properties.cluster_id,
