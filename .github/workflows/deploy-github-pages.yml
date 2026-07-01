@@ -26,4 +26,5 @@ jobs:
       # Storybook build and deploy to GitHub Pages
       - uses: bitovi/github-actions-storybook-to-github-pages@ddd9d35f670cceedd2bfc444be681001b0709730 # v1.04
         with:
+          checkout: false
           path: storybook-static
