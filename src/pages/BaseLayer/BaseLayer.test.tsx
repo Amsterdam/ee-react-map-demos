@@ -1,15 +1,24 @@
+import { StrictMode } from 'react';
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import BaseLayer from './BaseLayer';
 
 describe('BaseLayer', () => {
   it('renders the component', () => {
-    const { container } = render(<BaseLayer />);
+    const { container } = render(
+      <StrictMode>
+        <BaseLayer />
+      </StrictMode>
+    );
     expect(container.firstChild).toBeDefined();
   });
 
   it('uses the amsterdam base tile', () => {
-    const { container } = render(<BaseLayer />);
+    const { container } = render(
+      <StrictMode>
+        <BaseLayer />
+      </StrictMode>
+    );
 
     // Only test on the less dynamic part of the URL
     const imgSrc = (

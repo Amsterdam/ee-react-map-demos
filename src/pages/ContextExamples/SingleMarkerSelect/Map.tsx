@@ -24,11 +24,15 @@ const Map: FunctionComponent = () => {
     selectedMarker,
     setSelectedMarker,
   } = useMapInstance();
+  const initialPositionRef = useRef(position);
 
-  const onMarkerClick = useCallback((e: LeafletMouseEvent) => {
-    setDisplayAlert(true);
-    setSelectedMarker(e.target.feature.properties.id);
-  }, []);
+  const onMarkerClick = useCallback(
+    (e: LeafletMouseEvent) => {
+      setDisplayAlert(true);
+      setSelectedMarker(e.target.feature.properties.id);
+    },
+    [setDisplayAlert, setSelectedMarker]
+  );
 
   useEffect(() => {
     if (containerRef.current === null || createdMapInstance.current !== false) {
@@ -36,7 +40,7 @@ const Map: FunctionComponent = () => {
     }
 
     const map = new L.Map(containerRef.current, {
-      center: L.latLng(position),
+      center: L.latLng(initialPositionRef.current),
       zoom: 10,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
@@ -47,7 +51,7 @@ const Map: FunctionComponent = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -67,9 +71,10 @@ const Map: FunctionComponent = () => {
 
     // On component unmount, destroy the map and all related events
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
-  }, []);
+  }, [setMapInstance, setPosition]);
 
   // Add the markers
   useEffect(() => {
@@ -91,20 +96,19 @@ const Map: FunctionComponent = () => {
     return () => {
       if (layerGroup) layerGroup.removeFrom(mapInstance);
     };
-  }, [mapInstance]);
+  }, [mapInstance, markerData, onMarkerClick]);
 
   // Handle active markers
   useEffect(() => {
-    // Reset any already active markers
-    if (featureLayer) {
-      const markers = featureLayer.getLayers() as L.Marker[];
-
-      if (markers) {
-        markers.forEach(marker => marker.setIcon(L.icon(customMarker)));
-      }
+    if (!featureLayer || typeof featureLayer.getLayers !== 'function') {
+      return;
     }
 
-    if (selectedMarker && featureLayer) {
+    const markers = featureLayer.getLayers() as L.Marker[];
+
+    markers.forEach(marker => marker.setIcon(L.icon(customMarker)));
+
+    if (selectedMarker) {
       const marker = featureLayer
         .getLayers()
         .find(
@@ -119,7 +123,7 @@ const Map: FunctionComponent = () => {
         );
       }
     }
-  }, [selectedMarker]);
+  }, [selectedMarker, featureLayer]);
 
   return <div className={styles.container} ref={containerRef} />;
 };

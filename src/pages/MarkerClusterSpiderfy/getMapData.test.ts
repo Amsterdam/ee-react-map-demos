@@ -142,7 +142,6 @@ describe('getMapData', () => {
   });
 
   it('filterPointFeaturesWithinBoundingBox checks features are truly inside bounding box', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const features: any = [
       {
         geometry: { coordinates: [15, 15] },

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import L, {
   type LatLngTuple,
   type LeafletEvent,
@@ -30,8 +30,9 @@ const MarkerClusterSpider = ({
     useState<L.GeoJSON | null>();
   const createdMapInstance = useRef(false);
 
-  const [center, setCenter] = useState<LatLngTuple>([52.370216, 4.895168]);
-  const [zoom, setZoom] = useState(7);
+  const initialCenterRef = useRef<LatLngTuple>([52.370216, 4.895168]);
+  const initialZoomRef = useRef(7);
+  const [mapViewVersion, setMapViewVersion] = useState(0);
 
   const onMarkerClick = useCallback(
     (event: LeafletEvent) => {
@@ -51,7 +52,7 @@ const MarkerClusterSpider = ({
     [mapInstance]
   );
 
-  const onClick = useCallback(onMarkerClick, [mapInstance]);
+  const onClick = onMarkerClick;
 
   const onKeyup = useCallback(
     (event: LeafletKeyboardEvent) => {
@@ -59,7 +60,7 @@ const MarkerClusterSpider = ({
         onMarkerClick(event);
       }
     },
-    [onClick]
+    [onMarkerClick]
   );
 
   // Set the Leaflet map and Amsterdam base layer
@@ -69,8 +70,8 @@ const MarkerClusterSpider = ({
     }
 
     const map = new L.Map(containerRef.current, {
-      center,
-      zoom,
+      center: initialCenterRef.current,
+      zoom: initialZoomRef.current,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
           attribution: '',
@@ -80,7 +81,7 @@ const MarkerClusterSpider = ({
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -105,59 +106,59 @@ const MarkerClusterSpider = ({
 
     // Listen for map changes to know when to update the clusters
     map.on('moveend', () => {
-      setZoom(map.getZoom());
-      setCenter([map.getCenter().lat, map.getCenter().lng]);
+      setMapViewVersion(currentVersion => currentVersion + 1);
     });
 
     return () => {
-      if (mapInstance) mapInstance.remove();
-
-      if (markersInstance) {
-        markersInstance.off();
-        markersInstance.remove();
-      }
+      createdMapInstance.current = false;
+      markers.off();
+      markers.remove();
+      lines.off();
+      lines.remove();
+      map.remove();
     };
   }, []);
 
-  const clusterFeatures = useMemo(() => {
-    if (!mapInstance) {
-      return {
-        clusterItems: [],
-        spiderLines: [],
-      };
+  useEffect(() => {
+    if (!mapInstance || !markersInstance || !spiderLinesInstance) {
+      return;
     }
 
-    return processFeatures(
+    const clusterFeatures = processFeatures(
       mapInstance,
       getMapData(mapInstance, rawData as DataRecord[]),
       clusterOptions
     );
-  }, [mapInstance, zoom, center]);
 
-  useEffect(() => {
-    if (mapInstance) {
-      // Clear any already rendered clusters/markers
-      markersInstance?.clearLayers();
-      markersInstance?.off();
+    // Clear any already rendered clusters/markers
+    markersInstance.clearLayers();
+    markersInstance.off();
 
-      spiderLinesInstance?.clearLayers();
-      spiderLinesInstance?.off();
+    spiderLinesInstance.clearLayers();
+    spiderLinesInstance.off();
 
-      if (markersInstance && clusterFeatures.clusterItems.length) {
-        // Render the cluster(s) and marker(s) to the map
-        markersInstance?.addData(
-          clusterFeatures.clusterItems as unknown as GeoJsonObject
-        );
-        spiderLinesInstance?.addData(
-          clusterFeatures.spiderLines as unknown as GeoJsonObject
-        );
+    if (clusterFeatures.clusterItems.length) {
+      // Render the cluster(s) and marker(s) to the map
+      markersInstance.addData(
+        clusterFeatures.clusterItems as unknown as GeoJsonObject
+      );
+      spiderLinesInstance.addData(
+        clusterFeatures.spiderLines as unknown as GeoJsonObject
+      );
 
-        // Add event listeners to enable dynamic clustering
-        markersInstance?.on('click', onClick);
-        markersInstance?.on('keyup', onKeyup);
-      }
+      // Add event listeners to enable dynamic clustering
+      markersInstance.on('click', onClick);
+      markersInstance.on('keyup', onKeyup);
     }
-  }, [mapInstance, zoom, center]);
+  }, [
+    clusterOptions,
+    mapInstance,
+    mapViewVersion,
+    markersInstance,
+    onClick,
+    onKeyup,
+    spiderLinesInstance,
+  ]);
 
   return <div className={styles.container} ref={containerRef} />;
 };

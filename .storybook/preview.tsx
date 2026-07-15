@@ -1,5 +1,5 @@
 import '@amsterdam/design-system-tokens/dist/index.css';
-import '@amsterdam/design-system-tokens/dist/compact.css';
+import '@amsterdam/design-system-tokens/dist/compact.theme.css';
 import '@amsterdam/design-system-assets/font/index.css';
 import '@amsterdam/design-system-css/dist/index.css';
 import './preview.css';
@@ -36,8 +36,8 @@ export const decorators = [
   withThemeByClassName({
     defaultTheme: 'Spacious',
     themes: {
-      Compact: 'ams-body ams-theme--compact',
-      Spacious: 'ams-body',
+      Compact: 'ams-theme--compact',
+      Spacious: '',
     },
   }),
 ];

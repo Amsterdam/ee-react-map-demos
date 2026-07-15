@@ -12,7 +12,6 @@ describe('WMSLayer', () => {
     tileLayerWmsStub = sinon
       .stub(L.tileLayer, 'wms')
       // @ts-expect-error ts(2345)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .callsFake((url, options) => {
         return {
           addTo: sinon.stub().returnsThis(),
