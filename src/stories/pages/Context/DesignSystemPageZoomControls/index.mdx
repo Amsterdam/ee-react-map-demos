@@ -26,6 +26,10 @@ Using the [Amsterdam Design System](https://designsystem.amsterdam/) [Page compo
 
 In this example, the Map context exports a single element - the Leaflet map object. This enables you to interact with your Leaflet map natively in any component (that is a child to the Map context provider component).
 
+#### Mousewheel zooming
+
+**Note:** The default Leaflet map behavior is to zoom in/out when the mouse wheel is scrolled. This can be disabled by setting the `scrollWheelZoom` option to `false` when creating the map object. Because this map is inside a grid cell, we disabled the default mousewheel zooming behavior to prevent accidental zooming when scrolling the page. Only fullscreen map views should have mousewheel zooming enabled.
+
 #### Z-index warning
 
 **Note:** When rendering custom elements on top of a Leaflet map, you need to account for CSS z-index stacking.
