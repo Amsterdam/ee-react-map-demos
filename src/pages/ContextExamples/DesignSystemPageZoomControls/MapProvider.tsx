@@ -32,7 +32,7 @@ const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
         }),
       ],
       zoomControl: false,
-      scrollWheelZoom: true,
+      scrollWheelZoom: false,
       maxZoom: 16,
       minZoom: 7,
       crs: getCrsRd(),
