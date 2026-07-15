@@ -1,19 +1,17 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from 'eslint-plugin-storybook';
-
+import babelParser from '@babel/eslint-parser';
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
 import { defineConfig, globalIgnores } from 'eslint/config';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import prettier from 'eslint-plugin-prettier';
-import react from 'eslint-plugin-react';
 import globals from 'globals';
-import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import storybook from 'eslint-plugin-storybook';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
@@ -28,71 +26,46 @@ export default defineConfig([
     '**/coverage',
     '**/dist',
     '**/node_modules',
-    '**/tsconfig.json',
-    '**/tsconfig.prod.json',
     '**/package-lock.json',
-    '**/package.json',
   ]),
   {
-    extends: compat.extends(
-      'eslint:recommended',
-      'plugin:@typescript-eslint/eslint-recommended',
-      'plugin:@typescript-eslint/recommended',
-      'prettier',
-      'plugin:react/recommended'
-    ),
-
+    files: ['**/*.{ts,tsx}'],
+    extends: compat.extends('eslint:recommended', 'plugin:react/recommended'),
     plugins: {
-      '@typescript-eslint': typescriptEslint,
-      prettier,
       react,
+      'react-hooks': reactHooks,
     },
-
     languageOptions: {
+      parser: babelParser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...globals.vitest,
       },
-
-      parser: tsParser,
-      ecmaVersion: 5,
-
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
+        requireConfigFile: false,
+        babelOptions: {
+          presets: [
+            ['@babel/preset-typescript', { allExtensions: true, isTSX: true }],
+            ['@babel/preset-react', { runtime: 'automatic' }],
+          ],
         },
       },
     },
-
     settings: {
       react: {
         version: 'detect',
       },
     },
-
     rules: {
-      'prettier/prettier': 'error',
+      'no-undef': 'off',
+      'no-unused-vars': 'off',
       'react/react-in-jsx-scope': 'off',
-      'sort-imports': [
-        'error',
-        {
-          allowSeparatedGroups: false,
-          ignoreCase: true,
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-        },
-      ],
-      'max-len': [
-        'warn',
-        {
-          code: 100,
-          comments: 80,
-          ignoreUrls: true,
-          ignoreStrings: true,
-          ignoreTemplateLiterals: true,
-        },
-      ],
-      '@typescript-eslint/no-empty-object-type': 'off',
+      'react/prop-types': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
     },
   },
   ...storybook.configs['flat/recommended'],

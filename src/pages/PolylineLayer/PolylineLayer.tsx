@@ -31,7 +31,7 @@ const PolylineLayer = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -45,7 +45,8 @@ const PolylineLayer = () => {
     setMapInstance(map);
 
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
   }, []);
 
@@ -72,7 +73,7 @@ const PolylineLayer = () => {
         mapInstance.removeLayer(polylineRef.current);
       }
     };
-  }, [data, mapInstance]);
+  }, [mapInstance]);
 
   return <div className={styles.container} ref={containerRef} />;
 };

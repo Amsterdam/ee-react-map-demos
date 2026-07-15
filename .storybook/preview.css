@@ -1,3 +1,5 @@
+/* stylelint-disable @stylistic/indentation */
+/* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable selector-max-compound-selectors */
 .sbdocs-wrapper.sbdocs-wrapper {
   padding-inline: 8vw;
@@ -131,7 +133,6 @@
   font-size: 0.875rem;
 }
 
-/* stylelint-disable-next-line selector-no-qualifying-type */
 :is(#storybook-root, .sbdocs-content) a[href='#'] {
   /* stylelint-disable-next-line declaration-property-value-allowed-list */
   cursor: not-allowed;

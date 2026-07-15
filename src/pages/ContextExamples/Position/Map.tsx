@@ -10,8 +10,8 @@ const Map: FunctionComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const createdMapInstance = useRef(false);
 
-  const { mapInstance, setMapInstance, position, setPosition } =
-    useMapInstance();
+  const { setMapInstance, position, setPosition } = useMapInstance();
+  const initialPositionRef = useRef(position);
 
   useEffect(() => {
     if (containerRef.current === null || createdMapInstance.current !== false) {
@@ -19,7 +19,7 @@ const Map: FunctionComponent = () => {
     }
 
     const map = new L.Map(containerRef.current, {
-      center: L.latLng(position),
+      center: L.latLng(initialPositionRef.current),
       zoom: 12,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
@@ -30,7 +30,7 @@ const Map: FunctionComponent = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -50,9 +50,10 @@ const Map: FunctionComponent = () => {
 
     // On component unmount, destroy the map and all related events
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
-  }, []);
+  }, [setMapInstance, setPosition]);
 
   return <div className={styles.container} ref={containerRef} />;
 };

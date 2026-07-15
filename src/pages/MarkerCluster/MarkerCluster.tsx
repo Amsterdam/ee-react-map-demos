@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import L, {
   type LatLngTuple,
   type LeafletEvent,
@@ -36,44 +36,50 @@ const MarkerCluster = () => {
 
   const [center, setCenter] = useState<LatLngTuple>([52.370216, 4.895168]);
   const [zoom, setZoom] = useState(7);
+  const initialCenterRef = useRef(center);
+  const initialZoomRef = useRef(zoom);
 
-  const clusterIndex = new Supercluster<MockProperties>({
-    // Enable 'log' for console.logs with the timing to build each cluster
-    log: false,
-    radius: 40,
-    extent: 3000,
-    nodeSize: 64,
-    maxZoom: 13,
-  });
+  const clusterIndex = useMemo(() => {
+    const index = new Supercluster<MockProperties>({
+      // Enable 'log' for console.logs with the timing to build each cluster
+      log: false,
+      radius: 40,
+      extent: 3000,
+      nodeSize: 64,
+      maxZoom: 13,
+    });
 
-  // Parse any API data to GeoJSON
-  const parsedGeoJson = toGeoJSON<MockDataType>(data as MockDataType[]);
+    index.load(toGeoJSON<MockDataType>(data as MockDataType[]).features);
 
-  // Load the parsed GeoJSON data into the cluster index
-  clusterIndex.load(parsedGeoJson.features);
+    return index;
+  }, []);
 
-  const onMarkerClick = (event: LeafletEvent) => {
-    const { feature } = event.propagatedFrom;
+  const onMarkerClick = useCallback(
+    (event: LeafletEvent) => {
+      const { feature } = event.propagatedFrom;
 
-    if (feature.properties.cluster && feature.properties.cluster_id) {
-      // We must be dealing with a cluster click
-      mapInstance?.setZoomAround(
-        event.propagatedFrom.getLatLng(),
-        clusterIndex.getClusterExpansionZoom(feature.properties.cluster_id)
-      );
-    } else if (feature.properties.id) {
-      // We must be dealing with a marker click
-      alert(`Marker click ID ${feature.properties.id}`);
-    }
-  };
+      if (feature.properties.cluster && feature.properties.cluster_id) {
+        // We must be dealing with a cluster click
+        mapInstance?.setZoomAround(
+          event.propagatedFrom.getLatLng(),
+          clusterIndex.getClusterExpansionZoom(feature.properties.cluster_id)
+        );
+      } else if (feature.properties.id) {
+        // We must be dealing with a marker click
+        alert(`Marker click ID ${feature.properties.id}`);
+      }
+    },
+    [clusterIndex, mapInstance]
+  );
 
-  const onClick = onMarkerClick;
-
-  const onKeyup = (event: LeafletKeyboardEvent) => {
-    if (event.originalEvent.key === 'Enter') {
-      onMarkerClick(event);
-    }
-  };
+  const onKeyup = useCallback(
+    (event: LeafletKeyboardEvent) => {
+      if (event.originalEvent.key === 'Enter') {
+        onMarkerClick(event);
+      }
+    },
+    [onMarkerClick]
+  );
 
   // Set the Leaflet map and Amsterdam base layer
   useEffect(() => {
@@ -82,8 +88,8 @@ const MarkerCluster = () => {
     }
 
     const map = new L.Map(containerRef.current, {
-      center,
-      zoom,
+      center: initialCenterRef.current,
+      zoom: initialZoomRef.current,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
           attribution: '',
@@ -93,7 +99,7 @@ const MarkerCluster = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6, // TODO in ARM this is 3?
+      minZoom: 7, // TODO in ARM this is 3?
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -103,8 +109,13 @@ const MarkerCluster = () => {
 
     map.attributionControl.setPrefix(false);
 
+    const markers = L.geoJSON(null, {
+      pointToLayer: (...args) => createClusterIcon(...args, CLUSTER_STYLES),
+    }).addTo(map);
+
     createdMapInstance.current = true;
     setMapInstance(map);
+    setMarkersInstance(markers);
 
     // Listen for map changes to know when to update the clusters
     map.on('moveend', () => {
@@ -113,28 +124,12 @@ const MarkerCluster = () => {
     });
 
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      markers.off();
+      markers.remove();
+      map.remove();
     };
   }, []);
-
-  useEffect(() => {
-    if (mapInstance && !markersInstance) {
-      // Empty Layer Group that will receive the clusters data on the fly.
-      const markers = L.geoJSON(null, {
-        pointToLayer: (...args) => {
-          return createClusterIcon(...args, CLUSTER_STYLES);
-        },
-      }).addTo(mapInstance);
-      setMarkersInstance(markers);
-    }
-
-    return () => {
-      if (markersInstance) {
-        markersInstance.off();
-        markersInstance.remove();
-      }
-    };
-  }, [mapInstance]);
 
   useEffect(() => {
     if (markersInstance && mapInstance) {
@@ -162,11 +157,19 @@ const MarkerCluster = () => {
         clusterMarkers.forEach(m => markersInstance?.addData(m));
 
         // Add event listeners to enable dynamic clustering
-        markersInstance.on('click', onClick);
+        markersInstance.on('click', onMarkerClick);
         markersInstance.on('keyup', onKeyup);
       }
     }
-  }, [mapInstance, markersInstance, zoom]);
+  }, [
+    center,
+    clusterIndex,
+    mapInstance,
+    markersInstance,
+    onKeyup,
+    onMarkerClick,
+    zoom,
+  ]);
 
   return <div className={styles.container} ref={containerRef} />;
 };

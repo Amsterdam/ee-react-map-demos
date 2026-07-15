@@ -26,7 +26,6 @@ describe('createClusterIcon', () => {
 
     const latlng = L.latLng([52.41312161731963, 4.869341186626288]);
     const icon = createClusterIcon(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       feature as Feature<Point, any>,
       latlng,
       CLUSTER_STYLES
@@ -62,7 +61,6 @@ describe('createClusterIcon', () => {
 
     const latlng = L.latLng([52.376390617632865, 4.849467668376977]);
     const icon = createClusterIcon(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       feature as Feature<Point, any>,
       latlng,
       CLUSTER_STYLES
