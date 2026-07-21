@@ -1,4 +1,4 @@
-import type { LatLngTuple } from 'leaflet';
+import type { LatLngTuple, Map as LeafletMap } from 'leaflet';
 import Supercluster, { type PointFeature } from 'supercluster';
 import type {
   BBox,
@@ -72,7 +72,7 @@ const addExpansionZoom = <D extends Supercluster.ClusterProperties>(
 };
 
 const getMapData = <D extends { geometry: Point }>(
-  map: L.Map,
+  map: LeafletMap,
   rawData: D[]
 ) => {
   const bounds = map.getBounds();

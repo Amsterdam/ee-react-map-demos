@@ -6,7 +6,6 @@ import type { Feature, Point } from 'geojson';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
-import Supercluster from 'supercluster';
 
 const iconDefault = L.icon({
   iconRetinaUrl,
@@ -28,8 +27,23 @@ export interface ClusterStyles {
   large: string;
 }
 
-const createClusterIcon = <P extends Supercluster.ClusterProperties>(
-  feature: Feature<Point, P>,
+type MarkerFeatureProperties = {
+  id: string;
+  cluster?: false;
+};
+
+type ClusterFeatureProperties = {
+  cluster: true;
+  cluster_id: number;
+  point_count: number;
+  point_count_abbreviated: number | string;
+};
+
+type ClusterIconFeatureProperties =
+  MarkerFeatureProperties | ClusterFeatureProperties;
+
+const createClusterIcon = (
+  feature: Feature<Point, ClusterIconFeatureProperties>,
   latlng: L.LatLng,
   styles: ClusterStyles
 ) => {

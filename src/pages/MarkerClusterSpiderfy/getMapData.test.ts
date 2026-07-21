@@ -5,6 +5,7 @@ import getMapData, {
 } from './getMapData';
 import L from 'leaflet';
 import rawData from './data.json';
+import type { PointFeature } from 'supercluster';
 import type { DataRecord } from './types';
 
 const fakeClusterData = [
@@ -142,13 +143,16 @@ describe('getMapData', () => {
   });
 
   it('filterPointFeaturesWithinBoundingBox checks features are truly inside bounding box', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const features: any = [
+    const features: PointFeature<Record<string, never>>[] = [
       {
-        geometry: { coordinates: [15, 15] },
+        type: 'Feature',
+        properties: {},
+        geometry: { type: 'Point', coordinates: [15, 15] },
       },
       {
-        geometry: { coordinates: [25, 25] },
+        type: 'Feature',
+        properties: {},
+        geometry: { type: 'Point', coordinates: [25, 25] },
       },
     ];
     expect(

@@ -21,23 +21,19 @@ const Map: FunctionComponent = () => {
     selectedMarkers,
     setSelectedMarkers,
   } = useMapInstance();
+  const initialPositionRef = useRef(position);
 
   const onMarkerClick = useCallback(
     (e: LeafletMouseEvent) => {
-      if (selectedMarkers.includes(e.sourceTarget.feature.properties.id)) {
-        setSelectedMarkers([
-          ...selectedMarkers.filter(
-            marker => marker !== e.sourceTarget.feature.properties.id
-          ),
-        ]);
-      } else {
-        setSelectedMarkers([
-          ...selectedMarkers,
-          e.sourceTarget.feature.properties.id,
-        ]);
-      }
+      const markerId = e.sourceTarget.feature.properties.id;
+
+      setSelectedMarkers(currentSelectedMarkers =>
+        currentSelectedMarkers.includes(markerId)
+          ? currentSelectedMarkers.filter(marker => marker !== markerId)
+          : [...currentSelectedMarkers, markerId]
+      );
     },
-    [featureLayer, selectedMarkers]
+    [setSelectedMarkers]
   );
 
   const onMouseOver = useCallback((e: LeafletMouseEvent) => {
@@ -69,7 +65,7 @@ const Map: FunctionComponent = () => {
     }
 
     const map = new L.Map(containerRef.current, {
-      center: L.latLng(position),
+      center: L.latLng(initialPositionRef.current),
       zoom: 13,
       layers: [
         L.tileLayer('https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png', {
@@ -80,7 +76,7 @@ const Map: FunctionComponent = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -101,9 +97,10 @@ const Map: FunctionComponent = () => {
 
     // On component unmount, destroy the map and all related events
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
-  }, []);
+  }, [setMapInstance, setPosition]);
 
   // Add the markers
   useEffect(() => {
@@ -129,7 +126,7 @@ const Map: FunctionComponent = () => {
     return () => {
       if (layerGroup) layerGroup.removeFrom(mapInstance);
     };
-  }, [mapInstance, selectedMarkers]);
+  }, [mapInstance, markerData, onMarkerClick, onMouseOut, onMouseOver]);
 
   // Handle active markers
   useEffect(() => {

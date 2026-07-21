@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import type { RefObject } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 import L from 'leaflet';
 import getCrsRd from '@/utils/getCrsRd';
 
@@ -24,7 +23,7 @@ const useLeafletMap = (container: RefObject<HTMLDivElement | null>) => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.36966606270195, 4.886568897250246],
@@ -38,9 +37,10 @@ const useLeafletMap = (container: RefObject<HTMLDivElement | null>) => {
     setMapInstance(map);
 
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
-  }, []);
+  }, [container]);
 
   return mapInstance;
 };

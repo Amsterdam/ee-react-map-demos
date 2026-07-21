@@ -22,6 +22,7 @@ const MapProvider: FunctionComponent<MapProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const createdMapInstance = useRef(false);
+  const initialScrollWheelZoomRef = useRef(scrollWheelZoom);
 
   useEffect(() => {
     if (containerRef.current === null || createdMapInstance.current !== false) {
@@ -39,9 +40,9 @@ const MapProvider: FunctionComponent<MapProps> = ({
         }),
       ],
       zoomControl: false,
-      scrollWheelZoom,
+      scrollWheelZoom: initialScrollWheelZoomRef.current,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -56,9 +57,23 @@ const MapProvider: FunctionComponent<MapProps> = ({
     setMapInstance(map);
 
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
-  }, [mapInstance, containerRef]);
+  }, []);
+
+  useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
+
+    if (scrollWheelZoom) {
+      mapInstance.scrollWheelZoom.enable();
+      return;
+    }
+
+    mapInstance.scrollWheelZoom.disable();
+  }, [mapInstance, scrollWheelZoom]);
 
   return (
     <>

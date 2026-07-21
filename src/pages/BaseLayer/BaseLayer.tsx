@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import getCrsRd from '@/utils/getCrsRd';
@@ -6,10 +6,6 @@ import styles from './styles.module.css';
 
 const BaseLayer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // Use state instead of a ref for the Leaflet map object.
-  // This avoids DOM issues when React StrictMode is enabled.
-  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
 
   // This could use state, but it should only fire once.
   // A ref is mutable and does not trigger additional re-renders.
@@ -34,7 +30,7 @@ const BaseLayer = () => {
       ],
       zoomControl: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       // Ensure proper handling for Rijksdriehoekcoördinaten
       crs: getCrsRd(),
       // Prevent browsing too far outside Amsterdam.
@@ -48,13 +44,13 @@ const BaseLayer = () => {
     // Remove Leaflet link from the map
     map.attributionControl.setPrefix(false);
 
-    // Set the map as created and store the object to state
+    // Set the map as created
     createdMapInstance.current = true;
-    setMapInstance(map);
 
     // On component unmount, destroy the map and all related events
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
   }, []);
 

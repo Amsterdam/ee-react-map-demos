@@ -32,9 +32,9 @@ const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
         }),
       ],
       zoomControl: false,
-      scrollWheelZoom: true,
+      scrollWheelZoom: false,
       maxZoom: 16,
-      minZoom: 6,
+      minZoom: 7,
       crs: getCrsRd(),
       maxBounds: [
         [52.25168, 4.64034],
@@ -49,9 +49,10 @@ const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
     setMapInstance(map);
 
     return () => {
-      if (mapInstance) mapInstance.remove();
+      createdMapInstance.current = false;
+      map.remove();
     };
-  }, [mapInstance, containerRef]);
+  }, []);
 
   return (
     <>

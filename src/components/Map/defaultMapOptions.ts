@@ -5,7 +5,7 @@ export const DEFAULT_MAP_OPTIONS = {
   zoom: 12,
   zoomControl: false,
   maxZoom: 16,
-  minZoom: 6,
+  minZoom: 7,
   // Ensure proper handling for Rijksdriehoekcoördinaten
   crs: getCrsRd(),
   // Prevent browsing too far outside Amsterdam.
