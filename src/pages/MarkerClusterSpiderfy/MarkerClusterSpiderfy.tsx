@@ -52,8 +52,6 @@ const MarkerClusterSpider = ({
     [mapInstance]
   );
 
-  const onClick = onMarkerClick;
-
   const onKeyup = useCallback(
     (event: LeafletKeyboardEvent) => {
       if (event.originalEvent.key === 'Enter') {
@@ -147,7 +145,7 @@ const MarkerClusterSpider = ({
       );
 
       // Add event listeners to enable dynamic clustering
-      markersInstance.on('click', onClick);
+      markersInstance.on('click', onMarkerClick);
       markersInstance.on('keyup', onKeyup);
     }
   }, [
@@ -155,7 +153,7 @@ const MarkerClusterSpider = ({
     mapInstance,
     mapViewVersion,
     markersInstance,
-    onClick,
+    onMarkerClick,
     onKeyup,
     spiderLinesInstance,
   ]);
