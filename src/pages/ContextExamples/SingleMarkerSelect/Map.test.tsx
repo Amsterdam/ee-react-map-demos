@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import L from 'leaflet';
 import Map from './Map';
 import MapProvider from './MapProvider';
 import data from './data.json';

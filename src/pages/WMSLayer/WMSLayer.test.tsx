@@ -12,7 +12,7 @@ describe('WMSLayer', () => {
     tileLayerWmsStub = sinon
       .stub(L.tileLayer, 'wms')
       // @ts-expect-error ts(2345)
-      .callsFake((url, options) => {
+      .callsFake(() => {
         return {
           addTo: sinon.stub().returnsThis(),
           remove: sinon.stub().returnsThis(),
