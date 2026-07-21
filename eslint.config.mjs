@@ -1,4 +1,3 @@
-import babelParser from '@babel/eslint-parser';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import { defineConfig, globalIgnores } from 'eslint/config';
@@ -8,6 +7,8 @@ import { fileURLToPath } from 'node:url';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import storybook from 'eslint-plugin-storybook';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,13 +31,19 @@ export default defineConfig([
   ]),
   {
     files: ['**/*.{ts,tsx}'],
-    extends: compat.extends('eslint:recommended', 'plugin:react/recommended'),
+    extends: compat.extends(
+      'eslint:recommended',
+      'plugin:@typescript-eslint/eslint-recommended',
+      'plugin:@typescript-eslint/recommended',
+      'plugin:react/recommended'
+    ),
     plugins: {
+      '@typescript-eslint': typescriptEslint,
       react,
       'react-hooks': reactHooks,
     },
     languageOptions: {
-      parser: babelParser,
+      parser: tsParser,
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
@@ -45,12 +52,8 @@ export default defineConfig([
         ...globals.vitest,
       },
       parserOptions: {
-        requireConfigFile: false,
-        babelOptions: {
-          presets: [
-            ['@babel/preset-typescript', { allExtensions: true, isTSX: true }],
-            ['@babel/preset-react', { runtime: 'automatic' }],
-          ],
+        ecmaFeatures: {
+          jsx: true,
         },
       },
     },
@@ -60,8 +63,8 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-undef': 'off',
-      'no-unused-vars': 'off',
+      'no-undef': 'error',
+      'no-unused-vars': 'error',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       'react-hooks/rules-of-hooks': 'error',

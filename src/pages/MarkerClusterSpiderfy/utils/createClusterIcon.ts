@@ -27,8 +27,23 @@ export interface ClusterStyles {
   large: string;
 }
 
+type MarkerFeatureProperties = {
+  id: string;
+  cluster?: false;
+};
+
+type ClusterFeatureProperties = {
+  cluster: true;
+  cluster_id: number;
+  point_count: number;
+  point_count_abbreviated: number | string;
+};
+
+type ClusterIconFeatureProperties =
+  MarkerFeatureProperties | ClusterFeatureProperties;
+
 const createClusterIcon = (
-  feature: Feature<Point, any>,
+  feature: Feature<Point, ClusterIconFeatureProperties>,
   latlng: L.LatLng,
   styles: ClusterStyles
 ) => {

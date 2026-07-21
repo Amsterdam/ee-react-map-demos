@@ -1,12 +1,12 @@
 import type { FunctionComponent, PropsWithChildren } from 'react';
 import { useState } from 'react';
-import type { LatLngTuple } from 'leaflet';
+import type { LatLngTuple, Map as LeafletMap } from 'leaflet';
 import { MapContext } from './MapContext';
 import type { GeoJSONFeature } from './types';
 import data from './data.json';
 
 const MapProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+  const [mapInstance, setMapInstance] = useState<LeafletMap | null>(null);
   const [position, setPosition] = useState<LatLngTuple>([
     52.33981350119924, 4.904670904743209,
   ]);

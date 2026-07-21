@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import L from 'leaflet';
 import createClusterIcon from './createClusterIcon';
 import styles from '../styles.module.css';
-import type { Feature, Point } from 'geojson';
 
 const CLUSTER_STYLES = {
   default: styles.markerCluster,
@@ -26,7 +25,7 @@ describe('createClusterIcon', () => {
 
     const latlng = L.latLng([52.41312161731963, 4.869341186626288]);
     const icon = createClusterIcon(
-      feature as Feature<Point, any>,
+      feature as Parameters<typeof createClusterIcon>[0],
       latlng,
       CLUSTER_STYLES
     );
@@ -61,7 +60,7 @@ describe('createClusterIcon', () => {
 
     const latlng = L.latLng([52.376390617632865, 4.849467668376977]);
     const icon = createClusterIcon(
-      feature as Feature<Point, any>,
+      feature as Parameters<typeof createClusterIcon>[0],
       latlng,
       CLUSTER_STYLES
     );

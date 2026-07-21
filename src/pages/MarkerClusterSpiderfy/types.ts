@@ -1,4 +1,4 @@
-import type { Point } from 'geojson';
+import type { Feature, Geometry, GeometryCollection, Point } from 'geojson';
 import Supercluster from 'supercluster';
 
 export type ClusterOptions = {
@@ -22,11 +22,8 @@ export type DatasetClusterFeatureProperties = {
 };
 
 export type MapFeature<
-  G extends GeoJSON.Geometry = Exclude<
-    GeoJSON.Geometry,
-    GeoJSON.GeometryCollection
-  >,
-> = GeoJSON.Feature<G, DatasetFeatureProperties>;
+  G extends Geometry = Exclude<Geometry, GeometryCollection>,
+> = Feature<G, DatasetFeatureProperties>;
 export type MapPointFeature = MapFeature<Point>;
 
 export type MapSuperClusterFeature =
