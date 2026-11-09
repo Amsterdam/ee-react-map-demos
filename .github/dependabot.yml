@@ -1,0 +1,40 @@
+version: 2
+updates:
+  ## Monitor GitHub actions
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 1 # Wait for one day after release before updating a dependency
+
+  ## Monitor NPM dependencies
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 1 # Wait for one day after release before updating a dependency
+    versioning-strategy: 'increase-if-necessary' # only rewrites the range in package.json when the new version falls outside it
+    open-pull-requests-limit: 20
+    groups:
+      # react and react-dom must always match
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+      # storybook
+      storybook:
+        patterns:
+          - '@storybook/addon-a11y'
+          - '@storybook/addon-docs'
+          - '@storybook/addon-links'
+          - '@storybook/addon-themes'
+          - '@storybook/react'
+          - '@storybook/react-vite'
+          - 'eslint-plugin-storybook'
+          - 'storybook'
+    ignore:
+      # Prevent automatic major updates for @types/node
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
